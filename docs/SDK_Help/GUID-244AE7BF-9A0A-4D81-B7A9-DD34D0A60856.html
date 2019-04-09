@@ -1,0 +1,347 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Sending a request inside an existing dialog"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-244AE7BF-9A0A-4D81-B7A9-DD34D0A60856"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> JavaTM Implementation Notes</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-244AE7BF-9A0A-4D81-B7A9-DD34D0A60856"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-244AE7BF-9A0A-4D81-B7A9-DD34D0A60856"><!----></a>Sending
+a request inside an existing dialog</h1>
+<p>This section describes the restrictions of the S60 implementation related
+to sending a request inside an existing dialog.</p>
+<p>The <code>SipDialog.getNewClientConnection()</code> operation
+throws <code>SipException</code> with the <code>SipException.GENERAL_ERROR</code> error
+code if this operation is called within a <code>SipDialog</code> object
+not originating from a <code>INVITE</code>, <code>SUBSCRIBE</code>,<code> ACK</code> or <code>REFER</code> <code>SipConnection</code> object. <code>SipDialog</code> object can
+be created when the <code>SipConnection</code> belongs to a created <code>SipDialog</code>,
+which is in Early or Confirmed state.</p>
+<p>The &lt;EXTENSION&gt; request means any arbitrary user’s own request.</p>
+<p>The below tables show what requests can be sent inside <code>INVITE</code>, <code>SUBSCRIBE</code> and <code>REFER</code> dialogs. The S60 implementation supports the creation of these three dialog
+types.</p>
+<div class="tablenoborder"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-13EC9C58-22C5-469E-B036-59CDB32DD4AF"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-13EC9C58-22C5-469E-B036-59CDB32DD4AF" frame="border" border="1" rules="all"><caption><strong>Table 29: </strong>Requests that
+can be sent inside an existing sip dialog in the UAC side</caption>
+
+
+
+<thead align="left">
+<tr class="title "><th valign="top" width="22.05513784461153%" id="d0e29409">
+<p>A new request</p>
+</th><th valign="top" width="28.82205513784461%" id="d0e29414">
+<p>INVITE</p>
+</th><th valign="top" width="26.566416040100254%" id="d0e29419">
+<p>SUBSCRIBE</p>
+</th><th valign="top" width="22.55639097744361%" id="d0e29424">
+<p>REFER</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td valign="top" width="22.05513784461153%" headers="d0e29409 ">
+<p>REFER</p>
+</td>
+<td valign="top" width="28.82205513784461%" headers="d0e29414 ">
+<p>X</p>
+</td>
+<td valign="top" width="26.566416040100254%" headers="d0e29419 ">
+<p/>
+</td>
+<td valign="top" width="22.55639097744361%" headers="d0e29424 ">
+<p/>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="22.05513784461153%" headers="d0e29409 ">
+<p>BYE</p>
+</td>
+<td valign="top" width="28.82205513784461%" headers="d0e29414 ">
+<p>X</p>
+</td>
+<td valign="top" width="26.566416040100254%" headers="d0e29419 ">
+<p/>
+</td>
+<td valign="top" width="22.55639097744361%" headers="d0e29424 ">
+<p/>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="22.05513784461153%" headers="d0e29409 ">
+<p>OPTIONS</p>
+</td>
+<td valign="top" width="28.82205513784461%" headers="d0e29414 ">
+<p>X</p>
+</td>
+<td valign="top" width="26.566416040100254%" headers="d0e29419 ">
+<p/>
+</td>
+<td valign="top" width="22.55639097744361%" headers="d0e29424 ">
+<p/>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="22.05513784461153%" headers="d0e29409 ">
+<p>MESSAGE</p>
+</td>
+<td valign="top" width="28.82205513784461%" headers="d0e29414 ">
+<p>X</p>
+</td>
+<td valign="top" width="26.566416040100254%" headers="d0e29419 ">
+<p>X</p>
+</td>
+<td valign="top" width="22.55639097744361%" headers="d0e29424 ">
+<p>X</p>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="22.05513784461153%" headers="d0e29409 ">
+<p>PRACK</p>
+</td>
+<td valign="top" width="28.82205513784461%" headers="d0e29414 ">
+<p>X</p>
+</td>
+<td valign="top" width="26.566416040100254%" headers="d0e29419 ">
+<p/>
+</td>
+<td valign="top" width="22.55639097744361%" headers="d0e29424 ">
+<p/>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="22.05513784461153%" headers="d0e29409 ">
+<p>UPDATE</p>
+</td>
+<td valign="top" width="28.82205513784461%" headers="d0e29414 ">
+<p>X</p>
+</td>
+<td valign="top" width="26.566416040100254%" headers="d0e29419 ">
+<p/>
+</td>
+<td valign="top" width="22.55639097744361%" headers="d0e29424 ">
+<p/>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="22.05513784461153%" headers="d0e29409 ">
+<p>PUBLISH</p>
+</td>
+<td valign="top" width="28.82205513784461%" headers="d0e29414 ">
+<p>X</p>
+</td>
+<td valign="top" width="26.566416040100254%" headers="d0e29419 ">
+<p/>
+</td>
+<td valign="top" width="22.55639097744361%" headers="d0e29424 ">
+<p/>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="22.05513784461153%" headers="d0e29409 ">
+<p>INVITE</p>
+</td>
+<td valign="top" width="28.82205513784461%" headers="d0e29414 ">
+<p>X</p>
+</td>
+<td valign="top" width="26.566416040100254%" headers="d0e29419 ">
+<p>X</p>
+</td>
+<td valign="top" width="22.55639097744361%" headers="d0e29424 ">
+<p>X</p>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="22.05513784461153%" headers="d0e29409 ">
+<p>SUBSCRIBE</p>
+</td>
+<td valign="top" width="28.82205513784461%" headers="d0e29414 ">
+<p>X</p>
+</td>
+<td valign="top" width="26.566416040100254%" headers="d0e29419 ">
+<p>X</p>
+</td>
+<td valign="top" width="22.55639097744361%" headers="d0e29424 ">
+<p/>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="22.05513784461153%" headers="d0e29409 ">
+<p>&lt;EXTENSION&gt;</p>
+</td>
+<td valign="top" width="28.82205513784461%" headers="d0e29414 ">
+<p>X</p>
+</td>
+<td valign="top" width="26.566416040100254%" headers="d0e29419 ">
+<p>X</p>
+</td>
+<td valign="top" width="22.55639097744361%" headers="d0e29424 ">
+<p>X</p>
+</td>
+</tr>
+</tbody>
+</table></div><div class="tablenoborder"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-E687FA00-87C0-47B4-B28A-3781280C3161"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-E687FA00-87C0-47B4-B28A-3781280C3161" frame="border" border="1" rules="all"><caption><strong>Table 30: </strong>Requests
+that can be sent inside an existing SIP dialog in the UAS side</caption>
+
+
+
+<thead align="left">
+<tr class="title "><th valign="top" width="22.05513784461153%" id="d0e29709">
+<p>A new request</p>
+</th><th valign="top" width="28.82205513784461%" id="d0e29714">
+<p>INVITE</p>
+</th><th valign="top" width="26.566416040100254%" id="d0e29719">
+<p>SUBSCRIBE</p>
+</th><th valign="top" width="22.55639097744361%" id="d0e29724">
+<p>REFER</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td valign="top" width="22.05513784461153%" headers="d0e29709 ">
+<p>REFER</p>
+</td>
+<td valign="top" width="28.82205513784461%" headers="d0e29714 ">
+<p>X</p>
+</td>
+<td valign="top" width="26.566416040100254%" headers="d0e29719 ">
+<p/>
+</td>
+<td valign="top" width="22.55639097744361%" headers="d0e29724 ">
+<p/>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="22.05513784461153%" headers="d0e29709 ">
+<p>BYE</p>
+</td>
+<td valign="top" width="28.82205513784461%" headers="d0e29714 ">
+<p>X</p>
+</td>
+<td valign="top" width="26.566416040100254%" headers="d0e29719 ">
+<p/>
+</td>
+<td valign="top" width="22.55639097744361%" headers="d0e29724 ">
+<p/>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="22.05513784461153%" headers="d0e29709 ">
+<p>OPTIONS</p>
+</td>
+<td valign="top" width="28.82205513784461%" headers="d0e29714 ">
+<p>X</p>
+</td>
+<td valign="top" width="26.566416040100254%" headers="d0e29719 ">
+<p/>
+</td>
+<td valign="top" width="22.55639097744361%" headers="d0e29724 ">
+<p/>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="22.05513784461153%" headers="d0e29709 ">
+<p>MESSAGE</p>
+</td>
+<td valign="top" width="28.82205513784461%" headers="d0e29714 ">
+<p>X</p>
+</td>
+<td valign="top" width="26.566416040100254%" headers="d0e29719 ">
+<p/>
+</td>
+<td valign="top" width="22.55639097744361%" headers="d0e29724 ">
+<p/>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="22.05513784461153%" headers="d0e29709 ">
+<p>PRACK</p>
+</td>
+<td valign="top" width="28.82205513784461%" headers="d0e29714 ">
+<p/>
+</td>
+<td valign="top" width="26.566416040100254%" headers="d0e29719 ">
+<p/>
+</td>
+<td valign="top" width="22.55639097744361%" headers="d0e29724 ">
+<p/>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="22.05513784461153%" headers="d0e29709 ">
+<p>UPDATE</p>
+</td>
+<td valign="top" width="28.82205513784461%" headers="d0e29714 ">
+<p>X</p>
+</td>
+<td valign="top" width="26.566416040100254%" headers="d0e29719 ">
+<p/>
+</td>
+<td valign="top" width="22.55639097744361%" headers="d0e29724 ">
+<p/>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="22.05513784461153%" headers="d0e29709 ">
+<p>PUBLISH</p>
+</td>
+<td valign="top" width="28.82205513784461%" headers="d0e29714 ">
+<p>X</p>
+</td>
+<td valign="top" width="26.566416040100254%" headers="d0e29719 ">
+<p/>
+</td>
+<td valign="top" width="22.55639097744361%" headers="d0e29724 ">
+<p/>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="22.05513784461153%" headers="d0e29709 ">
+<p>INVITE</p>
+</td>
+<td valign="top" width="28.82205513784461%" headers="d0e29714 ">
+<p>X</p>
+</td>
+<td valign="top" width="26.566416040100254%" headers="d0e29719 ">
+<p/>
+</td>
+<td valign="top" width="22.55639097744361%" headers="d0e29724 ">
+<p/>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="22.05513784461153%" headers="d0e29709 ">
+<p>SUBSCRIBE</p>
+</td>
+<td valign="top" width="28.82205513784461%" headers="d0e29714 ">
+<p>X</p>
+</td>
+<td valign="top" width="26.566416040100254%" headers="d0e29719 ">
+<p/>
+</td>
+<td valign="top" width="22.55639097744361%" headers="d0e29724 ">
+<p/>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="22.05513784461153%" headers="d0e29709 ">
+<p>&lt;EXTENSION&gt;</p>
+</td>
+<td valign="top" width="28.82205513784461%" headers="d0e29714 ">
+<p>X</p>
+</td>
+<td valign="top" width="26.566416040100254%" headers="d0e29719 ">
+<p/>
+</td>
+<td valign="top" width="22.55639097744361%" headers="d0e29724 ">
+<p/>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="22.05513784461153%" headers="d0e29709 ">
+<p>NOTIFY</p>
+</td>
+<td valign="top" width="28.82205513784461%" headers="d0e29714 ">
+<p/>
+</td>
+<td valign="top" width="26.566416040100254%" headers="d0e29719 ">
+<p>X</p>
+</td>
+<td valign="top" width="22.55639097744361%" headers="d0e29724 ">
+<p>X</p>
+</td>
+</tr>
+</tbody>
+</table></div></div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

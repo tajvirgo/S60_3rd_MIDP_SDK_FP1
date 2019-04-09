@@ -1,0 +1,71 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobiletask"/><meta name="DC.Title" content="Creating your own application from the Hello World Plus MIDlet"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-88C01B23-0915-4465-9C02-1240DBD13939"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> S60 3rd Edition SDK for Symbian OS Supporting Feature Pack 1, for MIDP</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-88C01B23-0915-4465-9C02-1240DBD13939"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-88C01B23-0915-4465-9C02-1240DBD13939"><!----></a>Creating
+your own application from the Hello World Plus MIDlet</h1>
+<div><h3>Context</h3><p>In this section you will tailor the Hello World Plus <a href="GUID-BD3FDAA6-5977-40FF-A3BC-79BD6A9B4D4C.html#GUID-BD3FDAA6-5977-40FF-A3BC-79BD6A9B4D4C">MIDlet</a> into
+a new, personalized application of your own by editing the source code of
+the MIDlet.</p><p>In order to be able to edit the source code, you need to open it in
+an editor. To open the source in a WordPad editor, do the following:</p></div>
+<h3>Steps</h3><ol id="GUID-EBE7EA82-9BAA-4187-B0ED-D9D3CDB6A62A"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-EBE7EA82-9BAA-4187-B0ED-D9D3CDB6A62A"><!----></a>
+<li id="GUID-CAD79EDA-1B48-4EBE-A7F7-1D81D8E299E3"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-CAD79EDA-1B48-4EBE-A7F7-1D81D8E299E3"><!----></a><span>In the Windows
+Start menu, open the Command Prompt by choosing <span>Start &gt; Programs &gt; Accessories
+&gt; Command Prompt</span>.</span></li>
+<li id="GUID-3296A0C7-0725-4AA1-86CD-9FB0E478B032"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-3296A0C7-0725-4AA1-86CD-9FB0E478B032"><!----></a><span>In the Command
+Prompt, use the <code>cd</code> command switch to the <code>\s60examples\src\com\nokia\midp\examples\lcdui\helloworldplus</code> subdirectory
+of the directory where you installed the SDK.</span>
+
+<p>Enter, for example, the following command: <code>cd C:\&lt;S60_SDK_installation_directory&gt;\s60examples\src\com\nokia\midp\examples\lcdui\helloworldplus</code></p>
+
+</li>
+<li id="GUID-7CB34536-8390-406B-8934-3816E9FFE521"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-7CB34536-8390-406B-8934-3816E9FFE521"><!----></a><span>Open the
+HelloWorldPlus MIDlet source file in the WordPad editor by entering the following
+command: <code>write HelloWorldPlus.java</code></span>
+
+<p>The <code>HelloWorldPlus.java</code> source file opens in WordPad:</p>
+<div class="figure" id="GUID-1EDCD122-A21C-4B54-97A9-509B9EC3404D"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-1EDCD122-A21C-4B54-97A9-509B9EC3404D"><!----></a><img src="GUID-0A0709CE-896D-4E8A-910F-B43F3613612A_d0e4647_href.png" alt=""/><p class="figure-title"><strong>Figure 18: </strong>HelloWorldPlus MIDlet in WordPad editor</p></div>
+<p>To change the text displayed in on the screen in the HelloWorldPlus
+application, you first need to locate it in the source file.</p>
+
+</li>
+<li id="GUID-0030A95F-8C9A-4AD7-A9E6-1E4DF2F69645"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-0030A95F-8C9A-4AD7-A9E6-1E4DF2F69645"><!----></a><span>Select <span>Edit
+&gt; Find</span> from the menu bar (or press <span>CTRL+F</span>).</span>
+
+<p>The <span>Find</span> dialog box is displayed.</p>
+
+</li>
+<li id="GUID-B2261837-993D-4CCE-A12E-FFC76BFB1016"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-B2261837-993D-4CCE-A12E-FFC76BFB1016"><!----></a><span>In the <span>Find</span> dialog
+box, enter the text <code>HELLO_STRING = "Hello World!"</code> in
+the <span>Find what:</span> field and click the <span>Find Next</span> button.</span>
+
+<p>The cursor will go to the "Hello World" string in the <code>HelloWorldPlus.java</code> source
+file:</p>
+<p><code>public final static String HELLO_STRING = "Hello World!";</code></p>
+
+</li>
+<li id="GUID-74BA1843-10EC-4237-A3F2-9C9563C4CAC8"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-74BA1843-10EC-4237-A3F2-9C9563C4CAC8"><!----></a><span>Close the <span>Find</span> dialog
+box by clicking <span>Cancel</span>.</span></li>
+<li id="GUID-672C94F3-31B0-4AFF-8F41-5E737543DBD4"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-672C94F3-31B0-4AFF-8F41-5E737543DBD4"><!----></a><span>Edit the
+source code, for example, as follows: </span>
+
+<p><code>public final static String HELLO_STRING = "Just Java it!";</code></p>
+
+</li>
+<li id="GUID-02B648B7-CEC2-4B37-807C-C94BB93E68F4"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-02B648B7-CEC2-4B37-807C-C94BB93E68F4"><!----></a><span>To save
+your changes, select <span>File &gt; Save</span> and click <span>Yes</span> to confirm the
+command.</span></li>
+<li id="GUID-7BBB74DC-CA6A-40C1-BF63-A66531B4F818"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-7BBB74DC-CA6A-40C1-BF63-A66531B4F818"><!----></a><span>Compile,
+preverify and run your new MIDlet as described in <a href="GUID-86B5D07B-0458-41AC-9E8B-90561F402A3D.html#GUID-86B5D07B-0458-41AC-9E8B-90561F402A3D">Building
+and running the Hello World Plus MIDlet</a>.</span>
+
+<div class="note"><p><strong class="note_title">Note: </strong>If you have already created the <code>tmpclasses</code> and <code>classes</code> directories,
+you can skip the <code>mkdir</code> commands when compiling, preverifying
+and running your MIDlet.</p></div>
+
+</li>
+</ol>
+<div><h3>Results</h3><p>Once you have compiled and preverified the new MIDlet, you can run it
+in the <a href="GUID-519DDEA7-537F-4511-83A0-37DCFCFF8915.html#GUID-519DDEA7-537F-4511-83A0-37DCFCFF8915">S60 emulator</a>.
+The emulator should now display the text "Just Java It!" </p><p>Once you have tested the application on the emulator and you are satisfied
+with it, the next step is to package your MIDlet as described in <a href="GUID-D3E53ED6-828C-4841-B766-C5B0847A6825.html#GUID-D3E53ED6-828C-4841-B766-C5B0847A6825">Installing
+your application to your S60 smartphone</a>.</p></div></div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

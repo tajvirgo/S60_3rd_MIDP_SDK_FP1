@@ -1,0 +1,77 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="MIDP Security tab"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-CDE377BA-1A06-428E-9F8C-06DB3AA349A6"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> Tools and Utilities</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-CDE377BA-1A06-428E-9F8C-06DB3AA349A6"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-CDE377BA-1A06-428E-9F8C-06DB3AA349A6"><!----></a>MIDP
+Security tab</h1>
+<div class="figure" id="GUID-0A4C57C7-EB8B-4CCA-A32F-60FE406C109B"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-0A4C57C7-EB8B-4CCA-A32F-60FE406C109B"><!----></a><img src="GUID-7E0A3EAE-087C-41C5-8354-C752A36FC8B7_d0e8224_href.png" alt=""/><p class="figure-title"><strong>Figure 31: </strong>MIDP Security tab</p></div>
+<p>The <span>MIDP Security</span> tab is used for adjusting MIDlet runtime security
+sandbox on the emulator. The tab has two main options:</p>
+<ul>
+<li><p><span>Run MIDlets within security domain specified by their
+certificates</span> (default)</p><p>Selects security environment according
+to the real domain and provided certificates.</p></li>
+<li><p><span>Run MIDlets within the following domain</span></p><p>Lets
+the user specify the desired domain from the list or specify available function
+permissions manually in more detail (with user defined “domain”). The defined
+domains are:</p>
+<ul>
+<li><p>Manufacturer</p></li>
+<li><p>Operator</p></li>
+<li><p>Trusted Third Party</p></li>
+<li><p>Untrusted</p></li>
+<li><p>User Defined.</p></li>
+</ul>
+</li>
+</ul>
+<p>Domains are predefined sets of function permission mappings. The domain
+User defined is the only domain that allows permission changing. When User
+defined domain is chosen, permission cells become editable. By clicking the <span>Permissions</span> cell,
+the selectable permission list becomes visible and the user can define permissions
+for each function.</p>
+<div class="tablenoborder"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-659B7964-737D-4E79-9A9C-4A5076A5A651"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-659B7964-737D-4E79-9A9C-4A5076A5A651" frame="border" border="1" rules="all">
+<tbody>
+<tr class="">
+<td valign="top" width="31.5%">
+<p><span>Permission</span></p>
+</td>
+<td valign="top" width="68.5%">
+<p><span>Description</span></p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="31.5%">
+<p>Allowed</p>
+</td>
+<td valign="top" width="68.5%">
+<p>API access is allowed.</p>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="31.5%">
+<p>Denied</p>
+</td>
+<td valign="top" width="68.5%">
+<p>API access is denied.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="31.5%">
+<p>Ask once</p>
+</td>
+<td valign="top" width="68.5%">
+<p>When accessing to API the first time, the user is asked to confirm the
+action.</p>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="31.5%">
+<p>Ask every time</p>
+</td>
+<td valign="top" width="68.5%">
+<p>Confirmation is done every time accessing API.</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>The configurations require emulator restart to be activated.</p>
+</div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

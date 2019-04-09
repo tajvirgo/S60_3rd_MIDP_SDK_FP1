@@ -1,0 +1,91 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="SMS/MMS support"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-A3DEE07C-3C1F-494F-BCFA-1A3B9C33C745"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> Tools and Utilities</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-A3DEE07C-3C1F-494F-BCFA-1A3B9C33C745"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-A3DEE07C-3C1F-494F-BCFA-1A3B9C33C745"><!----></a>SMS/MMS
+support</h1>
+<p>The S60 SDK emulator SMS/MMS support enables 3rd party application to
+test applications using SMS/MMS APIs in the emulator. This speeds up development
+of messaging-based applications in a cost-efficient way.</p>
+<p>SMS/MMS support in the S60 SDK emulator is based on file based sending
+and reception: </p>
+<ul>
+<li><p><span>Sending an SMS/MMS:</span> The emulator writes the sent message
+to a directory specified for SMS/MMS sending. Any external application interested
+in the message can read it from the specified directory.</p>
+<div class="note"><p><strong class="note_title">Note: </strong>The message will remain in the directory if not removed.</p></div>
+</li>
+<li><p><span>Receiving an SMS/MMS:</span> To receive an SMS/MMS, move
+the message to the specified directory for SMS/MMS reception. The emulator
+reads the message from the specified location and shows the message in the
+Inbox of the emulator.</p>
+<div class="note"><p><strong class="note_title">Note: </strong>You can also copy example SMS/MMS messages to the Inbox folder of the
+emulator with the <span>Messaging events</span> of the <span>Utilities &gt; Events</span>.
+Please refer to <a href="GUID-79277B36-2D48-40E3-B7F7-3705079EC9C4.html#GUID-79277B36-2D48-40E3-B7F7-3705079EC9C4">Simulating
+messaging events</a>.</p></div>
+</li>
+</ul>
+<p>The table below describes the directories and prefixes used for sending
+and receiving SMS and MMS messages in the emulator.</p>
+<div class="tablenoborder"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-900CC5AC-93EB-46B3-87A6-C52F602D399F"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-900CC5AC-93EB-46B3-87A6-C52F602D399F" frame="border" border="1" rules="all"><caption><strong>Table 2: </strong>Directories and
+prefixes used for sending and receiving SMS and MMS</caption>
+<tbody>
+<tr class="">
+<td valign="top" width="20.666666666666668%">
+<p><span>Operation</span></p>
+</td>
+<td valign="top" width="39.666666666666664%">
+<p><span>Directory</span></p>
+</td>
+<td valign="top" width="39.666666666666664%">
+<p><span>Prefix</span></p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="20.666666666666668%">
+<p>Send MMS</p>
+</td>
+<td valign="top" width="39.666666666666664%">
+<p><code>&lt;SDK_home&gt;\bin\epoc32\winscw\c\mmsout</code></p>
+</td>
+<td valign="top" width="39.666666666666664%">
+<p>mms</p>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="20.666666666666668%">
+<p>Receive MMS</p>
+</td>
+<td valign="top" width="39.666666666666664%">
+<p><code>&lt;SDK_home&gt;\bin\epoc32\winscw\c\mmsin</code></p>
+</td>
+<td valign="top" width="39.666666666666664%">
+<p>mms</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="20.666666666666668%">
+<p>Send SMS</p>
+</td>
+<td valign="top" width="39.666666666666664%">
+<p><code>&lt;SDK_home&gt;\bin\epoc32\winscw\c\smsout</code></p>
+</td>
+<td valign="top" width="39.666666666666664%">
+<p>sms</p>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="20.666666666666668%">
+<p>Receive SMS</p>
+</td>
+<td valign="top" width="39.666666666666664%">
+<p><code>&lt;SDK_home&gt;\bin\epoc32\winscw\c\smsin</code></p>
+</td>
+<td valign="top" width="39.666666666666664%">
+<p>sms</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Supported SMS specification is GSM 03.40 version 7.4.0 Release 1998.</p>
+<p>Supported MMS specification is MMS WAP-209-MMSEncapsulation Protocol.</p>
+</div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

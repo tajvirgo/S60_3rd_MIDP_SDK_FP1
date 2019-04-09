@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>PKI Example</title>
+</head>
+<body>
+<p> This example demonstrates how to use a smart card to digitally sign
+data and manage user certificates, it&nbsp; implements the PKI API in
+the Security and Trust Services API 1.0 defined in JSR 177.<!--section contents-->
+</p>
+<h3>Section Contents</h3>
+<blockquote>
+  <p> <a href="#1">1.
+About this example</a> </p>
+  <p> <a href="#2">2.
+Pre-requisites</a> </p>
+  <p> <a href="#3">3.
+Building and running</a> </p>
+  <p> <a href="#4">4.
+Design and implementation</a> </p>
+  <p> <a href="#5">5.
+Summary</a> </p>
+</blockquote>
+<hr align="center" width="100%" size="2">
+<h3> <a name="1">1. About this example</a> </h3>
+<blockquote>
+  <p>This example implements SATSA-PKI APIs. It demonstrates how to use
+a smart card to digitally sign data and manage user certificates.&nbsp;
+This example currently does not come with the certificate, so the user
+can
+not run it on the device or SDK.<br>
+  </p>
+</blockquote>
+<h3> <a name="2">2. Pre-requisites</a> </h3>
+<blockquote>
+  <p>The example makes use of the standard MIDP application framework,
+security service and PKI API. This example uses MIDP 2.0.</p>
+</blockquote>
+<h3> <a name="3">3. Building and running</a> </h3>
+<blockquote>
+  <p>The example is built using the standard method for building and
+running as described in <a
+ href="../../../../../../../../../doc-files/building.html">Building
+and
+running the examples</a>.</p>
+  <p>The following classes should be included in the jar:</p>
+  <blockquote>com.nokia.midp.examples.security.pki.*<br>
+  </blockquote>
+  <p>No resource files are used.</p>
+  <p>When launched, the application displays the following screen.</p>
+</blockquote>
+<h3> <a name="4">4. Design and implementation</a> </h3>
+<blockquote>
+  <p>Application classes</p>
+  <ul>
+    <li><a
+ href="file:///C:/ccm/Series60SDK_dev-bs1sim%23main_zhe3/Series60SDK_dev/ExamplesJava/examples/pki/rsrc/javadoc/com/nokia/midp/examples/lcdui/helloworldplus/HelloWorldPlusMIDlet.html"
+ title="class in com.series60.examples.lcdui.helloworldplus"><code>PKIMIDlet</code></a>
+A simple MIDlet generating signatures using
+CMSMessageSignatureService-class. <br>
+    </li>
+  </ul>
+  <p>System classes</p>
+  <ul>
+    <li><a
+ href="file:///C:/ccm/Series60SDK_dev-bs1sim%23main_zhe3/Series60SDK_dev/ExamplesJava/examples/MIDP2.0_API/javadoc/javax/microedition/lcdui/Form.html"
+ title="class or interface in javax.microedition.lcdui"><code>Form</code></a>
+A Screen that contains a mixture of Items, and handles layout and user
+interaction focus.</li>
+    <li><a
+ href="file:///C:/ccm/Series60SDK_dev-bs1sim%23main_zhe3/Series60SDK_dev/ExamplesJava/examples/MIDP2.0_API/javadoc/javax/microedition/lcdui/Display.html"
+ title="class or interface in javax.microedition.lcdui"><code>Display</code></a>
+The manager of the display and input devices of the system.<br>
+    </li>
+  </ul>
+</blockquote>
+<h3> <a name="5">5. Summary</a> </h3>
+<blockquote>
+  <p>This example provids the source code to demonstrate how to
+digitally sign data and
+manage user certificates.</p>
+</blockquote>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</body>
+</html>

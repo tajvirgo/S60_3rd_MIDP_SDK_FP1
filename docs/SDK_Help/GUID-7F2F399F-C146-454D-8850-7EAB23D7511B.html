@@ -1,0 +1,39 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Command line interface"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-7F2F399F-C146-454D-8850-7EAB23D7511B"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> Tools and Utilities</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-7F2F399F-C146-454D-8850-7EAB23D7511B"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-7F2F399F-C146-454D-8850-7EAB23D7511B"><!----></a>Command
+line interface</h1>
+<p>The SDK has two command line interfaces:</p>
+<ul>
+<li><p>Emulator Command line interface (<code>emulator.exe</code>)</p>
+</li>
+<li><p>SDK Command Line Interface (<code>sdk.exe</code>)</p>
+</li>
+</ul>
+<div><h3>emulator.exe</h3><p>Typically, an IDE that supports MIDlet development automatically uses
+emulator.exe when it uses the SDK as a device. A developer of MIDlets is unlikely
+to use emulator.exe on the command line to monitor the behavior of a MIDlet.
+The SDK ignores options and commands that emulator.exe does not support.</p><p><code>emulator.exe</code> is the implementation of the Unified
+Emulator Interface Specification (UEI) 1.0.2.</p><p><code>emulator.exe</code> is located in <code>&lt;S60_SDK_installation_directory&gt;\bin\</code></p><p>For syntax and arguments, see <a href="GUID-27D73E1D-B43E-4BFA-8727-43FA57B9AA02.html#GUID-27D73E1D-B43E-4BFA-8727-43FA57B9AA02">Emulator.exe
+syntax and arguments</a>.</p></div>
+<div><h3>sdk.exe</h3><p>The executable <code>sdk.exe</code> supports options
+and commands that you use in message content development. If you are developing
+message or browser content, you are more likely to use <code>sdk.exe</code> on
+the command line because with this executable you can work within a shell
+and arrange to have one instance of the SDK send a message to another instance.
+Options and commands that <code>sdk.exe</code> does not support cause
+the entire command to fail, and an error message to be posted.</p><p><code>sdk.exe</code> is located in <code>&lt;S60_SDK_installation_directory&gt;\bin\epoc32\release\winscw\udeb</code>.</p><p>The <span>SDK command line interface</span> (<code>sdk.exe</code>)
+enables web content developers to easily test their content on the emulator
+or on a device. This interface can be used to:</p><ul>
+<li><p>Launch the emulator, view particular content in an already
+running emulator (for example an image) or launch a URL in the emulator.</p>
+</li>
+<li><p>Send a URL to a mobile device and launch the browser with
+the URL. This command line interface relies on the <a href="GUID-A3B88F89-14EE-48EB-ACA2-7C86A8AB2082.html#GUID-A3B88F89-14EE-48EB-ACA2-7C86A8AB2082">Device
+connectivity tool for S60 SDK</a> to provide connectivity between the PC
+and the mobile device.</p></li>
+</ul><p><code>sdk.exe</code> will automatically launch the Device Connectivity
+Tool for S60 SDK tool  - if it is not already running - for all the operation
+is in the device.</p><p>For syntax and arguments, see <a href="GUID-3F477400-5F43-478A-8134-C2DE888A471F.html#GUID-3F477400-5F43-478A-8134-C2DE888A471F">Sdk.exe
+syntax and arguments</a>.</p></div>
+</div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

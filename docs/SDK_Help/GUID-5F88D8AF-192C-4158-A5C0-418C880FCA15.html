@@ -1,0 +1,39 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Tools used for developing location-based applications"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-5F88D8AF-192C-4158-A5C0-418C880FCA15"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> Tools and Utilities</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-5F88D8AF-192C-4158-A5C0-418C880FCA15"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-5F88D8AF-192C-4158-A5C0-418C880FCA15"><!----></a>Tools
+used for developing location-based applications</h1>
+<p>The S60 SDK provides a number of APIs which can be used for developing
+location-based applications for devices that provide support for location
+acquisition.</p>
+<p>To support location-based application development, the S60 SDK includes
+tools which can be used to fully test these applications in the emulator.
+The figure below illustrates the relation of different tools and the location
+framework that are available for application developers.</p>
+<div class="note"><p><strong class="note_title">Note: </strong>The code samples provided in the instructions in this section are C++
+examples. For corresponding MIDP code, please refer to Location
+API (JSR-179) provided in the Java API Documentation section of the SDK Help.</p></div>
+<div class="figure" id="GUID-45A00B20-99CC-4928-AB66-E3BB1F37897F"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-45A00B20-99CC-4928-AB66-E3BB1F37897F"><!----></a><img src="GUID-62318796-A7E0-4135-91F4-D6EFCC33FC98_d0e13973_href.png" alt=""/><p class="figure-title"><strong>Figure 84: </strong>Relation of different tools and the location framework
+available for application developers</p></div>
+<div><h3>Location Application</h3><p>Application developed using location APIs.</p></div>
+<div><h3>Location Framework</h3><p>A framework that provides location-based services and location APIs
+for application developers. For more details on the location framework, see
+the API Reference Guide.</p></div>
+<div><h3>Configurations/LocationSimulation PSY</h3><p>An application in the emulator that is mainly used to activate the Location
+functionality and to select the desired positioning subsystem (PSY). The positioning
+subsystem provided in the emulator is the Simulation PSY.</p><p>A positioning subsystem used in the emulator.</p><div class="note"><p><strong class="note_title">Note: </strong>You can also use the Simulation PSY in case you wish to test your application
+using simulated locations in the target device. This requires that the SimPsyConfigurator
+is installed on the device.</p></div></div>
+<div><h3>SimPsyConfigurator</h3><p>A tool primarily used to select the desired simulation file used by
+the Simulation PSY. The SimPsyConfigurator is used for selecting the desired
+simulation file format: NMEA, or SPS format. For more details, see the <a href="GUID-4ABE0610-7FB0-4F91-B4BE-32870D0CAC62.html#GUID-4ABE0610-7FB0-4F91-B4BE-32870D0CAC62">Simulation PSY Configurator
+user’s guide</a>.</p><div class="note"><p><strong class="note_title">Note: </strong>SimPsyConfigurator can also be installed into a target device. Install
+the SimPsyConfigurator.sis (included with the SDK) file to your device, which
+has the required location support.</p></div></div>
+<div><h3>Route Generator</h3><p>The Route Generator is used to generate new simulation files used by
+the Simulation PSY. This tool is used via the emulator Preferences Window.
+For more details, see the <a href="GUID-801CF706-FE84-4E34-8C0F-8AAE31BA9060.html#GUID-801CF706-FE84-4E34-8C0F-8AAE31BA9060">Simulation
+PSY Route Plug-In user's guide</a>.</p></div>
+<div><h3>Simulation File</h3><p>A file in either NMEA or SPS format which is used by the Simulation
+PSY.</p></div>
+</div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

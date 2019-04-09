@@ -1,0 +1,174 @@
+<!DOCTYPE doctype PUBLIC "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+  <title>SVG Example</title>
+</head>
+<body>
+This example contains three midlets that illustrate the use of Scalable Vector Graphics(SVG) provided by the Mobile 2D(M2G) API.
+<h3>Section Contents</h3>
+<blockquote>
+  <p><a href="#1">1. About this example</a> </p>
+  <p><a href="#2">2. Pre-requisites</a> </p>
+  <p><a href="#3">3. Building and running</a> </p>
+  <p><a href="#4">4. Design and implementation</a> </p>
+  <p><a href="#5">5. Summary</a> </p>
+</blockquote>
+<!--(HR)============================================================-->
+<hr style="height: 2px; width: 100%;" size="2" width="100%"
+ align="center">
+<h3><a name="1">1. About this example</a> </h3>
+<blockquote>
+  <p> This example contains three midlets that illustrate the use of
+Scalable Vector Graphics(SVG) provided by the Mobile 2D(M2G) API. The
+three midlets
+are the SvgAnimatorMidlet, LoadStaticMidlet, and the HelloWorldMidlet.
+&nbsp;&nbsp;&nbsp;</p>
+</blockquote>
+<h3><a name="2">2. Pre-requisites</a> </h3>
+<blockquote>
+  <p>The example midlets make use of the standard MIDP application
+framework
+and LCDUI API. The reader should be familiar with these areas before
+attempting to understand this example.</p>
+  <p>This example uses MIDP 2.0.</p>
+</blockquote>
+<h3><a name="3">3. Building and running</a> </h3>
+<blockquote>
+  <p>The example is built using the standard method for building and
+running as described in <a
+ href="../../../../../../../../doc-files/building.html">Building and
+running the examples</a>.</p>
+  <p>The following classes should be included in the jar:</p>
+  <blockquote>com.nokia.midp.examples.svg.*<br>
+  </blockquote>
+  <p>Two additional SVG content files are resources that are included
+in
+the jar file:<br>
+  </p>
+  <ul>
+    <li>content2.svg</li>
+    <li>content3.svg</li>
+  </ul>
+The following images depict the three example midlets in operation.<br>
+  <br>
+  <img src="doc-files/SmileyFace.JPG" title="" alt=""
+ style="width: 179px; height: 179px;"><br>
+  <img src="doc-files/lion.jpeg" title="" alt=""
+ style="width: 176px; height: 176px;"><br>
+  <br>
+  <img src="doc-files/animation.JPG" title="" alt=""
+ style="width: 177px; height: 180px;"><br>
+  <br>
+  <ul>
+  </ul>
+</blockquote>
+<h3><a name="4">4. Design and implementation</a> </h3>
+<blockquote>
+  <p>The M2G API provides the methods to create and render vector
+images.
+&nbsp;The API also provides for graphic animation.&nbsp;</p>
+  <p>The following list and class diagram identify the classes used in
+this example.</p>
+  <p>Application classes</p>
+  <ul>
+    <li class="kadov-p">HelloWorldMidlet
+&nbsp;- Displays a static SVG image.</li>
+    <li class="kadov-p">LoadStaticMidlet &nbsp;- Loads and displays
+content
+and shows you how to perform zoom and rotate operations.<br>
+    </li>
+    <li class="kadov-p">SvgAnimatorMidlet
+&nbsp;- Demonstrates the feature of SVGAnimator class allowing you to
+playback
+animated SVG content.<br>
+    </li>
+  </ul>
+  <p>System classes</p>
+  <ul>
+    <li class="kadov-p">SVGImage&nbsp;
+- A class that represents an SVG image conforming to W3C SVG Tiny 1.1
+Profile</li>
+    <li class="kadov-p">SvgAnimator
+- This class handles rendering of updates and animations in a SVGImage
+to
+a target component.</li>
+    <li class="kadov-p">ScalableGraphics - A fundamental class for 2D
+rendering<br>
+    </li>
+  </ul>
+  <img src="doc-files/svgclassdiagram.jpg" alt="" width="791"
+ height="612"> <br>
+  <h4>HelloWorldMidlet</h4>
+The HelloWorldMidlet creates an object of type SvgCanvas1 and then
+displays
+it. &nbsp;The SvgCanvas1 instance sets up an instance of
+ScalableGraphics,
+creates an empty SVGImage, and creates graphical elements appending
+them
+to the image document to construct a smiley face. &nbsp;<br>
+  <br>
+  <h4>LoadStaticMidlet</h4>
+The LoadStaticMidlet creates an object of type SvgCanvas2 and then
+displays
+it. &nbsp;The midlet also sets up the following commands:<br>
+  <ul>
+    <li>Zoom In</li>
+    <li>Zoom Out</li>
+    <li>Rotate Counter</li>
+    <li>Rotate Clockwise</li>
+    <li>Restore View</li>
+    <li>Exit</li>
+  </ul>
+The SvgCanvas2 instance sets up an instance of ScalableGraphics, uses
+the
+content2.svg resource file to create an SVGImage, and sets the width
+and
+height of the SVGImage document to match the screen capabilities of the
+midlet.
+&nbsp;The SvgCanvas2 instance also implements methods to perform image
+manipulations
+that correspond to the commands that the LoadStaticMidlet supports. The
+result
+is that the midlet displays an image that may be manipulated in various
+ways
+by the user. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;<br>
+  <h4>SvgAnimatorMidlet</h4>
+The SvgAnimatorMidlet&nbsp; uses the content3.svg resource file to
+create
+an SVGImage. &nbsp;The midlet then creates an instance of SVGAnimator
+using
+the previously created SVGImage. &nbsp;The midlet also sets up the
+following
+commands:<br>
+  <ul>
+    <li>Play</li>
+    <li>Pause</li>
+    <li>Stop</li>
+    <li>Increase Frame Rate</li>
+    <li>Decrease Frame Rate</li>
+    <li>Exit</li>
+  </ul>
+Within the command handler of the midlet the instance of the
+SVGAnimator
+is used to perform the requested command operation. &nbsp;The result is
+that
+the midlet displays an animation that is controllable by the
+user.&nbsp;&nbsp; <br>
+  <blockquote>
+    <p></p>
+  </blockquote>
+</blockquote>
+<h3><a name="5">5. Summary</a> </h3>
+<blockquote>
+  <p>This example has demonstrated how to use Scalable Vector
+Graphics(SVG)
+provided by the Mobile 2D(M2G) API to load and displays a static SVG
+image
+file, load and display content and how to perform zoom and rotate
+operations,
+and playback animated SVG content.<br>
+  <br>
+  </p>
+</blockquote>
+</body>
+</html>

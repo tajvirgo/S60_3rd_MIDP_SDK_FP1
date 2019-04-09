@@ -1,0 +1,36 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Infrared support"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-9C24A673-7941-4A05-AE45-D608CFF6A916"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> Tools and Utilities</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-9C24A673-7941-4A05-AE45-D608CFF6A916"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-9C24A673-7941-4A05-AE45-D608CFF6A916"><!----></a>Infrared support</h1>
+<p>This section describes the configuration steps that you need to carry
+out in order to enable Infrared connectivity for the emulator manually. The
+emulator uses serial communications to interface directly with the PC's hardware,
+which means that an Ir Pod connected to the COM port should be used.</p>
+<p>There is no need to install any Windows drivers for the Ir pod when
+it is used with the emulator.</p>
+<p>The Symbian OS IrDA stack supports the RS-232 Extended Systems, Inc.
+Jeteye pods ESI 9680-7201, ESI 9680-7401, and ESI 9680-7501. Other pods are
+not guaranteed to work properly.</p>
+<div><h3>Prerequisites</h3><p>Before you start, make sure that:</p><ul>
+<li><p>the emulator is up and running</p></li>
+<li><p>you have a supported type of  Ir pod connected to the COM
+port.</p></li>
+</ul></div>
+<div><h3>Configuring Infrared connections</h3><p>Infrared connections are configured using the <a href="GUID-D61FEABF-825E-4F0B-A9A1-410290998C19.html#GUID-D61FEABF-825E-4F0B-A9A1-410290998C19">Preferences
+window</a>.</p><ol>
+<li id="GUID-12AE4435-1B7D-4D67-8165-788E6CFD2D5C"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-12AE4435-1B7D-4D67-8165-788E6CFD2D5C"><!----></a><p>To access the <span>Preferences</span> window, select <span>Tools
+&gt; Preferences</span> from the emulator main menu.</p></li>
+<li id="GUID-327EA9B5-2DB1-477E-AFD9-0AD2E3D432E8"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-327EA9B5-2DB1-477E-AFD9-0AD2E3D432E8"><!----></a><p>Click the <span>PAN (Personal Area Networking)</span> tab to display
+the following dialog: </p>
+<div class="figure" id="GUID-86110717-3FA2-443A-A697-30FCDF18D85A"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-86110717-3FA2-443A-A697-30FCDF18D85A"><!----></a><img src="GUID-D847E02F-76F0-4607-B752-B6D3AF43BDD3_d0e9304_href.png" alt=""/><p class="figure-title"><strong>Figure 42: </strong>PAN (Personal Area Networking) tab</p></div>
+</li>
+<li id="GUID-E4CABFFA-9914-4753-8E91-9514A6AA1AA8"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-E4CABFFA-9914-4753-8E91-9514A6AA1AA8"><!----></a><p>Select <span>Enable</span> under <span>IrDA</span>.</p></li>
+<li id="GUID-D6A00CC2-6A30-4B2E-9540-12F7FFF12613"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-D6A00CC2-6A30-4B2E-9540-12F7FFF12613"><!----></a><p>Select the virtual COM port used by the Ir pod.</p>
+<div class="note"><p><strong class="note_title">Note: </strong>Make sure that you use different COM ports for the Bluetooth and infrared
+connections.</p></div>
+</li>
+<li id="GUID-30B2C4CF-3823-4130-A3A7-AF112E0D1407"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-30B2C4CF-3823-4130-A3A7-AF112E0D1407"><!----></a><p>Click <span>Apply</span> to accept the changes or <span>OK</span> to
+accept and exit the tool.</p></li>
+</ol><p>A notification message is displayed stating that you need to restart
+the emulator to activate the changes.</p></div>
+</div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

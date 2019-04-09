@@ -1,0 +1,272 @@
+<!DOCTYPE doctype PUBLIC "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<!--(==============================================================)--><!--(Document created with RoboEditor. )============================--><!--(==============================================================)-->
+  <title>Location API Example MIDlet</title>
+<!--(Meta)==========================================================-->
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=windows-1252">
+  <meta name="Originator" content="ImportDoc">
+  <meta name="OriginalFile" content="Maze3Dpackage-summary.doc">
+  <meta name="generator"
+ content="RoboHELP by eHelp Corporation - www.ehelp.com">
+  <meta name="generator-major-version" content="0.1">
+  <meta name="generator-minor-version" content="1">
+  <meta name="filetype" content="kadov">
+  <meta name="filetype-version" content="1">
+  <meta name="page-count" content="1">
+  <meta name="layout-height" content="8285">
+  <meta name="layout-width" content="702">
+<!--(Links)=========================================================-->
+<!--(Style Sheet)===================================================-->
+  <style>
+
+  </style><!--(Body)==========================================================-->
+</head>
+<body lang="EN-US">
+This example application demonstrates how to use JSR 179 to create a
+health and sports oriented MIDlet.
+<p style="font-weight: bold;"><b><span style="font-weight: bold;">Section
+contents</span></b></p>
+<p>1. <a href="#1">About this example</a></p>
+<p><span style="font-family: 'Times New Roman';">2. <a href="#2">Prerequisites</a></span></p>
+<p><span style="font-family: 'Times New Roman'; color: rgb(0, 0, 0);">3.
+<a href="#3">Building and running</a></span></p>
+<p><span style="font-family: 'Times New Roman'; color: rgb(0, 0, 0);">4.
+<a href="#4">Design and implementation</a></span></p>
+<p><span style="font-family: 'Times New Roman'; color: rgb(0, 0, 0);">5.
+<a href="#5">Summary</a></span></p>
+<h3 style="font-family: 'Times New Roman';"><a name="1">1. About this
+example</a></h3>
+<p> This example application demonstrates how to use JSR 179
+to create<span
+ style="font-family: 'Times New Roman'; color: rgb(0, 0, 0);"> a sports
+and
+health related application that is used to obtain the distance to the
+current
+hole of a golf course. The MIDlet is intended as an introductory
+demonstration
+to show some of the features included in Location API.&nbsp;</span></p>
+<p style="font-family: 'Times New Roman'; font-weight: bold;"><a
+ name="2" style="font-weight: bold;"><span style="font-weight: bold;">2.
+Pre-requisites</span></a></p>
+<p><span style="font-family: 'Times New Roman';">You should be familiar
+with Java™ programming and the basics of Mobile Information Device
+Profile (MIDP) programming.</span></p>
+<h3 style="font-family: 'Times New Roman';"><a name="3">3. Building
+and running</a></h3>
+<p><span style="font-family: 'Times New Roman';">The example is built
+using the standard method for <a
+ href="../../../../../../../../../doc-files/building.html">Building and
+running the examples</a>. The
+support for the Location API in an SDK may require the use of a file
+containing
+NMEA location data.&nbsp; Creating location data with proximity to the
+locations in this example will make the results more realistic.&nbsp;
+This example creates landmarks for a 9 hole golf course.&nbsp;
+See the supporting documentation in your SDK for creating location
+data.&nbsp; <br>
+</span></p>
+<p><span style="font-family: 'Times New Roman';"> Hole 1:
+&nbsp;&nbsp;&nbsp; Longitude =
+61.4580&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; Latitude =
+23.8470&nbsp;&nbsp;&nbsp;&nbsp; <br>
+Hole 2:&nbsp;&nbsp; &nbsp; Longitude = 61.4585 &nbsp;&nbsp;
+&nbsp;&nbsp; </span><span style="font-family: 'Times New Roman';">Latitude
+= </span><span style="font-family: 'Times New Roman';">
+23.8475&nbsp;&nbsp;&nbsp; <br>
+Hole 3: </span><span style="font-family: 'Times New Roman';">&nbsp;&nbsp;&nbsp;
+Longitude =
+</span><span style="font-family: 'Times New Roman';">61.4587&nbsp;&nbsp;
+&nbsp; &nbsp; </span><span style="font-family: 'Times New Roman';">Latitude
+= </span><span style="font-family: 'Times New Roman';">23.8477<br>
+Hole 4: </span><span style="font-family: 'Times New Roman';">&nbsp;&nbsp;&nbsp;
+Longitude =
+</span><span style="font-family: 'Times New Roman';"> 61.4589 </span><span
+ style="font-family: 'Times New Roman';">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Latitude = </span><span style="font-family: 'Times New Roman';">23.8479<br>
+Hole 5: </span><span style="font-family: 'Times New Roman';">&nbsp;&nbsp;&nbsp;
+Longitude =
+</span><span style="font-family: 'Times New Roman';">61.4592
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+ style="font-family: 'Times New Roman';">Latitude = </span><span
+ style="font-family: 'Times New Roman';">23.8482<br>
+Hole 6: </span><span style="font-family: 'Times New Roman';">&nbsp;&nbsp;&nbsp;
+Longitude =
+</span><span style="font-family: 'Times New Roman';"> 61.4595&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+ style="font-family: 'Times New Roman';">Latitude = </span><span
+ style="font-family: 'Times New Roman';">23.8485<br>
+Hole 7: </span><span style="font-family: 'Times New Roman';">&nbsp;&nbsp;&nbsp;
+Longitude =
+</span><span style="font-family: 'Times New Roman';"> 61.4597&nbsp; </span><span
+ style="font-family: 'Times New Roman';">&nbsp;&nbsp;&nbsp;&nbsp;
+Latitude = </span><span style="font-family: 'Times New Roman';">23.8487<br>
+Hole 8: </span><span style="font-family: 'Times New Roman';">&nbsp;&nbsp;&nbsp;
+Longitude =
+</span><span style="font-family: 'Times New Roman';">61.4599&nbsp; </span><span
+ style="font-family: 'Times New Roman';">&nbsp;&nbsp;&nbsp;&nbsp;
+Latitude = </span><span style="font-family: 'Times New Roman';">
+23.8489 <br>
+Hole 9: </span><span style="font-family: 'Times New Roman';">&nbsp;&nbsp;&nbsp;
+Longitude =
+</span><span style="font-family: 'Times New Roman';"> 61.4600
+&nbsp;&nbsp;&nbsp; &nbsp; </span><span
+ style="font-family: 'Times New Roman';">Latitude = </span><span
+ style="font-family: 'Times New Roman';">23.8495</span></p>
+<p><span style="font-family: 'Times New Roman';">When the application
+begins operation there will be
+prompts asking permission to create location information
+(landmarks) in the phone.<br>
+</span></p>
+<p><span style="font-family: 'Times New Roman';">When the application
+starts up, the following screen appears:</span></p>
+<p style="font-family: 'Times New Roman';"><img
+ src="doc-files/start.jpg" x-maintain-ratio="TRUE"
+ style="border: medium none ; width: 180px; height: 213px; float: none;"
+ alt="start screen" title=""> </p>
+<p><b style="font-weight: bold;"><span
+ style="font-size: 8pt; font-family: 'Times New Roman';">Figure:
+Initial display</span></b></p>
+<p><span style="font-family: 'Times New Roman';">The MIDlet starts and
+the user selects a hole by pressing the Options key and a pop up menu
+appears.</span></p>
+<p><span style="font-family: 'Times New Roman';"><img
+ src="doc-files/scr2.jpg" alt="selection menu"
+ style="width: 179px; height: 212px;" title=""> <br>
+</span></p>
+<p><b style="font-weight: bold;"><span
+ style="font-size: 8pt; font-family: 'Times New Roman';">Figure: Select
+menu view</span></b></p>
+<p style="font-family: 'Times New Roman';">If the user selects the
+option the following hole selection screen appears.&nbsp;</p>
+<p> </p>
+<p style="font-family: 'Times New Roman';"><img src="doc-files/scr3.jpg"
+ alt="" style="width: 179px; height: 211px;" title=""> <br>
+</p>
+<p><b style="font-weight: bold;"><span
+ style="font-size: 8pt; font-family: 'Times New Roman';">Figure: Hole
+selection view</span></b></p>
+<p><span style="font-family: 'Times New Roman';">When the hole is
+selected a permissions screen will appear asking permission to
+determine the location, as shown below.<br>
+</span></p>
+<p style="font-family: 'Times New Roman';"><img src="doc-files/scr4.jpg"
+ alt="" style="width: 182px; height: 212px;" title=""> <br>
+</p>
+<p><b style="font-weight: bold;"><span
+ style="font-size: 8pt; font-family: 'Times New Roman';">Figure: Top
+view</span></b></p>
+<p><span style="font-family: 'Times New Roman';">If the user selects ok
+a location result screen is displayed as shown below.&nbsp;</span></p>
+<p style="font-family: 'Times New Roman';"><img src="doc-files/scr5.jpg"
+ alt="" style="width: 179px; height: 211px;" title=""> <br>
+</p>
+<p><b style="font-weight: bold;"><span
+ style="font-size: 8pt; font-family: 'Times New Roman';">Figure:
+Current
+location and hole distance view<br>
+</span></b></p>
+<p><span style="font-family: 'Times New Roman';">The user may use the
+select option to select a different hole as the golf game
+progresses.&nbsp;<br>
+</span></p>
+<p><span style="font-family: 'Times New Roman';">If the simulation file
+causes an out of service indication or the SDK preferences are set so
+that the
+location service are out of service then the user will see the
+following
+screen.<br>
+</span></p>
+<p><span style="font-family: 'Times New Roman';"><img
+ src="doc-files/scr6.jpg" alt="" style="width: 180px; height: 211px;"
+ title=""> <br>
+</span></p>
+<b style="font-weight: bold;"><span
+ style="font-size: 8pt; font-family: 'Times New Roman';">Figure: Out of
+service view</span></b>
+<p> </p>
+<h3 style="font-family: 'Times New Roman';"><a name="4">4. Design and
+implementation</a></h3>
+<p><span style="font-family: 'Times New Roman';">4.1 </span><span
+ style="font-family: 'Times New Roman';">Checking for the Location API<span
+ style="font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">
+</span></span><span style="font-family: 'Times New Roman';"><br>
+</span></p>
+<span style="font-family: 'Times New Roman';"></span>
+<p><span style="font-family: 'Times New Roman'; color: rgb(0, 0, 0);">The
+first application operation a well designed MIDlet will perform is to
+test the
+system properties to ensure that the required API is present before
+proceeding.<br>
+<br>
+<img src="doc-files/scr7.jpg" alt="" width="620" height="238"> <br>
+</span></p>
+<!--(Table)=========================================================-->
+<b style="font-weight: bold;"><span
+ style="font-size: 8pt; font-family: 'Times New Roman';">Figure: Code
+to
+Check for API <br>
+<br>
+<br>
+</span></b><span style="font-family: 'Times New Roman';">4.2 Sequence
+of Operations</span><br>
+<br>
+The application must interact with a number of Location API classes.
+&nbsp;The following sequence diagram illustrates the required
+interaction.<br>
+<p><span style="font-family: 'Times New Roman';"><img
+ src="doc-files/seqdiagram.jpg" alt="" width="595" height="444"> </span></p>
+<table x-use-null-cells=""
+ style="width: 100%; background-color: rgb(238, 238, 238);"
+ cellspacing="0" bgcolor="#eeeeee" width="100%">
+  <tbody>
+    <tr style="" valign="top">
+    </tr>
+  </tbody>
+</table>
+<p><span style="font-family: 'Times New Roman';">4.3 Class Diagram</span></p>
+<h3><span style="font-family: 'Times New Roman';"></span></h3>
+<p><span style="font-family: 'Times New Roman';">The MIDlet class takes
+care of holding the display and providing transitions between the
+different screens. The MIDlet has two screens: <i>HoleSelector, </i>where
+the user selects the hole; <i>LocationScreen, </i>which contains the
+current location and distance to hole information. &nbsp;The
+figure&nbsp; below shows the class diagram. &nbsp;The diagram shows the
+MIDlet class, screen classes (inherit
+from Form), Location API classes and some utility classes.</span></p>
+<p> </p>
+<p style="font-family: 'Times New Roman';"><img
+ src="doc-files/classdiagram.jpg" alt=""
+ style="width: 705px; height: 660px;" title=""> <br>
+</p>
+<p><b style="font-weight: bold;"><span
+ style="font-size: 8pt; font-family: 'Times New Roman';">Figure: Class
+diagram</span></b></p>
+<p><span style="font-family: 'Times New Roman';"></span></p>
+<h3><span style="font-family: 'Times New Roman';"><a name="5"></a>5.<span
+ style="font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">
+</span></span><span
+ style="font-family: 'Times New Roman'; text-transform: none;">Summary</span></h3>
+<p><span style="font-family: 'Times New Roman'; color: rgb(0, 0, 0);">The
+example has demonstrated how to use the the Location API within a
+health and sports oriented example MIDlet.</span></p>
+<p> </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</body>
+</html>

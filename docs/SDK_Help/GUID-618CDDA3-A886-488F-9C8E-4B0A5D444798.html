@@ -1,0 +1,27 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="TCP/IP support for S60 SDK"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-618CDDA3-A886-488F-9C8E-4B0A5D444798"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> Tools and Utilities</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-618CDDA3-A886-488F-9C8E-4B0A5D444798"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-618CDDA3-A886-488F-9C8E-4B0A5D444798"><!----></a>TCP/IP support for S60 SDK</h1>
+<p>The TCP/IP support for S60 SDK is a developer’s tool that lets you access
+IP networks via for example an Ethernet card. This is useful if your application
+needs access to the Internet.</p>
+<div class="figure" id="GUID-A82560F1-6657-42C5-B511-E98A04BF6D3E"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-A82560F1-6657-42C5-B511-E98A04BF6D3E"><!----></a><img src="GUID-5937AA7A-6534-4830-8C12-D0DD16E61DEA_d0e8747_href.png" alt=""/><p class="figure-title"><strong>Figure 35: </strong>TCP/IP support</p></div>
+<p>When using this WinSock access point the emulator uses the Windows TCP/IP
+stack, and not the Symbian TCP/IP stack. The emulator (and the applications
+running in it) use the same IP address as the IP address of the PC. The localhost
+(127.0.0.1) for Symbian applications are mapped to the localhost of the PC.
+As a consequence one cannot have a Symbian application and a regular PC application
+listening on the same local port on the same PC.</p>
+<p>As the emulator uses the Windows TCP/IP stack, you can use any Windows
+networking tool to analyze the behavior of the emulator (for example Ethereal). </p>
+<p>If you want to run the emulator on a mobile network (GPRS , WCDMA) you
+can either use a cellular modem PC card or a mobile device as a modem for
+connectivity.</p>
+<p>The TCP/IP support does not usually affect your application design.
+Simply use normal means for accessing Sockets in your Symbian OS application.
+Your application design is affected only if your application is interested
+in the type of access point used. </p>
+<p>The emulator can be used in an IPv6 network environment, if the hosting
+operation system supports IPv6. Please consult the documentation of the host
+operation system to install and enable IPv6 on your PC.</p>
+</div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

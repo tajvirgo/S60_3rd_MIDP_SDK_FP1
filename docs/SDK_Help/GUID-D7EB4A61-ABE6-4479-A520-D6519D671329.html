@@ -1,0 +1,91 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Bluetooth connectivity"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-D7EB4A61-ABE6-4479-A520-D6519D671329"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> S60 3rd Edition SDK for Symbian OS Supporting Feature Pack 1, for MIDP</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-D7EB4A61-ABE6-4479-A520-D6519D671329"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-D7EB4A61-ABE6-4479-A520-D6519D671329"><!----></a>Bluetooth
+connectivity</h1>
+<p/>
+<p>The Bluetooth API provides access to RFCOMM, L2CAP, and SDP protocols.</p>
+<p/>
+<div><h3>Point-to-multipoint applications</h3><p>Most Bluetooth applications use point-to-point connections between two
+devices. However, in certain applications, such as games, point-to-multipoint
+connections could provide added value. To get the best out of point-to-multipoint
+connections, a few conditions must be considered. </p><p>Note that not all Bluetooth devices support point-to-multipoint. Also,
+test your point-to-multipoint application with multiple devices to find out
+the actual number of how many devices can be used with your application. The
+Bluetooth specification defines seven as the maximum number of slaves, but
+in practice the device implementation or its resources may limit the number.</p><p>In current phones, scatternet is not widely supported. This means that
+a slave can only accept one connection at a time, and it cannot be a master
+while already being a slave in another piconet. This means that you can only
+establish multiple connections from one single device (master) to slaves.</p><p>In point-to-multipoint scenarios, the handling of interruptions becomes
+crucial. For more information on interruptions, see the guidelines in section
+Handling interruptions. </p><p>Check that:</p><ul>
+<li><p>If you state that your application connects with, for example,
+seven devices via Bluetooth, make sure that it supports those seven devices
+and that the usability of the application does not suffer.</p></li>
+</ul></div>
+<div><h3>Optimizing device and service discoveries</h3><p>Bluetooth device and service discoveries may take a while to complete.
+Therefore, it is advisable to optimize these procedures. In device discovery,
+use Limited Inquiry Access Code (LIAC) instead of General Inquiry Access Code
+(GIAC) whenever possible. With a LIAC inquiry, the application finds only
+the devices that are in Limited-Discoverable mode, thus speeding up the procedure.
+Using LIAC is especially feasible when discovering counterpart device(s) that
+are waiting for your connection, for example, to start a game. Please note
+that you have to set the counterpart device (application) into the Limited-Discoverable
+mode. In Bluetooth devices, Discoverable mode is usually set as the default.</p><p>You can also optimize the discovery procedures by stopping the discovery
+after the first match(es). In service discovery, for example, you can stop
+the search after you have found the first device(s) running the desired service
+of the application.</p><p>Check that:</p><ul>
+<li><p>Device and service discoveries are efficient. Use Limited
+Inquiry Access Code to speed up the discovery procedure if feasible.</p>
+</li>
+</ul></div>
+<div><h3>Power consumption considerations</h3><p>In idle mode, Bluetooth does not significantly increase power consumption.
+However, when you have an active Bluetooth connection, it is worth considering
+disconnecting the link whenever no data is transferred for a long time to
+decrease power consumption. When the connection is reopened, use the <code>retrieveDevices()</code> method
+of the <code>DiscoveryAgent</code> to return an array of Bluetooth
+devices that have either been found by the local device during previous inquiry
+requests or have been specified as preknown devices depending on the argument
+of the method. </p><p>Check that:</p><ul>
+<li><p>The connection is turned off if it has not been needed for
+a long time.</p></li>
+</ul></div>
+<div><h3>Handling interruptions</h3><p>The application is responsible for possible recovery actions, for example,
+for reconnecting the link, for continuing to work after one device has left
+the session, and for notifying users about the situation. However, when implementing
+recovery features, keep in mind that the user interface must be logical in
+order to provide a good, intuitive user experience.</p><p>A typical interruption occurs when one of the devices receives an incoming
+call or a message. In this case, the Bluetooth application should locally
+go into the paused mode using the <code>hideNotify()</code> method
+as described in section <a href="GUID-9E6BDE2A-19C4-41B1-B097-762BF19175A7.html#GUID-9E6BDE2A-19C4-41B1-B097-762BF19175A7">Pausing
+a MIDlet</a>. A Bluetooth application should also inform the connected
+devices about the pause (in the case of a point-to-multipoint scenario, the
+slave receiving a call or a message first informs the master, which in turn
+should then inform other slaves). The application has the liberty to use any
+proprietary message in order to command other devices into the paused state,
+as there are no standardized methods. The Bluetooth link remains connected
+also during the paused state, so there should be no need to reconnect just
+for continuing the application.</p><p>There are also several cases that may happen to a remote slave device:
+It may move out of range, run out of power and eventually be switched off,
+or its application may be closed (disconnected) by the user. For the master-side
+application, all of these cases look as if a remote device was disconnected.
+The slaves cannot see if one of them is disconnected. Therefore it is the
+master-side application’s responsibility to inform the remaining slaves about
+the changed situation. There are several possible ways to handle these cases.
+The application could be continued by the remaining parties or the master
+could attempt to reconnect to the disappeared device. In the latter case,
+it is possible that the device won’t be found again because, for example,
+its application may not have been restarted.</p><p>It is a trickier scenario if the master disconnects from the application,
+because it leads to the dismantling of the whole piconet (the slaves cannot
+run the piconet without a master). There is the possibility for any slave
+to start discovering the devices and become a new master. The game should
+be saved so that it can be continued. It is up to the developer to evaluate
+if this kind of recovery is feasible and reasonable to implement.</p><p>The system usually closes connections when the application is about
+to close. For convenience, it is recommended that the Bluetooth connection
+is either disconnected by the user or programmatically before the application
+closes. </p><p>Check that:</p><ul>
+<li><p>Other devices continue the Bluetooth session even though
+one device would disappear from the session.</p></li>
+<li><p>The user is informed in case of interruptions.</p></li>
+</ul></div>
+</div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

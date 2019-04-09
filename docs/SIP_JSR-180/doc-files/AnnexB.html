@@ -1,0 +1,415 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<BODY bgColor=white>
+<center><H1>Annex B: Code examples</H1></center>
+<H2>B.1.0 Establishing and stopping session - INVITE, 200 OK, ACK - BYE</H2>
+<B>Originating side</B>
+<p>
+The MIDlet <b>(Listing B.3.1)</b> shows a simplified example of originating side UA in SIP session. The example handles only the SIP signaling in a sequence and does not handle any error cases. The MIDlet implements following things:
+<UL>
+<LI>Opens a <code>SipConnectionNotifier</code> for incoming requests like BYE and sets itself as a listener
+<LI>Opens outbound <code>SipClientConnection</code> to user <i>sippy.tester@example.com</i>
+<LI>Initializes and sends INVITE with attached SDP content
+<LI>Receives provisional responses 100, 180 until final 200 OK response
+<LI>Reads SDP content from 200 OK response
+<LI>Saves the <code>SipDialog</code> information after 200 OK response
+<LI>Initializes and sends ACK -> session established
+<LI>Gets new <code>SipClientConnection</code> from <code>SipDialog</code> object
+<LI>Initializes BYE request and sends it
+<LI>Receives 200 OK for BYE -> session terminated
+</UL>
+</p>
+<B>Terminating side</B>
+<p>
+This MIDlet <b>(Listing B.3.2)</b> shows an example of terminating side UA in SIP session. The example handles only the SIP signaling in a sequence and does not handle any error cases. The MIDlet does following steps:
+<UL>
+<LI>Opens inbound <code>SipConnectionNotifier</code> for incoming requests on "sip:5060"
+<LI>Receives INVITE request and reads the SDP content
+<LI>Initializes and sends responses 180 and 200 OK, with own SDP content
+<LI>Waits for other side to send ACK -> session established
+<LI>Waits for other side to send BYE -> session terminated
+</UL>
+<H2>B.2.0 Subscribing for presence information</H2>
+<p>
+This MIDlet <b>(Listing B.3.3)</b> shows a simplified example of subscribing for presence info. The MIDlet does following things:
+<UL>
+<LI>Opens inbound <code>SipConnectionNotifier</code> for incoming requests on "sip:5060"
+<LI>Sets the MIDlet as a listener for events from <code>SipConnectionNotifier</code>
+<LI>Initializes and sends SUBSCRIBE with additional header information: Expires, Event and Accept
+<LI>Waits for 200 OK response
+<LI>Waits 10 seconds before sending un-SUBSCRIBE with "Expires: 0" header
+<LI>Receives 200 OK for un-SUBSCRIBE in <code>notifyResponse()</code> method
+<LI>The listener method <code>notifyResponse()</code> handles all NOTIFY requests
+</UL>
+</p>
+
+<HR>
+<H2>Listing B.3.1</H2>
+<pre>
+
+import java.io.*;
+import javax.microedition.io.*;
+import javax.microedition.midlet.*;
+import javax.microedition.lcdui.*;
+import javax.microedition.sip.*;
+
+public class OriginatingINVITE extends MIDlet {
+
+    private Display display;
+    private long startTime;
+    private Form form;
+    // <i><b>using static SDP content as an example</b></i>
+    private String sdp = "v=0\n\no=bob 2890844730 2890844732 IN IP4 host.example.com\ns=\nc=IN IP4 host.example.com\nt=0 0\nm=message 54344 SIP/TCP\na=user:bob";
+
+    public OriginatingINVITE() {
+        // <i><b>Initialize MIDlet display</b></i>
+        display=Display.getDisplay(this);
+        // <i><b>create a Form for progess info printings</b></i>
+        form = new Form("Session example");
+        display.setCurrent(form);    
+    }
+    
+    public void startApp() {
+        SipConnectionNotifier scn = null;
+        SipClientConnection scc = null;
+        SipDialog dialog = null;
+        try {
+            // <i><b>start a listener for possible incoming requests</b></i>
+            scn = (SipConnectionNotifier) Connector.open("sip:5060");
+            // <i><b>set this object as the listener</b></i>
+            scn.setListener(this);
+            // <i><b>open SIP connection with sippy.tester@10.128.0.50</b></i>
+            scc = (SipClientConnection) 
+                Connector.open("sip:sippy.tester@10.128.0.50:5070");
+            // <i><b>initialize INVITE request</b></i> 
+            // <i><b>and associate it with the SipConnectionNotifier</b></i>
+            scc.initRequest("INVITE", scn);
+            scc.setHeader("Content-Length", ""+sdp.length());
+            scc.setHeader("Content-Type", "application/sdp");
+            OutputStream os = scc.openContentOutputStream();
+            os.write(sdp.getBytes());
+            os.close(); // <i><b>close and send</b></i>
+	    
+            int statusCode = 0;
+            boolean received = false;
+            while(statusCode < 200) {
+                received = scc.receive(15000); // <i><b>blocking receive, with 15 sec timeout</b></i>
+                if(received) {
+                    statusCode = scc.getStatusCode();
+                    form.append("Response "+scc.getReasonPhrase());
+                    if(statusCode == 200) {
+                        String contentType = scc.getHeader("Content-Type");
+                        String contentLength = scc.getHeader("Content-Length");
+                        int length = Integer.parseInt(contentLength);
+                        if(contentType.equals("application/sdp")) {
+                            //
+                            // <i><b>handle SDP here</b></i>
+                            //
+                        }
+                        dialog = scc.getDialog(); // <i><b>save dialog info</b></i>
+                    }
+                } else {
+                    form.append("Timeout no response...");
+                }
+            }
+            scc.initAck(); // <i><b>initialize and send ACK</b></i>
+            scc.send();
+            scc.close();
+            active = true;
+	    
+            form.append("Wait 15 secs before closing the session...");
+            synchronized(this) {
+               try{ wait(15000); }catch(Exception ee ){ }
+            }	    
+            // <i><b>if the session is still active</b></i>
+            if(active) {
+                form.append("Closing session with BYE");
+                // <i><b>create SipClientConnection with</b></i>
+                // <i><b>pre-initialized BYE from saved dialog</b></i>
+                scc = dialog.getNewClientConnection("BYE");
+                scc.send();
+	    
+                received = scc.receive(15000); // <i><b>receive 200 OK</b></i>
+                if(received) 
+                    form.append("\nResponse: "+scc.getStatusCode()+" "+scc.getReasonPhrase());
+                active = false;
+                scc.close();
+            }
+            destroyApp(true);
+        } catch(IOException ex) {
+            // <i><b>handle IOException</b></i>
+        }
+    }
+    
+    
+    public void pauseApp() {
+        // pause
+    }
+    
+    public void destroyApp(boolean b) {
+        notifyDestroyed();
+    }
+    
+    public void shutdown() {
+        destroyApp(false);
+    }
+
+    /**
+     * <i><b>listener method for incoming requests</b></i>
+     */
+    public void notifyRequest(SipConnectionNotifier scn) {
+        SipServerConnection ssc = null;
+        try {
+            ssc = scn.acceptAndOpen(); // <i><b>fetch the new SipServerConnection</b></i>
+            if(ssc.getMethod().equals("BYE")) {
+                // <i><b>respond 200 OK to BYE</b></i>
+                ssc.initResponse(200);
+                ssc.send();
+                active = false;
+                form.append("\nOther side hang-up!");
+                form.append("\nClosing notifier...");
+                ssc.close();
+            } else {
+                // <i><b>481 Call/Transaction Does Not Exist</b></i>
+                ssc.initResponse(481); 
+                ssc.send();
+                ssc.close();
+            }
+        } catch(IOException ex) {
+            // <i><b>handle IOException</b></i>
+        }
+    }
+
+}
+    
+</pre>
+
+<HR>
+<H2>Listing B.3.2</H2>
+<pre>
+
+import java.io.*;
+import javax.microedition.io.*;
+import javax.microedition.midlet.*;
+import javax.microedition.lcdui.*;
+import javax.microedition.sip.*;
+
+public class TerminatingINVITE extends MIDlet {
+
+    private Display display;
+    private long startTime;
+    private Form form;
+    private boolean active = false;
+    // <i><b>using static SDP as an example</b></i>
+    private String sdp = "v=0\n\no=bob 2890844730 2890844732 IN IP4 host.example.com\ns=\nc=IN IP4 host.example.com\nt=0 0\nm=message 54355 SIP/TCP\na=user:bob";
+
+    public TerminatingINVITE() {
+        // <i><b>Initialize MIDlet display</b></i>
+        display = Display.getDisplay(this);
+        form = new Form("Session example");
+        display.setCurrent(form);    
+    }
+    
+    public void startApp() {
+        SipServerConnection ssc = null;
+        SipConnectionNotifier scn = null;
+
+        try {
+            // <i><b>start a listener for incoming request</b></i>
+            scn = (SipConnectionNotifier) Connector.open("sip:5060");
+            ssc = scn.acceptAndOpen(); // <i><b>blocking</b></i>
+            if(ssc.getMethod().equals("INVITE")) {
+                // <i><b>handle content</b></i>
+                String contentType = ssc.getHeader("Content-Type");
+                String contentLength = ssc.getHeader("Content-Length");
+                int length = Integer.parseInt(contentLength);
+                if(contentType.equals("application/sdp")) {
+                    InputStream is = ssc.openContentInputStream();
+                    byte content[] = new byte[length];
+                    is.read(content);
+                    String sc = new String(content);
+                    // <i><b>parse m= line from SDP, as an example</b></i>
+                    int m = sc.indexOf("m=");
+                    String media = sc.substring(m, sc.indexOf('\n', m));
+                    form.append("Otherside media is: "+media);
+                    //
+                    // <i><b>handle media here</b></i>
+                    //
+
+                    // <i><b>initialize and send 180 response</b></i>
+                    ssc.initResponse(180);
+                    ssc.send();
+                    // <i><b>inform user about the session here...</b></i>
+                }
+                // <i><b>accept automatically and initialize 200 response</b></i>
+                ssc.initResponse(200);
+                ssc.setHeader("Content-Length", ""+sdp.length());
+                ssc.setHeader("Content-Type", "application/sdp");
+                OutputStream os = ssc.openContentOutputStream();
+                os.write(sdp.getBytes());
+                os.close(); // <i><b>close and send</b></i>
+                ssc.close();
+
+                // <i><b>Wait for otherside to ACK</b></i>
+                form.append("Waiting for ACK...");
+                ssc = scn.acceptAndOpen(); // <i><b>blocking</b></i>
+                if(ssc.getMethod().equals("ACK")) {
+                    form.append("Session established");
+                } else {
+                    // problems just stop
+                    return;
+                }
+
+                // <i><b>Wait for otherside to send BYE</b></i>
+                form.append("Waiting for BYE...");
+                ssc = scn.acceptAndOpen(); // <i><b>blocking</b></i>
+                if(ssc.getMethod().equals("BYE")) {
+                    ssc.initResponse(200);
+                    ssc.send();
+                }
+                ssc.close();
+            }
+            scn.close();
+            destroyApp(true);
+        } catch(IOException ex) {
+            // <i><b>handle IOException</b></i>
+        }
+    }
+    
+    
+    public void pauseApp() {
+        // pause
+    }
+    
+    public void destroyApp(boolean b) {
+        notifyDestroyed();
+    }
+    
+    public void shutdown() {
+        destroyApp(false);
+    }
+}
+</pre>
+<HR>
+<H2>Listing B.3.3</H2>
+<pre>
+
+import java.io.*;
+import javax.microedition.io.*;
+import javax.microedition.midlet.*;
+import javax.microedition.lcdui.*;
+
+import javax.microedition.sip.*;
+
+public class Subscribe extends MIDlet implements SipClientConnectionListener, SipServerConnectionListener {
+
+    private Display display;
+    private SipDialog dialog;
+    private Form form;
+
+    public Subscribe() {
+        display=Display.getDisplay(this);
+        form = new Form("SUBSCRIBE from server");
+        display.setCurrent(form);
+    }
+    
+    public void startApp() {
+        form.append("Starting...\n");
+        try {
+            SipConnectionNotifier scn = null;
+            SipServerConnection ssc = null;
+            // <i><b>Start notifier on port 5060</b></i>
+            scn = (SipConnectionNotifier) Connector.open("sip:5060");
+            scn.setListener(this);
+
+            // <i><b>Open outbound SIP connection to sippy.tester</b></i>    
+            SipClientConnection scc = 
+               (SipClientConnection) Connector.open("sip:sippy.tester@sip.registrar.com");
+            // <i><b>Initialize and send SUBSCRIBE for 'presence' events</b></i>
+            scc.initRequest("SUBSCRIBE", scn);
+            scc.setHeader("Expires", "930");
+            scc.setHeader("Event", "presence");
+            scc.addHeader("Accept", "application/xpidf+xml");
+            scc.send();
+            scc.receive(5000); // <i><b>blocking receive</b></i>
+            form.append("Response: "+scc.getStatusCode());
+            dialog = scc.getDialog();
+            scc.close();
+
+            form.append("Wait 10 secs before unsubscribing...");
+            synchronized(this) {
+               try{ wait(10000); }catch(Exception ee ){ }
+            }
+            // <i><b>Initialize and send un-SUBSCRIBE, with Expires: 0</b></i>
+            scc = dialog.getNewClientConnection("SUBSCRIBE");
+            // <i><b>for example handle response in a listener</b></i>
+            scc.setListener(this);
+            scc.setHeader("Expires", "0");
+            scc.setHeader("Event", "presence");
+            scc.send();
+        } catch(IOException ex) {
+            // <i><b>handle IOException</b></i>
+        }
+    }
+    
+    /** 
+     * <i><b>listener method for incoming responses</b></i>
+     */
+    public void notifyResponse(SipClientConnection scc) {
+        try {
+            scc.receive(0); // <i><b>non-blocking receive</b></i>
+            form.append("Response: "+scc.getStatusCode());
+            // <i><b>handle response here</b></i>
+            scc.close();
+        } catch(IOException ex) {
+           // <i><b>handle IOException</b></i>
+        }
+    }
+    
+    /**
+     * <i><b>listener method for incoming requests</b></i>
+     */
+    public void notifyRequest(SipConnectionNotifier scn) {
+        SipServerConnection ssc;
+        try {
+            ssc = scn.acceptAndOpen(); // <i><b>non-blocking</b></i>
+            form.append("Message: "+ssc.getMethod()+" received");
+            // <i><b>check if the received request is NOTIFY and it belongs to our dialog</b></i>
+            if(ssc.getMethod().equals("NOTIFY") && dialog.isSameDialog(ssc)) {
+                String contentType = ssc.getHeader("Content-Type");
+                String contentLength = ssc.getHeader("Content-Length");
+                int length = Integer.parseInt(contentLength);
+                if(contentType.equals("application/xpidf+xml")) {
+                InputStream is = ssc.openContentInputStream();
+                    byte buf[] = new byte[length];
+                    int i = is.read(buf);
+                    String tmp = new String(buf, 0, i);
+                    form.append("NOTIFY info:"+tmp);
+                    ssc.initResponse(200);
+                    ssc.send();
+                    //
+                    // <i><b>handle presence info</b></i>
+                    //
+                }
+            } else { 
+                // <i><b>send 481 "Subscription does not exist"</b></i>
+                ssc.initResponse(481);
+                ssc.send();
+            }
+            ssc.close();
+        } catch(IOException ex) { }
+    }
+    
+    public void pauseApp() {
+    }
+
+    public void destroyApp(boolean b) {
+        notifyDestroyed();
+    }
+    
+    public void shutdown() {
+        destroyApp(false);
+    }   
+}
+</pre>
+</BODY>
+</HTML>

@@ -1,0 +1,8 @@
+MIDlet-1: CapitalClient, , com.nokia.midp.examples.webservices.capitalclient.CapitalClient
+MIDlet-Jar-Size: @@@
+MIDlet-Jar-URL: capitalclient.jar
+MIDlet-Name: CapitalClient
+MicroEdition-Configuration: CLDC-1.1
+MicroEdition-Profile: MIDP-2.0
+MIDlet-Version: 1.0
+MIDlet-Vendor: Nokia

@@ -1,0 +1,6 @@
+MIDlet-1: btl2capEcho, /logo.png, com.nokia.midp.examples.btl2capecho.MIDletApplication
+MIDlet-Name: btl2capEcho
+MicroEdition-Configuration: CLDC-1.1
+MicroEdition-Profile: MIDP-2.0
+MIDlet-Vendor: Nokia
+MIDlet-Version: 1.0

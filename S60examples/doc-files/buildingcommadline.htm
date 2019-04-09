@@ -1,0 +1,298 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+</head>
+<body>
+<h1>Building and running examples using the command line</h1>
+<div class="Section1">
+<p><span style="font-size: 14pt;">Section contents<o:p></o:p></span><br>
+</p>
+<p><a href="#Introduction">1. Introduction</a>&nbsp;</p>
+<p><a href="#Setting_up_the_development_environment">2. Setting up the
+development environment</a></p>
+<p><a href="#Checking_the">2.1 Checking the application development
+environment</a></p>
+<p><a href="#Checking_the_paths">2.1.1 Checking the paths for the
+compiler and preverifier tools</a></p>
+<p><a href="#Troubleshooting">2.2 Troubleshooting: PATH variable not
+set or not set correctly</a></p>
+<p><a href="#Setting_the_PATH_variable">2.3 Setting the PATH variable</a></p>
+<p><a href="#Building_and_running">3. Building and running the MIDlet</a>
+</p>
+<p><a href="#Compiling_the_HelloWorld_MIDlet">3.1 Compiling the
+HelloWorld MIDlet</a></p>
+<p><a href="#Running_the">3.2 Running the MIDlet in the emulator</a>&nbsp;</p>
+<div class="MsoNormal" style="text-align: center;" align="center">
+<hr align="center" width="100%" size="2"></div>
+<!--(HR)============================================================-->
+<p><a name="Introduction"></a><b>1. Introduction</b></p>
+<p>This section describes how compile, preverify and run a simple
+HelloWorld example MIDlet which is included in the MIDP SDK.<br>
+</p>
+<p>You should have the following tools and resources available on your
+PC before you can start to develop Java™ MIDP applications using the<span
+ style="">&nbsp; </span>MIDP SDK: </p>
+<p style="margin-left: 36pt; text-indent: -18pt;"><span
+ style="font-size: 10pt; font-family: Symbol;">&middot;<span
+ style="font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Windows 2000 (SP3 or higher) or Windows XP (SP1a or
+higher)</p>
+<p style="margin-left: 36pt; text-indent: -18pt;"><span
+ style="font-size: 10pt; font-family: Symbol;">&middot;<span
+ style="font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Java 2 Standard Edition (J2SE) SDK version 1.4.1_02.<br>
+The J2SE SDK provides the Java compiler and other tools used in
+application development. You can download the J2SE SDK at <a
+ href="http://java.sun.com/j2se">http://java.sun.com/j2se</a></p>
+<p style="margin-left: 36pt; text-indent: -18pt;"><span
+ style="font-size: 10pt; font-family: Symbol;">&middot;<span
+ style="font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>The MIDP SDK installed on your PC</p>
+<p style="margin-left: 36pt; text-indent: -18pt;"><span
+ style="font-size: 10pt; font-family: Symbol;">&middot;<span
+ style="font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>A text editor, such as WordPad</p>
+<p style="margin-left: 36pt; text-indent: -18pt;"><span
+ style="font-size: 10pt; font-family: Symbol;">&middot;<span
+ style="font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Ant 1.6.3.<span style="">&nbsp; </span>You can download
+ant at <a href="http://ant.apache.org/">http://ant.apache.org</a></p>
+<p style="margin-left: 18pt;"><o:p></o:p></p>
+<p><o:p></o:p></p>
+<div class="MsoNormal" style="text-align: center;" align="center">
+<hr align="center" width="100%" size="2"></div>
+<!--(HR)============================================================-->
+<p><a name="Setting_up_the_development_environment"></a><b>2. Setting
+up the development environment</b>&nbsp;</p>
+<p><a name="Checking_the"></a><b>2.1 Checking the application
+development environment</b></p>
+<p>When you start developing an application for the first time with the
+MIDP SDK, you should first check that the development environment is
+set up properly. This involves, for example, checking that the paths
+for the Java compiler and preverifier tool are set correctly. This
+section provides instructions on how to test and troubleshoot the
+needed path settings.&nbsp;</p>
+<p>You can run the Java 2 SDK without setting the PATH variable.
+However, setting the PATH variable allows you to run the executables
+(javac.exe, preverify.exe) from any directory without having to specify
+the full path to the executable every time you run it. See section <a
+ href="#1_4_2_Troubleshooting">Troubleshooting: PATH variable not set
+or not set correctly</a> for detailed instructions on how to set the
+path.</p>
+<p><a name="Checking_the_paths"></a><b>2.1.1</b><b><span
+ style="font-size: 7pt; font-family: 'Times New Roman';">&nbsp; </span>Checking
+the paths for the Java compiler and preverifier tools</b></p>
+<p style="margin-left: 36pt; text-indent: -18pt;">1.<span
+ style="font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>In the Windows <b>Start</b> menu, open the Command Prompt by
+choosing<b> Start &gt; Programs &gt; Accessories &gt; Command Prompt</b></p>
+<p style="margin-left: 36pt; text-indent: -18pt;">2.<span
+ style="font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>To check the Java compiler (javac.exe) settings, enter the
+following command in the Command Prompt:<b><span
+ style="color: rgb(76, 76, 76); font-family: Courier;"><br>
+<br>
+javac</span></b><br>
+<br>
+You should get the following output on the screen:<b><span
+ style="font-family: Courier;"><br>
+</span></b><b><span style="font-size: 11pt; font-family: Courier;"><br>
+Usage: javac &lt;options&gt; &lt;source files&gt; etc ... (output data)</span></b><br>
+<br>
+If you get an error message, see section <a href="#Troubleshooting">2.2</a><!--kadov_tag{{<spaces>}}--><!--kadov_tag{{</spaces>}}-->
+&nbsp;for more
+details.&nbsp;</p>
+<p style="margin-left: 36pt; text-indent: -18pt;">3.<span
+ style="font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>To check the preverifier tool (preverify.exe), enter the
+following command in the Command Prompt:<b><span
+ style="font-family: Courier;"><br>
+<br>
+preverify</span></b><br>
+<br>
+You should get the following output on the screen:<b><span
+ style="font-size: 11pt; font-family: Courier;"><br>
+Usage: preverify [options] classnames|dirnames ...etc ... (output data)</span></b><br>
+If you get an error message, see section <a href="#Troubleshooting">2.2</a>
+<!--kadov_tag{{<spaces>}}-->&nbsp;<!--kadov_tag{{</spaces>}}-->for more
+details.</p>
+<p><a name="Troubleshooting"></a><b>2.2</b><b><span
+ style="font-size: 7pt; font-family: 'Times New Roman';">&nbsp; </span>Troubleshooting:
+PATH variable not set or not set correctly</b>&nbsp;</p>
+<p>When testing the application environment settings, you may get the
+following error message:</p>
+<p><span style="font-size: 11pt; font-family: 'Courier New';">The name
+specified is not recognized as an internal or external command,
+operable program or batch file (Windows 2000, XP)</span> </p>
+<p>This means that Windows cannot locate the Java compiler (javac.exe)
+or the preverifier tool (preverify.exe). See examples below on how to
+specify their locations for Windows.</p>
+<p><b>To specify the location of the Java compiler:</b><br>
+If you installed the Java 2 Software Development Kit in, for example, <b><span
+ style="color: rgb(76, 76, 76); font-family: Courier;">c:<!-- -->\jdk1.4</span></b>,
+enter the following command in the Command Prompt:</p>
+<p><span style="font-size: 11pt;">c:<!-- -->\jdk1.4\bin\javac<o:p></o:p></span><br>
+&nbsp;</p>
+<p><b>To specify the location of the preverifier tool:</b></p>
+<p>For example, <b><span
+ style="font-size: 11pt; color: rgb(76, 76, 76); font-family: Courier;">c:<!-- -->\&lt;SDK
+installation path&gt;</span></b>, enter the following command in the
+Command Prompt:</p>
+<p><span style="font-weight: normal; font-size: 11pt;">c:<!-- -->\&lt;SDK
+installation path&gt;</span><span style="font-size: 11pt;">\bin\preverify<o:p></o:p></span><span
+ style="font-family: Courier;">&nbsp;<o:p></o:p></span></p>
+
+<p>Update the PATH variable as instructed in the following section.</p>
+<p><a name="Setting_the_PATH_variable"></a><b>2.3</b><b><span
+ style="font-size: 7pt; font-family: 'Times New Roman';">&nbsp; </span>Setting
+the PATH variable</b> </p>
+<p>To avoid having to enter the full path every time you need to
+compile or preverify a MIDlet, it is useful to set the path permanently
+so it will persist even after rebooting. This is done by adding the
+full path of the directory to the PATH variable. <br>
+<br>
+Typically, this full path is <b><span
+ style="font-size: 11pt; color: rgb(76, 76, 76); font-family: Courier;">c:<!-- -->\j2sdk1.4.2_&lt;version&gt;\bin</span></b>
+for the Java compiler and<span style="font-family: Courier;"> </span><b><span
+ style="font-size: 11pt; color: rgb(76, 76, 76); font-family: Courier;">c:<!-- -->\&lt;SDK
+installation path&gt;</span></b><span
+ style="font-size: 11pt; font-family: Courier;">\bin</span> for the
+preverifier<span style="font-family: Courier;">.</span>&nbsp;</p>
+<p>Complete the following steps to set the path permanently on
+Microsoft 2000 and XP:</p>
+<p style="margin-left: 36pt; text-indent: -18pt;">1.<span
+ style="font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Choose<b> Start &gt; Settings &gt; Control Panel &gt; System</b></p>
+<p style="margin-left: 36pt; text-indent: -18pt;">2.<span
+ style="font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Go to the <b>Advanced</b> tab and select <b>Environment
+Variables</b></p>
+<p style="margin-left: 36pt; text-indent: -18pt;">3.<span
+ style="font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style="font-size: 7pt; font-family: 'Times New Roman';">&nbsp;</span><!--kadov_tag{{</spaces>}}-->Locate
+the <b>Path</b> variable in the <b>User Variables </b>or <b>&nbsp;System
+Variables</b><br>
+<br>
+If you are not sure where to add the path, enter it as the last Path
+variable value listed in <b>User Variables</b>.&nbsp;</p>
+<p style="margin-left: 36pt; text-indent: -18pt;">4.<span
+ style="font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Select the <b>Path</b> variable and click <b>Edit</b> </p>
+<p style="margin-left: 36pt; text-indent: -18pt;">5.<span
+ style="font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Enter the path into the <b>variable value</b> field, for
+example, as follows:<b><span
+ style="color: rgb(76, 76, 76); font-family: Courier;"><br>
+</span></b><b><span
+ style="font-size: 11pt; color: rgb(76, 76, 76); font-family: Courier;"><br>
+<span class="codeintext">c:<!-- -->\j2sdk1.4.2_&lt;version&gt;\bin</span></span></b><span
+ class="codeintext"><span style="font-family: Courier;"> </span></span>for
+the compiler<span class="codeintext"><span style="font-family: Courier;">&nbsp;</span></span><b><span
+ style="font-size: 11pt; color: rgb(76, 76, 76); font-family: Courier;"><br>
+c:<!-- -->\&lt;SDK installation path&gt;<span class="codeintext">\bin</span></span></b>
+for the preverifier</p>
+<p><b>Caution:</b>&nbsp; Do not delete the existing path settings.
+Deleting the settings may affect the functioning of the system or other
+programs.<br>
+</p>
+<p><b>Note:&nbsp; </b>The PATH can be a series of directories
+separated by semi-colons (;). Microsoft Windows looks for programs in
+the PATH directories in the order from left to right. You should have
+only one bin directory specified for the Java SDK at a time (those
+following the first one are ignored). If there is a path setting
+already specified, you can update it with the path given here.</p>
+<p style="margin-left: 36pt; text-indent: -18pt;">6.<span
+ style="font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Click <b>Set</b>, <b>OK</b> or <b>Apply</b></p>
+<p>The new path is now set for each time you open the Command Prompt.</p>
+<p>You can verify the settings by completing the steps detailed in <a
+ href="#Checking_the_paths">Checking the paths for the compiler
+and preverifier tools</a>.<br>
+&nbsp;</p>
+<div class="MsoNormal" style="text-align: center;" align="center">
+<hr align="center" width="100%" size="2"></div>
+<!--(HR)============================================================-->
+<p><a name="Building_and_running"></a><b>3</b><b><span
+ style="font-size: 7pt; font-family: 'Times New Roman';">.<!--kadov_tag{{<spaces>}}-->
+&nbsp;<!--kadov_tag{{</spaces>}}--></span>Building and running the
+Hello World Plus MIDlet</b></p>
+<p>This section describes how compile, preverify and run the simple <i>HelloWorldPlus</i>
+example MIDlet.<br>
+</p>
+<p><a name="Compiling_the_HelloWorld_MIDlet"></a><b>3.1</b><b><span
+ style="font-size: 7pt; font-family: 'Times New Roman';">&nbsp; </span>Compiling
+the HelloWorld MIDlet</b></p>
+<p>To compile the <i>HelloWorldPlus</i> example MIDlet, do the
+following:<br>
+</p>
+<p style="margin-left: 36pt; text-indent: -18pt;">1.<span
+ style="font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style="font-size: 7pt; font-family: 'Times New Roman';">&nbsp;</span><!--kadov_tag{{</spaces>}}-->In
+the Windows <b>Start</b> menu, open the Command Prompt by choosing <b>Start
+&gt; Programs &gt; Accessories &gt; Command Prompt</b>.</p>
+<p style="margin-left: 36pt; text-indent: -18pt;">2.<span
+ style="font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style="font-size: 7pt; font-family: 'Times New Roman';">&nbsp;</span><!--kadov_tag{{</spaces>}}-->In
+the Command Prompt, use the <b><span
+ style="color: rgb(76, 76, 76); font-family: Courier;">cd</span></b>
+command to switch to the &lt;<b><span
+ style="font-size: 11pt; color: rgb(76, 76, 76); font-family: Courier;">examples
+folder&gt;\helloworldplus\targets</span></b> subdirectory of the
+directory where you installed the SDK. <b><span style="">&nbsp;</span><br>
+<br>
+Tip:</b> An easy way to open the Command Prompt without typing long
+directory paths is to locate the desired directory in the Windows
+Explorer, right click, and select <b>Command Prompt Here</b>.</p>
+<p style="margin-left: 36pt; text-indent: -18pt;">&nbsp;3.<span
+ style="font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Compile the Hello World MIDlet by entering the following command
+in the Command Prompt:<b><span
+ style="color: rgb(76, 76, 76); font-family: Courier;"><br>
+</span></b><b><span
+ style="font-size: 11pt; color: rgb(76, 76, 76); font-family: Courier;"><br>
+ant &#8211;f build.xml</span></b></p>
+<p>The HelloWorldPlus MIDlet has now been compiled, preverified,
+javadoc has been created, a jar file has been created, and a jad file
+have been created.<span style="">&nbsp; </span>The result of the build
+is in the<span style="">&nbsp; </span>&lt;<b><span
+ style="font-size: 11pt; color: rgb(76, 76, 76); font-family: Courier;">examples
+folder&gt;\helloworldplus\build directory. </span></b>The bin
+subdirectory contains the jad and jar file.<span style="">&nbsp; </span>The
+javadoc is found in the javadoc subdirectory.<b><span
+ style="color: rgb(76, 76, 76); font-family: Courier;"><br>
+</span></b></p>
+<p>Now that you have compiled and preverified the HelloWorld MIDlet,
+you can run and view it in the emulator.<br>
+</p>
+<p><a name="Running_the"></a><b>3.2 Running the MIDlet in the emulator</b></p>
+<p>To run the HelloWorldPlus MIDlet in the emulator, do the following:<br>
+&nbsp;</p>
+<p style="margin-left: 36pt; text-indent: -18pt;">1.<span
+ style="font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>In the Windows <b>Start</b> menu, open the Command Prompt by
+choosing <b>Start &gt; Programs &gt; Accessories &gt; Command Prompt</b>.</p>
+<p style="margin-left: 36pt; text-indent: -18pt;">2.<span
+ style="font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>In the Command Prompt, use the <b><span
+ style="color: rgb(76, 76, 76); font-family: Courier;">cd</span></b>
+command to switch to the <b><span
+ style="color: rgb(76, 76, 76); font-family: Courier;">bin\</span></b>
+subdirectory of the directory where you installed the SDK. <br style="">
+</p>
+<p style="margin-left: 36pt; text-indent: -18pt;">3.<span
+ style="font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Run the Hello World MIDlet in the emulator by entering the
+following command in the Command Prompt:<b><span
+ style="color: rgb(76, 76, 76); font-family: Courier;"><br>
+</span></b><b><span
+ style="font-size: 11pt; color: rgb(76, 76, 76); font-family: Courier;"><br>
+emulator &#8211;Xdescriptor:&lt;full path of the HelloWorldPlus jad file&gt;</span></b><br>
+<br>
+The emulator appears on the screen and displays the "Hello World"
+string.<br>
+<span style="">&nbsp;</span></p>
+</div>
+<options><source files=""><examples folder=""><examples folder=""><full
+ path="" of="" the="" helloworldplus="" jad="" file=""> </full></examples></examples></source></options>
+</body>
+</html>

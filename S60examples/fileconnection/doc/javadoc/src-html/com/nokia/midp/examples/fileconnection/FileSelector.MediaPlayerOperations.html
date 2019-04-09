@@ -1,0 +1,374 @@
+<HTML>
+<BODY BGCOLOR="white">
+<PRE>
+<FONT color="green">001</FONT>    /* Copyright © 2006 Nokia. */<a name="line.1"></a>
+<FONT color="green">002</FONT>    package com.nokia.midp.examples.fileconnection;<a name="line.2"></a>
+<FONT color="green">003</FONT>    <a name="line.3"></a>
+<FONT color="green">004</FONT>    import java.io.*;<a name="line.4"></a>
+<FONT color="green">005</FONT>    import java.util.*;<a name="line.5"></a>
+<FONT color="green">006</FONT>    import javax.microedition.io.*;<a name="line.6"></a>
+<FONT color="green">007</FONT>    import javax.microedition.io.file.*;<a name="line.7"></a>
+<FONT color="green">008</FONT>    import javax.microedition.lcdui.*;<a name="line.8"></a>
+<FONT color="green">009</FONT>    import javax.microedition.media.*;<a name="line.9"></a>
+<FONT color="green">010</FONT>    import com.nokia.midp.examples.fileconnection.OperationsQueue;<a name="line.10"></a>
+<FONT color="green">011</FONT>    /**<a name="line.11"></a>
+<FONT color="green">012</FONT>     * A class used to access the file system, show currently available mid files<a name="line.12"></a>
+<FONT color="green">013</FONT>     * and play them.<a name="line.13"></a>
+<FONT color="green">014</FONT>     */<a name="line.14"></a>
+<FONT color="green">015</FONT>    class FileSelector<a name="line.15"></a>
+<FONT color="green">016</FONT>        extends javax.microedition.lcdui.List<a name="line.16"></a>
+<FONT color="green">017</FONT>        implements CommandListener, FileSystemListener, PlayerListener {<a name="line.17"></a>
+<FONT color="green">018</FONT>      private final static Image FILE_IMAGE = FileConnDemo.makeImage(<a name="line.18"></a>
+<FONT color="green">019</FONT>          "/file.png");<a name="line.19"></a>
+<FONT color="green">020</FONT>      private final static Image ROOT_IMAGE = FileConnDemo.makeImage(<a name="line.20"></a>
+<FONT color="green">021</FONT>          "/root.png");<a name="line.21"></a>
+<FONT color="green">022</FONT>      private final OperationsQueue queue = new OperationsQueue();<a name="line.22"></a>
+<FONT color="green">023</FONT>    <a name="line.23"></a>
+<FONT color="green">024</FONT>      private final static String FILE_SEPARATOR =<a name="line.24"></a>
+<FONT color="green">025</FONT>          (System.getProperty("file.separator") != null) ?<a name="line.25"></a>
+<FONT color="green">026</FONT>          System.getProperty("file.separator") : "/";<a name="line.26"></a>
+<FONT color="green">027</FONT>    <a name="line.27"></a>
+<FONT color="green">028</FONT>      private final FileConnDemo midlet;<a name="line.28"></a>
+<FONT color="green">029</FONT>      private final Command playCommand = new Command("Play", Command.SCREEN, 1);<a name="line.29"></a>
+<FONT color="green">030</FONT>      private final Command stopCommand = new Command("Stop", Command.SCREEN, 1);<a name="line.30"></a>
+<FONT color="green">031</FONT>      private final Command deleteCommand = new Command("Delete", Command.SCREEN, 2);<a name="line.31"></a>
+<FONT color="green">032</FONT>      private final Command aboutCommand = new Command("About", Command.SCREEN, 3);<a name="line.32"></a>
+<FONT color="green">033</FONT>    <a name="line.33"></a>
+<FONT color="green">034</FONT>      private final static int INIT_OP = 0;<a name="line.34"></a>
+<FONT color="green">035</FONT>      private final static int OPEN_OP = 1;<a name="line.35"></a>
+<FONT color="green">036</FONT>      private final static int DELETE_OP = 2;<a name="line.36"></a>
+<FONT color="green">037</FONT>    <a name="line.37"></a>
+<FONT color="green">038</FONT>      private Vector rootsList = new Vector();<a name="line.38"></a>
+<FONT color="green">039</FONT>    <a name="line.39"></a>
+<FONT color="green">040</FONT>      // Stores the current root, if null we are showing all the roots<a name="line.40"></a>
+<FONT color="green">041</FONT>      private FileConnection currentRoot = null;<a name="line.41"></a>
+<FONT color="green">042</FONT>      private FileConnection fileConn = null;<a name="line.42"></a>
+<FONT color="green">043</FONT>      private InputStream fis = null;<a name="line.43"></a>
+<FONT color="green">044</FONT>      private Player player;<a name="line.44"></a>
+<FONT color="green">045</FONT>      private boolean playing = false;<a name="line.45"></a>
+<FONT color="green">046</FONT>    <a name="line.46"></a>
+<FONT color="green">047</FONT>      /**<a name="line.47"></a>
+<FONT color="green">048</FONT>       * Constructor<a name="line.48"></a>
+<FONT color="green">049</FONT>       * @param midlet FileConnDemo<a name="line.49"></a>
+<FONT color="green">050</FONT>       */<a name="line.50"></a>
+<FONT color="green">051</FONT>      FileSelector(FileConnDemo midlet) {<a name="line.51"></a>
+<FONT color="green">052</FONT>        super("Media Player", List.IMPLICIT);<a name="line.52"></a>
+<FONT color="green">053</FONT>        this.midlet = midlet;<a name="line.53"></a>
+<FONT color="green">054</FONT>    <a name="line.54"></a>
+<FONT color="green">055</FONT>        addCommand(playCommand);<a name="line.55"></a>
+<FONT color="green">056</FONT>        addCommand(deleteCommand);<a name="line.56"></a>
+<FONT color="green">057</FONT>        addCommand(aboutCommand);<a name="line.57"></a>
+<FONT color="green">058</FONT>        setSelectCommand(playCommand);<a name="line.58"></a>
+<FONT color="green">059</FONT>        setCommandListener(this);<a name="line.59"></a>
+<FONT color="green">060</FONT>    <a name="line.60"></a>
+<FONT color="green">061</FONT>        queue.enqueueOperation(new MediaPlayerOperations(INIT_OP));<a name="line.61"></a>
+<FONT color="green">062</FONT>        FileSystemRegistry.addFileSystemListener(FileSelector.this);<a name="line.62"></a>
+<FONT color="green">063</FONT>      }<a name="line.63"></a>
+<FONT color="green">064</FONT>    <a name="line.64"></a>
+<FONT color="green">065</FONT>      void stop() {<a name="line.65"></a>
+<FONT color="green">066</FONT>        queue.abort();<a name="line.66"></a>
+<FONT color="green">067</FONT>        FileSystemRegistry.removeFileSystemListener(this);<a name="line.67"></a>
+<FONT color="green">068</FONT>      }<a name="line.68"></a>
+<FONT color="green">069</FONT>    <a name="line.69"></a>
+<FONT color="green">070</FONT>      /**<a name="line.70"></a>
+<FONT color="green">071</FONT>       * The command listener command action implementation.<a name="line.71"></a>
+<FONT color="green">072</FONT>       * @param c Command<a name="line.72"></a>
+<FONT color="green">073</FONT>       * @param d Displayable<a name="line.73"></a>
+<FONT color="green">074</FONT>       */<a name="line.74"></a>
+<FONT color="green">075</FONT>      public void commandAction(Command c, Displayable d) {<a name="line.75"></a>
+<FONT color="green">076</FONT>        if ( (c == playCommand) || (c == List.SELECT_COMMAND && !playing)) {<a name="line.76"></a>
+<FONT color="green">077</FONT>          queue.enqueueOperation(new MediaPlayerOperations(OPEN_OP));<a name="line.77"></a>
+<FONT color="green">078</FONT>        }<a name="line.78"></a>
+<FONT color="green">079</FONT>        else if ( (c == stopCommand) || (c == List.SELECT_COMMAND && playing)) {<a name="line.79"></a>
+<FONT color="green">080</FONT>          stopPlaying();<a name="line.80"></a>
+<FONT color="green">081</FONT>          playingStopped();<a name="line.81"></a>
+<FONT color="green">082</FONT>        }<a name="line.82"></a>
+<FONT color="green">083</FONT>        else if (c == deleteCommand) {<a name="line.83"></a>
+<FONT color="green">084</FONT>          queue.enqueueOperation(new MediaPlayerOperations(DELETE_OP));<a name="line.84"></a>
+<FONT color="green">085</FONT>        }<a name="line.85"></a>
+<FONT color="green">086</FONT>        else if (c == aboutCommand) {<a name="line.86"></a>
+<FONT color="green">087</FONT>          midlet.displayAboutInfo();<a name="line.87"></a>
+<FONT color="green">088</FONT>        }<a name="line.88"></a>
+<FONT color="green">089</FONT>        else {<a name="line.89"></a>
+<FONT color="green">090</FONT>          stopPlaying();<a name="line.90"></a>
+<FONT color="green">091</FONT>          midlet.fileSelectorExit();<a name="line.91"></a>
+<FONT color="green">092</FONT>        }<a name="line.92"></a>
+<FONT color="green">093</FONT>      }<a name="line.93"></a>
+<FONT color="green">094</FONT>    <a name="line.94"></a>
+<FONT color="green">095</FONT>      public void playerUpdate(Player p, String event, Object eventData) {<a name="line.95"></a>
+<FONT color="green">096</FONT>        if (event == CLOSED) {<a name="line.96"></a>
+<FONT color="green">097</FONT>          player = null;<a name="line.97"></a>
+<FONT color="green">098</FONT>          playingStopped();     <a name="line.98"></a>
+<FONT color="green">099</FONT>        }<a name="line.99"></a>
+<FONT color="green">100</FONT>      }<a name="line.100"></a>
+<FONT color="green">101</FONT>    <a name="line.101"></a>
+<FONT color="green">102</FONT>      /**<a name="line.102"></a>
+<FONT color="green">103</FONT>       * Processing requires when playing is stopped.<a name="line.103"></a>
+<FONT color="green">104</FONT>       */<a name="line.104"></a>
+<FONT color="green">105</FONT>      void stopPlaying() {    <a name="line.105"></a>
+<FONT color="green">106</FONT>        if (player != null) {<a name="line.106"></a>
+<FONT color="green">107</FONT>          player.close();     <a name="line.107"></a>
+<FONT color="green">108</FONT>        }<a name="line.108"></a>
+<FONT color="green">109</FONT>        if (fileConn != null) {<a name="line.109"></a>
+<FONT color="green">110</FONT>          try {<a name="line.110"></a>
+<FONT color="green">111</FONT>            fis.close();<a name="line.111"></a>
+<FONT color="green">112</FONT>            fis = null;<a name="line.112"></a>
+<FONT color="green">113</FONT>            fileConn.close();<a name="line.113"></a>
+<FONT color="green">114</FONT>            fileConn = null;<a name="line.114"></a>
+<FONT color="green">115</FONT>          }<a name="line.115"></a>
+<FONT color="green">116</FONT>          catch (IOException e) {<a name="line.116"></a>
+<FONT color="green">117</FONT>            midlet.showError(e);<a name="line.117"></a>
+<FONT color="green">118</FONT>          }     <a name="line.118"></a>
+<FONT color="green">119</FONT>        }<a name="line.119"></a>
+<FONT color="green">120</FONT>      }<a name="line.120"></a>
+<FONT color="green">121</FONT>    <a name="line.121"></a>
+<FONT color="green">122</FONT>      /**<a name="line.122"></a>
+<FONT color="green">123</FONT>       * Used to start playing.<a name="line.123"></a>
+<FONT color="green">124</FONT>       */<a name="line.124"></a>
+<FONT color="green">125</FONT>      private void playingStarted() {    <a name="line.125"></a>
+<FONT color="green">126</FONT>        removeCommand(playCommand);<a name="line.126"></a>
+<FONT color="green">127</FONT>        addCommand(stopCommand);<a name="line.127"></a>
+<FONT color="green">128</FONT>        playing = true;   <a name="line.128"></a>
+<FONT color="green">129</FONT>      }<a name="line.129"></a>
+<FONT color="green">130</FONT>    <a name="line.130"></a>
+<FONT color="green">131</FONT>      /**<a name="line.131"></a>
+<FONT color="green">132</FONT>       * Used to stop playing.<a name="line.132"></a>
+<FONT color="green">133</FONT>       */<a name="line.133"></a>
+<FONT color="green">134</FONT>      private void playingStopped() {   <a name="line.134"></a>
+<FONT color="green">135</FONT>        removeCommand(stopCommand);<a name="line.135"></a>
+<FONT color="green">136</FONT>        addCommand(playCommand);<a name="line.136"></a>
+<FONT color="green">137</FONT>        playing = false;    <a name="line.137"></a>
+<FONT color="green">138</FONT>      }<a name="line.138"></a>
+<FONT color="green">139</FONT>    <a name="line.139"></a>
+<FONT color="green">140</FONT>      /**<a name="line.140"></a>
+<FONT color="green">141</FONT>       * Listen for changes in the roots.<a name="line.141"></a>
+<FONT color="green">142</FONT>       */<a name="line.142"></a>
+<FONT color="green">143</FONT>      public void rootChanged(int state, String rootName) {<a name="line.143"></a>
+<FONT color="green">144</FONT>        queue.enqueueOperation(new MediaPlayerOperations(INIT_OP));<a name="line.144"></a>
+<FONT color="green">145</FONT>      }<a name="line.145"></a>
+<FONT color="green">146</FONT>    <a name="line.146"></a>
+<FONT color="green">147</FONT>      /**<a name="line.147"></a>
+<FONT color="green">148</FONT>       * A method used to display all the roots.<a name="line.148"></a>
+<FONT color="green">149</FONT>       */<a name="line.149"></a>
+<FONT color="green">150</FONT>      private void displayAllRoots() {<a name="line.150"></a>
+<FONT color="green">151</FONT>        setTitle("Media Player - [Roots]");<a name="line.151"></a>
+<FONT color="green">152</FONT>        deleteAll();<a name="line.152"></a>
+<FONT color="green">153</FONT>        Enumeration roots = rootsList.elements();<a name="line.153"></a>
+<FONT color="green">154</FONT>        while (roots.hasMoreElements()) {<a name="line.154"></a>
+<FONT color="green">155</FONT>          String root = (String) roots.nextElement();<a name="line.155"></a>
+<FONT color="green">156</FONT>          append(root.substring(1), ROOT_IMAGE);<a name="line.156"></a>
+<FONT color="green">157</FONT>        }<a name="line.157"></a>
+<FONT color="green">158</FONT>        currentRoot = null;<a name="line.158"></a>
+<FONT color="green">159</FONT>      }<a name="line.159"></a>
+<FONT color="green">160</FONT>    <a name="line.160"></a>
+<FONT color="green">161</FONT>      /**<a name="line.161"></a>
+<FONT color="green">162</FONT>       * A method used to load the roots.<a name="line.162"></a>
+<FONT color="green">163</FONT>       */<a name="line.163"></a>
+<FONT color="green">164</FONT>      private void loadRoots() {<a name="line.164"></a>
+<FONT color="green">165</FONT>        if (!rootsList.isEmpty()) {<a name="line.165"></a>
+<FONT color="green">166</FONT>          rootsList.removeAllElements();<a name="line.166"></a>
+<FONT color="green">167</FONT>        }<a name="line.167"></a>
+<FONT color="green">168</FONT>        try {<a name="line.168"></a>
+<FONT color="green">169</FONT>          Enumeration roots = FileSystemRegistry.listRoots();<a name="line.169"></a>
+<FONT color="green">170</FONT>          while (roots.hasMoreElements()) {<a name="line.170"></a>
+<FONT color="green">171</FONT>            rootsList.addElement(FILE_SEPARATOR + (String) roots.nextElement());<a name="line.171"></a>
+<FONT color="green">172</FONT>          }<a name="line.172"></a>
+<FONT color="green">173</FONT>        }<a name="line.173"></a>
+<FONT color="green">174</FONT>        catch (Throwable e) {<a name="line.174"></a>
+<FONT color="green">175</FONT>          midlet.showMsg(e.getMessage());<a name="line.175"></a>
+<FONT color="green">176</FONT>        }<a name="line.176"></a>
+<FONT color="green">177</FONT>      }<a name="line.177"></a>
+<FONT color="green">178</FONT>    <a name="line.178"></a>
+<FONT color="green">179</FONT>      /**<a name="line.179"></a>
+<FONT color="green">180</FONT>       * A method used to delete the current selection.<a name="line.180"></a>
+<FONT color="green">181</FONT>       */<a name="line.181"></a>
+<FONT color="green">182</FONT>      private void deleteCurrent() {    <a name="line.182"></a>
+<FONT color="green">183</FONT>        if (playing == true) {<a name="line.183"></a>
+<FONT color="green">184</FONT>          stopPlaying();<a name="line.184"></a>
+<FONT color="green">185</FONT>          playingStopped();<a name="line.185"></a>
+<FONT color="green">186</FONT>        }<a name="line.186"></a>
+<FONT color="green">187</FONT>        int selectedIndex = getSelectedIndex();    <a name="line.187"></a>
+<FONT color="green">188</FONT>        if (selectedIndex >= 0) {<a name="line.188"></a>
+<FONT color="green">189</FONT>          String selectedFile = getString(selectedIndex);<a name="line.189"></a>
+<FONT color="green">190</FONT>    <a name="line.190"></a>
+<FONT color="green">191</FONT>          try {<a name="line.191"></a>
+<FONT color="green">192</FONT>            FileConnection fileToDelete =<a name="line.192"></a>
+<FONT color="green">193</FONT>                (FileConnection) Connector.open(currentRoot.getURL() + selectedFile);                <a name="line.193"></a>
+<FONT color="green">194</FONT>            if (fileToDelete.exists()) {          <a name="line.194"></a>
+<FONT color="green">195</FONT>              fileToDelete.delete();        <a name="line.195"></a>
+<FONT color="green">196</FONT>              fileToDelete.close();        <a name="line.196"></a>
+<FONT color="green">197</FONT>            }<a name="line.197"></a>
+<FONT color="green">198</FONT>            else {        <a name="line.198"></a>
+<FONT color="green">199</FONT>              midlet.showMsg("File " + fileToDelete.getName() + " does not exists");<a name="line.199"></a>
+<FONT color="green">200</FONT>            }<a name="line.200"></a>
+<FONT color="green">201</FONT>          }<a name="line.201"></a>
+<FONT color="green">202</FONT>          catch (IOException e) {<a name="line.202"></a>
+<FONT color="green">203</FONT>            midlet.showError(e);<a name="line.203"></a>
+<FONT color="green">204</FONT>          }<a name="line.204"></a>
+<FONT color="green">205</FONT>          catch (SecurityException e) {<a name="line.205"></a>
+<FONT color="green">206</FONT>            midlet.showError(e);<a name="line.206"></a>
+<FONT color="green">207</FONT>          }<a name="line.207"></a>
+<FONT color="green">208</FONT>          displayCurrentRoot();<a name="line.208"></a>
+<FONT color="green">209</FONT>        }<a name="line.209"></a>
+<FONT color="green">210</FONT>      }<a name="line.210"></a>
+<FONT color="green">211</FONT>    <a name="line.211"></a>
+<FONT color="green">212</FONT>      /**<a name="line.212"></a>
+<FONT color="green">213</FONT>       * A method used to open the current selection.<a name="line.213"></a>
+<FONT color="green">214</FONT>       */<a name="line.214"></a>
+<FONT color="green">215</FONT>      private void openSelected() {<a name="line.215"></a>
+<FONT color="green">216</FONT>        int selectedIndex = getSelectedIndex();<a name="line.216"></a>
+<FONT color="green">217</FONT>        if (selectedIndex >= 0) {<a name="line.217"></a>
+<FONT color="green">218</FONT>          String selectedFile = getString(selectedIndex);<a name="line.218"></a>
+<FONT color="green">219</FONT>          String url = currentRoot.getURL() + selectedFile;<a name="line.219"></a>
+<FONT color="green">220</FONT>          try {<a name="line.220"></a>
+<FONT color="green">221</FONT>            fileConn = (FileConnection) Connector.open(url, Connector.READ);<a name="line.221"></a>
+<FONT color="green">222</FONT>            fis = fileConn.openInputStream();<a name="line.222"></a>
+<FONT color="green">223</FONT>            player = Manager.createPlayer(fis, "audio/midi");<a name="line.223"></a>
+<FONT color="green">224</FONT>            player.realize();<a name="line.224"></a>
+<FONT color="green">225</FONT>            player.setLoopCount( -1);<a name="line.225"></a>
+<FONT color="green">226</FONT>            player.start();<a name="line.226"></a>
+<FONT color="green">227</FONT>            playingStarted();<a name="line.227"></a>
+<FONT color="green">228</FONT>          }<a name="line.228"></a>
+<FONT color="green">229</FONT>          catch (IOException e) {<a name="line.229"></a>
+<FONT color="green">230</FONT>            midlet.showError(e);<a name="line.230"></a>
+<FONT color="green">231</FONT>          }<a name="line.231"></a>
+<FONT color="green">232</FONT>          catch (MediaException e) {<a name="line.232"></a>
+<FONT color="green">233</FONT>            midlet.showError(e);<a name="line.233"></a>
+<FONT color="green">234</FONT>          }<a name="line.234"></a>
+<FONT color="green">235</FONT>        }<a name="line.235"></a>
+<FONT color="green">236</FONT>      }<a name="line.236"></a>
+<FONT color="green">237</FONT>    <a name="line.237"></a>
+<FONT color="green">238</FONT>      /**<a name="line.238"></a>
+<FONT color="green">239</FONT>       * A method used to display the current root.<a name="line.239"></a>
+<FONT color="green">240</FONT>       */<a name="line.240"></a>
+<FONT color="green">241</FONT>      private void displayCurrentRoot() {<a name="line.241"></a>
+<FONT color="green">242</FONT>        try {<a name="line.242"></a>
+<FONT color="green">243</FONT>          setTitle("Media Player - [" + currentRoot.getURL() + "]");<a name="line.243"></a>
+<FONT color="green">244</FONT>          // open the root<a name="line.244"></a>
+<FONT color="green">245</FONT>          deleteAll();<a name="line.245"></a>
+<FONT color="green">246</FONT>    <a name="line.246"></a>
+<FONT color="green">247</FONT>          Enumeration listOfFiles = currentRoot.list("*.mid", false);<a name="line.247"></a>
+<FONT color="green">248</FONT>          while (listOfFiles.hasMoreElements()) {<a name="line.248"></a>
+<FONT color="green">249</FONT>            String currentFile = (String) listOfFiles.nextElement();<a name="line.249"></a>
+<FONT color="green">250</FONT>            append(currentFile, FILE_IMAGE);<a name="line.250"></a>
+<FONT color="green">251</FONT>          }<a name="line.251"></a>
+<FONT color="green">252</FONT>    <a name="line.252"></a>
+<FONT color="green">253</FONT>        }<a name="line.253"></a>
+<FONT color="green">254</FONT>        catch (IOException e) {<a name="line.254"></a>
+<FONT color="green">255</FONT>          midlet.showError(e);<a name="line.255"></a>
+<FONT color="green">256</FONT>        }<a name="line.256"></a>
+<FONT color="green">257</FONT>        catch (SecurityException e) {<a name="line.257"></a>
+<FONT color="green">258</FONT>          midlet.showError(e);<a name="line.258"></a>
+<FONT color="green">259</FONT>        }<a name="line.259"></a>
+<FONT color="green">260</FONT>      }<a name="line.260"></a>
+<FONT color="green">261</FONT>    <a name="line.261"></a>
+<FONT color="green">262</FONT>      private class MediaPlayerOperations<a name="line.262"></a>
+<FONT color="green">263</FONT>          implements Operation {<a name="line.263"></a>
+<FONT color="green">264</FONT>        private final String parameter;<a name="line.264"></a>
+<FONT color="green">265</FONT>        private final int operationCode;<a name="line.265"></a>
+<FONT color="green">266</FONT>    <a name="line.266"></a>
+<FONT color="green">267</FONT>        MediaPlayerOperations(int operationCode) {<a name="line.267"></a>
+<FONT color="green">268</FONT>          this.parameter = null;<a name="line.268"></a>
+<FONT color="green">269</FONT>          this.operationCode = operationCode;<a name="line.269"></a>
+<FONT color="green">270</FONT>        }<a name="line.270"></a>
+<FONT color="green">271</FONT>    <a name="line.271"></a>
+<FONT color="green">272</FONT>        MediaPlayerOperations(String parameter, int operationCode) {<a name="line.272"></a>
+<FONT color="green">273</FONT>          this.parameter = parameter;<a name="line.273"></a>
+<FONT color="green">274</FONT>          this.operationCode = operationCode;<a name="line.274"></a>
+<FONT color="green">275</FONT>        }<a name="line.275"></a>
+<FONT color="green">276</FONT>    <a name="line.276"></a>
+<FONT color="green">277</FONT>        public void execute() {<a name="line.277"></a>
+<FONT color="green">278</FONT>          switch (operationCode) {<a name="line.278"></a>
+<FONT color="green">279</FONT>            case INIT_OP:          <a name="line.279"></a>
+<FONT color="green">280</FONT>              String initDir = System.getProperty("fileconn.dir.music");                  <a name="line.280"></a>
+<FONT color="green">281</FONT>              loadRoots();         <a name="line.281"></a>
+<FONT color="green">282</FONT>              if (initDir != null) {<a name="line.282"></a>
+<FONT color="green">283</FONT>                try {              <a name="line.283"></a>
+<FONT color="green">284</FONT>                  currentRoot = (FileConnection) Connector.open(initDir,<a name="line.284"></a>
+<FONT color="green">285</FONT>                      Connector.READ);              <a name="line.285"></a>
+<FONT color="green">286</FONT>                  displayCurrentRoot();              <a name="line.286"></a>
+<FONT color="green">287</FONT>                }<a name="line.287"></a>
+<FONT color="green">288</FONT>                catch (Exception e) {<a name="line.288"></a>
+<FONT color="green">289</FONT>                  midlet.showError(e);<a name="line.289"></a>
+<FONT color="green">290</FONT>                  displayAllRoots();<a name="line.290"></a>
+<FONT color="green">291</FONT>                }<a name="line.291"></a>
+<FONT color="green">292</FONT>              }<a name="line.292"></a>
+<FONT color="green">293</FONT>              else {<a name="line.293"></a>
+<FONT color="green">294</FONT>                displayAllRoots();<a name="line.294"></a>
+<FONT color="green">295</FONT>              }<a name="line.295"></a>
+<FONT color="green">296</FONT>              break;<a name="line.296"></a>
+<FONT color="green">297</FONT>    <a name="line.297"></a>
+<FONT color="green">298</FONT>            case OPEN_OP:<a name="line.298"></a>
+<FONT color="green">299</FONT>              openSelected();<a name="line.299"></a>
+<FONT color="green">300</FONT>              break;<a name="line.300"></a>
+<FONT color="green">301</FONT>    <a name="line.301"></a>
+<FONT color="green">302</FONT>            case DELETE_OP:<a name="line.302"></a>
+<FONT color="green">303</FONT>              deleteCurrent();<a name="line.303"></a>
+<FONT color="green">304</FONT>              break;<a name="line.304"></a>
+<FONT color="green">305</FONT>          }<a name="line.305"></a>
+<FONT color="green">306</FONT>        }<a name="line.306"></a>
+<FONT color="green">307</FONT>      }<a name="line.307"></a>
+<FONT color="green">308</FONT>    }<a name="line.308"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+</BODY>
+</HTML>

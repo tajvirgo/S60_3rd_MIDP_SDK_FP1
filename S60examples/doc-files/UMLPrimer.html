@@ -1,0 +1,380 @@
+<!DOCTYPE doctype PUBLIC "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html xmlns="http://www.w3.org/TR/REC-html40/loose.dtd">
+<head>
+  <title>UML notation primer</title>
+                
+  <meta http-equiv="content-type"
+ content="text/html; charset=windows-1252">
+         
+  <meta name="generator"
+ content="RoboHelp by eHelp Corporation www.ehelp.com">
+         
+  <link rel="stylesheet" href="../../SDK_style_ns.css">
+       
+  <script type="text/javascript" language="JavaScript"
+ title="WebHelpSplitCss"><!--if (navigator.appName !="Netscape"){   document.write("<link rel='stylesheet' href='../../SDK_style.css'>");}//-->  </script> 
+      
+  <style type="text/css"><!--div.whs1 { width:100%; }table.whs2 { background-color:#eeeeee; width:100%; height:8px; x-cell-content-align:Top; }tr.whs3 { x-cell-content-align:top; }td.whs4 { width:100%; border-left-style:none; }hr.whs5 { float:alignleft; }div.whs6 { text-align:center; }img_whs7 { width:510px; height:252px; border-style:none; }table.whs8 { x-border-left:1px table-solid; x-border-top:1px table-solid; x-border-right:1px table-solid; x-border-bottom:1px table-solid; border-collapse:separate; border-spacing:0px; }th.whs9 { padding-left:2px; padding-top:2px; padding-right:2px; padding-bottom:2px; }td.whs10 { padding-left:2px; padding-top:2px; padding-right:2px; padding-bottom:2px; }img_whs11 { width:640px; height:358px; border-style:none; }img_whs12 { width:640px; height:374px; border-style:none; }table.whs13 { width:100%; border-spacing:0px; }table.whs14 { border-spacing:3px; }tr.whs15 { x-cell-content-align:top; text-align:center; }td.whs16 { x-cell-content-align:top; text-align:right; padding-left:1px; padding-top:1px; padding-right:1px; padding-bottom:1px; }td.whs17 { padding-left:1px; padding-top:1px; padding-right:1px; padding-bottom:1px; }table.whs18 { border-spacing:8px; }hr.whs19 { float:aligncenter; }table.whs20 { x-cell-content-align:top; width:100%; float:aligncenter; border-spacing:0px; }col.whs21 { width:50%; }td.whs22 { width:50%; padding-right:10px; padding-left:10px; border-right-style:none; border-left-style:none; border-top-style:none; border-bottom-style:none; }p.whs23 { font-family:Arial; }td.whs24 { width:50%; padding-right:10px; padding-left:10px; background-color:Transparent; border-top-style:none; border-right-style:none; border-bottom-style:none; }p.whs25 { text-align:right; }img_whs26 { border:none; width:18px; height:15px; float:none; border-style:none; }-->  </style>
+      
+  <script type="text/javascript" language="JavaScript"><!--if ((navigator.appName == "Netscape") && (parseInt(navigator.appVersion) == 4)){  var strNSS = "<style type='text/css'>";  strNSS += "td.whs24 {background-color:white; }";  strNSS +="</style>";  document.write(strNSS);}//-->  </script> 
+      
+  <script type="text/javascript" language="JavaScript"
+ title="WebHelpInlineScript"><!--function reDo() {  if (innerWidth != origWidth || innerHeight != origHeight)     location.reload();}if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {	origWidth = innerWidth;	origHeight = innerHeight;	onresize = reDo;}onerror = null; //-->  </script> 
+      
+  <style type="text/css"><!--div.WebHelpPopupMenu { position:absolute; left:0px; top:0px; z-index:4; visibility:hidden; }-->  </style>
+      
+  <script type="text/javascript" language="javascript1.2"
+ src="../../whmsg.js"></script>       
+  <script type="text/javascript" language="javascript"
+ src="../../whver.js"></script>       
+  <script type="text/javascript" language="javascript1.2"
+ src="../../whproxy.js"></script>       
+  <script type="text/javascript" language="javascript1.2"
+ src="../../whutils.js"></script>       
+  <script type="text/javascript" language="javascript1.2"
+ src="../../whtopic.js"></script>
+</head>
+  <body>
+   
+<script type="text/javascript" language="javascript1.2"><!--if (window.gbWhTopic){	if (window.addTocInfo)	{	addButton("show",BTN_TEXT,"Show","","","","",0,0,"","","");	}	if (window.writeBtnStyle)		writeBtnStyle();	if (window.writeIntopicBar)		writeIntopicBar(1);	if (window.setRelStartPage)	{	setRelStartPage("../../Index.htm");		autoSync(1);		sendSyncInfo();		sendAveInfoOut();	}}else	if (window.gbIE4)		document.location.reload();//--></script>   
+<div placeholder="" id="header" class="whs1">  
+<table x-use-null-cells="" height="8" width="100%" bgcolor="#eeeeee"
+ class="whs2">
+    <tbody>
+      <tr valign="top" class="whs3">
+        <td width="100%" class="whs4"><font
+ style="font-family: Arial,Helvetica,sans-serif;" face="Arial"><strong><span
+ style="font-size: 10pt;"><font size="2" style="font-size: 10pt;"></font></span><span
+ style="font-size: 10pt; font-weight: normal; font-style: italic;"><font
+ size="2" style="font-size: 10pt;"><i>Example Applications</i></font></span></strong></font></td>
+      </tr>
+          
+  </tbody>  
+</table>
+   </div>
+     
+<h1>UML Notation Primer</h1>
+      
+<h3>Section Contents</h3>
+      
+<blockquote>       
+  <p><a href="#1">Introduction</a> </p>
+          
+  <p><a href="#2">Class diagrams</a> </p>
+          
+  <p><a href="#3">Sequence diagrams</a> </p>
+   </blockquote>
+      
+<table x-use-null-cells="" class="whs6" style="width: 100%;"
+ cellspacing="0" width="100%">
+   <col class="whs7"> <col class="whs7">  <tbody>
+      <tr class="whs3" style="" valign="top">
+   <td class="whs8" style="width: 50%;" width="50%">               
+      <p class="whs9"> </p>
+        </td>
+   <td class="whs10" style="width: 50%;" width="50%">               
+      <p class="whs11" style="text-align: right;" align="right"><a
+ href="#Top" title="Back to top"
+ onmouseover="if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == 'Netscape')) ehlp_showtip(this,event,'Back to top')"
+ onmouseout="if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == 'Netscape')) ehlp_hidetip()">
+                                
+        </a></p>
+        <br>
+        </td>
+      </tr>
+         
+  </tbody>  
+</table>
+       
+<hr align="left" class="whs5">     
+<h3><a name="1">Introduction</a> </h3>
+      
+<blockquote>       
+  <p>This document provides a brief overview of UML class diagrams and sequence
+   diagrams, which are used in the example documentation. It is intended
+  to help readers who have not met UML before to understand the examples.</p>
+   </blockquote>
+      
+<table x-use-null-cells="" class="whs6" style="width: 100%;"
+ cellspacing="0" width="100%">
+   <col class="whs7"> <col class="whs7">  <tbody>
+      <tr class="whs3" style="" valign="top">
+   <td class="whs8" style="width: 50%;" width="50%">               
+      <p class="whs9"> </p>
+        </td>
+   <td class="whs10" style="width: 50%;" width="50%">               
+      <p class="whs11" style="text-align: right;" align="right"><a
+ href="#Top" title="Back to top"
+ onmouseover="if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == 'Netscape')) ehlp_showtip(this,event,'Back to top')"
+ onmouseout="if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == 'Netscape')) ehlp_hidetip()">
+                           
+        </a></p>
+        <br>
+        </td>
+      </tr>
+         
+  </tbody>  
+</table>
+       
+<hr align="left" class="whs5">     
+<h3><a name="2">Class diagrams</a> </h3>
+      
+<blockquote>       
+  <h3><a name="2.1">HelloWorldPlus</a> </h3>
+          
+  <p>This is the class diagram for the <a
+ href="../helloworldplus/doc/javadoc/index.html">HelloWorldPlus</a>   example. 
+Note that two styles of arrowhead are used.</p>
+          
+  <div align="center" class="whs6"> <img alt=""
+ src="../helloworldplus/doc/javadoc/com/nokia/midp/examples/lcdui/helloworldplus/doc-files/class_diagram.jpg"
+ width="510" height="252" border="0" class="img_whs7">
+    </div>
+          
+  <div align="center" class="whs6">       
+  <table x-use-null-cells="" cellspacing="0" border="1" class="whs8">
+    <tbody>
+        <tr>
+   <th class="whs9">Colours</th>
+   <td class="whs10">System-supplied classes are coloured   with a purple 
+background, developer-supplied classes have a white background.   This colour 
+scheme is specific to this documentation.</td>
+        </tr>
+    <tr>
+   <th class="whs9">Inheritance</th>
+   <td class="whs10">The hollow closed arrowhead on the link   from HelloWorldPlusMIDlet
+ to MIDlet denotes that HelloWorldPlusMIDlet   is a subclass of MIDlet. This
+ arrowhead is also used to denote implementation   of an interface.</td>
+        </tr>
+    <tr>
+   <th class="whs9">Dependancy</th>
+   <td class="whs10">The link from HelloWorldPlusMIDlet to   Display denotes
+ an association. The open arrowhead denotes that this is   one-way. HelloWorldPlusMIDlet
+ depends on Display, but Display does not   depend on HelloWorldPlusMIDlet.
+ Without the arrowhead, both classes would   depend on each other.</td>
+        </tr>
+    <tr>
+   <th class="whs9">Ownership</th>
+   <td class="whs10">A TextEditor is an integral part of a   HelloWorldPlusMIDlet,
+ as shown by the filled diamond at the HelloWorldPlusMIDlet   end of the
+link  between them. Every instance of HelloWorldPlusMIDlet owns   an instance
+of  TextEditor; and when the HelloWorldPlusMIDlet becomes a   candidate for
+garbage  collection, so will the TextEditor.</td>
+        </tr>
+    <tr>
+   <th class="whs9">Ownership, one-way association</th>
+   <td class="whs10">Each TextEditor owns an instance of TextField,   as
+shown  by the diamond on the link between them. Additionally, the arrowhead
+  denotes  that this is a one-way association.</td>
+        </tr>
+             
+    </tbody>      
+  </table>
+   </div>
+          
+  <h3><a name="2.2">Shopping List</a> </h3>
+          
+  <p>This is the class diagram for the <a
+ href="../shopping/doc/javadoc/index.html">Shopping   List</a> example, which 
+uses additional notation.</p>
+          
+  <div align="center" class="whs6"> <img
+ src="../shopping/doc/javadoc/com/nokia/midp/examples/rms/shopping/doc-files/class_diagram.jpg"
+ width="510" height="252" border="0" class="img_whs7">
+    </div>
+          
+  <div align="center" class="whs6">       
+  <table x-use-null-cells="" cellspacing="0" border="1" class="whs8">
+    <tbody>
+        <tr>
+   <th class="whs9">Use</th>
+   <td class="whs10">The ShoppingListMIDlet uses the RecordStore   class
+(denoted  by the link), but does not own an instance of it (no diamond).
+  The RecordStore  class itself has no knowledge of the ShoppingListMIDlet
+  class (this is denoted by the arrowhead).</td>
+        </tr>
+    <tr>
+   <th class="whs9">Ownership of multiple instances</th>
+   <td class="whs10">The Vector owns zero or more ShoppingItems,   as denoted
+ by the asterisk next to this link.</td>
+        </tr>
+             
+    </tbody>      
+  </table>
+   </div>
+   </blockquote>
+      
+<table x-use-null-cells="" class="whs6" style="width: 100%;"
+ cellspacing="0" width="100%">
+   <col class="whs7"> <col class="whs7">  <tbody>
+      <tr class="whs3" style="" valign="top">
+   <td class="whs8" style="width: 50%;" width="50%">               
+      <p class="whs9"> </p>
+        </td>
+   <td class="whs10" style="width: 50%;" width="50%">               
+      <p class="whs11" style="text-align: right;" align="right"><a
+ href="#Top" title="Back to top"
+ onmouseover="if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == 'Netscape')) ehlp_showtip(this,event,'Back to top')"
+ onmouseout="if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == 'Netscape')) ehlp_hidetip()">
+              
+        </a></p>
+        <br>
+        </td>
+      </tr>
+         
+  </tbody>  
+</table>
+       
+<hr align="left" class="whs5">     
+<h3><a name="3">Sequence diagrams</a> </h3>
+      
+<blockquote>       
+  <h3><a name="3.1">HelloWorldPlus</a> </h3>
+          
+  <p>This is the sequence diagram for the sequence of actions when the <a
+ href="../helloworldplus/doc/javadoc/index.html">HelloWorldPlus</a>   example 
+is launched. A written explanation of the sequence follows it   in the HelloWorld 
+documentation.</p>
+          
+  <div align="center" class="whs6"> <img
+ src="../helloworldplus/doc/javadoc/com/nokia/midp/examples/lcdui/helloworldplus/doc-files/hw_start_sequence.jpg"
+ width="640" height="358" border="0" class="img_whs11">
+    </div>
+          
+  <div align="center" class="whs6">       
+  <table x-use-null-cells="" cellspacing="0" border="1" class="whs8">
+    <tbody>
+    <tr>
+   <th class="whs9">Left to right order</th>
+   <td class="whs10">There is no significance to the left-to-right   ordering
+ of these diagrams.</td>
+        </tr>
+    <tr>
+   <th class="whs9">Top to bottom order</th>
+   <td class="whs10">Execution starts at the top, and proceeds   to the bottom.</td>
+        </tr>
+    <tr>
+   <th class="whs9">Vertical lines</th>
+   <td class="whs10">The vertical lines represent a class,   instance or
+system  framework, named at the top. These terms are explained   in the following
+ two definitions, and the ShoppingListMIDlet explanation   below.</td>
+        </tr>
+    <tr>
+   <th class="whs9">Framework</th>
+   <td class="whs10">The Framework represents the JVM, Symbian   OS, and
+events  generated by the user.</td>
+        </tr>
+    <tr>
+   <th class="whs9">Class instances created during the sequence</th>
+   <td class="whs10">When an instance of the class is created   during this
+ sequence, the vertical line headed by the name appears at   the point in
+the sequence that creates it.</td>
+        </tr>
+    <tr>
+   <th class="whs9">Function calls</th>
+   <td class="whs10">Each of the arrows except number 2 represent   a function
+ call. The vertical rectangles on the class lines show the duration   of
+the  function call</td>
+        </tr>
+    <tr>
+   <th class="whs9">Conditional execution</th>
+   <td class="whs10">In this documentation, the contents of   a conditional
+ block are represented as a function call, with the necessary   condition
+in square brackets as the name of the pseudo-function. Action   number 2
+represents the start of an if statement, which continues to action   9. This
+notation is specific to this documentation.</td>
+        </tr>
+             
+    </tbody>      
+  </table>
+   </div>
+          
+  <h3><a name="3.2">Shopping List</a> </h3>
+          
+  <p>This sequence diagram, from the Shopping
+   List example, uses additional notation. There are two diagrams for
+  this sequence, hence this diagram starts at action 12.</p>
+          
+  <div align="center" class="whs6"> <img
+ src="../shopping/doc/javadoc/com/nokia/midp/examples/rms/shopping/doc-files/uml_saving.jpg"
+ width="640" height="374" border="0" class="img_whs12">
+    </div>
+          
+  <div align="center" class="whs6">       
+  <table x-use-null-cells="" cellspacing="0" border="1" class="whs8">
+    <tbody>
+        <tr>
+   <th class="whs9">Notes</th>
+   <td class="whs10">Occassionally it is useful to add additional   notes 
+to the diagram - these are shown as yellow rectangles, with a dotted   line
+ to the event that they describe.</td>
+        </tr>
+    <tr>
+   <th class="whs9">Class instances existing at the start   of the sequence</th>
+   <td class="whs10">If an instance exists at the start of   this sequence,
+ the name appears at the top of the diagram.</td>
+        </tr>
+    <tr>
+   <th class="whs9">Class providing only static methods</th>
+   <td class="whs10">(not shown) The same notation for instances   existing
+ at the start of the sequence is used in this documentation for   classes
+that provide only static methods. This treats them as an object   that has
+existed before this sequence, and continues to exist after it.</td>
+        </tr>
+    <tr>
+   <th class="whs9">Named instances</th>
+   <td class="whs10">The diagrams generally refer to instances   of classes
+ without quoting the variable name used to hold the object.   In this diagram,
+ the instance of Vector being used is explictly identified   as "shoppingItems".</td>
+        </tr>
+    <tr>
+   <th class="whs9">Explict returns from function calls</th>
+   <td class="whs10">The return from a function is normally   left as implied.
+ Action 14 explictly depicts the return value of the function   called at
+action 12.</td>
+        </tr>
+    <tr>
+   <th class="whs9">Iteration</th>
+   <td class="whs10">In this documentation, the contents of   while block 
+are represented as a function call, with the necessary condition   preceeded
+ by "*[" and followed by "]". Action numbers   15 and 16 represent the start
+ of such a block, which continues to action   23. hasMoreElements() is called
+ once per iteration. This notation is specific   to this documentation.</td>
+        </tr>
+    <tr>
+   <th class="whs9">Destruction</th>
+   <td class="whs10">The X mark at the bottom of RecordStore   represents 
+explictly calling a destructor. In these Java™ examples, they   are also used 
+to represent all references to the object going out of scope,   making it 
+a candidate for garbage collection.</td>
+        </tr>
+             
+    </tbody>      
+  </table>
+   </div>
+   </blockquote>
+            
+<div placeholder="" id="footer" class="whs1">  
+<hr class="whs19">  
+<div align="center">     
+<table x-use-null-cells="" cellspacing="0" width="100%" class="whs20">
+      <col class="whs21">    <col class="whs21">    <tbody>
+      <tr valign="top" class="whs3">
+      <td width="50%" class="whs22">                  
+      <p class="whs23"><br>
+       </p>
+        <br>
+       </td>
+      <td width="50%" class="whs24">                  <br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+   </div>
+     
+<script type="text/javascript" language="javascript1.2"><!--if (window.writeIntopicBar)	writeIntopicBar(0);//--></script> <br>
+  <br>
+ <br>
+</body>
+</html>

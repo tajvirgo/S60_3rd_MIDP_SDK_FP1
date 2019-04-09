@@ -1,0 +1,6 @@
+MIDlet-1: WMA Chat, , com.nokia.midp.examples.wma.chat.WMAMIDlet
+MIDlet-Name: WMA Chat
+MicroEdition-Configuration: CLDC-1.1
+MicroEdition-Profile: MIDP-2.0
+MIDlet-Vendor: Nokia
+MIDlet-Version: 1.0

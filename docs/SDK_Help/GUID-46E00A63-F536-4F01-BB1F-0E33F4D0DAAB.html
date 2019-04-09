@@ -1,0 +1,87 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobiletask"/><meta name="DC.Title" content="Running an S60 SDK example MIDlet from NetBeans"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-46E00A63-F536-4F01-BB1F-0E33F4D0DAAB"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> Tools and Utilities</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-46E00A63-F536-4F01-BB1F-0E33F4D0DAAB"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-46E00A63-F536-4F01-BB1F-0E33F4D0DAAB"><!----></a>Running
+an S60 SDK example MIDlet from NetBeans</h1>
+<div><h3>Context</h3><p>The S60 SDK comes with a number of <a href="GUID-B3A60BEF-0447-42E5-A845-E84630CACCF0.html#GUID-B3A60BEF-0447-42E5-A845-E84630CACCF0">example
+MIDlets</a>, which can be used in application development. The MIDlets
+can also be run on the <a href="GUID-519DDEA7-537F-4511-83A0-37DCFCFF8915.html#GUID-519DDEA7-537F-4511-83A0-37DCFCFF8915">S60
+emulator</a> from NetBeans.</p><div class="note"><p><strong class="note_title">Note: </strong>In order to follow the instructions here, the following prerequisites
+have to be in place</p><ul>
+<li><p>S60 3rd Edition SDK for Symbian OS, Supporting Feature Pack
+1, for Java (S60 SDK) has been installed</p></li>
+<li><p>NetBeans and NetBeans Mobility Pack have been installed,
+and the S60 SDK has been configured for NetBeans (see <a href="GUID-AF44CDDE-42BC-477A-A679-79847880EF68.html#GUID-AF44CDDE-42BC-477A-A679-79847880EF68">Installing
+and configuring NetBeans</a>)</p></li>
+</ul></div></div>
+<h3>Steps</h3><ol id="GUID-7BF448D0-2567-4500-8F95-EE079F30DD95"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-7BF448D0-2567-4500-8F95-EE079F30DD95"><!----></a>
+<li id="GUID-04B6BB53-F7AD-43F9-81E3-AB9E23004C22"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-04B6BB53-F7AD-43F9-81E3-AB9E23004C22"><!----></a><span>Open the
+NetBeans IDE.</span></li>
+<li id="GUID-6B50DF1D-936A-4D9A-9E79-8D4741AA8B43"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-6B50DF1D-936A-4D9A-9E79-8D4741AA8B43"><!----></a><span>Select <span>File
+&gt; Open project…</span> from the menu bar.</span>
+
+<p>The <span>Open Project</span> view is displayed:</p>
+<div class="figure" id="GUID-3D0E2FCF-150C-457E-85A2-1E02E12C824A"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-3D0E2FCF-150C-457E-85A2-1E02E12C824A"><!----></a><img src="GUID-4C99584D-ABFB-49E5-8DAF-E3CD6FFAC328_d0e11493_href.png" alt=""/><p class="figure-title"><strong>Figure 66: </strong>Open project</p></div>
+
+</li>
+<li id="GUID-3815077A-927D-4ED5-ACA3-C9CEEEB25B33"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-3815077A-927D-4ED5-ACA3-C9CEEEB25B33"><!----></a><span>Browse to
+the NetBeans project file located in the in the <code>\targets\netbeans</code> folder
+of the S60 example application that you want to run.</span>
+
+<p>For example, <code>&lt;S60_SDK_installation_directory&gt;\S60examples\helloworldplus\targets\netbeans</code></p>
+
+</li>
+<li id="GUID-682E20F9-928F-4172-AD9D-C99B2AFBE34A"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-682E20F9-928F-4172-AD9D-C99B2AFBE34A"><!----></a><span>Click <span>Open
+Project Folder</span>.</span>
+
+<p>The NetBeans project is opened in the NetBeans IDE.</p>
+
+</li>
+<li id="GUID-779B0BF9-36C8-40C5-9BE2-23F9A6CD237B"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-779B0BF9-36C8-40C5-9BE2-23F9A6CD237B"><!----></a><span>Click the <span>netbeans</span> project
+icon in the project view on the left and select <span>Properties</span> from the
+pop-up menu.</span>
+
+<p>The <span>Project configuration</span> view is displayed:</p>
+<div class="figure" id="GUID-16D35696-DFAC-4993-89C9-B742C5A462F1"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-16D35696-DFAC-4993-89C9-B742C5A462F1"><!----></a><img src="GUID-C0390E62-5449-4B1E-AF6B-8E97BE7686FC_d0e11548_href.png" alt=""/><p class="figure-title"><strong>Figure 67: </strong>Project configuration view</p></div>
+<p>Here you need to set the S60 SDK emulator as the default project configuration.</p>
+
+</li>
+<li id="GUID-C160412F-F4EA-45EB-9E2F-CDDA1AABE324"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-C160412F-F4EA-45EB-9E2F-CDDA1AABE324"><!----></a><span>Click <span>Manage
+Configurations…</span>.</span></li>
+<li id="GUID-8BBD21AA-BE1F-459B-8BB9-A5BF550237BA"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-8BBD21AA-BE1F-459B-8BB9-A5BF550237BA"><!----></a><span>In the <span>Project
+Configuration Manager</span> view that is displayed, click <span>Add…</span>.</span>
+</li>
+<li id="GUID-79C3C9A9-D38B-4135-AC67-113D4FDD468D"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-79C3C9A9-D38B-4135-AC67-113D4FDD468D"><!----></a><span>In the <span>Add
+Project Confugration</span> view that is displayed, select "S60_emulator_template"
+from the <span>Use Configuration Template</span> drop-down menu and click <span>OK</span>.</span>
+
+<p>The S60Emulator configuration is added to the list of project configurations.</p>
+
+</li>
+<li id="GUID-CA093A07-36D6-4AF9-A2B4-D4012F35193D"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-CA093A07-36D6-4AF9-A2B4-D4012F35193D"><!----></a><span>In the <span>Project
+Configuration</span> view, click <span>Close</span>.</span></li>
+<li id="GUID-5FF1D82B-1CC8-4186-B483-F5349BF12CC5"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-5FF1D82B-1CC8-4186-B483-F5349BF12CC5"><!----></a><span>With the
+S60Emulator in the <span>Project Configuration</span> field of the <span>Project configuration</span> view,
+click <span>OK</span>.</span></li>
+<li id="GUID-F9533B99-B762-4992-AA36-AB4263A7A409"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-F9533B99-B762-4992-AA36-AB4263A7A409"><!----></a><span>Select <span>Build
+&gt; Build Main Project</span> from the menu bar.</span>
+
+<p>The build output is displayed in the <span>Output</span> field at the bottom
+of the IDE.</p>
+
+</li>
+<li id="GUID-CD0B7718-AA24-49F9-979E-BB4DEEAA6BE4"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-CD0B7718-AA24-49F9-979E-BB4DEEAA6BE4"><!----></a><span>Select <span>Run
+&gt; Run Main Project</span> from the menu bar.</span>
+
+</li>
+</ol>
+<div><h3>Results</h3><p>The S60 SDK emulator is launched.</p><p><span>Note:</span> It may take some time for the emulator to start. </p><p>To locate the S60 example application, do the following:</p><ol>
+<li id="GUID-69822B64-1C38-4E07-B351-DF5D7BFE29E1"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-69822B64-1C38-4E07-B351-DF5D7BFE29E1"><!----></a><p>Click the
+Applications button to open the emulator's application grid (see <a href="GUID-5C971867-3A84-42A8-82E5-853626BBFA69.html#GUID-5C971867-3A84-42A8-82E5-853626BBFA69">Graphical
+user interface</a>).</p></li>
+<li id="GUID-9A55FA9D-50BB-4959-8F94-3922B8A5DF81"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-9A55FA9D-50BB-4959-8F94-3922B8A5DF81"><!----></a><p>In the emulator's
+application grid, use the five-way navigation key to open the <span>Installed</span> folder.</p>
+</li>
+<li id="GUID-173D5EF2-E366-41F9-90D2-1D07ED387471"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-173D5EF2-E366-41F9-90D2-1D07ED387471"><!----></a><p>In the <span>Installed</span> folder,
+open the application.</p></li>
+</ol></div></div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

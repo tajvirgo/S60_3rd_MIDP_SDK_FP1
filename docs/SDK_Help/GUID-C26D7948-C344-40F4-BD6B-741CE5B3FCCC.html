@@ -1,0 +1,98 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobiletask"/><meta name="DC.Title" content="Installation and configuration"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-C26D7948-C344-40F4-BD6B-741CE5B3FCCC"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> Tools and Utilities</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-C26D7948-C344-40F4-BD6B-741CE5B3FCCC"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-C26D7948-C344-40F4-BD6B-741CE5B3FCCC"><!----></a>Installation and configuration</h1>
+<div><h3>Context</h3><p>The 4-step setup procedure is introduced in this section. The setup
+procedure consists of the following steps:</p></div>
+<h3>Steps</h3><ol id="GUID-7B77370C-C055-4C2E-A323-30CB3A53D0FE"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-7B77370C-C055-4C2E-A323-30CB3A53D0FE"><!----></a>
+<li id="GUID-6EA9DFB7-CF34-410D-BDCA-628E466EDE2D"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-6EA9DFB7-CF34-410D-BDCA-628E466EDE2D"><!----></a><span>Install S60 SDK.</span>
+
+<p>If not installed already, install the S60 SDK.</p>
+
+</li>
+<li id="GUID-98ABA55C-A079-42B4-988E-DC6AB3B2929E"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-98ABA55C-A079-42B4-988E-DC6AB3B2929E"><!----></a><span>Build the example SIP applications.</span>
+
+<p>Example applications can be built by going to the main groupdirectories
+under the root directories of the example applications and run the following
+commands in the command prompt:</p>
+<ul>
+<li><p><code>bldmake bldfiles</code></p></li>
+<li><p><code>abld build winscw udeb</code></p></li>
+</ul>
+<p>For detailed information about the example applications, please refer
+to the documentation provided in the Example Application package.</p>
+
+</li>
+<li id="GUID-B95AB4A1-4F32-4360-A5EB-A36A879D0D02"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-B95AB4A1-4F32-4360-A5EB-A36A879D0D02"><!----></a><span>Start the SIP server emulator.</span>
+
+<p>Start the SIP Server Emulator (GUI) from the <span>Start</span> menu. Before
+starting the server, you must configure the domains to be used. Find out the
+IP address of each PC and add these to the list of domains in the SIP Server
+Emulator GUI  (see the <span>SIP Server Emulator user interface</span> figure and <a href="GUID-8456E477-201D-44C7-BF39-6B9D6D8FFD50.html#GUID-8456E477-201D-44C7-BF39-6B9D6D8FFD50">SIP Server Emulator</a> for
+more detailed information). Removing the default domains (domain1 and domain2)
+is not required.</p>
+<p>Start the SIP Server Emulator by clicking the <span>Start server</span> button
+on the toolbar. The SIP Server Emulator should now accept SIP requests. </p>
+<p>For more information on how to use the SIP Server Emulator see <a href="GUID-8456E477-201D-44C7-BF39-6B9D6D8FFD50.html#GUID-8456E477-201D-44C7-BF39-6B9D6D8FFD50">SIP Server
+Emulator</a>.</p>
+
+</li>
+<li id="GUID-3D42A247-1A6C-4F2F-9EB9-8C6D9376496C"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-3D42A247-1A6C-4F2F-9EB9-8C6D9376496C"><!----></a><span>Configure the SIP settings and test the environment.</span>
+
+<p>On both emulators, set the SIP configuration through <span>Applications
+&gt; Configurations &gt; Settings &gt; Connection &gt; SIP settings</span> if the SIP Server
+is located on a PC, server address is the same as the PC’s IP address:</p>
+<pre class="codeblock" id="GUID-886E02EE-886F-4058-94F6-9DB41ECE6B01"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-886E02EE-886F-4058-94F6-9DB41ECE6B01"><!----></a>Profile name: Provider
+
+Service profile: IETF
+
+Default access point: Winsock
+
+Public user name: player1@&lt;server_address&gt;
+
+Use compression: No
+
+Registration mode: When needed
+
+Security negotiation: Inactive
+
+Proxy server:
+
+       Proxy address:&lt;server_address&gt;
+
+       Realm:&lt;server_address&gt;
+
+       Username: None
+
+       Password: None
+
+       Loose routing: Yes
+
+       Transport protocol: TCP
+
+       Port: 5060
+
+Registrar server:
+
+       Registrar address:&lt;server_address&gt;
+
+       Realm:&lt;server_address&gt;
+
+       Username: None
+
+       Password: None
+
+       Transport protocol: TCP
+
+       Port: 5060
+</pre>
+<p>On Emulator B, the name "player1" should be replaced with another name,
+such as "player2". "realm" can be replaced with any text. Player1 and player2
+can have different realms.</p>
+<p>Now you can start to test the configuration with the SIP example application.
+The example and its documentation are provided as part of the Example Application
+package.</p>
+
+</li>
+</ol>
+</div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

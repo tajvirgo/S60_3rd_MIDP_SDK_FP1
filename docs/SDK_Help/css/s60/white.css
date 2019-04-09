@@ -1,0 +1,14 @@
+h1.pageHeading,
+h1.pageHeadingRed {
+    font-family: Arial, sans-serif;
+}
+
+.siteIdentifier {
+	left: 380px;
+	top: 50px;
+	font-size: 14px;
+	width: auto;
+}
+.figure-title {
+    font-weight: bold;  
+}

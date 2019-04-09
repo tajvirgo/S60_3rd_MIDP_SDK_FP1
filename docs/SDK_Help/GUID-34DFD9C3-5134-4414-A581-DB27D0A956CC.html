@@ -1,0 +1,40 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="MIDlet lifecycle"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-34DFD9C3-5134-4414-A581-DB27D0A956CC"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> S60 3rd Edition SDK for Symbian OS Supporting Feature Pack 1, for MIDP</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-34DFD9C3-5134-4414-A581-DB27D0A956CC"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-34DFD9C3-5134-4414-A581-DB27D0A956CC"><!----></a>MIDlet
+lifecycle</h1>
+<p><a href="GUID-BD3FDAA6-5977-40FF-A3BC-79BD6A9B4D4C.html#GUID-BD3FDAA6-5977-40FF-A3BC-79BD6A9B4D4C">MIDlets</a> are
+designed to co-exist with other applications on a Mobile Information Device
+(MID). The MIDlet lifecycle is pivotal in enabling this co-existence. Basically,
+a MIDlet can be in one of the following states: paused, active, or destroyed.</p>
+<p>The Application Management Software (AMS) controls the state of a MIDlet
+by directing a MIDlet to start, pause, or destroy itself. It constructs a
+MIDlet and communicates changes in its state by calling the following methods,
+which every MIDlet must implement: <code>startApp()</code>, <code>pauseApp()</code>,
+and <code>destroyApp()</code>.</p>
+<p>All MIDlets start out in the paused state. When a user starts an application,
+the AMS calls the <code>startApp()</code> Method of the MIDlet in
+question, after which the MIDlet is in active state (that is, the application
+is opened).</p>
+<div><h3>startApp() method</h3><p>When a user opens a Java application on her device, the
+AMS calls the <code>startApp()</code> method. In this case, the MIDlet
+is newly constructed with the method. In the case of such a newly constructed
+MIDlet, the <code>startApp()</code> method calls <code>Display.getDisplay(this).setCurrent(startup_screen)</code> to
+invoke the startup screen of the MIDlet (that is, application) in question. </p><p>The <code>startApp()</code> method is also invoked by the AMS
+when a MIDlet is returned from the paused state. In this case, the <code>startApp()</code> method
+will typically need to restore the state it was in before it was paused.</p></div>
+<div><h3>pauseApp() method</h3><p>When a user pauses (but does not close) an application, the AMS calls
+the <code>pauseApp()</code> method. In this case, the application
+is paused and it is not longer displayed in the User Interface (UI) to the
+user. However, any threads or timers created by the MIDlet in question will
+continue to run unless the user stops these manually. These threads keep on
+running by default, because the application will need to restore its state
+when it is reactivated with the <code>startApp()</code> method.</p></div>
+<div><h3>destroyApp() method</h3><p>When a user closes an application, the AMS calls the <code>destroyApp()</code> method.
+This method instructs the MIDlet to release all the resources it has reserved
+and to close down as soon as possible. In effect, this means that the application
+in question closes all input and output streams, terminates all threads, and
+cancels all timers. Once the <code>destroyApp()</code> method has
+been called, the MIDlet ceases to access the display, in other words, the
+application is no longer displayed in the UI to the user.</p></div>
+</div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

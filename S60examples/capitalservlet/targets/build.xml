@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<project name="CapitalService" default="build" basedir="..">
+	<property name="source" value="src" />
+	<property name="build" value="build" />
+	<property name="release" value="release" />
+	<property name="appname" value="${ant.project.name}" />
+	<property name="webapp.webxml" value="WebContent/WEB-INF/web.xml" />
+
+<!-- YOU MUST SET THE PATH OF THE TOMCAT in the environment variable TOMCAT_HOME   !-->
+  	<property environment="env"/>
+	<property name="tomcat.home" value="${env.TOMCAT_HOME}"/>
+  	<echo message="TOMCAT_HOME is set to = ${env.TOMCAT_HOME}"/>
+ 
+	 <fail message="Build fails because TOMCAT_HOME environment variable is NOT set">
+     	    <condition>
+       	        <not>
+                          <isset property="env.TOMCAT_HOME"/>
+                      </not>
+                  </condition>
+              </fail>
+
+	
+	<property name="build" value="build" />
+ 	<property name="classes" value="${build}/classes" />
+  	<property name="src" value="src" />
+  	<property name="rsrc" value="rsrc" />
+  	<property name="midp_rsrc" value="${rsrc}/midp" />
+  	<property name="bin" value="${build}/bin" />
+  	<property name="targets" value="targets" />
+  	<property name="javadoc" value="${build}/javadoc" />
+  	<property name="javadoc_rsrc" value="${rsrc}/javadoc" />
+
+	<path id="compile.classpath">
+		<pathelement location="${tomcat.home}/common/lib/servlet-api.jar" />
+		<pathelement location="${tomcat.home}/jaxrpc/lib/jaxrpc-api.jar" />  
+		<pathelement location="${tomcat.home}/jaxrpc/lib/jaxrpc-impl.jar" /> 
+		<pathelement location="${tomcat.home}/jaxrpc/lib/jaxrpc-spi.jar" />
+		<pathelement location="${tomcat.home}/jwsdp-shared/lib/jax-qname.jar" />
+	</path>
+
+	<target name="build" depends="create-war">
+		<echo message="Building...." />	                            
+	</target>
+
+	<target name="compile-server" depends="javadoc">		
+                            <mkdir dir="${build}"/>
+                            <mkdir dir="${release}"/>
+		<javac srcdir="${source}" destdir="${build}">
+			<classpath refid="compile.classpath" />
+		</javac>
+	</target>
+
+	<target name="clean">
+    		<delete dir="${build}" />
+  	</target>
+
+	<target name="create-war" depends="compile-server">
+		<war warfile="${release}/${appname}.war" webxml="${webapp.webxml}">
+			<classes dir="${build}" includes="**/*.class" />
+		  	<zipfileset dir="res" prefix="res"/>
+		</war>
+	</target>
+
+  <target name="javadoc" description="creates javadoc documentation">   
+    <delete dir="${build}" failonerror="false"/>
+    <javadoc destdir="${build}/javadoc"
+      sourcepath="${javadoc_rsrc}"
+      classpath="${src};${tomcat.home}/common/lib/servlet-api.jar"
+      author="true"
+      version="true"
+      use="true"
+      access="private"     
+      noindex="false"
+      linksource="true">
+      <packageset dir="src">
+        <include name="com/nokia/**" />          
+      </packageset>       
+	
+    </javadoc> 
+   </target>
+</project>

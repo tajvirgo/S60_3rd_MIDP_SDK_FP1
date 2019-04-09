@@ -1,0 +1,257 @@
+<!DOCTYPE doctype PUBLIC "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html xmlns="http://www.w3.org/TR/REC-html40/loose.dtd">
+<head>
+  <title>Building and running the examples</title>
+                                                                        
+  <meta http-equiv="content-type"
+ content="text/html; charset=windows-1252">
+                                         
+  <meta name="generator"
+ content="RoboHelp by eHelp Corporation www.ehelp.com">
+                                         
+  <link rel="stylesheet" href="../../SDK_style_ns.css">
+                                       
+  <script type="text/javascript" language="JavaScript"
+ title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='../../SDK_style.css'>");}
+//-->
+  </script> 
+                                  
+  <style type="text/css">
+<!--
+div.whs1 { width:100%; }
+table.whs2 { background-color:#eeeeee; width:100%; height:8px; x-cell-content-align:Top; }
+tr.whs3 { x-cell-content-align:top; }
+td.whs4 { width:100%; border-left-style:none; }
+hr.whs5 { float:alignleft; }
+div.whs6 { text-align:center; }
+table.whs7 { x-border-left:1px table-solid; x-border-top:1px table-solid; x-border-right:1px table-solid; x-border-bottom:1px table-solid; border-collapse:separate; border-spacing:0px; }
+th.whs8 { padding-left:2px; padding-top:2px; padding-right:2px; padding-bottom:2px; }
+td.whs9 { padding-left:2px; padding-top:2px; padding-right:2px; padding-bottom:2px; }
+hr.whs10 { float:aligncenter; }
+table.whs11 { x-cell-content-align:top; width:100%; float:aligncenter; border-spacing:0px; }
+col.whs12 { width:50%; }
+td.whs13 { width:50%; padding-right:10px; padding-left:10px; border-right-style:none; border-left-style:none; border-top-style:none; border-bottom-style:none; }
+p.whs14 { font-family:Arial; }
+td.whs15 { width:50%; padding-right:10px; padding-left:10px; background-color:Transparent; border-top-style:none; border-right-style:none; border-bottom-style:none; }
+p.whs16 { text-align:right; }
+img_whs17 { border:none; width:18px; height:15px; float:none; border-style:none; }
+-->
+  </style>
+                                  
+  <script type="text/javascript" language="JavaScript">
+<!--
+if ((navigator.appName == "Netscape") && (parseInt(navigator.appVersion) == 4))
+{
+  var strNSS = "<style type='text/css'>";
+  strNSS += "td.whs15 {background-color:white; }";
+  strNSS +="</style>";
+  document.write(strNSS);
+}
+//-->
+  </script> 
+                                  
+  <script type="text/javascript" language="JavaScript"
+ title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+  </script> 
+                                  
+  <style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute; left:0px; top:0px; z-index:4; visibility:hidden; }
+-->
+  </style>
+                                  
+  <script type="text/javascript" language="javascript1.2"
+ src="../../whmsg.js"></script>                               
+  <script type="text/javascript" language="javascript"
+ src="../../whver.js"></script>                               
+  <script type="text/javascript" language="javascript1.2"
+ src="../../whproxy.js"></script>                               
+  <script type="text/javascript" language="javascript1.2"
+ src="../../whutils.js"></script>                               
+  <script type="text/javascript" language="javascript1.2"
+ src="../../whtopic.js"></script>
+</head>
+  <body>
+                   
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Example Applications\nBuilding and Running Example Applications");
+addButton("show",BTN_TEXT,"Show","","","","",0,0,"","","");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(1);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("../../Index.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>           
+<h1>Building and Running Example Applications</h1>
+                      
+<h3>Section Contents</h3>
+                      
+<blockquote>                               
+  <p><a href="#1">Building overview</a> </p>
+                                          
+  <p><a href="#2">Pre-requisites</a> </p>
+                                          
+  <p><a href="#3">Common terminology</a> </p>
+                                          
+  <p><a href="#4">Tools</a> </p>
+                                          
+  <p><a href="#5">Building and running</a> </p>
+           </blockquote>
+                             
+<hr align="left" class="whs5">             
+<h3><a name="1">Building overview</a> </h3>
+                      
+<p>This document explains the process required to build and run the various
+       examples. If an example has additional building and running requirements
+       or dependencies, these are detailed in the Building and running section
+       for that particular example.</p>
+                      
+<p>Source code for the examples is located in</p>
+                      
+<p class="CodeLine"><span class="CodeInText">&lt;SDK_installation_directory&gt;/&lt;examples
+ folder&gt;</span>       </p>
+                      
+<p>A syntax-highlighted version of the source is also included, this is  
+linked to from the relevant class in the JavaDoc documentation.</p>
+                             
+<hr align="left" class="whs5">             
+<h3><a name="2">Pre-requisites</a> </h3>
+                      
+<p>Before you start, you should have the MIDP SDK, the Java™ Platform  Standard Edition
+     SDK and, optionally, an IDE tool. If you use an IDE, you should also
+first configure the emulator for use with the IDE tool. For more details,
+  see   the <span style="font-style: italic;"><i>Installation   and Configuration
+     Guide</i></span> included as a separate pdf document in   the SDK.</p>
+                             
+<hr align="left" class="whs5">             
+<h3><a name="3">Common terminology</a> </h3>
+                      
+<p>The details in this section apply to all of the tools.</p>
+                      
+<div align="center" class="whs6">           
+<table x-use-null-cells="" cellspacing="0" border="1" class="whs7">
+            <tbody>
+              <tr>
+           <th class="whs8">                                            
+                          
+      <p><span style="font-weight: normal;">root directory of the source</span></p>
+                </th>
+           <td class="whs9">This is the directory containing a subdirectory 
+   called   "com". It is not the "com" directory itself,   or the directory 
+  containing   .java files.</td>
+              </tr>                                                    
+  </tbody>          
+</table>
+           </div>
+                               
+<hr align="left" class="whs5">             
+<h3><a name="4">Tools</a> </h3>
+                      
+<p>This section gives download locations and brief notes for the main tools,
+       which are straightforward download-and-run installations. The Java Platform Standard Edition SDK
+must be installed.</p>
+                      
+<h4><a name="4.1">Java™ Platform Standard Edition (SDK) </a></h4>
+                      
+<p>Downloads  : <a href="http://java.sun.com">http://java.sun.com</a>
+       </p>
+                      
+<p>The Java Platform Standard Edition SDK provides the basic tools for compiling and running Java  
+programs.</p>
+                      
+<hr align="left" class="whs5">             
+<h3><a name="5">Building and running</a> </h3>
+                      
+<p>Instructions on how to build and run the examples using an IDE are provided
+       in the following IDE-specific pages.</p>
+                      
+<ul>
+           	 	<li class="kadov-p"><a href="BuildingEclipse.html">Eclipse</a></li>
+   <li class="kadov-p"><a href="BuildingJBuilder.html">Borland JBuilder</a></li>
+      <li class="kadov-p"><a href="BuildingNetbeans.html">Netbeans </a><br>
+      </li>
+           	 	      	 	                     
+</ul>
+                      
+<div placeholder="" id="footer" class="whs1">   Please see the Eclipse/Nokia 
+ Plug-in documentation for instructions on building and running MIDlets with 
+ Eclipse.<br>
+   <br>
+     
+<hr class="whs10">          
+<div align="center">             
+<table x-use-null-cells="" cellspacing="0" width="100%" class="whs11">
+            <tbody>
+              <tr valign="top" class="whs3">
+                <td width="50%" class="whs13">                          
+                                           
+      <p class="whs14"><small style="font-size: smaller;"></small></p>
+                <br>
+                </td>
+              <td width="50%" class="whs15">                            
+                                             
+      <p align="right" class="whs16"><a href="..%5C..%5C#Top"><br>
+                </a></p>
+                <br>
+               </td>
+              </tr>
+                                           
+  </tbody>          
+</table>
+            </div>
+           </div>
+                     
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script> <br>
+          <br>
+         <br>
+        <br>
+       <br>
+      <br>
+     <br>
+    <br>
+   <br>
+  <br>
+ <br>
+</body>
+</html>

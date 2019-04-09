@@ -1,0 +1,67 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobiletask"/><meta name="DC.Title" content="Setting up system.out and system.err redirection"/><meta name="abstract" content="To redirect System.out and System.err streams to the device connectivity tool on the PC, proceed as follows:"/><meta name="description" content="To redirect System.out and System.err streams to the device connectivity tool on the PC, proceed as follows:"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-2EAFDF61-2D9F-4397-B977-650C2FB60240"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> Tools and Utilities</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-2EAFDF61-2D9F-4397-B977-650C2FB60240"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-2EAFDF61-2D9F-4397-B977-650C2FB60240"><!----></a>Setting
+up system.out and system.err redirection</h1>
+<h3>Steps</h3><ol id="GUID-A2716C54-CBDF-462A-9FF0-5196B514E336"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-A2716C54-CBDF-462A-9FF0-5196B514E336"><!----></a>
+<li id="GUID-B566F836-AD1B-440C-A91C-5A20AEFBBCEA"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-B566F836-AD1B-440C-A91C-5A20AEFBBCEA"><!----></a><span>Install
+Ecmt applications to your S60 device from <code>Ecmt_Agent_MIDP.sis</code> file. </span>
+
+<p>See Device Connectivity Tool <a href="GUID-A3B88F89-14EE-48EB-ACA2-7C86A8AB2082.html#GUID-A3B88F89-14EE-48EB-ACA2-7C86A8AB2082">Installation</a> for
+instructions.</p>
+
+</li>
+<li id="GUID-9D53C264-4522-4904-B491-60CD02949A14"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-9D53C264-4522-4904-B491-60CD02949A14"><!----></a><span>Install
+the Redirector MIDlet (<code>RedMIDlet</code>) from the Application
+Manager of your S60 device.</span>
+
+<p>The Redirector MIDlet is unpacked from the <code>.sis</code> file
+during installation, but it is not installed by default.</p>
+
+</li>
+<li id="GUID-F6C0EB4D-227F-4E1F-9279-08BB1C3DCC27"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-F6C0EB4D-227F-4E1F-9279-08BB1C3DCC27"><!----></a><span>Turn on
+the Bluetooth connectivity on your S60 device.</span></li>
+<li id="GUID-5373978D-FF3D-4852-88B7-7DCB68158626"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-5373978D-FF3D-4852-88B7-7DCB68158626"><!----></a><span>Run the
+Ecmt connectivity application on your S60 device.</span></li>
+<li id="GUID-92D2AECC-7DCC-4754-A98A-78DE600F5F6F"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-92D2AECC-7DCC-4754-A98A-78DE600F5F6F"><!----></a><span>Set up Bluetooth
+connection with your S60 device as follows:</span>
+<ol type="i" id="GUID-95167EED-2C0A-4FAC-A2DE-CEC047818713"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-95167EED-2C0A-4FAC-A2DE-CEC047818713"><!----></a>
+<li id="GUID-452539E3-47E8-4F2B-8349-3B1E3AC11AF9"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-452539E3-47E8-4F2B-8349-3B1E3AC11AF9"><!----></a><span>Turn
+on the Bluetooth connectivity of your PC, scan and pair the S60 device, and
+discover available services.</span></li>
+<li id="GUID-D2C152A9-29C9-49AE-8EE5-6160B52B3599"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-D2C152A9-29C9-49AE-8EE5-6160B52B3599"><!----></a><span>Connect
+to the Bluetooth Serial port. The Bluetooth services window can be seen in
+the figure below. </span>
+
+<div class="figure" id="GUID-E8DCA9EF-B85D-4879-9FAA-E2D2820A5620"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-E8DCA9EF-B85D-4879-9FAA-E2D2820A5620"><!----></a><img src="GUID-910404E7-DFAA-4307-A9DA-1681F62B0D60_d0e13295_href.png" alt=""/></div>
+
+</li>
+</ol>
+</li>
+<li id="GUID-EB1CA7A3-A59E-49D9-8E89-B52F4FA5ED41"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-EB1CA7A3-A59E-49D9-8E89-B52F4FA5ED41"><!----></a><span>Run the
+device connectivity tool on the PC by selecting <span>Start &gt; All Programs S60
+Developer Tools &gt;3rd Edition FP1 SDK &gt; MIDP &gt; Tools &gt; Device Connection</span>.</span>
+<ol type="i" id="GUID-867873F5-8AF7-4A5B-9DD6-46316B88D04B"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-867873F5-8AF7-4A5B-9DD6-46316B88D04B"><!----></a>
+<li id="GUID-913D7246-3162-44E0-B551-581CC60B5A85"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-913D7246-3162-44E0-B551-581CC60B5A85"><!----></a><span>In the <span>Port</span> tab
+of the device connectivity tool, select the COM port provided by Bluetooth
+connection with the phone (Bluetooth serial port).</span>
+
+<div class="figure" id="GUID-6A73F909-90A8-44BB-A4BF-892DF61B5E2A"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-6A73F909-90A8-44BB-A4BF-892DF61B5E2A"><!----></a><img src="GUID-E0B2FF56-C6ED-4C01-A657-F4C68680FCB1_d0e13320_href.png" alt=""/></div>
+
+</li>
+<li id="GUID-4734B8C7-E4BF-4094-A6D5-FEF6C24A69EC"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-4734B8C7-E4BF-4094-A6D5-FEF6C24A69EC"><!----></a><span>Click
+the <span>Connect</span> button.</span></li>
+<li id="GUID-6D2CDB84-376E-4102-9AF1-81EE5084561E"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-6D2CDB84-376E-4102-9AF1-81EE5084561E"><!----></a><span>Select
+ <span>Tools &gt; Diagnostics</span> . The <a href="GUID-EB012373-734D-4A3A-995A-926F9ABFDDF5.html#GUID-EB012373-734D-4A3A-995A-926F9ABFDDF5">Diagnostics
+window</a> appears.</span></li>
+</ol>
+</li>
+<li id="GUID-31D4251F-E523-4546-93AA-646BDA117361"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-31D4251F-E523-4546-93AA-646BDA117361"><!----></a><span>Run the
+Redirector MIDlet on the phone. A message saying “Redirector MIDlet: redirection
+is started” should appear in the <span>Diagnostics</span> window.</span>
+</li>
+<li id="GUID-334A28B5-1470-4914-852D-5C0CACAC1FE1"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-334A28B5-1470-4914-852D-5C0CACAC1FE1"><!----></a><span>Run the
+MIDlet under test. Messages sent to System.out and System.err will start to
+appear once the 110 symbol buffer becomes full.</span></li>
+</ol>
+</div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

@@ -1,0 +1,150 @@
+<HTML>
+<BODY BGCOLOR="white">
+<PRE>
+<FONT color="green">001</FONT>    /* Copyright © 2006 Nokia. */<a name="line.1"></a>
+<FONT color="green">002</FONT>    package com.nokia.midp.examples.security.satsa;<a name="line.2"></a>
+<FONT color="green">003</FONT>    <a name="line.3"></a>
+<FONT color="green">004</FONT>    import java.security.*;<a name="line.4"></a>
+<FONT color="green">005</FONT>    import java.security.spec.*;<a name="line.5"></a>
+<FONT color="green">006</FONT>    import javax.crypto.*;<a name="line.6"></a>
+<FONT color="green">007</FONT>    import javax.crypto.spec.*;<a name="line.7"></a>
+<FONT color="green">008</FONT>    <a name="line.8"></a>
+<FONT color="green">009</FONT>    /**<a name="line.9"></a>
+<FONT color="green">010</FONT>     * Codec handles the encryption, decryption and displays encrypted<a name="line.10"></a>
+<FONT color="green">011</FONT>     * data in hex format.<a name="line.11"></a>
+<FONT color="green">012</FONT>     */<a name="line.12"></a>
+<FONT color="green">013</FONT>    class Codec<a name="line.13"></a>
+<FONT color="green">014</FONT>    {<a name="line.14"></a>
+<FONT color="green">015</FONT>        private static final int blocksize = 16;<a name="line.15"></a>
+<FONT color="green">016</FONT>        private static final String hexCodes = "0123456789ABCDEF";<a name="line.16"></a>
+<FONT color="green">017</FONT>        private static final String decryptLabel = "AES/ECB/PKCS5Padding";<a name="line.17"></a>
+<FONT color="green">018</FONT>        private static final String secretKeySpec = "AES";<a name="line.18"></a>
+<FONT color="green">019</FONT>        /**<a name="line.19"></a>
+<FONT color="green">020</FONT>         * An instance of the SATSAMIDLET class<a name="line.20"></a>
+<FONT color="green">021</FONT>         */<a name="line.21"></a>
+<FONT color="green">022</FONT>        SATSAMIDlet midlet;<a name="line.22"></a>
+<FONT color="green">023</FONT>    <a name="line.23"></a>
+<FONT color="green">024</FONT>        /**<a name="line.24"></a>
+<FONT color="green">025</FONT>         * Creates a new codec object for this midlet.<a name="line.25"></a>
+<FONT color="green">026</FONT>         * @param midlet the {@link SATSAMIDlet} object<a name="line.26"></a>
+<FONT color="green">027</FONT>         */<a name="line.27"></a>
+<FONT color="green">028</FONT>        Codec(SATSAMIDlet midlet)<a name="line.28"></a>
+<FONT color="green">029</FONT>      {<a name="line.29"></a>
+<FONT color="green">030</FONT>        this.midlet = midlet;<a name="line.30"></a>
+<FONT color="green">031</FONT>      }<a name="line.31"></a>
+<FONT color="green">032</FONT>    <a name="line.32"></a>
+<FONT color="green">033</FONT>      /** Encrypts text with given AES key.*/<a name="line.33"></a>
+<FONT color="green">034</FONT>      public byte[] encrypt (byte[] keyBits, byte[] plaintext)<a name="line.34"></a>
+<FONT color="green">035</FONT>        throws GeneralSecurityException<a name="line.35"></a>
+<FONT color="green">036</FONT>      {<a name="line.36"></a>
+<FONT color="green">037</FONT>        Cipher cipher = Cipher.getInstance(decryptLabel);<a name="line.37"></a>
+<FONT color="green">038</FONT>        Key key = new SecretKeySpec(keyBits, 0, keyBits.length, secretKeySpec);<a name="line.38"></a>
+<FONT color="green">039</FONT>        int ciphertextLength = 0;<a name="line.39"></a>
+<FONT color="green">040</FONT>        int remainder = plaintext.length % blocksize;<a name="line.40"></a>
+<FONT color="green">041</FONT>        if (remainder == 0)<a name="line.41"></a>
+<FONT color="green">042</FONT>          ciphertextLength = plaintext.length;<a name="line.42"></a>
+<FONT color="green">043</FONT>        else<a name="line.43"></a>
+<FONT color="green">044</FONT>          ciphertextLength = plaintext.length - remainder + blocksize;<a name="line.44"></a>
+<FONT color="green">045</FONT>        byte[] cipherText = new byte[ciphertextLength];<a name="line.45"></a>
+<FONT color="green">046</FONT>    <a name="line.46"></a>
+<FONT color="green">047</FONT>        cipher.init(Cipher.ENCRYPT_MODE, key);<a name="line.47"></a>
+<FONT color="green">048</FONT>        cipher.doFinal(plaintext, 0, plaintext.length, cipherText, 0);<a name="line.48"></a>
+<FONT color="green">049</FONT>        return cipherText;<a name="line.49"></a>
+<FONT color="green">050</FONT>      }<a name="line.50"></a>
+<FONT color="green">051</FONT>    <a name="line.51"></a>
+<FONT color="green">052</FONT>      /** Decrypt text with given AES key.*/<a name="line.52"></a>
+<FONT color="green">053</FONT>      public byte[] decrypt (byte[] keyBits, byte[] cipherText)<a name="line.53"></a>
+<FONT color="green">054</FONT>        throws GeneralSecurityException<a name="line.54"></a>
+<FONT color="green">055</FONT>      {<a name="line.55"></a>
+<FONT color="green">056</FONT>        Cipher cipher = Cipher.getInstance(decryptLabel);<a name="line.56"></a>
+<FONT color="green">057</FONT>        Key key = new SecretKeySpec(keyBits, 0, keyBits.length, secretKeySpec);<a name="line.57"></a>
+<FONT color="green">058</FONT>    <a name="line.58"></a>
+<FONT color="green">059</FONT>        cipher.init(Cipher.DECRYPT_MODE, key);<a name="line.59"></a>
+<FONT color="green">060</FONT>    <a name="line.60"></a>
+<FONT color="green">061</FONT>        byte[] decrypted = new byte[cipherText.length];<a name="line.61"></a>
+<FONT color="green">062</FONT>        cipher.doFinal(cipherText, 0, cipherText.length, decrypted, 0);<a name="line.62"></a>
+<FONT color="green">063</FONT>    <a name="line.63"></a>
+<FONT color="green">064</FONT>        return decrypted;<a name="line.64"></a>
+<FONT color="green">065</FONT>      }<a name="line.65"></a>
+<FONT color="green">066</FONT>    <a name="line.66"></a>
+<FONT color="green">067</FONT>      /** Displays ecrypted data in hex.*/<a name="line.67"></a>
+<FONT color="green">068</FONT>      public static String byteToHex(byte[] data)<a name="line.68"></a>
+<FONT color="green">069</FONT>      {<a name="line.69"></a>
+<FONT color="green">070</FONT>        StringBuffer hexString = new StringBuffer();<a name="line.70"></a>
+<FONT color="green">071</FONT>        for (int i=0; i &lt; data.length; i++)<a name="line.71"></a>
+<FONT color="green">072</FONT>        {<a name="line.72"></a>
+<FONT color="green">073</FONT>          hexString.append( hexCodes.charAt( (data[i] >> 4) & 0x0f) );<a name="line.73"></a>
+<FONT color="green">074</FONT>          hexString.append( hexCodes.charAt( data[i] & 0x0f) );<a name="line.74"></a>
+<FONT color="green">075</FONT>          if (i&lt; data.length - 1)<a name="line.75"></a>
+<FONT color="green">076</FONT>          {<a name="line.76"></a>
+<FONT color="green">077</FONT>            hexString.append(":");<a name="line.77"></a>
+<FONT color="green">078</FONT>          }<a name="line.78"></a>
+<FONT color="green">079</FONT>          if ( ((i+1)%8) == 0)<a name="line.79"></a>
+<FONT color="green">080</FONT>            hexString.append("\n");<a name="line.80"></a>
+<FONT color="green">081</FONT>        }<a name="line.81"></a>
+<FONT color="green">082</FONT>        return hexString.toString();<a name="line.82"></a>
+<FONT color="green">083</FONT>      }<a name="line.83"></a>
+<FONT color="green">084</FONT>    }<a name="line.84"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+</BODY>
+</HTML>

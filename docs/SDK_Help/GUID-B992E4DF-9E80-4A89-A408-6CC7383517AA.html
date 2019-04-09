@@ -1,0 +1,26 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Video Recorder"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-B992E4DF-9E80-4A89-A408-6CC7383517AA"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> JavaTM Implementation Notes</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-B992E4DF-9E80-4A89-A408-6CC7383517AA"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-B992E4DF-9E80-4A89-A408-6CC7383517AA"><!----></a>Video
+Recorder</h1>
+<p>The video recorder is created with a <code>"capture://video"</code> locator.
+The supported video sizes are <code>width=128&amp;height=96"</code> and <code>"width=176&amp;height=144"</code>.
+Others can be supported depending on the platform version and product. For
+further information, see <a href="http://forum.nokia.com/audiovideo" target="_blank">Audio
+&amp; Video at Forum Nokia</a>. </p>
+<p>The supported video capture encoding types are listed in the property <code>"video.encodings"</code>. </p>
+<p>Example locator with parameters:</p>
+<pre class="codeblock" id="GUID-985E6C70-2E04-4890-8987-559F3ED7EE79"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-985E6C70-2E04-4890-8987-559F3ED7EE79"><!----></a>"capture://video?encoding=video/3gpp&amp;width=176&amp;height=144"</pre>
+<p>The default recording size limit is not fixed but set by the underlying
+platform. It thus depends on platform and product versions and available resources.
+It can be changed with the method <code>RecordControl.setRecordSizeLimit(
+int size )</code>.</p>
+<p>Recording size limit cannot be changed when a player is recording or
+recording has been stopped but not committed. The <code>RecordControl.setRecordSizeLimit(
+int size )</code> method only works before the recording starts or after
+the recording has been committed.</p>
+<p>The video recorder supports the following controls: <code>VideoControl</code>, <code>RecordControl</code>,
+and <code>GUIControl</code>. </p>
+<div><h3>Camera alarm sounds</h3><p>A single alarm tone is played at the beginning of a video recording.
+When a video snapshot (a photograph) is taken, a camera shutter sound is played.</p></div>
+</div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

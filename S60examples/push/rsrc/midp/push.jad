@@ -1,0 +1,11 @@
+MIDlet-1: Push, , com.nokia.midp.examples.network.push.PushMIDlet
+MIDlet-2: Connect, , com.nokia.midp.examples.network.push.ConnectMIDlet
+MIDlet-Permissions: javax.microedition.io.PushRegistry, javax.microedition.io.Connector.socket, javax.microedition.io.Connector.serversocket
+MIDlet-Push-1: socket://:5001, com.nokia.midp.examples.network.push.PushMIDlet, *
+MIDlet-Jar-Size: @@@
+MIDlet-Jar-URL: ./push.jar
+MIDlet-Name: Push MIDlet Suite
+MicroEdition-Configuration: CLDC-1.1
+MicroEdition-Profile: MIDP-2.0
+MIDlet-Version: 1.0
+MIDlet-Vendor: Nokia

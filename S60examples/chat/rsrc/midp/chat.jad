@@ -1,0 +1,12 @@
+MIDlet-1: WMA Chat, , com.nokia.midp.examples.wma.chat.WMAMIDlet
+MIDlet-Jar-Size: @@@
+MIDlet-Jar-URL: chat.jar
+MIDlet-Name: WMA Chat
+MicroEdition-Configuration: CLDC-1.1
+MicroEdition-Profile: MIDP-2.0
+MIDlet-Version: 1.0
+MIDlet-Vendor: Nokia
+Default-Port: 5000
+Peers-0: 5550001:5000
+Peers-1: 5550002:5000
+PhoneNumber: 5550000

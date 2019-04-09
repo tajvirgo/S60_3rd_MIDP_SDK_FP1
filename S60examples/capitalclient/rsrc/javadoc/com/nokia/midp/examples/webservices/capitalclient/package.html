@@ -1,0 +1,123 @@
+<!DOCTYPE doctype PUBLIC "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+  <title>Web Services Example</title>
+</head>
+<body>
+This example demonstrates accessing a web based service to look
+up the capital of a given nation. <br>
+<!--section contents-->
+<h3>Section Contents</h3>
+<blockquote>
+  <p><a href="#1">1. About this example</a> </p>
+  <p><a href="#2">2. Pre-requisites</a> </p>
+  <p><a href="#3">3. Building and running</a> </p>
+  <p><a href="#4">4. Design and implementation</a> </p>
+  <p><a href="#5">5. Summary</a> </p>
+</blockquote>
+<!--(HR)============================================================-->
+<hr style="height: 2px; width: 100%;" size="2" width="100%"
+ align="center">
+<h3><a name="1">1. About this example</a> </h3>
+<blockquote>
+  <p>This example shows how a MIDlet accesses a web based service.
+&nbsp;The user interface provides an editable text field and two
+command keys. The text field is used to enter the name of a nation. One
+command key is a "Get capital" function key and the other command key
+is an "Exit" key.&nbsp; When the "Get capital" key has been pressed the
+name of the nation entered in the text field is sent to a web service.
+&nbsp;The web service looks up the capital of the given nation.
+&nbsp;When the "Exit" key is pressed the MIDlet exits.</p>
+</blockquote>
+<h3><a name="2">2. Pre-requisites</a> </h3>
+<blockquote>
+  <blockquote> </blockquote>
+  <p>The example makes use of the standard MIDP application framework
+and LCDUI API. <br>
+  </p>
+  <p>This example uses MIDP 2.0.</p>
+</blockquote>
+<blockquote> </blockquote>
+<h3><a name="3">3. Building and running</a> </h3>
+<blockquote>
+  <p>The example requires a running web service in order to function
+properly (see the Capital Servlet example).<br>
+  </p>
+  <p><span style="font-family: 'Times New Roman';">The example is built
+using the standard method for building and running Java™ MIDlets.&nbsp;</span></p>
+  <p>The following classes should be included in the jar:</p>
+  <blockquote>com.nokia.midp.examples.webservices.capitalclient.*<br>
+  </blockquote>
+  <p>No resource files are used in the client.</p>
+  <p>When first launched, the application displays the screen shown
+below. The second screen shows the result of pressing the "Get captial"
+command key.<br>
+  </p>
+  <p><img src="doc-files/start.jpg" alt="start image" width="355"
+ height="417"> <br>
+  </p>
+  <p><br>
+  <img src="doc-files/complete.jpg" alt="complete image" width="355"
+ height="421"> &nbsp; </p>
+<!--(Table)=========================================================-->
+  <ul>
+    <li class="kadov-p">At any stage during this example you can
+exit and restart the midlet.&nbsp;</li>
+  </ul>
+  <p></p>
+<!--(Table)=========================================================-->
+  <ul>
+  </ul>
+</blockquote>
+<h3><a name="4">4. Design and implementation</a> </h3>
+<blockquote>
+  <blockquote>
+    <p></p>
+    <p>Web Services are specified using an XML document written in WSDL
+(Web Services Description Language). &nbsp;This example provides an
+example
+WSDL file that defines a simple web based service to look up the
+capital
+of a given nation. &nbsp;Note that the URL of the webserver is encoded
+within the WSDL file. You must ensure that the address of your web
+server matches the entry in the WSDL file. &nbsp;TheWSDL file is used
+to generate a Java Interface and client stub class for use when
+accessing the web based service. For more information regarding the
+implementaion of the actual web service see the ClientServlet example
+servlet.</p>
+    <p>The following list and class diagram identify the classes used
+in
+this example.</p>
+    <p>Application classes</p>
+    <ul>
+      <li>&nbsp;CapitalClient - A MIDlet used to access a web based
+service(getCapital).</li>
+    </ul>
+Generated Stubs and Interfaces<br>
+    <ul>
+      <li>CapitalPortType - The interface for the getCapital service</li>
+      <li>CapitalPortType_Stub - The stub used when invoking the web
+service<br>
+      </li>
+    </ul>
+    <img src="doc-files/ClassDiagram.jpg"
+ alt="doc-files/ClassDiagram.png" style="width: 526px; height: 452px;"
+ title=""><!--(Table)=========================================================--> </blockquote>
+  <blockquote>
+    <p></p>
+  </blockquote>
+</blockquote>
+<h3><a name="5">5. Summary</a> </h3>
+<blockquote>
+  <p>This example has demonstrated how to use a web based service from
+within a MIDlet. &nbsp;</p>
+</blockquote>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</body>
+</html>

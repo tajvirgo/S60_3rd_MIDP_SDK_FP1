@@ -1,0 +1,824 @@
+<!DOCTYPE doctype PUBLIC "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<!--(==============================================================)--><!--(Document created with RoboEditor. )============================--><!--(==============================================================)-->
+  <title>package 1</title>
+<!--(Meta)==========================================================-->
+  <meta http-equiv="content-type"
+ content="text/html; charset=windows-1252">
+  <meta name="generator"
+ content="RoboHELP by eHelp Corporation - www.ehelp.com">
+  <meta name="generator-major-version" content="0.1">
+  <meta name="generator-minor-version" content="1">
+  <meta name="filetype" content="kadov">
+  <meta name="filetype-version" content="1">
+  <meta name="page-count" content="1">
+  <meta name="layout-height" content="10923">
+  <meta name="layout-width" content="1382">
+<!--(Body)==========================================================-->
+</head>
+<body>
+This example demonstrates wireless messaging. <br>
+<!--section contents-->
+<h3>Section Contents</h3>
+<blockquote>
+  <p><a href="#1">1. About this example</a> </p>
+  <p><a href="#2">2. Pre-requisites</a> </p>
+  <p><a href="#3">3. Building and running</a> </p>
+  <p><a href="#4">4. Design and implementation</a> </p>
+  <p><a href="#5">5. Summary</a> </p>
+</blockquote>
+<!--(HR)============================================================-->
+<hr style="height: 2px; width: 100%;" size="2" width="100%"
+ align="center">
+<h3><a name="1">1. About this example</a> </h3>
+<blockquote>
+  <p>This example demonstrates how to send and receive messages between
+two devices using the wireless messaging API. The WMA package is used
+to send and receive messages over a wireless network. For example
+sending SMS (Short Message Service) messages between mobile phones.
+Whilst WMA messages may appear to be similar to Datagrams they cannot
+use the Datagram interfaces defined in the IO API as Datagrams are
+intended to be used with UDP connections. </p>
+</blockquote>
+<h3><a name="2">2. Pre-requisites</a> </h3>
+<blockquote>
+  <p>The example makes use of the standard MIDP application framework
+and LCDUI API. The example also utilises the Thread class. The reader
+should be familiar with all these areas before attempting to understand
+this example.</p>
+  <p>This demonstration uses MIDP 2.0<!--kadov_tag{{<spaces>}}--> &nbsp;<!--kadov_tag{{</spaces>}}-->and
+the optional package WMA (JSR 120).</p>
+</blockquote>
+<h3><a name="3">3. Building and running</a> </h3>
+<blockquote>
+  <p>The example is built using the standard method for building and
+running as described in <a
+ href="../../../../../../../../../doc-files/building.html">Building and
+running the examples</a>.</p>
+  <p>The following classes should be included in the jar:</p>
+  <blockquote> com.nokia.midp.examples.wma.chat.*<br>
+  </blockquote>
+  <p>No resource files are used.</p>
+  <p>A phone number is used as the address for an instance of the
+emulator and is needed when sending a wireless message to it, the other
+emulators must know these addresses. Configuring peers can either be
+done by using "change peers", "add peer" UI command when midlet is
+running, or by configuring&nbsp; the&nbsp;JAD file contains the phone
+numbers for the peers.&nbsp; </p>
+  <ul>
+    <li class="kadov-p">The "Default-Port" property specifies the port
+on which the emulator is to listen for messages, this must be a
+different port for each emulator and is therefore defined in the JAD. </li>
+    <li class="kadov-p">Also in the JAD are the numbers of the other
+emulators which are hardcoded as the properties "Peers-x".</li>
+  </ul>
+  <p>The MIDlets need to be started in numerical address/telephone
+number order (starting with the lowest first) if the example is to work
+correctly.</p>
+  <p>The following screen will be displayed requesting the user to
+enter a chat name.</p>
+<!--(Table)=========================================================-->
+  <table x-use-null-cells="" style="width: 90%;" width="90%">
+    <tbody>
+      <tr>
+        <td style="text-align: center; width: 50%;" align="center"
+ valign="bottom" width="50%">
+        <div style="text-align: center;" align="center"><!--kadov_tag{{<implicit_p>}}--> <img
+ alt="doc-files/chatname.jpg" src="doc-files/chatname.jpg"
+ style="border: medium none ; width: 191px; height: 221px;" width="191"
+ height="221" border="0"> </div>
+        </td>
+        <td style="text-align: center; width: 50%;" align="center"
+ valign="bottom" width="50%">
+        <div style="text-align: center;" align="center"><!--kadov_tag{{<implicit_p>}}--> <img
+ alt="doc-files/Pic4.gif" src="doc-files/Pic4.gif"
+ style="border: medium none ; width: 191px; height: 221px; float: none;"
+ width="191" height="221" border="0"> </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <ul>
+    <li class="kadov-p">Select "Exit" at anytime during the running of
+the example and the connection will be lost and the MIDlet terminated.</li>
+    <li class="kadov-p">Enter a chat name in the "Enter chat name" text
+field.</li>
+    <li class="kadov-p">Select "Ok".</li>
+  </ul>
+  <p>The next screen to be displayed will be the ChatScreen. The
+ChatScreen displays any messages sent to or received from any device,
+and is therefore blank initially. The "Menu" has two options, one to
+set the peers to send messages to and the other to write a message to
+the selected peers. Initially no peers are set. </p>
+<!--(Table)=========================================================-->
+  <table x-use-null-cells="" style="width: 90%;" width="90%">
+    <tbody>
+      <tr>
+        <td style="text-align: center; width: 50%;" align="center"
+ valign="bottom" width="50%">
+        <div style="text-align: center;" align="center"><!--kadov_tag{{<implicit_p>}}--> <img
+ alt="doc-files/blankchatmenu.jpg" src="doc-files/blankchatmenu.jpg"
+ style="border: medium none ; width: 192px; height: 225px;" width="192"
+ height="225" border="0"> </div>
+        </td>
+        <td style="text-align: center; width: 50%;" align="center"
+ valign="bottom" width="50%">
+        <div style="text-align: center;" align="center"><!--kadov_tag{{<implicit_p>}}--> <img
+ alt="doc-files/blankchat.jpg" src="doc-files/blankchat.jpg"
+ x-maintain-ratio="FALSE"
+ style="border: medium none ; width: 192px; height: 225px; float: none;"
+ width="192" height="225" border="0"> </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <ul>
+    <li class="kadov-p">Select the "Change Peers" option from the menu
+on both emulators.</li>
+  </ul>
+  <p>The following screen will be displayed.</p>
+<!--(Table)=========================================================-->
+  <table x-use-null-cells="" style="width: 90%;" width="90%">
+    <tbody>
+      <tr>
+        <td style="text-align: center; width: 50%;" align="center"
+ valign="bottom" width="50%">
+        <div style="text-align: center;" align="center"><!--kadov_tag{{<implicit_p>}}--> <img
+ alt="doc-files/peerlist.jpg" src="doc-files/peerlist.jpg"
+ style="border: medium none ; width: 191px; height: 223px;" width="191"
+ height="223" border="0"> </div>
+        </td>
+        <td style="text-align: center; width: 50%;" align="center"
+ valign="bottom" width="50%">
+        <div style="text-align: center;" align="center"><!--kadov_tag{{<implicit_p>}}--> <img
+ alt="doc-files/peerlist2.jpg" src="doc-files/peerlist2.jpg"
+ x-maintain-ratio="FALSE"
+ style="border: medium none ; width: 191px; height: 223px; float: none;"
+ width="191" height="223" border="0"> </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <ul>
+    <li class="kadov-p">Select the peer number(s) which correspond to
+the emulators that are running.</li>
+  </ul>
+<!--(Table)=========================================================-->
+  <table x-use-null-cells="" style="width: 90%;" width="90%">
+    <tbody>
+      <tr>
+        <td style="text-align: center; width: 50%;" align="center"
+ valign="bottom" width="50%">
+        <div style="text-align: center;" align="center"><!--kadov_tag{{<implicit_p>}}--> <img
+ alt="doc-files/peerlistmenu.jpg" src="doc-files/peerlistmenu.jpg"
+ style="border: medium none ; width: 191px; height: 224px;" width="191"
+ height="224" border="0"> </div>
+        </td>
+        <td style="text-align: center; width: 50%;" align="center"
+ valign="bottom" width="50%">
+        <div style="text-align: center;" align="center"><!--kadov_tag{{<implicit_p>}}--> <img
+ alt="doc-files/peerlistmenu2.jpg" src="doc-files/peerlistmenu2.jpg"
+ x-maintain-ratio="FALSE"
+ style="border: medium none ; width: 191px; height: 224px; float: none;"
+ width="191" height="224" border="0"> </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <ul>
+    <li class="kadov-p">Select "Ok" from the "Menu" and the peers will
+be set and the user returned to the ChatScreen.</li>
+    <li class="kadov-p">Selecting "Cancel" from the "Menu" will return
+the user to the ChatScreen without the peers being set.</li>
+  </ul>
+  <p>The user will be returned to the ChatScreen as shown below.</p>
+<!--(Table)=========================================================-->
+  <table x-use-null-cells="" style="width: 90%;" width="90%">
+    <tbody>
+      <tr>
+        <td style="text-align: center; width: 50%;" align="center"
+ valign="bottom" width="50%">
+        <div style="text-align: center;" align="center"><!--kadov_tag{{<implicit_p>}}--> <img
+ alt="doc-files/blankchatmenu2.jpg" src="doc-files/blankchatmenu2.jpg"
+ style="border: medium none ; width: 190px; height: 222px;" width="190"
+ height="222" border="0"> </div>
+        </td>
+        <td style="text-align: center; width: 50%;" align="center"
+ valign="bottom" width="50%">
+        <div style="text-align: center;" align="center"><!--kadov_tag{{<implicit_p>}}--> <img
+ alt="doc-files/blankchat.jpg" src="doc-files/blankchat.jpg"
+ x-maintain-ratio="FALSE"
+ style="border: medium none ; width: 190px; height: 222px; float: none;"
+ width="190" height="222" border="0"> </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <ul>
+    <li class="kadov-p">Select "Write Message" from the menu of one
+of the emulators.</li>
+  </ul>
+  <p>The following screen displaying an editable text field will be
+displayed.</p>
+<!--(Table)=========================================================-->
+  <table x-use-null-cells="" style="width: 90%;" width="90%">
+    <tbody>
+      <tr>
+        <td style="text-align: center; width: 50%;" align="center"
+ valign="bottom" width="50%">
+        <div style="text-align: center;" align="center"><!--kadov_tag{{<implicit_p>}}--> <img
+ alt="doc-files/write.jpg" src="doc-files/write.jpg"
+ style="border: medium none ; width: 193px; height: 223px;" width="193"
+ height="223" border="0"> </div>
+        </td>
+        <td style="text-align: center; width: 50%;" align="center"
+ valign="bottom" width="50%">
+        <div style="text-align: center;" align="center"><!--kadov_tag{{<implicit_p>}}--> <img
+ alt="doc-files/blankchat.jpg" src="doc-files/blankchat.jpg"
+ x-maintain-ratio="FALSE"
+ style="border: medium none ; width: 193px; height: 223px; float: none;"
+ width="193" height="223" border="0"> </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <ul>
+    <li class="kadov-p">Enter some text in the text field.</li>
+  </ul>
+<!--(Table)=========================================================-->
+  <table x-use-null-cells="" style="width: 90%;" width="90%">
+    <tbody>
+      <tr>
+        <td style="text-align: center; width: 50%;" align="center"
+ valign="bottom" width="50%">
+        <div style="text-align: center;" align="center"><!--kadov_tag{{<implicit_p>}}--> <img
+ alt="doc-files/writehellomenu.jpg" src="doc-files/writehellomenu.jpg"
+ style="border: medium none ; width: 189px; height: 223px;" width="189"
+ height="223" border="0"> </div>
+        </td>
+        <td style="text-align: center; width: 50%;" align="center"
+ valign="bottom" width="50%">
+        <div style="text-align: center;" align="center"><!--kadov_tag{{<implicit_p>}}--> <img
+ alt="doc-files/blankchat.jpg" src="doc-files/blankchat.jpg"
+ x-maintain-ratio="FALSE"
+ style="border: medium none ; width: 189px; height: 223px; float: none;"
+ width="189" height="223" border="0"> </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <ul>
+    <li class="kadov-p">Select "Send" from the menu.</li>
+    <li class="kadov-p">Selecting "Cancel" from the menu will return
+the user to the ChatScreen without sending the message.</li>
+  </ul>
+  <p>Both the emulator's displays will be updated with the sent text as
+shown below.</p>
+<!--(Table)=========================================================-->
+  <table x-use-null-cells="" style="width: 90%;" width="90%">
+    <tbody>
+      <tr>
+        <td style="text-align: center; width: 50%;" align="center"
+ valign="bottom" width="50%">
+        <div style="text-align: center;" align="center"><!--kadov_tag{{<implicit_p>}}--> <img
+ alt="doc-files/hellochat.jpg" src="doc-files/hellochat.jpg"
+ style="border: medium none ; width: 190px; height: 222px;" width="190"
+ height="222" border="0"> </div>
+        </td>
+        <td style="text-align: center; width: 50%;" align="center"
+ valign="bottom" width="50%">
+        <div style="text-align: center;" align="center"><!--kadov_tag{{<implicit_p>}}--> <img
+ alt="doc-files/hellochat.jpg" src="doc-files/hellochat.jpg"
+ style="border: medium none ; width: 190px; height: 222px;" width="190"
+ height="222" border="0"> </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <ul>
+    <li class="kadov-p">Select "Write Message" from the other emulators
+menu.</li>
+  </ul>
+  <p>The following screen will be displayed.</p>
+<!--(Table)=========================================================-->
+  <table x-use-null-cells="" style="width: 90%;" width="90%">
+    <tbody>
+      <tr>
+        <td style="text-align: center; width: 50%;" align="center"
+ valign="bottom" width="50%">
+        <div style="text-align: center;" align="center"><!--kadov_tag{{<implicit_p>}}--> <img
+ alt="doc-files/hellochat.jpg" src="doc-files/hellochat.jpg"
+ style="border: medium none ; width: 190px; height: 222px;" width="190"
+ height="222" border="0"> </div>
+        </td>
+        <td style="text-align: center; width: 50%;" align="center"
+ valign="bottom" width="50%">
+        <div style="text-align: center;" align="center"><!--kadov_tag{{<implicit_p>}}--> <img
+ alt="doc-files/write.jpg" src="doc-files/write.jpg"
+ x-maintain-ratio="FALSE"
+ style="border: medium none ; width: 190px; height: 222px; float: none;"
+ width="190" height="222" border="0"> </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <ul>
+    <li class="kadov-p">Enter some text in the text field.</li>
+  </ul>
+<!--(Table)=========================================================-->
+  <table x-use-null-cells="" style="width: 90%;" width="90%">
+    <tbody>
+      <tr>
+        <td style="text-align: center; width: 50%;" align="center"
+ valign="bottom" width="50%">
+        <div style="text-align: center;" align="center"><!--kadov_tag{{<implicit_p>}}--> <img
+ alt="doc-files/hellochat.jpg" src="doc-files/hellochat.jpg"
+ style="border: medium none ; width: 190px; height: 222px;" width="190"
+ height="222" border="0"> </div>
+        </td>
+        <td style="text-align: center; width: 50%;" align="center"
+ valign="bottom" width="50%">
+        <div style="text-align: center;" align="center"><!--kadov_tag{{<implicit_p>}}--> <img
+ alt="doc-files/writehellomenu2.jpg" src="doc-files/writehellomenu2.jpg"
+ style="border: medium none ; width: 192px; height: 222px;" width="192"
+ height="222" border="0"> </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <ul>
+    <li class="kadov-p">Select "Send" from the menu.</li>
+  </ul>
+  <p>Both screens will be updated with the sent text.</p>
+<!--(Table)=========================================================-->
+  <table x-use-null-cells="" style="width: 90%;" width="90%">
+    <tbody>
+      <tr>
+        <td style="text-align: center; width: 50%;" align="center"
+ valign="bottom" width="50%">
+        <div style="text-align: center;" align="center"><!--kadov_tag{{<implicit_p>}}--> <img
+ alt="doc-files/hellochat2.jpg" src="doc-files/hellochat2.jpg"
+ style="border: medium none ; width: 191px; height: 225px;" width="191"
+ height="225" border="0"> </div>
+        </td>
+        <td style="text-align: center; width: 50%;" align="center"
+ valign="bottom" width="50%">
+        <div style="text-align: center;" align="center"><!--kadov_tag{{<implicit_p>}}--> <img
+ alt="doc-files/hellochat2.jpg" src="doc-files/hellochat2.jpg"
+ style="border: medium none ; width: 191px; height: 225px;" width="191"
+ height="225" border="0"> </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p>If more than two emulators are running then various combinations
+of Peers can be set. If an attempt to send a message is made with no
+peers set an alert will be displayed on the screen.</p>
+</blockquote>
+<h3><a name="4">4. Design and implementation</a> </h3>
+<blockquote>
+  <p>The Wireless Messaging API contains a set of interfaces used to
+send and receive wireless messages irrespective of the underlying
+message protocol. The standard MIDP IO API provides the Connector class
+and Connection interfaces and sub-interfaces to perform network
+connections. The MessageConnection provided by the Wireless Messaging
+API is also a sub-interface of the IO API Connection. This example uses
+the MessageConnection subinterface for the connection and receiving and
+sending of messages. The MessageListener interface is used to notify
+the application of incoming messages by defining the
+notifyIncomingMessage() method. The Message interface has
+sub-interfaces of TextMessage and BinaryMessage that act as a holder
+for the information to be sent or received. This example only processes
+messages of the type TextMessage, but the receiving and sending of
+BinaryMessages is similar to that of a TextMessage. </p>
+  <p>The example also makes use of the Thread class to perform the
+connection and sending and receiving of messages. These types of time
+consuming tasks should be performed in a seperate thread to that of the
+system thread which calls startApp() etc otherwise the system thread
+may not be available to perform other application tasks.</p>
+  <h3><a name="4.1">4.1. Class Diagram</a> </h3>
+  <blockquote>
+    <p>The following table and diagram show the classes and interfaces
+involved in the datagram example.</p>
+    <p>Application Classes</p>
+    <ul>
+      <li class="kadov-p"><a
+ href="../../../../../../com/nokia/midp/examples/wma/chat/WMAMIDlet.html"
+ title="class in com.nokia.examples.wma.chat"><code>WMAMIDlet</code></a>
+Extends the MIDlet class. The class handles the setting up of the
+application.</li>
+      <li class="kadov-p"><a
+ href="../../../../../../com/nokia/midp/examples/wma/chat/ScreenHandler.html"
+ title="class in com.nokia.examples.wma.chat"><code>ScreenHandler</code></a>
+Implements the CommandListener interface. Handles the UI display and
+the users interaction with it.</li>
+      <li class="kadov-p"><a
+ href="../../../../../../com/nokia/midp/examples/wma/chat/MessageHandler.html"
+ title="class in com.nokia.examples.wma.chat"><code>MessageHandler</code></a>
+Extends the Thread class and implements the MessageListener. It
+provides the thread of execution for connecting, sending and receiving
+of messages. The thread waits for a notification from the user that
+there is a message to send or from the framework that there is a
+message to be receive.</li>
+      <li class="kadov-p"><a
+ href="../../../../../../com/nokia/midp/examples/wma/chat/WMAForm.html"
+ title="class in com.nokia.examples.wma.chat"><code>WMAForm</code></a>
+Extends the Form class to provide the common elements for all the
+screens.</li>
+      <li class="kadov-p"><a
+ href="../../../../../../com/nokia/midp/examples/wma/chat/ChatNameScreen.html"
+ title="class in com.nokia.examples.wma.chat"><code>ChatNameScreen</code></a>
+Extends the WMAForm class. Provides the screen to enter a Chat name.</li>
+      <li class="kadov-p"><a
+ href="../../../../../../com/nokia/midp/examples/wma/chat/ChatScreen.html"
+ title="class in com.nokia.examples.wma.chat"><code>ChatScreen</code></a>
+Extends the WMAForm class. Provides the screen to display the sent and
+received messages.</li>
+      <li class="kadov-p"><a
+ href="../../../../../../com/nokia/midp/examples/wma/chat/PeerListScreen.html"
+ title="class in com.nokia.examples.wma.chat"><code>PeerListScreen</code></a>
+Extends the WMAForm class. Provides a screen on which Peers can be
+selected.</li>
+      <li class="kadov-p"><a
+ href="../../../../../../com/nokia/midp/examples/wma/chat/WriteScreen.html"
+ title="class in com.nokia.examples.wma.chat"><code>WriteScreen</code></a>
+Extends the WMAForm class. Provides a screen to enter text to send to
+the chosen peers.</li>
+      <li class="kadov-p"><a
+ href="../../../../../../com/nokia/midp/examples/wma/chat/OutgoingMessage.html"
+ title="class in com.nokia.examples.wma.chat"><code>OutgoingMessage</code></a>
+Provides a holder for the data required by a message.</li>
+    </ul>
+    <p>System Classes and Interfaces</p>
+    <ul>
+      <li class="kadov-p"><a
+ href="../../../../../../../../../MIDP2.0_API/javadoc/javax/microedition/lcdui/CommandListener.html"
+ title="class or interface in javax.microedition.lcdui"><code>CommandListener</code></a>
+Is the interface that handles the commands made by the user.</li>
+      <li class="kadov-p"><a
+ href="../../../../../../../../../CLDC1.1_API/javax/microedition/io/Connector.html"
+ title="class or interface in javax.microedition.io"><code>Connector</code></a>
+Is responsible for creating instances of the Connection class. It
+provides the method to actually open a connection.</li>
+      <li class="kadov-p"><a
+ href="../../../../../../../../../CLDC1.1_API/javax/microedition/io/Connection.html"
+ title="class or interface in javax.microedition.io"><code>Connection</code></a>
+Is the basic type of interface for a connection and provides the close
+method for the connection.</li>
+      <li class="kadov-p"><a
+ href="../../../../../../../../../WM_API/javax/wireless/messaging/MessageConnection.html"
+ title="class or interface in javax.wireless.messaging"><code>MessageConnection</code></a>
+MessageConnection is a subinterface of the generic interface
+Connection. MessageConnection provides methods to create new messages
+and to receive and send messages. MessageConnection also provides a
+method to register the MessageListener. The MessageListener must be
+de-registered on exiting the application by setting the MessageListener
+to null.</li>
+      <li class="kadov-p"><a
+ href="../../../../../../../../../WM_API/javax/wireless/messaging/MessageListener.html"
+ title="class or interface in javax.wireless.messaging"><code>MessageListener</code></a>
+The MessageListener interface provides the mechanism which allows the
+application to receive messages concurrently. The networking examples
+have required a seperate thread to be started to provide for the
+blocking which occurs when waiting for a message. This interface
+provides the method notifyIncomingMessage() which is called by the
+platform every time a message is received. Message processing should be
+kept to a minimum in this method as this method is called by a system
+thread which should be released as soon as possible to enable the
+thread to go about other business.</li>
+      <li class="kadov-p"><a
+ href="../../../../../../../../../WM_API/javax/wireless/messaging/Message.html"
+ title="class or interface in javax.wireless.messaging"><code>Message</code></a>
+The Message interface acts as a holder for data that is to be sent or
+received over the MessageConnection. Message provides methods to get
+and set the address as well as getting the timestamp at which the
+message was sent. Message has subinterfaces of TextMessage and
+BinaryMessage to deal with the various types of data.</li>
+      <li class="kadov-p"><a
+ href="../../../../../../../../../WM_API/javax/wireless/messaging/TextMessage.html"
+ title="class or interface in javax.wireless.messaging"><code>TextMessage</code></a>
+TextMessage is a subinterface of Message and provides methods to get
+and set the Payload Text.</li>
+      <li class="kadov-p"><a
+ href="../../../../../../../../../CLDC1.1_API/java/lang/Thread.html"
+ title="class or interface in java.lang"><code>Thread</code></a>
+Provides a seperate thread of execution for a certain task. </li>
+    </ul>
+    <p>The Application classes which extend the Form class and the
+WMAForm class have been left off this diagram for clarity, the missing
+classes can all be described as belonging to the ScreenHandler.</p>
+    <div style="text-align: center;" align="center"><!--kadov_tag{{<implicit_p>}}--> <img
+ alt="doc-files/cd_chat.jpg" src="doc-files/cd_chat.jpg"
+ style="border: medium none ; width: 560px; height: 366px;" width="560"
+ height="366" border="0"> </div>
+  </blockquote>
+  <h3><a name="4.2">4.2. Sequence Diagram</a> </h3>
+  <blockquote>
+    <p>The following use case and sequence diagrams consider the
+scenario where a successful connection is made and data is sent and
+received successfully. </p>
+    <p>The following diagram considers the scenario where the user
+launches the MIDlet. It shows only the creation of the MessageHandler
+thread and the setting up of the connection, its sending and receiving
+functionality will be shown in other diagrams.</p>
+    <div style="text-align: center;" align="center"><!--kadov_tag{{<implicit_p>}}--> <img
+ alt="doc-files/sd_chat.jpg" src="doc-files/sd_chat.jpg"
+ style="border: medium none ; width: 640px; height: 410px;" width="640"
+ height="410" border="0"> </div>
+<!--(Table)=========================================================-->
+    <table x-use-null-cells="" style="width: 90%;" width="90%">
+      <tbody>
+        <tr>
+          <th style="text-align: center; width: 10%;" align="center"
+ width="10%">Message</th>
+          <th style="text-align: left; width: 80%;" align="left"
+ width="80%">Description</th>
+        </tr>
+        <tr>
+          <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">1</td>
+          <td style="width: 80%;" width="80%">The user launches the
+application, which causes startApp() to be called.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">2 - 4</td>
+          <td style="width: 80%;" width="80%">The MIDlet is set up with
+properties from the JAD file and the phone numbers set.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">5 - 6 </td>
+          <td style="width: 80%;" width="80%">A new instance of
+MessageHandler
+is created and it's start() method is called.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">7</td>
+          <td style="width: 80%;" width="80%">A new instance of
+ScreenHandler is created.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">8</td>
+          <td style="width: 80%;" width="80%">The current screen is
+then set to display the screen requesting the user to enter a Chat name.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">9</td>
+          <td style="width: 80%;" width="80%">The framework calls the
+MessageHandlers run() method.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">10 - 11</td>
+          <td style="width: 80%;" width="80%">MessageHandler's
+connect() method is called and a connection is opened.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">12 </td>
+          <td style="width: 80%;" width="80%">The setMessageListener()
+method on the connection is called, setting the object which is to be
+notified when a message is received on this connection.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">13</td>
+          <td style="width: 80%;" width="80%">The thread then begins
+waiting to be notified tht it has something to do.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>The MessageHandler thread waits to be notified either by the
+notifyIncomingMessage() method that there is a message to be received
+or by the commandAction handler that there is a message to be sent. The
+following diagram shows the scenario where the MIDlet is notified of an
+incoming message.</p>
+    <div style="text-align: center;" align="center"><!--kadov_tag{{<implicit_p>}}--> <img
+ alt="doc-files/sd2_chat.jpg" src="doc-files/sd2_chat.jpg"
+ style="border: medium none ; width: 640px; height: 326px;" width="640"
+ height="326" border="0"> </div>
+<!--(Table)=========================================================-->
+    <table x-use-null-cells="" style="width: 90%;" width="90%">
+      <tbody>
+        <tr>
+          <th style="text-align: center; width: 10%;" align="center"
+ width="10%">Message</th>
+          <th style="text-align: left; width: 80%;" align="left"
+ width="80%">Description</th>
+        </tr>
+        <tr>
+          <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">1 - 2</td>
+          <td style="width: 80%;" width="80%">The framework notifies
+the MessageHandler that a message has been received on the connection
+by calling notifyIncomingMessage().The thread is then notified that it
+has something to do.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">3</td>
+          <td style="width: 80%;" width="80%">The framework calls the
+run() method of the thread.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">4 - 6</td>
+          <td style="width: 80%;" width="80%">The receive() method of
+the thread is called which in turn calls the receive() method on the
+connection.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">7 - 8</td>
+          <td style="width: 80%;" width="80%">The Message returned by
+the receive() method is cast into a TextMessage.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">9 - 11</td>
+          <td style="width: 80%;" width="80%">The payload of the
+TextMessage is then used to update the ChatScreen and once the
+IncomingQueue is empty the thread goes back to waiting.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>The following diagrams show the scenario where the user makes a
+request to send a message. The first diagram shows the functionality
+upto the notification of the thread that it has to do something.</p>
+    <div style="text-align: center;" align="center"><!--kadov_tag{{<implicit_p>}}--> <img
+ alt="doc-files/sd3_chat.jpg" src="doc-files/sd3_chat.jpg"
+ style="border: medium none ; width: 640px; height: 334px;" width="640"
+ height="334" border="0"> </div>
+<!--(Table)=========================================================-->
+    <table x-use-null-cells="" style="width: 90%;" width="90%">
+      <tbody>
+        <tr>
+          <th style="text-align: center; width: 10%;" align="center"
+ width="10%">Message</th>
+          <th style="text-align: left; width: 80%;" align="left"
+ width="80%">Description</th>
+        </tr>
+        <tr>
+          <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">1 - 2</td>
+          <td style="width: 80%;" width="80%">The user requests for the
+message to be sent, which causes commandAction() to be called, this in
+turn calls handleSendCommand().</td>
+        </tr>
+        <tr>
+          <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">3 </td>
+          <td style="width: 80%;" width="80%">handleSendCommand() calls
+the doSend() method of MessageHandler.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">4 - 6</td>
+          <td style="width: 80%;" width="80%">An Enumeration of the
+currently selected peer names is made.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">7 - 11</td>
+          <td style="width: 80%;" width="80%">For each peer name in the
+enumeration an OutgoingMessage object is created with the message text
+and the address to send it to. The OutgoingMessage is then added to the
+vector OutgoingQueue.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">12</td>
+          <td style="width: 80%;" width="80%">The notify() method is
+called to
+notify the thread that it has something to do.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>The following diagram shows the scenario where the thread has
+been notified that it has something to send.</p>
+    <div style="text-align: center;" align="center"><!--kadov_tag{{<implicit_p>}}--> <img
+ alt="doc-files/sd4_chat.jpg" src="doc-files/sd4_chat.jpg"
+ style="border: medium none ; width: 640px; height: 420px;" width="640"
+ height="420" border="0"> </div>
+<!--(Table)=========================================================-->
+    <table x-use-null-cells="" style="width: 90%;" width="90%">
+      <tbody>
+        <tr>
+          <th style="text-align: center; width: 10%;" align="center"
+ width="10%">Message</th>
+          <th style="text-align: left; width: 80%;" align="left"
+ width="80%">Description</th>
+        </tr>
+        <tr>
+          <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">1</td>
+          <td style="width: 80%;" width="80%">When notified the run()
+method of the thread is called.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">2 - 4</td>
+          <td style="width: 80%;" width="80%">The run() method gets the
+first element on the OutgoingQueue vector and calls it's send() method
+with this OutgoingMessage as a parameter.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">5 - 9</td>
+          <td style="width: 80%;" width="80%">The address of the
+OutgoingMessage is used to create a new Message which is then cast to
+be of type TextMessage.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">10 - 11</td>
+          <td style="width: 80%;" width="80%">The text from the
+OutgoingMessage is used to set the payload text of the TextMessage.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">12 </td>
+          <td style="width: 80%;" width="80%">The TextMessage is then
+sent.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">13 - 14 </td>
+          <td style="width: 80%;" width="80%">The ChatScreen is updated
+and the message is removed from the OutgoingQueue. Once the
+OutgoingQueue is empty the thread goes back to waiting.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>The following diagram shows the scenario where the user requests
+to exit the application.</p>
+    <div style="text-align: center;" align="center"><!--kadov_tag{{<implicit_p>}}--> <img
+ alt="doc-files/sdclose_chat.jpg" src="doc-files/sdclose_chat.jpg"
+ style="border: medium none ; width: 640px; height: 254px;" width="640"
+ height="254" border="0"> </div>
+<!--(Table)=========================================================-->
+    <table x-use-null-cells="" style="width: 90%;" width="90%">
+      <tbody>
+        <tr>
+          <th style="text-align: center; width: 10%;" align="center"
+ width="10%">Message</th>
+          <th style="text-align: left; width: 80%;" align="left"
+ width="80%">Description</th>
+        </tr>
+        <tr>
+          <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">1</td>
+          <td style="width: 80%;" width="80%">The user exits the
+application which causes commandAction() to be called.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">2 </td>
+          <td style="width: 80%;" width="80%">commandAction() calls the
+destroyApp() method of the MIDlet.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">3 - 5</td>
+          <td style="width: 80%;" width="80%">The exit() method of the
+MessageHandler is called, which sets the MessageListener to null and
+closes the connection.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">6</td>
+          <td style="width: 80%;" width="80%">The thread of the
+MessageHandler
+is terminated.</td>
+        </tr>
+        <tr>
+          <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">7</td>
+          <td style="width: 80%;" width="80%">The notifyDestroyed()
+method is called and the example terminated.</td>
+        </tr>
+      </tbody>
+    </table>
+  </blockquote>
+</blockquote>
+<h3><a name="5">5. Summary</a> </h3>
+<blockquote>
+  <p>This example has demonstrated: </p>
+  <ul>
+    <li class="kadov-p">How to make a MessageConnection. </li>
+    <li class="kadov-p">How to send a TextMessage. </li>
+    <li class="kadov-p">How to receive a TextMessage. </li>
+    <li class="kadov-p">How to close a MessageConnection. </li>
+  </ul>
+</blockquote>
+<br>
+<br>
+<br>
+<br>
+</body>
+</html>

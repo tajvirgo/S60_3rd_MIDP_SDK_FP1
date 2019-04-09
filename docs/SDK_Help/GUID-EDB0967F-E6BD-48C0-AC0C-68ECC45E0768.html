@@ -1,0 +1,151 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="DRM support"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-EDB0967F-E6BD-48C0-AC0C-68ECC45E0768"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> JavaTM Implementation Notes</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-EDB0967F-E6BD-48C0-AC0C-68ECC45E0768"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-EDB0967F-E6BD-48C0-AC0C-68ECC45E0768"><!----></a>DRM support</h1>
+<p>Starting from S60 Third Edition, the File API implementation supports
+accessing OMA DRM 1.0 protected files (see the specification on <a href="http://www.openmobilealliance.org/release_program/drm_v1_0.html" target="_blank">the
+Open Mobile Alliance Web site</a>).</p>
+<p>When accessing DRM protected files, the MIDlet has to specify whether
+the file is opened in decrypted or in encrypted mode. The DRM access mode
+is specified as a parameter at the end of the file URL. If the DRM access
+mode is not specified when opening a DRM protected file, <code>java.lang.SecurityException</code> will
+be thrown. The syntax for the DRM access mode parameter is as follows:</p>
+<pre class="codeblock" id="GUID-A9320845-9D3E-4BFF-9039-C98BE1603EB8"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-A9320845-9D3E-4BFF-9039-C98BE1603EB8"><!----></a>drm_access_mode :== "?drm=" ( "enc" | dec )
+dec :== "dec+" purpose [ "+preview" ]
+purpose :== "display" | "play" | "print" | "execute"
+</pre>
+<p>For examples on URLs containing access mode parameters, see sections <span>Encrypted
+mode</span> and <span>Decrypted mode</span> below. </p>
+<p>DRM protected files can only be opened as read-only. In particular,
+this means that MIDlets that want to open DRM protected files must use two
+or three-parameter versions of <code>Connector.open()</code>. The
+second parameter of the method can only be <code>Connector.READ</code>.
+Any other value of the second parameter causes <code>java.lang.SecurityException</code> to
+be thrown. If a URL with DRM parameters is passed to the one-parameter version
+of <code>Connector.open()</code>, <code>java.lang.SecurityException</code> is
+thrown. This is because the default access mode for the one-parameter version
+of <code>Connector.open()</code> is <code>Connector.READ_WRITE</code>.</p>
+<div><h3>Encrypted mode</h3><p>MIDlets can use encrypted mode to read DRM protected files in encrypted
+form, thus enabling MIDlets to pass DRM protected content from files to other
+APIs. </p><p>When a MIDlet opens a file using a URL that starts with <code>file://</code> and
+ends with “<code>?drm=enc</code>”, this is interpreted as a request
+to open a file for reading of the content in the encrypted form. Here is an
+example of such a URL:</p><p><code>file:///E:/images/cat.jpg?drm=enc</code></p><p>Rules for the encrypted mode are as follows:</p><ul>
+<li><p>The only supported operation is reading of the file’s content
+using a stream. It is not possible for a MIDlet to write anything into a file
+opened in the encrypted mode. Also, it is not possible for a MIDlet to use
+any other mechanisms except streams for reading of the file’s content.</p>
+</li>
+<li><p>If an object to which an encrypted mode URL points is an
+OMA DRM protected file and the security policy of the mobile device allows
+the MIDlet to access this file, the implementation opens the file in the encrypted
+mode. This means that in all subsequent read operations, the implementation
+returns content as is (i.e. starting with DCF headers continuing with the
+encrypted file data). If the security policy of the mobile device does not
+allow the MIDlet to access a protected file, <code>java.lang.SecurityException</code> is
+thrown by an API method into which the URL was passed</p></li>
+<li><p>If an object to which an encrypted mode URL points is an
+unprotected file, <code>java.lang.SecurityException</code> is thrown
+by an API method into which the URL was passed.</p></li>
+</ul></div>
+<div><h3>Decrypted mode</h3><p>Decrypted mode is available only for MIDlets that belong to the manufacturer
+security domain. </p><p>When a MIDlet tries to open a file using a URL that starts with <code>file://</code> and
+ends either with “<code>?drm=dec+’purpose’</code>” or with “<code>?drm=dec+’purpose’+preview</code>”
+(where <code>‘purpose’</code> is one of the following: <code>"display"</code>, <code>"play"</code>, <code>"print"</code>, or <code>"execute"</code>), this is interpreted by the implementation
+as a request to open the file for reading of the content in plain text format.
+Here are examples of such URLs:</p><p><code>file:///E:/images/cat.jpg?drm=dec+play </code></p><p><code>file:///E:/sounds/mew.mp3?drm=dec+play+preview</code> </p><p><code>file:///E:/sounds/mew.mp3?drm=dec+display</code></p><p>Rules for the decrypted mode are as follows:</p><ul>
+<li><p>If an object to which a decrypted mode URL points is an OMA
+DRM protected file and the security policy of the mobile device allows the
+MIDlet to access this file, the implementation checks the following. Each
+decrypted mode URL contains the <code>‘purpose’</code> parameter: <code>"display"</code>, <code>"play"</code>, <code>"print"</code> or <code>"execute"</code>. The implementation interprets the value
+of this parameter as an indication of an operation that a MIDlet is going
+to perform on a file being open. The implementation uses this parameter to
+check whether a corresponding OMA DRM permission exists for a given file and
+is valid. If a protected file does not have a valid permission for an indicated
+operation, the file is not opened and <code>java.lang.SecurityException</code> is
+thrown.</p><p>For example, if a URL is <code>file:///E:/sounds/mew.mp3?drm=dec+display</code>,
+the file has to have a valid <code>"display"</code> OMA DRM permission,
+otherwise an exception will be thrown.</p><p>If all checks described
+above are passed, the implementation opens the file in the decrypted mode.
+This means that in all subsequent read operations performed by the MIDlet,
+the implementation returns decrypted content. In other words, from the MIDlet
+point of view, read operation happens as if the content were not protected.
+If the security policy of the mobile device prohibits the MIDlet from accessing
+the protected file, <code>java.lang.SecurityException</code> is thrown
+by an API method into which the URL was passed.</p></li>
+<li><p>If an object to which a decrypted mode URL points is an unprotected
+file and the security policy of the mobile device allows the MIDlet to access
+this file, the implementation opens the file as is. If the security policy
+of the mobile device prohibits the MIDlet from accessing the unprotected file
+requested using a decrypted mode URL, <code>java.lang.SecurityException</code> is
+thrown by an API method into which the URL was passed. Also, in case of an
+unprotected file, all URL parameters (e.g., “<code>?drm=dec+display</code>”)
+are ignored.</p></li>
+<li><p>If a decrypted mode URL ends with “preview” and points to
+a OMA DRM protected file, this is interpreted by the implementation as an
+indication that the MIDlet is not going to consume the content of the file(s).
+In this case, if the protected file(s) has the <code>&lt;count&gt;</code> constraint
+in a relevant permission, the counter is not decreased. Such behavior is necessary
+because in certain situations a MIDlet needs to manipulate the file, but this
+manipulation does not qualify for actual consumption of the file’s content.
+E.g., a MIDlet may want to display a thumbnail of a protected image. Note,
+however, that if in a relevant OMA DRM permission the <code>&lt;count&gt;</code> constraint
+is equal to ‘0’, access to a requested file is not granted.</p></li>
+</ul></div>
+<div><h3>Availability of access modes in File API</h3><p>Table below presents availability of different access modes in different
+security domains when accessing files through File API.</p><div class="tablenoborder"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-964E0E46-DA34-4A6F-B4AD-108B502DC89B"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-964E0E46-DA34-4A6F-B4AD-108B502DC89B" frame="border" border="1" rules="all">
+
+
+
+
+<thead align="left">
+<tr class="title "><th valign="top" width="24.2%" id="d0e17284">
+<p>Access mode</p>
+</th><th valign="top" width="23.4%" id="d0e17289">
+<p>Manufacturer</p>
+</th><th valign="top" width="20.400000000000002%" id="d0e17294">
+<p>Operator</p>
+</th><th valign="top" width="17.8%" id="d0e17299">
+<p>Trusted third-party</p>
+</th><th valign="top" width="14.2%" id="d0e17304">
+<p>Untrusted</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td valign="top" width="24.2%" headers="d0e17284 ">
+<p>Encrypted mode</p>
+</td>
+<td valign="top" width="23.4%" headers="d0e17289 ">
+<p>Yes</p>
+</td>
+<td valign="top" width="20.400000000000002%" headers="d0e17294 ">
+<p>Yes</p>
+</td>
+<td valign="top" width="17.8%" headers="d0e17299 ">
+<p>Yes</p>
+</td>
+<td valign="top" width="14.2%" headers="d0e17304 ">
+<p>Yes</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="24.2%" headers="d0e17284 ">
+<p>Decrypted mode</p>
+</td>
+<td valign="top" width="23.4%" headers="d0e17289 ">
+<p>Yes</p>
+</td>
+<td valign="top" width="20.400000000000002%" headers="d0e17294 ">
+<p>No</p>
+</td>
+<td valign="top" width="17.8%" headers="d0e17299 ">
+<p>No</p>
+</td>
+<td valign="top" width="14.2%" headers="d0e17304 ">
+<p>No</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+</div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

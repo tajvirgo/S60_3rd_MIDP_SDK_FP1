@@ -1,0 +1,51 @@
+<?xml version="1.0" standalone="no"?>
+<svg width="176" height="178" stroke="none">
+
+  <desc>A Simple example for SVG animation</desc>
+
+  <rect fill="#c4e7ff" x="0" y="0" width="88" height="104"/>
+  <rect fill="#c4e7ff" x="88" y="104" width="88" height="104"/>
+
+  <circle cx="80" cy="60" r="10"
+        fill="yellow" stroke="blue" stroke-width="10">
+    <animate attributeName="x" attributeType="XML"
+             begin="0s" dur="10s" fill="freeze" from="60" to="20" />
+    <animate attributeName="y" attributeType="XML"
+             begin="0s" dur="10s" fill="freeze" from="20" to="30" />
+    <animate attributeName="r" attributeType="XML"
+             begin="0s" dur="10s" fill="freeze" from="10" to="200" />   
+    <animate attributeName="x" attributeType="XML"
+             begin="10s" dur="20s" fill="freeze" from="20" to="60" />
+    <animate attributeName="y" attributeType="XML"
+             begin="10s" dur="20s" fill="freeze" from="30" to="20" />
+    <animate attributeName="r" attributeType="XML"
+             begin="10s" dur="20s" fill="freeze" from="200" to="10" />   
+ <animate attributeName="x" attributeType="XML"
+             begin="20s" dur="30s" fill="freeze" from="60" to="20" />
+    <animate attributeName="y" attributeType="XML"
+             begin="20s" dur="30s" fill="freeze" from="20" to="30" />
+    <animate attributeName="r" attributeType="XML"
+             begin="20s" dur="30s" fill="freeze" from="10" to="200" />   
+
+</circle>
+
+  <g transform="translate(10,50)" >
+    <text id="TextElement" x="0" y="0"
+          font-family="Verdana" font-size="8.0" visibility="hidden"  > 
+      SVG!
+      <set attributeName="visibility" attributeType="CSS" to="visible"
+           begin="2s" dur="2s" fill="freeze" />
+      <animateMotion path="M 0 0 L 80 40" 
+           begin="2s" dur="2s" fill="freeze" />
+      <animateColor attributeName="fill" attributeType="CSS"
+           from="rgb(0,0,255)" to="rgb(128,0,0)"
+           begin="2s" dur="2s" fill="freeze" />
+      <animateTransform attributeName="transform" attributeType="XML"
+           type="rotate" from="0" to="+360"
+           begin="1s" dur="2s" fill="freeze" repeatCount="indefinite"/>
+      <animateTransform attributeName="transform" attributeType="XML"
+           type="scale" from="1" to="3" additive="sum"
+           begin="2s" dur="2s" fill="freeze" />
+    </text>
+  </g>
+</svg>

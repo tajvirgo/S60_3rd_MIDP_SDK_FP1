@@ -1,0 +1,242 @@
+<HTML>
+<BODY BGCOLOR="white">
+<PRE>
+<FONT color="green">001</FONT>    /* Copyright © 2006 Nokia. */<a name="line.1"></a>
+<FONT color="green">002</FONT>    package com.nokia.midp.examples.sip;<a name="line.2"></a>
+<FONT color="green">003</FONT>    <a name="line.3"></a>
+<FONT color="green">004</FONT>    import java.util.*;<a name="line.4"></a>
+<FONT color="green">005</FONT>    import java.io.*;<a name="line.5"></a>
+<FONT color="green">006</FONT>    import javax.microedition.io.*;<a name="line.6"></a>
+<FONT color="green">007</FONT>    import javax.microedition.midlet.*;<a name="line.7"></a>
+<FONT color="green">008</FONT>    import javax.microedition.lcdui.*;<a name="line.8"></a>
+<FONT color="green">009</FONT>    <a name="line.9"></a>
+<FONT color="green">010</FONT>    import javax.microedition.sip.*;<a name="line.10"></a>
+<FONT color="green">011</FONT>    <a name="line.11"></a>
+<FONT color="green">012</FONT>    /**<a name="line.12"></a>
+<FONT color="green">013</FONT>     * ReceiveMessage: Implements simple message receiving using SIP via JSR-180.<a name="line.13"></a>
+<FONT color="green">014</FONT>     * It listens and receives SIP message requests in specified port, and responds<a name="line.14"></a>
+<FONT color="green">015</FONT>     * accordingly.  It uses shared mode when connecting to the sip server.<a name="line.15"></a>
+<FONT color="green">016</FONT>     * This example assumes that user already created the profile on the SDK's or<a name="line.16"></a>
+<FONT color="green">017</FONT>     * phone's sip setting, and uses sip profile to register with sip server.  The<a name="line.17"></a>
+<FONT color="green">018</FONT>     * sip public name for the SDK running SendMessge midlet is "sip:sip1@sipServer",<a name="line.18"></a>
+<FONT color="green">019</FONT>     * and the sip public name for the SDK running ReceivingMessage midlet is<a name="line.19"></a>
+<FONT color="green">020</FONT>     * "sip:sip2@sipServer".<a name="line.20"></a>
+<FONT color="green">021</FONT>    <a name="line.21"></a>
+<FONT color="green">022</FONT>    <a name="line.22"></a>
+<FONT color="green">023</FONT>     */<a name="line.23"></a>
+<FONT color="green">024</FONT>    public class ReceiveMessage extends MIDlet implements CommandListener, SipServerConnectionListener  {<a name="line.24"></a>
+<FONT color="green">025</FONT>    <a name="line.25"></a>
+<FONT color="green">026</FONT>            private Display display;<a name="line.26"></a>
+<FONT color="green">027</FONT>            private long startTime;<a name="line.27"></a>
+<FONT color="green">028</FONT>            private Form form;<a name="line.28"></a>
+<FONT color="green">029</FONT>            private TextField receivePort;<a name="line.29"></a>
+<FONT color="green">030</FONT>            private Command receiveCmd;<a name="line.30"></a>
+<FONT color="green">031</FONT>            private Command exitCmd;<a name="line.31"></a>
+<FONT color="green">032</FONT>            SipConnectionNotifier scn = null;<a name="line.32"></a>
+<FONT color="green">033</FONT>            SipServerConnection ssc = null;<a name="line.33"></a>
+<FONT color="green">034</FONT>    <a name="line.34"></a>
+<FONT color="green">035</FONT>            //Protocol constants - headers<a name="line.35"></a>
+<FONT color="green">036</FONT>            private final String CONTENT_TYPE_HEADER = "Content-Type";<a name="line.36"></a>
+<FONT color="green">037</FONT>            private final String CONTENT_LENGTH_HEADER = "Content-Length";<a name="line.37"></a>
+<FONT color="green">038</FONT>    <a name="line.38"></a>
+<FONT color="green">039</FONT>            //Protocol constants - status<a name="line.39"></a>
+<FONT color="green">040</FONT>            private final int OK_STATUS = 200;<a name="line.40"></a>
+<FONT color="green">041</FONT>    <a name="line.41"></a>
+<FONT color="green">042</FONT>            //UI labels and messages<a name="line.42"></a>
+<FONT color="green">043</FONT>            private final String FORM_RECEIVE = "Receive Message";<a name="line.43"></a>
+<FONT color="green">044</FONT>            private final String START_CMD = "Start";<a name="line.44"></a>
+<FONT color="green">045</FONT>            private final String EXIT_CMD = "Exit";<a name="line.45"></a>
+<FONT color="green">046</FONT>            private final String FORM_LISTEN_MSG = "Listening... in port: ";<a name="line.46"></a>
+<FONT color="green">047</FONT>            private final String EXCEPTION = "Exception: ";<a name="line.47"></a>
+<FONT color="green">048</FONT>    <a name="line.48"></a>
+<FONT color="green">049</FONT>            /**<a name="line.49"></a>
+<FONT color="green">050</FONT>             * Creates a new ReceiveMessage object to handle the incoming messages.<a name="line.50"></a>
+<FONT color="green">051</FONT>             * It also provides UI for the user to enter the communication<a name="line.51"></a>
+<FONT color="green">052</FONT>             * information.<a name="line.52"></a>
+<FONT color="green">053</FONT>             */<a name="line.53"></a>
+<FONT color="green">054</FONT>            public ReceiveMessage() {<a name="line.54"></a>
+<FONT color="green">055</FONT>                    display=Display.getDisplay(this);<a name="line.55"></a>
+<FONT color="green">056</FONT>                    form = new Form(FORM_RECEIVE);<a name="line.56"></a>
+<FONT color="green">057</FONT>                    form.append("Click start to listen on the port.");<a name="line.57"></a>
+<FONT color="green">058</FONT>                    receiveCmd = new Command(START_CMD, Command.ITEM, 1);<a name="line.58"></a>
+<FONT color="green">059</FONT>                    exitCmd = new Command(EXIT_CMD, Command.EXIT, 1);<a name="line.59"></a>
+<FONT color="green">060</FONT>                    form.addCommand(receiveCmd);<a name="line.60"></a>
+<FONT color="green">061</FONT>                    form.addCommand(exitCmd);<a name="line.61"></a>
+<FONT color="green">062</FONT>                    form.setCommandListener(this);<a name="line.62"></a>
+<FONT color="green">063</FONT>            }<a name="line.63"></a>
+<FONT color="green">064</FONT>    <a name="line.64"></a>
+<FONT color="green">065</FONT>            /**<a name="line.65"></a>
+<FONT color="green">066</FONT>             * Creates a commandAction object with given command and diaplayable.<a name="line.66"></a>
+<FONT color="green">067</FONT>             * @param c Command the command used for the commandAction<a name="line.67"></a>
+<FONT color="green">068</FONT>             * @param d Displayable the displayable used when excuting the command<a name="line.68"></a>
+<FONT color="green">069</FONT>             */<a name="line.69"></a>
+<FONT color="green">070</FONT>            public void commandAction(Command c, Displayable d) {<a name="line.70"></a>
+<FONT color="green">071</FONT>                    if(c == receiveCmd) {<a name="line.71"></a>
+<FONT color="green">072</FONT>                            Thread t = new Thread() {<a name="line.72"></a>
+<FONT color="green">073</FONT>                                    public void run() {<a name="line.73"></a>
+<FONT color="green">074</FONT>                                            receiveMessage();<a name="line.74"></a>
+<FONT color="green">075</FONT>                                    }<a name="line.75"></a>
+<FONT color="green">076</FONT>                            };<a name="line.76"></a>
+<FONT color="green">077</FONT>                            t.start();<a name="line.77"></a>
+<FONT color="green">078</FONT>                    }else if(c == exitCmd) {<a name="line.78"></a>
+<FONT color="green">079</FONT>                            if(scn != null) {<a name="line.79"></a>
+<FONT color="green">080</FONT>                                    try {<a name="line.80"></a>
+<FONT color="green">081</FONT>                                            scn.close();<a name="line.81"></a>
+<FONT color="green">082</FONT>                                    }<a name="line.82"></a>
+<FONT color="green">083</FONT>                                    catch(IOException iox) {<a name="line.83"></a>
+<FONT color="green">084</FONT>                                      form.append(EXCEPTION + iox.getMessage());<a name="line.84"></a>
+<FONT color="green">085</FONT>                                    }<a name="line.85"></a>
+<FONT color="green">086</FONT>                            }<a name="line.86"></a>
+<FONT color="green">087</FONT>                            destroyApp(true);<a name="line.87"></a>
+<FONT color="green">088</FONT>                    }else{}<a name="line.88"></a>
+<FONT color="green">089</FONT>            }<a name="line.89"></a>
+<FONT color="green">090</FONT>    <a name="line.90"></a>
+<FONT color="green">091</FONT>            /**<a name="line.91"></a>
+<FONT color="green">092</FONT>             * Signals the MIDlet that it has entered the Active state.  It also<a name="line.92"></a>
+<FONT color="green">093</FONT>             * invokes the application and makes the form visible.<a name="line.93"></a>
+<FONT color="green">094</FONT>             */<a name="line.94"></a>
+<FONT color="green">095</FONT>            public void startApp() {<a name="line.95"></a>
+<FONT color="green">096</FONT>                    display.setCurrent(form);<a name="line.96"></a>
+<FONT color="green">097</FONT>            }<a name="line.97"></a>
+<FONT color="green">098</FONT>            /**<a name="line.98"></a>
+<FONT color="green">099</FONT>             * Listen to the messages and displays the port information on the form.<a name="line.99"></a>
+<FONT color="green">100</FONT>             */<a name="line.100"></a>
+<FONT color="green">101</FONT>            public void receiveMessage() {<a name="line.101"></a>
+<FONT color="green">102</FONT>                    try {<a name="line.102"></a>
+<FONT color="green">103</FONT>                            if(scn != null)<a name="line.103"></a>
+<FONT color="green">104</FONT>                                    scn.close();<a name="line.104"></a>
+<FONT color="green">105</FONT>                            form.append("Waiting for the connection.");<a name="line.105"></a>
+<FONT color="green">106</FONT>                            scn = (SipConnectionNotifier)Connector.open("sip:*;type=\"application/test\"");<a name="line.106"></a>
+<FONT color="green">107</FONT>                            scn.setListener(this);<a name="line.107"></a>
+<FONT color="green">108</FONT>                            form.append(FORM_LISTEN_MSG + scn.getLocalPort());<a name="line.108"></a>
+<FONT color="green">109</FONT>                    } catch(Exception ex) {<a name="line.109"></a>
+<FONT color="green">110</FONT>                            ex.printStackTrace();<a name="line.110"></a>
+<FONT color="green">111</FONT>                            form.append("receive message "+ EXCEPTION + ex.getMessage());<a name="line.111"></a>
+<FONT color="green">112</FONT>                    }<a name="line.112"></a>
+<FONT color="green">113</FONT>            }<a name="line.113"></a>
+<FONT color="green">114</FONT>            /**<a name="line.114"></a>
+<FONT color="green">115</FONT>             * Processes the requests based on contents.<a name="line.115"></a>
+<FONT color="green">116</FONT>             * Responds with 200 OK after getting the messages.<a name="line.116"></a>
+<FONT color="green">117</FONT>             * @param scn SipConnectionNotifier the SIP server connection notifier<a name="line.117"></a>
+<FONT color="green">118</FONT>             * object<a name="line.118"></a>
+<FONT color="green">119</FONT>             */<a name="line.119"></a>
+<FONT color="green">120</FONT>            public void notifyRequest(SipConnectionNotifier scn) {<a name="line.120"></a>
+<FONT color="green">121</FONT>                    try {<a name="line.121"></a>
+<FONT color="green">122</FONT>                            ssc = scn.acceptAndOpen();<a name="line.122"></a>
+<FONT color="green">123</FONT>                            if(ssc.getMethod().equals("MESSAGE")) {<a name="line.123"></a>
+<FONT color="green">124</FONT>                                    String contentType = ssc.getHeader(CONTENT_TYPE_HEADER );<a name="line.124"></a>
+<FONT color="green">125</FONT>                                    String contentLength = ssc.getHeader(CONTENT_LENGTH_HEADER);<a name="line.125"></a>
+<FONT color="green">126</FONT>                                    int length = Integer.parseInt(contentLength);<a name="line.126"></a>
+<FONT color="green">127</FONT>                                    if((contentType != null) && contentType.equals("text/plain")) {<a name="line.127"></a>
+<FONT color="green">128</FONT>                                            InputStream is = ssc.openContentInputStream();<a name="line.128"></a>
+<FONT color="green">129</FONT>                                            int i=0;<a name="line.129"></a>
+<FONT color="green">130</FONT>                                            byte testBuffer[] = new byte[length];<a name="line.130"></a>
+<FONT color="green">131</FONT>                                            i = is.read(testBuffer);<a name="line.131"></a>
+<FONT color="green">132</FONT>    <a name="line.132"></a>
+<FONT color="green">133</FONT>                                            String tmp = new String(testBuffer, 0, i);<a name="line.133"></a>
+<FONT color="green">134</FONT>    <a name="line.134"></a>
+<FONT color="green">135</FONT>                                            StringItem st = new StringItem("Subject:", ssc.getHeader("Subject"));<a name="line.135"></a>
+<FONT color="green">136</FONT>                                            form.append(st);<a name="line.136"></a>
+<FONT color="green">137</FONT>                                            st = new StringItem("Message:", tmp);<a name="line.137"></a>
+<FONT color="green">138</FONT>                                            form.append(st);<a name="line.138"></a>
+<FONT color="green">139</FONT>                                    }<a name="line.139"></a>
+<FONT color="green">140</FONT>                                    ssc.initResponse(OK_STATUS);<a name="line.140"></a>
+<FONT color="green">141</FONT>                                    ssc.send();<a name="line.141"></a>
+<FONT color="green">142</FONT>                            }<a name="line.142"></a>
+<FONT color="green">143</FONT>    <a name="line.143"></a>
+<FONT color="green">144</FONT>                    } catch(IOException ex) {<a name="line.144"></a>
+<FONT color="green">145</FONT>                            form.append("notifyRequest IOException: "+ex.getMessage());<a name="line.145"></a>
+<FONT color="green">146</FONT>                    }catch(Exception e){<a name="line.146"></a>
+<FONT color="green">147</FONT>                      form.append("notifyRequest other Exception: "+e.getMessage());<a name="line.147"></a>
+<FONT color="green">148</FONT>                    }<a name="line.148"></a>
+<FONT color="green">149</FONT>    <a name="line.149"></a>
+<FONT color="green">150</FONT>            }<a name="line.150"></a>
+<FONT color="green">151</FONT>            /**<a name="line.151"></a>
+<FONT color="green">152</FONT>             * Signals the MIDlet to enter the Paused state.<a name="line.152"></a>
+<FONT color="green">153</FONT>             */<a name="line.153"></a>
+<FONT color="green">154</FONT>            public void pauseApp() {<a name="line.154"></a>
+<FONT color="green">155</FONT>    <a name="line.155"></a>
+<FONT color="green">156</FONT>            }<a name="line.156"></a>
+<FONT color="green">157</FONT>    <a name="line.157"></a>
+<FONT color="green">158</FONT>            /**<a name="line.158"></a>
+<FONT color="green">159</FONT>             * Signals the MIDlet to terminate and notifies the destroyed state.<a name="line.159"></a>
+<FONT color="green">160</FONT>             * @param b boolean If true when this method is called, the MIDlet<a name="line.160"></a>
+<FONT color="green">161</FONT>             * must cleanup and release all resources. If false the MIDlet may<a name="line.161"></a>
+<FONT color="green">162</FONT>             * throw MIDletStateChangeException to indicate it does not want to be<a name="line.162"></a>
+<FONT color="green">163</FONT>             * destroyed at this time.<a name="line.163"></a>
+<FONT color="green">164</FONT>             */<a name="line.164"></a>
+<FONT color="green">165</FONT>            public void destroyApp(boolean b) {<a name="line.165"></a>
+<FONT color="green">166</FONT>                    notifyDestroyed();<a name="line.166"></a>
+<FONT color="green">167</FONT>            }<a name="line.167"></a>
+<FONT color="green">168</FONT>    <a name="line.168"></a>
+<FONT color="green">169</FONT>    }<a name="line.169"></a>
+<FONT color="green">170</FONT>    <a name="line.170"></a>
+<FONT color="green">171</FONT>    <a name="line.171"></a>
+<FONT color="green">172</FONT>    <a name="line.172"></a>
+<FONT color="green">173</FONT>    <a name="line.173"></a>
+<FONT color="green">174</FONT>    <a name="line.174"></a>
+<FONT color="green">175</FONT>    <a name="line.175"></a>
+<FONT color="green">176</FONT>    <a name="line.176"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+</BODY>
+</HTML>

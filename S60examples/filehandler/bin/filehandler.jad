@@ -1,0 +1,8 @@
+MIDlet-1: FileHandler, , com.nokia.midp.examples.JSR75.FileHandler.FileHandlerMIDlet
+MIDlet-Jar-Size: 22625
+MIDlet-Jar-URL: filehandler.jar
+MIDlet-Name:  FileHandler
+MicroEdition-Configuration: CLDC-1.1
+MicroEdition-Profile: MIDP-2.0
+MIDlet-Version: 1.0
+MIDlet-Vendor: Nokia

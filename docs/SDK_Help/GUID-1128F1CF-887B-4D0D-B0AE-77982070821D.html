@@ -1,0 +1,161 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Security settings"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-1128F1CF-887B-4D0D-B0AE-77982070821D"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> JavaTM Implementation Notes</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-1128F1CF-887B-4D0D-B0AE-77982070821D"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-1128F1CF-887B-4D0D-B0AE-77982070821D"><!----></a>Security
+settings</h1>
+<p>The File API security model implemented in Java Platform for S60 is based on MIDP 2.0 Recommended Security Policy, security
+policy of the JTWI specification, and JSR-75 addendum for the security of <code>FileConnection</code> API.</p>
+<p>For S60, the table below lists the access rights of MIDlets belonging
+to different MIDP access domains:</p>
+<div class="tablenoborder"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-5C6BC13D-0072-44E1-BD2B-F9B70E7FF2D8"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-5C6BC13D-0072-44E1-BD2B-F9B70E7FF2D8" frame="border" border="1" rules="all"><caption><strong>Table 3: </strong>Access rights
+of access domains in S60</caption>
+
+
+
+
+<thead align="left">
+<tr class="title "><th valign="top" width="22.64529058116232%" id="d0e18488">
+<p>Category</p>
+</th><th valign="top" width="19.238476953907817%" id="d0e18493">
+<p>Manufacturer</p>
+</th><th valign="top" width="20.641282565130258%" id="d0e18498">
+<p>Operator</p>
+</th><th valign="top" width="20.641282565130258%" id="d0e18503">
+<p>Trusted third-party</p>
+</th><th valign="top" width="16.833667334669336%" id="d0e18508">
+<p>Untrusted</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td valign="top" width="22.64529058116232%" headers="d0e18488 ">
+<p>System files and directories</p>
+</td>
+<td valign="top" width="19.238476953907817%" headers="d0e18493 ">
+<p>Yes</p>
+</td>
+<td valign="top" width="20.641282565130258%" headers="d0e18498 ">
+<p>No</p>
+</td>
+<td valign="top" width="20.641282565130258%" headers="d0e18503 ">
+<p>No</p>
+</td>
+<td valign="top" width="16.833667334669336%" headers="d0e18508 ">
+<p>No</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="22.64529058116232%" headers="d0e18488 ">
+<p>Private user files and directories</p>
+</td>
+<td valign="top" width="19.238476953907817%" headers="d0e18493 ">
+<p>Yes</p>
+</td>
+<td valign="top" width="20.641282565130258%" headers="d0e18498 ">
+<p>No</p>
+</td>
+<td valign="top" width="20.641282565130258%" headers="d0e18503 ">
+<p>No</p>
+</td>
+<td valign="top" width="16.833667334669336%" headers="d0e18508 ">
+<p>No</p>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="22.64529058116232%" headers="d0e18488 ">
+<p>Designated public directories and files therein</p>
+</td>
+<td valign="top" width="19.238476953907817%" headers="d0e18493 ">
+<p>Yes</p>
+</td>
+<td valign="top" width="20.641282565130258%" headers="d0e18498 ">
+<p>Yes</p>
+</td>
+<td valign="top" width="20.641282565130258%" headers="d0e18503 ">
+<p>Yes</p>
+</td>
+<td valign="top" width="16.833667334669336%" headers="d0e18508 ">
+<p>Yes</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>“Designed public directories and files therein” means all directories
+defined by File API System properties and a whole memory card except for <code> system/</code> and <code>private/</code> directories. </p>
+
+
+<div><h3>Directory and file access restrictions</h3><p>File API also contains the “restricted access to the directory” concept.
+This is needed if a user starts to navigate, for example, from root to <code>c:/data/Images/
+directory</code> (the <code>fileconn.dir.photos</code> property
+points to that directory). The user has only a restricted access to the <code>c:/</code> root
+and <code>c:/data/</code> directory. This means that the user has
+only read access rights to the <code>data/</code> directory. The <code>list()</code> operation
+returns only those directories/files to where the user has access. </p><p>The user can create/modify/delete files and sub-directories under the <code>c:/data/Images/</code> directory,
+but cannot change the name of the <code>c:/data/Images/</code> directory.
+This restriction concerns all directories that are pointed to by a File API
+system property.</p><p>In S60, access to <code>*.jar</code> and <code>*.jad</code> files
+are forbidden for other access domains except <code>Manufacturer</code>.</p></div>
+<div><h3>User settings</h3><p>File API implementations in Java Platform for S60 allow
+users to accept MIDlet access rights by using the function groups Read User
+Data Access and Write User Data Access. These two function groups are defined
+in MIDP 2.0 Recommended Security Policy. The Read User Data Access group represents
+permissions to any function that gives a MIDlet suite the ability to read
+a user’s phone book, or any other data in a file or directory. The Write User
+Data Access group represents permissions to any function that gives a MIDlet
+suite the ability to add or modify a user’s phone book, or any other data
+in a file or directory.</p><p>For trusted third party and untrusted MIDlets, the user settings are
+defined according to the table below. </p><div class="tablenoborder"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-BE5CEAB1-8D21-465A-A2A1-8AAF6896B677"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-BE5CEAB1-8D21-465A-A2A1-8AAF6896B677" frame="border" border="1" rules="all"><caption><strong>Table 4: </strong>User settings
+for Read User Data Access and Write User Data Access function groups</caption>
+
+
+
+<thead align="left">
+<tr class="title "><th valign="top" width="25.187032418952622%" id="d0e18701">
+<p>Function group </p>
+</th><th valign="top" width="38.65336658354115%" id="d0e18706">
+<p>Trusted Third Party domain </p>
+</th><th valign="top" width="36.15960099750624%" id="d0e18711">
+<p>Untrusted domain </p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td valign="top" width="25.187032418952622%" headers="d0e18701 ">
+<p>Read User Data Access</p>
+</td>
+<td valign="top" width="38.65336658354115%" headers="d0e18706 ">
+<p>Default setting Allowed: Oneshot </p>
+<p>Settings: Session, Blanket, Oneshot, No </p>
+</td>
+<td valign="top" width="36.15960099750624%" headers="d0e18711 ">
+<p>Default setting: Oneshot </p>
+<p>Allowed settings: Oneshot, No </p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="25.187032418952622%" headers="d0e18701 ">
+<p>Write User Data Access</p>
+</td>
+<td valign="top" width="38.65336658354115%" headers="d0e18706 ">
+<p>Default setting Allowed: Oneshot </p>
+<p>Settings: Session, Blanket, Oneshot, No </p>
+</td>
+<td valign="top" width="36.15960099750624%" headers="d0e18711 ">
+<p>Default setting: Oneshot</p>
+<p>Allowed settings: Oneshot, No </p>
+</td>
+</tr>
+</tbody>
+</table></div><div class="note"><p><strong class="note_title">Note: </strong>MIDlets belonging to the Manufacturer or the Operator domains always
+have rights to Read User Data and Write User Data (blanket permission).</p></div><p>The explanations for the table values are as follows: </p><ul>
+<li><p>“Blanket” is valid for every invocation of an API by a MIDlet
+suite until it is uninstalled or the permission is changed by the user.</p>
+</li>
+<li><p>“Session” is valid from the invocation of a MIDlet suite
+until it terminates. “Session” mode MUST prompt the user on or before the
+first invocation of the API or function, which is protected. When the user
+re-invokes the MIDlet suite the prompt MUST be repeated.</p></li>
+<li><p>“Oneshot” MUST prompt the user on each invocation of the
+API or function, which is protected.</p></li>
+</ul></div>
+</div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

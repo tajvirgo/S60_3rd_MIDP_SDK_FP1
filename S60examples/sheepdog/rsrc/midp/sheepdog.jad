@@ -1,0 +1,8 @@
+MIDlet-1: SheepdogMIDlet, , com.nokia.midp.examples.sheepdog.SheepdogMIDlet
+MIDlet-Jar-Size: @@@
+MIDlet-Jar-URL: sheepdog.jar
+MIDlet-Name:  SheepdogMIDlet
+MicroEdition-Configuration: CLDC-1.1
+MicroEdition-Profile: MIDP-2.0
+MIDlet-Version: 1.0
+MIDlet-Vendor: Nokia

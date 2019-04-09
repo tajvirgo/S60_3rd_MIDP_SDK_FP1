@@ -1,0 +1,8 @@
+=========================================================================================
+RELEASE NOTE FOR S60 3RD EDITION SDK FOR SYMBIAN OS SUPPORTTING FEATURE PACK 1, D.M.YYYY
+=========================================================================================
+
+
+Copyright (c) 2001-2006 Nokia Corporation. All rights reserved. 
+Nokia and Nokia Connecting People are registered trademarks of 
+Nokia Corporation.

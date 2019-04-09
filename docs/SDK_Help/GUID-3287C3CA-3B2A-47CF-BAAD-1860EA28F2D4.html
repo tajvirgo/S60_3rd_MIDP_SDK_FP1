@@ -1,0 +1,63 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Over-the-Air (OTA)"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-3287C3CA-3B2A-47CF-BAAD-1860EA28F2D4"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> S60 3rd Edition SDK for Symbian OS Supporting Feature Pack 1, for MIDP</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-3287C3CA-3B2A-47CF-BAAD-1860EA28F2D4"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-3287C3CA-3B2A-47CF-BAAD-1860EA28F2D4"><!----></a>Over-the-Air
+(OTA)</h1>
+<p>With OTA deployment, the MIDlet is installed on a Web server and then
+downloaded to a device via the device's Internet microbrowser. A JAR file
+and a JAD file are required for OTA installation.  </p>
+<p>The steps involved in a typical MIDlet suite installation are shown
+below. </p>
+<div class="figure" id="GUID-3614D067-A815-4722-B7EA-DD23A968F2D2"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-3614D067-A815-4722-B7EA-DD23A968F2D2"><!----></a><img src="GUID-2B369CA5-7556-439F-9360-AB052486A99F_d0e2928_href.png" alt=""/><p class="figure-title"><strong>Figure 4: </strong>Typical MIDlet installation process using OTA</p></div>
+<p>In the figure, the process begins by browsing to a page that includes
+a link to a MIDlet suite. The link is then clicked, which causes the Web server
+to deliver the JAD file for the MIDlet suite to the browser.  </p>
+<p>On receipt of the JAD file, it is opened and its contents are displayed.
+The JAD file contains a description of the MIDlet suite, including its size,
+version number, and who provided it. A request is then sent for the JAR file
+and, finally, the Web server delivers the JAR file. Once the JAR file has
+been delivered to the device, the suite is installed and individual MIDlets
+can be selected and run. </p>
+<p><span>To deploy a MIDlet on a device using OTA provisioning:</span> </p>
+<ol>
+<li id="GUID-9F977CE3-9163-4E85-9417-108E9FE3851A"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-9F977CE3-9163-4E85-9417-108E9FE3851A"><!----></a><p>Edit the JAD
+file. Change the <code>MIDlet-Jar-URL</code> attribute so that it
+points to the JAR file using an absolute URL. For example, if the Web server
+is running on the local machine, the URL will look something like: <code>http://localhost:8080/HelloWorld.jar</code>.
+For more information JAR and JAD files, see section <a href="GUID-2F1F0733-C438-4A43-841A-590DE2D63A67.html#GUID-2F1F0733-C438-4A43-841A-590DE2D63A67">Default
+project structure</a>.</p></li>
+<li id="GUID-FCC8DE55-68AF-4207-8DF9-44BB2ED54397"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-FCC8DE55-68AF-4207-8DF9-44BB2ED54397"><!----></a><p>Install the
+JAD file and JAR file on the Web server.</p></li>
+<li id="GUID-CAF0BDDB-D4B0-45D9-B1F3-0BB174C984C7"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-CAF0BDDB-D4B0-45D9-B1F3-0BB174C984C7"><!----></a><p>Create a Wap
+or Web page with a hypertext link to the JAD file. The hypertext link must
+also be an absolute URL. For example:</p>
+<pre class="codeblock" id="GUID-87CE7782-ABCF-4D5F-A61F-3E12A0922824"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-87CE7782-ABCF-4D5F-A61F-3E12A0922824"><!----></a>&lt;wml&gt;
+&lt;body&gt;
+&lt;a href=http://localhost:8080/HelloWorld.jad&gt;Click here to install&lt;/a&gt;
+&lt;/body&gt;
+&lt;/wml&gt;</pre>
+</li>
+<li id="GUID-247FD5DC-6288-4C8D-B8EC-29D12C947623"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-247FD5DC-6288-4C8D-B8EC-29D12C947623"><!----></a><p>Configure
+the Web server's MIME types so that JAD files are returned with MIME type <code>text/vnd.sun.j2me.app-descriptor</code> and
+JAR files are returned with MIME type <code>application/java-archive</code>. </p>
+</li>
+<li id="GUID-4476D38A-5199-4F24-B0B0-FA2A76320074"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-4476D38A-5199-4F24-B0B0-FA2A76320074"><!----></a><p>Point the
+device's Wap browser (if a Wap page has been created) or Web browser (if a
+Web page has been created) to the URL of the created page. Click on the link. </p>
+</li>
+<li id="GUID-9D3AE848-54C4-4B5D-9161-88C5565F8EC3"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-9D3AE848-54C4-4B5D-9161-88C5565F8EC3"><!----></a><p>Every device
+that supports the Java platform will have a piece of software for application
+delivery and management. As this software is device specific, the term Application
+Management Software (AMS) is generally used to describe it. Once a link to
+a JAD file has been clicked, the device's AMS will activate and display the
+name, version, and origin of the MIDlet suite.</p></li>
+<li id="GUID-FD09CC1A-0DDD-4616-84B7-148D24AD96E8"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-FD09CC1A-0DDD-4616-84B7-148D24AD96E8"><!----></a><p>With the details
+of the suite displayed, the AMS should give an option to install the suite. </p>
+</li>
+<li id="GUID-8533C588-99C2-4CAB-9C8E-5B9B6A12CA9E"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-8533C588-99C2-4CAB-9C8E-5B9B6A12CA9E"><!----></a><p>The AMS should
+now also provide the ability to run any of the installed MIDlets. Run the
+MIDlet that has just been installed. </p></li>
+</ol>
+
+
+</div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

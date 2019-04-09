@@ -1,0 +1,21 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Usage of headers"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-D00220FF-7965-4D4A-BDF8-CB48FFEFE423"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> JavaTM Implementation Notes</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-D00220FF-7965-4D4A-BDF8-CB48FFEFE423"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-D00220FF-7965-4D4A-BDF8-CB48FFEFE423"><!----></a>Usage
+of headers</h1>
+<p>This section describes special treatments of certain headers.</p>
+<div><h3>Accept-Contact</h3><p><span>This header is a mandatory header in all requests</span> because otherwise
+the S60 implementation does not recognize whether the potential receiving
+MIDlet is ready to handle a request. See the examples from sections <a href="GUID-55921D23-9FF3-458E-B6D8-52A5C656157E.html#GUID-55921D23-9FF3-458E-B6D8-52A5C656157E">Using PushRegistry</a> and <a href="GUID-C35EC411-690E-4CDD-81B5-BF810530543F.html#GUID-C35EC411-690E-4CDD-81B5-BF810530543F">Appendix 1</a>. The CANCEL
+request is the only exception to this rule since the S60 implementation sets
+Accept-Contact automatically to the CANCEL request.</p></div>
+<div><h3>Event</h3><p>The ‘Event’ header is a mandatory one for the SUBSCRIBE request. </p><p>The value of the ‘Event’ header can be updated in the first NOTIFY request
+in the subscription. The value of the ‘Event’ header cannot be changed in
+the rest of the NOTIFY requests. A MIDlet does not have to set the ‘Event’
+header to the NOTIFY request. In the SUBSCRIBE case, the default value for
+the ‘Event’ header, to the NOTIFY request, is taken from the SUBSCRIBE request.
+Correspondingly, in the REFER case, the default value of the ‘Event’ header
+has the value ‘refer’ in the NOTIFY request.</p></div>
+<div><h3>Refer-To</h3><p>The ‘Refer-To’ header is a mandatory header for the REFER request.</p></div>
+<div><h3>Subscription-State</h3><p>This is a mandatory header for the NOTIFY request. </p></div>
+</div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

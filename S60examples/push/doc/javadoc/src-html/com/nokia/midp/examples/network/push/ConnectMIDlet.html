@@ -1,0 +1,199 @@
+<HTML>
+<BODY BGCOLOR="white">
+<PRE>
+<FONT color="green">001</FONT>    /* Copyright © 2006 Nokia. */<a name="line.1"></a>
+<FONT color="green">002</FONT>    package com.nokia.midp.examples.network.push;<a name="line.2"></a>
+<FONT color="green">003</FONT>    <a name="line.3"></a>
+<FONT color="green">004</FONT>    import javax.microedition.midlet.*;<a name="line.4"></a>
+<FONT color="green">005</FONT>    import javax.microedition.lcdui.*;<a name="line.5"></a>
+<FONT color="green">006</FONT>    import javax.microedition.io.*;<a name="line.6"></a>
+<FONT color="green">007</FONT>    <a name="line.7"></a>
+<FONT color="green">008</FONT>    /**<a name="line.8"></a>
+<FONT color="green">009</FONT>     *  Supplies a MIDlet with a mechanism to create a connection to<a name="line.9"></a>
+<FONT color="green">010</FONT>     *  a desired address.<a name="line.10"></a>
+<FONT color="green">011</FONT>     */<a name="line.11"></a>
+<FONT color="green">012</FONT>    public class ConnectMIDlet extends MIDlet implements CommandListener, Runnable {<a name="line.12"></a>
+<FONT color="green">013</FONT>        /** String constant for the socket address */<a name="line.13"></a>
+<FONT color="green">014</FONT>        private static final String SOCKET_ADDRESS = "socket://localhost:";<a name="line.14"></a>
+<FONT color="green">015</FONT>        /** TextField size constant */<a name="line.15"></a>
+<FONT color="green">016</FONT>        private static final int TEXTFIELD_SIZE = 256;<a name="line.16"></a>
+<FONT color="green">017</FONT>        /** Command priority constant */<a name="line.17"></a>
+<FONT color="green">018</FONT>        private static final int COMMAND_PRIORITY = 1;<a name="line.18"></a>
+<FONT color="green">019</FONT>        /** Command for exit. */<a name="line.19"></a>
+<FONT color="green">020</FONT>        public static final Command CMD_EXIT = new Command("Exit", Command.EXIT, COMMAND_PRIORITY);<a name="line.20"></a>
+<FONT color="green">021</FONT>        /** Command to connect to a desired address */<a name="line.21"></a>
+<FONT color="green">022</FONT>        private static final Command CMD_CONNECT = new Command("Connect", Command.OK, COMMAND_PRIORITY);<a name="line.22"></a>
+<FONT color="green">023</FONT>    <a name="line.23"></a>
+<FONT color="green">024</FONT>        /** UI display. */<a name="line.24"></a>
+<FONT color="green">025</FONT>        private Display display;<a name="line.25"></a>
+<FONT color="green">026</FONT>        /** Form to display information to the user */<a name="line.26"></a>
+<FONT color="green">027</FONT>        private Form midletForm;<a name="line.27"></a>
+<FONT color="green">028</FONT>        /** TextField to enter url to connect to */<a name="line.28"></a>
+<FONT color="green">029</FONT>        private TextField textField;<a name="line.29"></a>
+<FONT color="green">030</FONT>        /** instance of SocketConnection */<a name="line.30"></a>
+<FONT color="green">031</FONT>        private SocketConnection socketConnection;<a name="line.31"></a>
+<FONT color="green">032</FONT>    <a name="line.32"></a>
+<FONT color="green">033</FONT>        /**<a name="line.33"></a>
+<FONT color="green">034</FONT>         *  Sets up the midlet and the items required for user interaction.<a name="line.34"></a>
+<FONT color="green">035</FONT>         */<a name="line.35"></a>
+<FONT color="green">036</FONT>        public void startApp() {<a name="line.36"></a>
+<FONT color="green">037</FONT>            if (display == null) {<a name="line.37"></a>
+<FONT color="green">038</FONT>                display = Display.getDisplay(this);<a name="line.38"></a>
+<FONT color="green">039</FONT>                midletForm = new Form("Push Example");<a name="line.39"></a>
+<FONT color="green">040</FONT>                textField = new TextField("Connect to:", SOCKET_ADDRESS, TEXTFIELD_SIZE, TextField.ANY);<a name="line.40"></a>
+<FONT color="green">041</FONT>                midletForm.append(textField);<a name="line.41"></a>
+<FONT color="green">042</FONT>                midletForm.addCommand(CMD_EXIT);<a name="line.42"></a>
+<FONT color="green">043</FONT>                midletForm.addCommand(CMD_CONNECT);<a name="line.43"></a>
+<FONT color="green">044</FONT>                midletForm.setCommandListener(this);<a name="line.44"></a>
+<FONT color="green">045</FONT>            }<a name="line.45"></a>
+<FONT color="green">046</FONT>            display.setCurrent(midletForm);<a name="line.46"></a>
+<FONT color="green">047</FONT>        }<a name="line.47"></a>
+<FONT color="green">048</FONT>    <a name="line.48"></a>
+<FONT color="green">049</FONT>        /**<a name="line.49"></a>
+<FONT color="green">050</FONT>         *  Must be defined but no implementation required as the midlet only responds<a name="line.50"></a>
+<FONT color="green">051</FONT>         *  to user interaction.<a name="line.51"></a>
+<FONT color="green">052</FONT>         */<a name="line.52"></a>
+<FONT color="green">053</FONT>        public void pauseApp() {<a name="line.53"></a>
+<FONT color="green">054</FONT>        }<a name="line.54"></a>
+<FONT color="green">055</FONT>    <a name="line.55"></a>
+<FONT color="green">056</FONT>        /**<a name="line.56"></a>
+<FONT color="green">057</FONT>         *  Must be defined but no implementation required as all the resources<a name="line.57"></a>
+<FONT color="green">058</FONT>         *  are released when the thread terminates.<a name="line.58"></a>
+<FONT color="green">059</FONT>         */<a name="line.59"></a>
+<FONT color="green">060</FONT>        public void destroyApp(boolean unconditional) {<a name="line.60"></a>
+<FONT color="green">061</FONT>        }<a name="line.61"></a>
+<FONT color="green">062</FONT>    <a name="line.62"></a>
+<FONT color="green">063</FONT>        /**<a name="line.63"></a>
+<FONT color="green">064</FONT>         *  Handles the commands on the UI.<a name="line.64"></a>
+<FONT color="green">065</FONT>         *<a name="line.65"></a>
+<FONT color="green">066</FONT>         *  @param cmd the command object identifying the command<a name="line.66"></a>
+<FONT color="green">067</FONT>         *  @param source the displayable on which the command has occurred<a name="line.67"></a>
+<FONT color="green">068</FONT>         */<a name="line.68"></a>
+<FONT color="green">069</FONT>        public void commandAction(Command cmd, Displayable source) {<a name="line.69"></a>
+<FONT color="green">070</FONT>            if (cmd == CMD_EXIT) {<a name="line.70"></a>
+<FONT color="green">071</FONT>                destroyApp(true);<a name="line.71"></a>
+<FONT color="green">072</FONT>                notifyDestroyed();<a name="line.72"></a>
+<FONT color="green">073</FONT>            } else if (cmd == CMD_CONNECT) {<a name="line.73"></a>
+<FONT color="green">074</FONT>                Thread t = new Thread(this);<a name="line.74"></a>
+<FONT color="green">075</FONT>                t.start();<a name="line.75"></a>
+<FONT color="green">076</FONT>            } else {<a name="line.76"></a>
+<FONT color="green">077</FONT>            }<a name="line.77"></a>
+<FONT color="green">078</FONT>        }<a name="line.78"></a>
+<FONT color="green">079</FONT>    <a name="line.79"></a>
+<FONT color="green">080</FONT>        /**<a name="line.80"></a>
+<FONT color="green">081</FONT>         *  Defines the run() method which all Runnable objects must do.<a name="line.81"></a>
+<FONT color="green">082</FONT>         *  Creates a SocketConnection to the address appearing in the<a name="line.82"></a>
+<FONT color="green">083</FONT>         *  TextField on the screen.<a name="line.83"></a>
+<FONT color="green">084</FONT>         */<a name="line.84"></a>
+<FONT color="green">085</FONT>        public void run() {<a name="line.85"></a>
+<FONT color="green">086</FONT>            try {<a name="line.86"></a>
+<FONT color="green">087</FONT>                String url = textField.getString();<a name="line.87"></a>
+<FONT color="green">088</FONT>                if (url.startsWith("socket")) {<a name="line.88"></a>
+<FONT color="green">089</FONT>                    Connection c = Connector.open(url);<a name="line.89"></a>
+<FONT color="green">090</FONT>                    if (c instanceof SocketConnection) {<a name="line.90"></a>
+<FONT color="green">091</FONT>                        // NB: URL must contain a hostname in order to create a client connection.<a name="line.91"></a>
+<FONT color="green">092</FONT>                        //     Omitting the hostname will create a server connection, which will<a name="line.92"></a>
+<FONT color="green">093</FONT>                        //     not work for this example.<a name="line.93"></a>
+<FONT color="green">094</FONT>                        socketConnection = (SocketConnection)c;<a name="line.94"></a>
+<FONT color="green">095</FONT>                        socketConnection.setSocketOption(SocketConnection.LINGER, 5);<a name="line.95"></a>
+<FONT color="green">096</FONT>                    } else if (c instanceof ServerSocketConnection) {<a name="line.96"></a>
+<FONT color="green">097</FONT>                        // User omitted the hostname in the entered URL<a name="line.97"></a>
+<FONT color="green">098</FONT>                        displayAlert("incorrect URL: client socket URL must contain a hostname (e.g. \"localhost\")");<a name="line.98"></a>
+<FONT color="green">099</FONT>                        c.close();<a name="line.99"></a>
+<FONT color="green">100</FONT>                    } else if (c != null) {<a name="line.100"></a>
+<FONT color="green">101</FONT>                        // User entered an invalid socket URL<a name="line.101"></a>
+<FONT color="green">102</FONT>                        displayAlert("incorrect URL: only sockets with user-defined ports are supported in this example");<a name="line.102"></a>
+<FONT color="green">103</FONT>                        c.close();<a name="line.103"></a>
+<FONT color="green">104</FONT>                    }<a name="line.104"></a>
+<FONT color="green">105</FONT>                } else {<a name="line.105"></a>
+<FONT color="green">106</FONT>                    displayAlert("incorrect URL, possibly network type not supported");<a name="line.106"></a>
+<FONT color="green">107</FONT>                }<a name="line.107"></a>
+<FONT color="green">108</FONT>            } catch (IllegalArgumentException iae) {<a name="line.108"></a>
+<FONT color="green">109</FONT>                //iae.printStackTrace();<a name="line.109"></a>
+<FONT color="green">110</FONT>                displayAlert("incorrect url, check and try again");<a name="line.110"></a>
+<FONT color="green">111</FONT>            } catch (ConnectionNotFoundException cnfe) {<a name="line.111"></a>
+<FONT color="green">112</FONT>                //cnfe.printStackTrace();<a name="line.112"></a>
+<FONT color="green">113</FONT>                displayAlert("no such address registered, check and try again");<a name="line.113"></a>
+<FONT color="green">114</FONT>            } catch (Exception e) {<a name="line.114"></a>
+<FONT color="green">115</FONT>                e.printStackTrace();<a name="line.115"></a>
+<FONT color="green">116</FONT>                displayAlert(e.getMessage());<a name="line.116"></a>
+<FONT color="green">117</FONT>            }<a name="line.117"></a>
+<FONT color="green">118</FONT>            finally {<a name="line.118"></a>
+<FONT color="green">119</FONT>                if (socketConnection != null) {<a name="line.119"></a>
+<FONT color="green">120</FONT>                    try {<a name="line.120"></a>
+<FONT color="green">121</FONT>                        socketConnection.close();<a name="line.121"></a>
+<FONT color="green">122</FONT>                    } catch (Exception e) {<a name="line.122"></a>
+<FONT color="green">123</FONT>                    }<a name="line.123"></a>
+<FONT color="green">124</FONT>                }<a name="line.124"></a>
+<FONT color="green">125</FONT>            }<a name="line.125"></a>
+<FONT color="green">126</FONT>        }<a name="line.126"></a>
+<FONT color="green">127</FONT>    <a name="line.127"></a>
+<FONT color="green">128</FONT>        /** Displays an alert with the desired text to the user. */<a name="line.128"></a>
+<FONT color="green">129</FONT>        private void displayAlert(String alertText) {<a name="line.129"></a>
+<FONT color="green">130</FONT>            Alert alert = new Alert("Info", alertText, null, AlertType.INFO);<a name="line.130"></a>
+<FONT color="green">131</FONT>            display.setCurrent(alert, midletForm);<a name="line.131"></a>
+<FONT color="green">132</FONT>        }<a name="line.132"></a>
+<FONT color="green">133</FONT>    }<a name="line.133"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+</BODY>
+</HTML>

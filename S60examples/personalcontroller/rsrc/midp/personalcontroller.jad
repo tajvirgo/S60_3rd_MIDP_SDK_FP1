@@ -1,0 +1,8 @@
+MIDlet-1: PersonalController, , com.nokia.midp.examples.JSR75.PersonalController.PersonalController
+MIDlet-Jar-Size: @@@
+MIDlet-Jar-URL: personalcontroller.jar
+MIDlet-Name: PersonalController
+MicroEdition-Configuration: CLDC-1.1
+MicroEdition-Profile: MIDP-2.0
+MIDlet-Version: 1.0
+MIDlet-Vendor: Nokia

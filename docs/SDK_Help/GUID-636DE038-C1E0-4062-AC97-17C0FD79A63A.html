@@ -1,0 +1,77 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Method additions and exceptions"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-636DE038-C1E0-4062-AC97-17C0FD79A63A"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> JavaTM Implementation Notes</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-636DE038-C1E0-4062-AC97-17C0FD79A63A"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-636DE038-C1E0-4062-AC97-17C0FD79A63A"><!----></a>Method
+additions and exceptions</h1>
+<p><span><code>addCredential</code></span></p>
+<div class="tablenoborder"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-5EE3540C-1610-4A9A-9DD0-E62D7736342D"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-5EE3540C-1610-4A9A-9DD0-E62D7736342D" frame="border" border="1" rules="all">
+
+
+
+<thead align="left">
+<tr class="title "><th valign="top" width="27.242524916943523%" id="d0e25821">
+<p>Parameter name</p>
+</th><th valign="top" width="20.930232558139537%" id="d0e25826">
+<p>Parameter values</p>
+</th><th valign="top" width="51.82724252491695%" id="d0e25831">
+<p>Notes</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td valign="top" width="27.242524916943523%" headers="d0e25821 ">
+<p><code>uri</code></p>
+</td>
+<td valign="top" width="20.930232558139537%" headers="d0e25826 ">
+<p>Not used</p>
+</td>
+<td valign="top" width="51.82724252491695%" headers="d0e25831 ">
+<p>The implementation stores the entire certificate, and the <code>uri</code> parameter
+is not used.</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p><span><code>generateCSR</code></span></p>
+<p>Only keys stored in WIM can be used in CSR generation.</p>
+<div class="tablenoborder"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-936F4488-F28A-437C-8A7A-9EA396E67BBB"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-936F4488-F28A-437C-8A7A-9EA396E67BBB" frame="border" border="1" rules="all">
+
+
+
+<thead align="left">
+<tr class="title "><th valign="top" width="28.571428571428577%" id="d0e25890">
+<p>Parameter name</p>
+</th><th valign="top" width="20.598006644518275%" id="d0e25895">
+<p>Parameter values</p>
+</th><th valign="top" width="50.83056478405316%" id="d0e25900">
+<p>Notes</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td valign="top" width="28.571428571428577%" headers="d0e25890 ">
+<p><code>forceKeyGen</code></p>
+</td>
+<td valign="top" width="20.598006644518275%" headers="d0e25895 ">
+<p>false</p>
+</td>
+<td valign="top" width="50.83056478405316%" headers="d0e25900 ">
+<p>Key generation is not supported. The keys must already exist in WIM.
+Both authentication and non-repudiation keys are supported if they can be
+found in WIM.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="28.571428571428577%" headers="d0e25890 ">
+<p><code>nameInfo</code></p>
+</td>
+<td valign="top" width="20.598006644518275%" headers="d0e25895 ">
+<p>String formatted according to RFC2253, or null.</p>
+</td>
+<td valign="top" width="50.83056478405316%" headers="d0e25900 ">
+<p>Only characters in ASN.1 PrintableString character set are allowed in
+attribute values.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

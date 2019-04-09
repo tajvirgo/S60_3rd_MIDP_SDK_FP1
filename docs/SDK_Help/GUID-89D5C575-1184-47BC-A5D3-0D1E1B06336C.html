@@ -1,0 +1,77 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Runtime environment notes"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-89D5C575-1184-47BC-A5D3-0D1E1B06336C"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> JavaTM Implementation Notes</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-89D5C575-1184-47BC-A5D3-0D1E1B06336C"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-89D5C575-1184-47BC-A5D3-0D1E1B06336C"><!----></a>Runtime
+environment notes</h1>
+<div><h3>Localization</h3><p>The labels of fields, attributes, array elements, and list names are
+localized. </p><p>The methods <code>PIMList.getFieldLabel()</code>, <code>PIMList.getAttributeLabel()</code>, <code>PIMList.getArrayElementLabel()</code>, and <code>PIMList.getName()</code> should be used for obtaining
+these localized labels.</p></div>
+<div><h3>Security settings</h3><p>Security vulnerable operations in PIM API belong to two Function groups:</p><ul>
+<li><p>Read User Data Access</p></li>
+<li><p>Write User Data Access</p></li>
+</ul><p>All methods which may throw a <code>SecurityException</code> (according
+to the API specification) are considered security vulnerable. Permission to
+access any security vulnerable operation are checked on every invocation. </p><p>The following table describes the security policy for the PIM API related
+Function groups:</p><div class="tablenoborder"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-374B6BC4-5299-4FF1-B5A2-B87E69BDB755"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-374B6BC4-5299-4FF1-B5A2-B87E69BDB755" frame="border" border="1" rules="all"><caption><strong>Table 17: </strong>The security
+policy for the PIM API related Function groups</caption>
+
+
+
+<thead align="left">
+<tr class="title "><th valign="top" width="19.063545150501675%" id="d0e22956">
+<p>Function group</p>
+</th><th valign="top" width="39.79933110367893%" id="d0e22961">
+<p>Trusted Third Party domain</p>
+</th><th valign="top" width="41.1371237458194%" id="d0e22966">
+<p>Untrusted domain</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td valign="top" width="19.063545150501675%" headers="d0e22956 ">
+<p>Read User Data Access</p>
+</td>
+<td valign="top" width="39.79933110367893%" headers="d0e22961 ">
+<p>Default setting: Oneshot</p>
+<p>Other settings: Blanket, Session, No</p>
+</td>
+<td valign="top" width="41.1371237458194%" headers="d0e22966 ">
+<p>Default setting: Oneshot</p>
+<p>Other settings: No</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="19.063545150501675%" headers="d0e22956 ">
+<p>Write User Data Access</p>
+</td>
+<td valign="top" width="39.79933110367893%" headers="d0e22961 ">
+<p>Default setting: Oneshot</p>
+<p>Other settings: Blanket, Session, No</p>
+</td>
+<td valign="top" width="41.1371237458194%" headers="d0e22966 ">
+<p>Default setting: Oneshot</p>
+<p>Other settings: No</p>
+</td>
+</tr>
+</tbody>
+</table></div><p>Explanation for the table values are as follows:</p><ul>
+<li><p>“Blanket” is valid for every invocation of an API by a MIDlet
+suite until it is uninstalled or the permission is changed by the user.</p>
+</li>
+<li><p>“Session” is valid from the invocation of a MIDlet suite
+until it terminates. “Session” mode must prompt the user on or before the
+first invocation of the API or function, which is protected. When the user
+re-invokes the MIDlet suite the prompt must be repeated as the user previously
+defined.</p></li>
+<li><p>"Oneshot" means that the mode must prompt the user every
+time when the API or a protected function is invocated.</p></li>
+<li><p>“No” means that the MIDlet can’t access the protected function
+at all.</p></li>
+</ul></div>
+<div><h3>Confirmation dialogues </h3><p>Although the PIM API does not constitute any explicit UI components,
+the implementation shows an extra confirmation dialogue for item and category
+deletion operations. In PIM API S60 3rd Edition Feature Pack 1 these confirmation
+dialogues are suppressed when the API is used from the Manufacturer security
+domain.</p></div>
+
+</div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

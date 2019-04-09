@@ -1,0 +1,184 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Internal settings"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-60E7453A-D6CB-4B0F-816F-F0C9685CE62E"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> JavaTM Implementation Notes</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-60E7453A-D6CB-4B0F-816F-F0C9685CE62E"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-60E7453A-D6CB-4B0F-816F-F0C9685CE62E"><!----></a>Internal
+settings</h1>
+<p>The following sections give information about the internal settings
+supported by JSR-205.</p>
+<div><h3>Maximum size of MMS</h3><p>In the S60 implementation, the maximum size for an MMS to be sent through
+JSR-205 is 300K. This value is specified by <a href="http://www.openmobilealliance.org/release_program/docs/MMS/V1_2-20030923-C/OMA-MMS-CONF-V1_2-20030929-C.pdf" target="_blank">MMS Conformance Document 1.2</a>. The creation of any MMS with a size
+bigger than 300K will result in a <code>SizeExceededException</code>.</p><p/></div>
+<div><h3>MMS store</h3><p>In the S60 implementation, by default the MMS store is the phone memory
+(C: drive), but the user can change that to be memory card. In this case,
+if the memory card is removed and an MMS (or notification) arrives to the
+phone, it will be saved into the phone's memory, which becomes automatically
+the new MMS store.  </p><p>If the user later reinserts the memory card into the phone, the MMSs
+which were received while the memory card was the MMS store will
+not be available unless the user resets the memory card as the new MMS store.</p><p/></div>
+<div><h3>Receiving MMS messages</h3><p>In the S60 implementation, MMSs addressed to registered Java applications
+are not saved into the Inbox and are not visible through the Messaging UI.
+These kinds of MMSs are only visible towards the registered Java applications. </p><p>In case there is no registered Java application for a certain received
+MMS, then this MMS will be saved into the Inbox and therefore it will be visible
+through Messaging UI. </p><p>The automatic/manual fetch feature of the S60 phones applies to MMSs
+received by JSR-205 as well: </p><ul>
+<li><p>In automatic fetching, the MMSs will be automatically fetched
+(either into a specific folder if there is a registered Java application for
+that MMS or into the Inbox if there is no registered Java application for
+that MMS).</p></li>
+<li><p>In manual fetching, a regular notification (with no Java-specific
+information) about the incoming MMS will be saved into the Inbox and shown
+to the phone user who can decide whether to fetch the MMS.</p></li>
+</ul><p/></div>
+<div><h3>Reply mechanism </h3><p>The reply mechanism defined in Appendix D of the <a href="http://jcp.org/en/jsr/detail?id=205" target="_blank">JSR-205
+specification</a> is supported as clarified in the paragraphs below.
+The reply mechanism is based on the ‘Reply-To-Application-ID’ transport header
+defined by JSR-205. The reply mechanism means sending a received message back
+to the sender without specifically setting the recipient’s address (this will
+be done automatically by the implementation based on the information attached
+to the message to be sent. Thus, the message to be sent becomes a reply-type
+of message). The reply-type of the message is a message which came from a
+sender which is prepared for receiving responses to the sent message. JSR-205
+specifies only how the ‘Reply-To-Application-ID’ is set on the sender side
+in case of a server-type of connection (“<span>when a message identifying an
+application-id is sent from a server type MessageConnection, the Reply-To-Application-ID
+in the message is set to the application-id of the MessageConnection</span>”),
+but JSR-205 does not specify how this header is set on the sender side in
+case of a client-type of connection and how this header is used on the receiver
+side. The S60 implementation for this is:</p><ul>
+<li><p>In case of a client-type of connection JSR-205 mandates that
+"<span>when a client type <code>MessageConnection</code> is used for
+sending a message with an application-id, the 'Reply-To-Application-ID' is
+set to an implementation-specific value</span>". The S60's implementation specific
+value is '$'. Therefore, the S60 implementation recognizes a reply-type of
+message as a message which has 'Reply-To-Application-ID' transport header
+set to something else than '$'</p></li>
+<li><p>The ‘Reply-To-Application-ID’ header is visible on the receiver
+side via <code>getAddress()</code> or <code>getAddress("from")</code> methods.
+All the other get methods for the address(es) will return the receiver’s own
+application ID. In case of a non reply-type of message the implementation
+returns the sender's address without the application ID.</p></li>
+<li><p>The receiver makes a reply by simply sending a received message
+back to the sender without specifically setting the recipient’s address (the
+receiver is free to modify other fields of the message, but the addresses).
+In this case the implementation checks if the message to be sent is a reply-type
+of message or not (by checking the presence of the ‘Reply-To-Application-ID’
+info attached to the message).</p>
+<ul>
+<li><p>In case the message is a reply-type of message, the implementation
+will discard all the other recipients of the message and it will only send
+the message to original sender of the message. In the same time the ‘Reply-To-Application-ID’
+header of the message to be sent as a reply is set to be the application ID
+of the current sender (that is, the message which is sent as a reply is a
+reply-type of message as well). After being sent, a reply-type of message
+has only one “to” address set to point to the original sender of the message.
+All the other addresses have been cleared after sending.</p></li>
+<li><p>In case the message to be sent is not a reply-type of message,
+the implementation will throw an <code>IllegalArgumentException</code>,
+informing the receiver that the message to be sent is not a reply-type of
+message. </p></li>
+</ul>
+</li>
+<li><p>On the other hand, as soon as the receiver of a reply-type
+of message touched/modified some of the message’s addresses (by calling one
+of the <code>setAddress()</code> or <code>removeAddress()</code> methods),
+the message is not a reply-type of message anymore; by calling the <code>send()</code> method
+with this kind of message, the receiver performs a simple send (to the message's
+recipients) and not a reply.</p></li>
+</ul></div>
+<div><h3>Out of memory</h3><p>In the S60 implementation, there is no difference in handling the lack
+of memory scenario for MMSs addressed to Java applications and other MMSs
+(going by default to the Inbox):</p><ul>
+<li><p>In manual fetching: the notification about the incoming MMS
+will be put to a failed state and a corresponding error code will indicate
+the lack of memory </p></li>
+<li><p>In automatic fetching: the terminal user will be notified
+about the lack of memory and the receiving of the incoming MMS will be re-scheduled</p>
+</li>
+</ul><p/></div>
+<div><h3>Alert tone</h3><p>When an MMS addressed to a certain Java application is received by the
+phone, the same alert tone which is assigned for the receiving of MMS’s (going
+by default to the Inbox) will be played/heard. </p></div>
+<div><h3>Deploying push MIDlets</h3><p>In the S60 implementation, Push MIDlets should be installed in a MIDlet
+suite of their own (which does not contain other MIDlets). The reason for
+this is that a push MIDlet can not be restarted if a MIDlet (which was installed
+from the same MIDlet suite with the push MIDlet) is running.</p><p/></div>
+<div><h3>Security settings</h3><p>The Wireless Messaging API security model implemented is based on the
+security requirements specified in <a href="http://jcp.org/en/jsr/detail?id=118" target="_blank">Mobile
+Information Device Profile for Java 2 Micro Edition, Version 2.0</a> and <a href="http://jcp.org/en/jsr/detail?id=185" target="_blank">Java Technology for the Wireless
+Industry Specification</a>. </p><p>Briefly, Wireless Messaging API is assigned to Messaging function group
+with the following user permission settings/interaction modes for the <code>send()</code> method:</p><div class="tablenoborder"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-09B29B2F-BE93-4375-9303-F9AD55BE52BF"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-09B29B2F-BE93-4375-9303-F9AD55BE52BF" frame="border" border="1" rules="all">
+
+
+
+
+<thead align="left">
+<tr class="title "><th valign="top" width="16.666666666666668%" id="d0e31560">
+<p>Function group</p>
+</th><th valign="top" width="17.562724014336915%" id="d0e31565">
+<p>Trusted Domain</p>
+</th><th valign="top" width="13.620071684587815%" id="d0e31570">&nbsp;</th><th valign="top" width="26.881720430107524%" id="d0e31571">
+<p>Untrusted Domain</p>
+</th><th valign="top" width="25.268817204301076%" id="d0e31576">&nbsp;</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td valign="top" width="16.666666666666668%" headers="d0e31560 ">
+<p>Messaging</p>
+</td>
+<td valign="top" width="17.562724014336915%" headers="d0e31565 ">
+<p>default setting</p>
+</td>
+<td valign="top" width="13.620071684587815%" headers="d0e31570 ">
+<p>Oneshot</p>
+</td>
+<td valign="top" width="26.881720430107524%" headers="d0e31571 ">
+<p>default setting</p>
+</td>
+<td valign="top" width="25.268817204301076%" headers="d0e31576 ">
+<p>Oneshot</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="16.666666666666668%" headers="d0e31560 ">
+<p/>
+</td>
+<td valign="top" width="17.562724014336915%" headers="d0e31565 ">
+<p>other settings</p>
+</td>
+<td valign="top" width="13.620071684587815%" headers="d0e31570 ">
+<p>Blanket, Session, No</p>
+</td>
+<td valign="top" width="26.881720430107524%" headers="d0e31571 ">
+<p>other settings</p>
+</td>
+<td valign="top" width="25.268817204301076%" headers="d0e31576 ">
+<p>No</p>
+</td>
+</tr>
+</tbody>
+</table></div><p>In the S60 implementation, there are no user prompts for using the other
+methods of Wireless Messaging API. The interaction modes, or user permission
+settings, specify how to prompt the user to grant permissions to a specific
+API with one of the following modes:</p><ul>
+<li><p>“Blanket” is valid for every invocation of an API by a MIDlet
+suite until it is uninstalled or the permission is changed by the user.</p>
+</li>
+<li><p>“Session” is valid from the invocation of a MIDlet suite
+until it terminates. “Session” mode MUST prompt the user on or before the
+first invocation of the API or function which is protected. When the user
+re-invokes the MIDlet suite, the prompt MUST be repeated.</p></li>
+<li><p>“Oneshot” MUST prompt the user on each invocation of the
+API or function which is protected.</p></li>
+</ul><p>The S60 implementation shows only the number of recipients to which
+the MMS is about to be sent. The size of each of the <code>MessagePart</code> can
+be retrieved separately by using<code> MessagePart.getLength()</code> method.
+This clarification applies to the following paragraph:</p><p><span>“An Application MUST receive a user permission to send an MMS. The
+user makes a decision based on the following information provided by the application: </span></p><ul>
+<li><p><span>List of all recipient addresses: all addresses set in
+the "to", "cc" and "bcc" fields</span></p></li>
+<li><p><span>The total size of the message, which includes the size
+of all message attachments and the size of the subject.” (Appendix E, E.2.1
+E.2.2 Permissions for Send and Receive Operations; <a href="http://jcp.org/en/jsr/detail?id=205" target="_blank">JSR-205
+API specification</a>)</span></p></li>
+</ul><p/></div>
+</div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

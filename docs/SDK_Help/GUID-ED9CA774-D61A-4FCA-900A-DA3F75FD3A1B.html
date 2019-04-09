@@ -1,0 +1,57 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobiletask"/><meta name="DC.Title" content="Launching a MIDlet in the S60 emulator from WSDD"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-ED9CA774-D61A-4FCA-900A-DA3F75FD3A1B"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> Tools and Utilities</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-ED9CA774-D61A-4FCA-900A-DA3F75FD3A1B"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-ED9CA774-D61A-4FCA-900A-DA3F75FD3A1B"><!----></a>Launching a MIDlet in the S60 emulator from WSDD</h1>
+<div><h3>Context</h3><p>You must create a launch configuration in WSDD the first time you run
+a <a href="GUID-E56AE4C9-AD3C-4725-B5D4-04D8DF446BAC.html#GUID-E56AE4C9-AD3C-4725-B5D4-04D8DF446BAC">MIDlet suite</a> on
+the <a href="GUID-519DDEA7-537F-4511-83A0-37DCFCFF8915.html#GUID-519DDEA7-537F-4511-83A0-37DCFCFF8915">S60 Emulator</a>.
+The executable will run on the local platform with the J9 virtual machine
+and the S60 Emulator. </p></div>
+<h3>Steps</h3><ol id="GUID-50C372EC-959F-44A8-894A-4D75DFA53387"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-50C372EC-959F-44A8-894A-4D75DFA53387"><!----></a>
+<li id="GUID-98140F75-5FFE-49E1-815F-77F29AC86538"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-98140F75-5FFE-49E1-815F-77F29AC86538"><!----></a><span>Open the MIDlet project that you want to run in WSDD. </span>
+</li>
+<li id="GUID-6E0454C4-E015-4C07-8F66-7A2EC86E66FC"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-6E0454C4-E015-4C07-8F66-7A2EC86E66FC"><!----></a><span>Select <span>Run &gt; Run...</span> from the WSDD menu bar.</span>
+
+<p>The <span>Create, manage, and run configurations</span> dialog opens.</p>
+
+</li>
+<li id="GUID-4C9BC9A7-6F55-4575-A054-00578B4D71F8"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-4C9BC9A7-6F55-4575-A054-00578B4D71F8"><!----></a><span>In the<span>Create, manage, and run configurations</span> dialog,
+select MIDlet suite from the list and click <span>New</span>.</span>
+
+<p>A dialog to configure a new MIDlet suite opens.</p>
+
+</li>
+<li id="GUID-B093FD14-63CA-466D-B550-3D52481C301E"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-B093FD14-63CA-466D-B550-3D52481C301E"><!----></a><span>in the <span>Run</span> dialog, edit the run configuration fields.</span>
+
+<p> To fill in the <span>Project</span> field, click <span>Browse</span> to select
+the project. Select the configured “S60 MIDP SDK Emulator” in the <span>Device
+or JRE</span> field.</p>
+<div class="figure" id="GUID-793FADDB-9FBA-411E-8F65-44A49CD25E35"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-793FADDB-9FBA-411E-8F65-44A49CD25E35"><!----></a><img src="GUID-75AD7FC4-E42D-4BE3-AC30-08B3078058A0_d0e12341_href.png" alt=""/><p class="figure-title"><strong>Figure 80: </strong>New MIDlet suite configuration</p></div>
+
+</li>
+<li id="GUID-BEE707E7-78B1-4622-84CB-3EB1D511141F"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-BEE707E7-78B1-4622-84CB-3EB1D511141F"><!----></a><span>Select the MIDlet suite <code>examples.jad</code> to
+be run using the combo box.</span></li>
+<li id="GUID-BD03A1EC-4EA8-4BA1-9D34-76D2E3CD0910"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-BD03A1EC-4EA8-4BA1-9D34-76D2E3CD0910"><!----></a><span>Click <span>Run</span>.</span>
+
+<p>A MIDlet selector dialog is shown.</p>
+
+</li>
+<li id="GUID-FC46ED9E-EC4B-430D-A94E-15444891A363"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-FC46ED9E-EC4B-430D-A94E-15444891A363"><!----></a><span>In the MIDlet selector dialog, select the MIDlet to run
+and press <span>Enter</span>.</span>
+
+<p>The J9 VM and the MIDlet launches on the S60 MIDP SDK Emulator.</p>
+<div class="note"><p><strong class="note_title">Note: </strong>If your MIDlet does not respond to commands, you can kill your MIDlet
+using the key combination <span>Shift + Ctrl + Alt + K</span>, which kills the application
+with the current keyboard focus.</p></div>
+<p>You can reuse a previously created run configuration to run your MIDlet
+suite:</p>
+<ol type="a">
+<li id="GUID-4970B64D-AE8B-4615-A803-F3FD2D5B1161"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-4970B64D-AE8B-4615-A803-F3FD2D5B1161"><!----></a><p>Click <span>Run &gt; Run</span>.</p></li>
+<li id="GUID-07E0394B-1FFC-41D3-B420-9035FC0AC74F"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-07E0394B-1FFC-41D3-B420-9035FC0AC74F"><!----></a><p>In the <span>Run</span> dialog box, select a run configuration
+from the <span>Configurations</span> list.</p></li>
+<li id="GUID-1CF18480-50C7-49A1-85F6-27E217C8605E"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-1CF18480-50C7-49A1-85F6-27E217C8605E"><!----></a><p>Click <span>Run</span>.</p></li>
+</ol>
+
+</li>
+</ol>
+</div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

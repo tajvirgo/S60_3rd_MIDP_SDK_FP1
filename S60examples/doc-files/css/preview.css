@@ -1,0 +1,111 @@
+.preview-block,
+.preview-page-block {
+	border: solid 2px orange;
+}
+.preview-block {
+    margin: 0 0 5px 0;
+}
+td.preview-block,
+th.preview-block {
+    margin: 0;
+    border: solid 2px orange;
+    padding: 0;
+}
+span.preview-block {
+    border-top: none;
+    margin: 0;
+}
+.preview-block-header,
+.preview-page-block-header {
+	background-color: #FD8;
+}
+div.preview-block-header,
+.preview-page-block-header {
+	border-bottom: solid 2px orange;
+}
+span.preview-block-header {
+	border-right: solid 2px orange;
+	border-top: solid 2px orange;
+	margin-right: 5px;
+}
+.preview-block-button {
+	font-size: 9px;
+	line-height: 12px;
+	height: 18px;
+	padding: 0;
+	margin: 1px 3px 1px 1px;
+}
+.preview-block-title,
+.preview-page-block-title {
+	color: black;
+	font-size: 11px;
+	padding: 0px;
+	padding: 0px 5px;
+	vertical-align: middle;
+}
+div.preview-block-title p {
+    margin: 0;
+}
+div.preview-block-content {
+	margin: 5px;
+}
+span.preview-block-content {
+	padding: 0;
+}
+
+
+/* TOC link target indicator */
+
+.preview-target-format {
+    color: black;
+    border: solid 1px orange;
+    background-color: #FD8;
+    padding: 0 2px;
+    margin-left: 3px;
+    cursor: help;
+}
+a:hover .preview-target-format {
+    text-decoration: none;
+}
+
+/* Make body width window constrained. */
+div.body {
+  width: auto;
+  padding: 10px;
+}
+div.contentLeft {
+	width: auto;
+	float: none;	
+	display: block;
+	min-height: 200px;
+	padding: 0 0 50px 0;
+}
+
+/* Replacement text. */
+
+.preview-replacement-text,
+.conref {
+    color: green !important;
+    cursor: help;
+}
+
+/*
+.condition {
+	border: solid 2px orange;
+	background-color: #FD8;
+	color: black;
+	font-size: 11px;
+	padding: 0px 5px;
+	margin: 5px 0px;
+	vertical-align: middle;	
+}
+*/
+.condition-start-highlight,
+.condition-end-highlight {
+    color: #5555FF;
+    cursor: help;
+}
+
+div.nav3 ul p {
+  margin-left: 30px;
+}

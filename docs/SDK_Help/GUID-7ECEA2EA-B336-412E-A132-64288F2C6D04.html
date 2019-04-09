@@ -1,0 +1,63 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Additional notes"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-7ECEA2EA-B336-412E-A132-64288F2C6D04"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> JavaTM Implementation Notes</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-7ECEA2EA-B336-412E-A132-64288F2C6D04"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-7ECEA2EA-B336-412E-A132-64288F2C6D04"><!----></a>Additional notes</h1>
+<p>The list below contains additional notes:</p>
+<ul>
+<li><p>Escaped and unescaped URI forms are accepted as input unless
+stated otherwise. The output full or partial URI is unescaped unless stated
+otherwise. The methods that take a full or partial URI:</p>
+<ul>
+<li><p><code>Connector.open("file://...")</code></p>
+</li>
+<li><p><code>FileConnection.setFileConnection(String fileName)</code></p>
+</li>
+<li><p><code>FileConnection.rename(String newName)</code></p>
+</li>
+</ul>
+<p><code>Connector.open</code> accepts both forms. The <code>FileConnection.setFileConnection()</code> operation
+does not unescape URIs because the argument must be one of the values returned
+by the <code>FileConnection.list()</code> operation, which returns
+unescaped forms. This means that <code>FileConnection.setFileConnection()</code> can
+be used to open files with names that contain special characters such as "My%20Doc.txt". </p>
+<p>Nothing is specified for the <code>FileConnection.rename()</code> operation,
+so it must accept both forms. The methods that return a full or partial URL
+(one or more):</p>
+<ul>
+<li><p><code>String FileConnection.getName()</code></p>
+</li>
+<li><p><code>String FileConnection.getPath()</code></p>
+</li>
+<li><p><code>String FileConnection.getURL()</code></p>
+</li>
+<li><p><code>java.util.Enumeration FileConnection.list()</code></p>
+</li>
+<li><p><code>java.util.Enumeration FileConnection.list(String
+filter, boolean includeHidden)</code></p></li>
+</ul>
+<p>Of these <code>getName()</code> and <code>getPath()</code> operations
+return unescaped forms, but the <code>getURL()</code> operation returns
+the escaped form, as specified. Since nothing is stated for the <code>list()</code> methods,
+they return unescaped forms.</p></li>
+<li><p>READ_WRITE and WRITE connections can be established to the
+read-only file and directory. This is needed because otherwise changing the
+file/directory to writable is not possible through a File API interface since
+the <code>setWritable()</code> operation needs either a READ_WRITE
+or WRITE connection mode. The following methods can be called in the "write
+mode to read-only file" mode: <code>setWritable()</code> and <code>setHidden()</code>. <code>IOException</code> is
+thrown if other methods, which need a WRITE connection mode, are called in
+the "write mode to read-only file" mode. Note: <code>setHidden()</code> and <code>setWritable()</code> operations
+close automatically an open <code>InputStream</code>.</p></li>
+<li><p>File API accepts only “localhost” or “” as a host in the
+file URI. That is, valid URIs start with <code>file://localhost/</code> or <code>file:///</code>.</p>
+</li>
+<li><p>“/” character at the end of the URI is not mandatory if a
+connection has been established to the directory. In case of an existing file/dir,
+the implementation first searches whether a file by that name exists and after
+that it searches for a directory by that name. In case of a new file/dir,
+the user defines by calling <code>create()</code> or <code>mkdir()</code> operations
+whether a file or a directory is created. Note: If URI ends to the “/” character
+then calling<code> create()</code> operation causes <code>IOException</code>. </p>
+</li>
+</ul>
+</div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

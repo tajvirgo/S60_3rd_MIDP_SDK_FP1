@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>File Connection Demo</title>
+</head>
+  <body>
+           This example demonstrates both &nbsp;JSR 75 file connection and
+ JSR  135 Mobile Media API. &nbsp;The application displays MIDI (.mid) files
+ available  on the device file system and allows the user to play them.<br>
+          <!--section contents-->          
+<h3>Section Contents</h3>
+                   
+<blockquote>                            
+  <p> <a href="#1">1. About this example</a> </p>
+                                     
+  <p> <a href="#2">2. Pre-requisites</a> </p>
+                                     
+  <p> <a href="#3">3. Building and running</a> </p>
+                                     
+  <p> <a href="#4">4. Design and implementation</a> </p>
+                                     
+  <p> <a href="#5">5. Summary</a> </p>
+          </blockquote>
+                   
+<hr align="center" width="100%" size="2">          
+<h3> <a name="1">1. About this example</a> </h3>
+                   
+<blockquote>                            
+  <p>         This example demonstrates both &nbsp;JSR 75 file connection
+ and JSR  135 Mobile Media API. &nbsp;The application displays MIDI (.mid)
+ files available  on the device file system and allows the user to play them.</p>
+          </blockquote>
+                   
+<h3> <a name="2">2. Pre-requisites</a> </h3>
+                   
+<blockquote>                            
+  <p>The example makes use of the standard MIDP application framework and 
+    LCDUI API.  The reader should be familiar 			with these areas before attempting
+    to understand this example.</p>
+                                     
+  <p> </p>
+                             </blockquote>
+                   
+<h3> <a name="3">3. Building and running</a> </h3>
+                   
+<blockquote>                            
+  <p>The example is built using the standard method for building and running 
+    as described in 				<a
+ href="../../../../../../../../doc-files/building.html">Building  and running
+ the examples</a>.<br>
+      </p>
+               
+  <p>In order to play a MIDI file you must place the file in the appropriate
+ directory  for your MIDP SDK. 
+           
+  <p>When the midlet starts the user is prompted to accept the read data operation
+and the following screen appears.<br>
+     </p>
+           
+  <p><img src="doc-files/image1.jpg" alt="First image" width="182"
+ height="213">
+     <br>
+     </p>
+           
+  <p>Screens similar to the above screen will appear when operations access 
+ the file system. &nbsp;Once the midlet has read the contents of the music 
+ folder a spash screen will appear as shown below.<br>
+     </p>
+           
+  <p><img src="doc-files/image2.jpg" alt="image 2" width="182"
+ height="211">
+     <br>
+     </p>
+           
+  <p>Any key press will advance the midlet to the next screen that displays 
+ the contents of the music directory.<br>
+     </p>
+           
+  <p><img src="doc-files/image3.jpg" alt="image 3" width="182"
+ height="210">
+     <br>
+     </p>
+           
+  <p>Selecting the options will cause the following pop up screen to appear.<br>
+     </p>
+           
+  <p><img src="doc-files/image4.jpg" alt="image 4" width="182"
+ height="210">
+     <br>
+     </p>
+           
+  <p>This allows playing or deleting the currently selected file. &nbsp;The 
+ user may also access an about info box or exit the meidlet from this screen. 
+ &nbsp;When a MIDI file is playing the Play option on the screen above is 
+changed to a Stop option.<br>
+     </p>
+           
+  <p>Here are two screen shots that display the about info screen.<br>
+     </p>
+           
+  <p><img src="doc-files/image5.jpg" alt="image 5" width="182"
+ height="209">
+     <br>
+     </p>
+           
+  <p><img src="doc-files/image6.jpg" alt="Image 6" width="182"
+ height="210">
+     <br>
+      </p>
+                                                          
+  <h3> <a name="3.1"></a></h3>
+               
+  <p> 						</p>
+                                     
+  <table width="90%" border="0">
+          <tbody>
+               <tr>
+          <td width="100%" valign="bottom" align="center">              
+                                                                   
+          </td>
+          </tr>
+                                                       
+    </tbody>                           
+  </table>
+          </blockquote>
+                   
+<h3> <a name="4">4. Design and implementation</a> </h3>
+                   
+<blockquote>                            
+  <p>The FileConnectionDemo class is the midlet class for this example. &nbsp;The
+  FileSelector class provides most of the application functionality by making
+  use of the services provided by the JSR 135 Player class and the JSR 75
+FileConnection  class. &nbsp;The example also has two classes derived from
+the Alert class  for part of the user interface.</p>
+                                     
+  <p>    			</p>
+                         <img src="doc-files/classdiagram.jpg"
+ alt="A class diagram image" width="510" height="539">
+                                                   
+  <p></p>
+          </blockquote>
+                   
+<h3> <a name="5">5. Summary</a> </h3>
+                   
+<blockquote>                            
+  <p>This example has demonstrated how to query a device to obtain its supported 
+    media formats, download 				protocols and capture capabilities.</p>
+          </blockquote>
+           <br>
+         <br>
+        <br>
+       <br>
+      <br>
+     <br>
+    <br>
+   <br>
+  <br>
+ <br>
+</body>
+</html>

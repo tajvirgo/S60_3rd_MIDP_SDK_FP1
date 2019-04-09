@@ -1,0 +1,747 @@
+<!DOCTYPE doctype PUBLIC "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+  <title>Shopping Example</title>
+</head>
+  <body>
+  This example stores a Vector of items (a shopping list). <br>
+  <!--section contents-->  
+<h3>Section Contents</h3>
+    
+<blockquote>    
+  <p><a href="#1">1. About this example</a> </p>
+      
+  <p><a href="#2">2. Pre-requisites</a> </p>
+      
+  <p><a href="#3">3. Building and running</a> </p>
+      
+  <p><a href="#4">4. Design and implementation</a> </p>
+      
+  <p><a href="#5">5. Summary</a> </p>
+  </blockquote>
+    <!--(HR)============================================================-->
+ 
+<hr style="height: 2px; width: 100%;" size="2" width="100%"
+ align="center">    
+<h3><a name="1">1. About this example</a> </h3>
+    
+<blockquote>    
+  <p>This example stores and retreives a Vector of items, a shopping list. 
+ This handles a shopping list, containing an unsorted list of items,   and 
+the quantity required. As things are purchased they are removed from   the 
+list.</p>
+  </blockquote>
+    
+<h3><a name="2">2. Pre-requisites</a> </h3>
+    
+<blockquote>    
+  <p>The example makes use of the standard MIDP application framework and 
+  LCDUI API. The reader should be familiar with these areas before attempting 
+  to understand this example.</p>
+      
+  <p>It is suggested that the One Record example is understood before studying 
+  this example.</p>
+      
+  <p>This example uses MIDP 1.0.</p>
+  </blockquote>
+    
+<h3><a name="3">3. Building and running</a> </h3>
+    
+<blockquote>    
+  <p>The example is built using the standard method for building and running 
+  as described in <a
+ href="../../../../../../../../../doc-files/building.html">Building   and
+running the examples</a>.</p>
+      
+  <p>The following classes should be included in the jar:</p>
+      
+  <blockquote> com.nokia.midp.examples.rms.shopping.*<br>
+   </blockquote>
+      
+  <p>No resource files are used.</p>
+      
+  <p>When first launched, the application displays the left-hand screen. 
+ The right-hand screen shot shows the Options menu open.</p>
+   <!--(Table)=========================================================-->
+   
+  <table x-use-null-cells="" style="width: 90%;" width="90%">
+   <tbody>
+       <tr>
+  <td style="text-align: center; width: 50%;" align="center"
+ valign="bottom" width="50%">          
+        <div style="text-align: center;" align="center"> <!--kadov_tag{{<implicit_p>}}--><img
+ alt="doc-files/empty_list.png" src="doc-files/empty_list.png"
+ style="border: medium none ; width: 180px; height: 214px;" width="180"
+ height="214" border="0">
+   </div>
+         </td>
+  <td style="text-align: center; width: 50%;" align="center"
+ valign="bottom" width="50%">          
+        <div style="text-align: center;" align="center"> <!--kadov_tag{{<implicit_p>}}--><img
+ alt="doc-files/menu_short.png" src="doc-files/menu_short.png"
+ style="border: medium none ; width: 180px; height: 214px;" width="180"
+ height="214" border="0">
+   </div>
+         </td>
+       </tr>
+       
+    </tbody>   
+  </table>
+      
+  <ul>
+  	 	<li class="kadov-p">At any stage during this example you can exit and 
+  restart the midlet. The list will be saved between sessions.</li>
+  	 	<li class="kadov-p">Select "Generate ..." to add an appropriate   number 
+of items list. These options are discussed in the section on alternative 
+ implementations.</li>
+     
+  </ul>
+      
+  <p>Selecting Add starts the editing screen with a blank item, as shown 
+ below.</p>
+      
+  <div style="text-align: center;" align="center"> <!--kadov_tag{{<implicit_p>}}--><img
+ alt="doc-files/edit_blank.png" src="doc-files/edit_blank.png"
+ style="border: medium none ; width: 180px; height: 214px;" width="180"
+ height="214" border="0">
+   </div>
+      
+  <p>Here the details for 5 bananas have been added.</p>
+      
+  <div style="text-align: center;" align="center"> <!--kadov_tag{{<implicit_p>}}--><img
+ alt="doc-files/edit_bananas.png" src="doc-files/edit_bananas.png"
+ style="border: medium none ; width: 180px; height: 214px;" width="180"
+ height="214" border="0">
+   </div>
+      
+  <ul>
+  	 	<li class="kadov-p">Select "OK" to save your changes and return   to 
+the list.</li>
+  	 	<li class="kadov-p">Select "Cancel" to return to the list without  
+saving changes.</li>
+     
+  </ul>
+      
+  <p>After adding items, they will be shown in the list. Additional menu 
+ items are available when the list contains items - the right-hand screen 
+  shot shows the Options menu open.</p>
+   <!--(Table)=========================================================-->
+   
+  <table x-use-null-cells="" style="width: 90%;" width="90%">
+   <tbody>
+       <tr>
+  <td style="text-align: center; width: 50%;" align="center"
+ valign="bottom" width="50%">          
+        <div style="text-align: center;" align="center"> <!--kadov_tag{{<implicit_p>}}--><img
+ alt="doc-files/list_bananas_bulbs.png"
+ src="doc-files/list_bananas_bulbs.png"
+ style="border: medium none ; width: 180px; height: 214px;" width="180"
+ height="214" border="0">
+   </div>
+         </td>
+  <td style="text-align: center; width: 50%;" align="center"
+ valign="bottom" width="50%">          
+        <div style="text-align: center;" align="center"> <!--kadov_tag{{<implicit_p>}}--><img
+ alt="doc-files/menu.png" src="doc-files/menu.png"
+ style="border: medium none ; width: 180px; height: 214px;" width="180"
+ height="214" border="0">
+   </div>
+         </td>
+       </tr>
+       
+    </tbody>   
+  </table>
+      
+  <ul>
+  	 	<li class="kadov-p">Press [up] or [down] to scroll through the list.</li>
+  	 	<li class="kadov-p">Use the Options menu to add new items.</li>
+  	 	<li class="kadov-p">When the list is not empty, the Options menu has 
+  options to edit or delete the current item.</li>
+  	 	<li class="kadov-p">Press [center of rocker switch] to edit the current 
+  item (this is also available from the menu).</li>
+     
+  </ul>
+  </blockquote>
+    
+<h3><a name="4">4. Design and implementation</a> </h3>
+    
+<blockquote>    
+  <p>The RMS API provides the method for saving and restoring data to and 
+  from the filing system. RMS uses a database API to store/restore data. 
+ This example uses one record for each type of item.</p>
+      
+  <p>The following list and class diagram identify the classes used in this 
+  example.</p>
+      
+  <p>Application classes</p>
+      
+  <ul>
+  	 	<li class="kadov-p"><a
+ href="../../../../../../com/nokia/midp/examples/rms/shopping/ShoppingListMIDlet.html"><code>ShoppingListMIDlet</code></a> 
+  Shows a List screen, displaying the items in the shopping list; also handles 
+  loading and saving the data.</li>
+  	 	<li class="kadov-p"><a
+ href="../../../../../../com/nokia/midp/examples/rms/shopping/ShoppingItem.html"><code>ShoppingItem</code></a> 
+  Encapsulates an item on the list.</li>
+  	 	<li class="kadov-p"><a
+ href="../../../../../../com/nokia/midp/examples/rms/shopping/EditItemScreen.html"><code>EditItemScreen</code></a> 
+  UI to edit the details of a ShoppingItem.</li>
+     
+  </ul>
+      
+  <p>System classes</p>
+      
+  <ul>
+  	 	<li class="kadov-p"><a
+ href="../../../../../../../../../MIDP2.0_API/javadoc/javax/microedition/rms/RecordStore.html"><code>RecordStore</code></a> 
+  A collection of records which persist across multiple invocations of the 
+  MIDlet.</li>
+  	 	<li class="kadov-p"><a
+ href="../../../../../../../../../MIDP2.0_API/javadoc/javax/microedition/rms/RecordEnumeration.html"><code>RecordEnumeration</code></a> 
+  Iterates over the records in the RecordStore.</li>
+  	 	<li class="kadov-p"><a
+ href="../../../../../../../../../CLDC1.1_API/java/io/DataInputStream.html"><code>DataInputStream</code></a> 
+  Reads primitive Java™ data types from an underlying input stream.</li>
+  	 	<li class="kadov-p"><a
+ href="../../../../../../../../../CLDC1.1_API/java/io/ByteArrayInputStream.html"><code>ByteArrayInputStream</code></a> 
+  Provides an input stream accessing a byte array.</li>
+  	 	<li class="kadov-p"><a
+ href="../../../../../../../../../CLDC1.1_API/java/io/DataOutputStream.html"><code>DataOutputStream</code></a> 
+  Writes primitive Java data types to an underlying output stream.</li>
+  	 	<li class="kadov-p"><a
+ href="../../../../../../../../../CLDC1.1_API/java/io/ByteArrayOutputStream.html"><code>ByteArrayOutputStream</code></a> 
+  Provides an output stream in which the data is written to a byte array.</li>
+  	 	<li class="kadov-p"><a
+ href="../../../../../../../../../MIDP2.0_API/javadoc/javax/microedition/lcdui/List.html"><code>List</code></a> 
+  A Screen containing a list of choices.</li>
+  	 	<li class="kadov-p"><a
+ href="../../../../../../../../../CLDC1.1_API/java/util/Vector.html"><code>Vector</code></a> 
+  Implements a growable array of objects.</li>
+     
+  </ul>
+      
+  <div style="text-align: center;" align="center"> <!--kadov_tag{{<implicit_p>}}--><img
+ alt="doc-files/class_diagram.jpg" src="doc-files/class_diagram.jpg"
+ style="border: medium none ; width: 510px; height: 252px;" width="510"
+ height="252" border="0">
+   </div>
+      
+  <p>The engine of the midlet is a collection of ShoppingItems. Each instance 
+  of ShoppingItem is a line on a shopping list - it contains the name of 
+ the item, and the quantity needed. This collection is stored in a Vector.</p>
+      
+  <p>The RMS database is a mirror of the Vector, containing one record for 
+  each ShoppingItem. In loadData() each database record is used to construct 
+  a separate ShoppingItem.</p>
+      
+  <p>In saveData() the database is synchronised with the Vector using the 
+  following rules:</p>
+      
+  <ul>
+  	 	<li class="kadov-p">If a shopping item has been deleted, the corresponding 
+  record is deleted.</li>
+  	 	<li class="kadov-p">If a shopping item has been modified, the corresponding 
+  record is modified.</li>
+  	 	<li class="kadov-p">If a shopping item has been created, a new record 
+  is created.</li>
+  	 	<li class="kadov-p">Any other record is not accessed.</li>
+     
+  </ul>
+      
+  <p>When a new record is added to the database a record id is allocated 
+ to it. Record ids are allocated sequentially, beginning at 1, and are   never
+reused unless the database is deleted. Each ShoppingItem stores   the id
+of the record in the database that corresponds to it.</p>
+      
+  <p>Because no record has id 0, this id can be (and is) used to identify 
+  ShoppingItems that are not yet represented in the database.</p>
+      
+  <p>The issues involved when multiple applications require concurrent access 
+  to the database have not been addressed in this example.</p>
+      
+  <h3><a name="4.1">4.1. Loading</a> </h3>
+      
+  <blockquote>      
+    <p>The following two diagrams show the sequence of actions when the database 
+  records are loaded, which occurs when the application starts. The first 
+  diagram shows ShoppingListMIDlet's sequence of actions, treating the ShoppingItem 
+  class as a black box.</p>
+        
+    <div style="text-align: center;" align="center"> <!--kadov_tag{{<implicit_p>}}--><img
+ alt="doc-files/uml_loading.jpg" src="doc-files/uml_loading.jpg"
+ style="border: medium none ; width: 640px; height: 578px;" width="640"
+ height="578" border="0">
+   </div>
+   <!--(Table)=========================================================-->
+     
+    <table x-use-null-cells="" style="width: 90%;" width="90%">
+   <tbody>
+         <tr>
+  <th style="text-align: center; width: 10%;" align="center" width="10%">Message</th>
+  <th style="text-align: left; width: 80%;" align="left" width="80%">Description</th>
+         </tr>
+   <tr>
+  <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">1</td>
+  <td style="width: 80%;" width="80%">ShoppingListMIDlet's startApp method 
+calls <a
+ href="../../../../../../com/nokia/midp/examples/rms/shopping/ShoppingListMIDlet.html#loadData%28%29"><code>loadData</code></a>. 
+  </td>
+         </tr>
+   <tr>
+  <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">2</td>
+  <td style="width: 80%;" width="80%">loadData calls <code>RecordStore.openRecordStore(String,boolean 
+  false)</code> to create a new RecordStore object accessing the existing 
+  record store. </td>
+         </tr>
+   <tr>
+  <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">3 - 5</td>
+  <td style="width: 80%;" width="80%">loadData calls <code>RecordStore.enumerateRecords(RecordFilter,RecordComparator,boolean)</code>, 
+  to retrieve an enumeration of the records available. </td>
+         </tr>
+   <tr>
+  <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">6 - 7</td>
+  <td style="width: 80%;" width="80%">loadData calls <code>Vector.ensureCapacity(int)</code> 
+to   prepare storage for the number of records in the store. This step is 
+not   necessary, but will improve performance on large record stores. </td>
+         </tr>
+   <tr>
+  <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">8 - 13</td>
+  <td style="width: 80%;" width="80%">loadData iterates over the enumeration. 
+          </td>
+         </tr>
+   <tr>
+  <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">9</td>
+  <td style="width: 80%;" width="80%">loadData checks that unread records 
+exist, by calling <code>RecordEnumeration.hasNextElement()</code>.   </td>
+         </tr>
+   <tr>
+  <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">10 - 11</td>
+  <td style="width: 80%;" width="80%">loadData calls <code>RecordEnumeration.nextRecordId()</code> 
+  and <code>RecordStore.getRecord(int)</code> to retrieve both a record 
+ id and the corresponding record data. </td>
+         </tr>
+   <tr>
+  <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">12</td>
+  <td style="width: 80%;" width="80%">loadData constructs a new <a
+ href="../../../../../../com/nokia/midp/examples/rms/shopping/ShoppingItem.html"><code>ShoppingItem</code></a>, 
+  using the retrieved record id and record data. The implementation of ShoppingItem's 
+  constructor is discussed in the next sequence diagram and commentry. </td>
+         </tr>
+   <tr>
+  <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">13</td>
+  <td style="width: 80%;" width="80%">the new ShoppingItem is stored in the 
+Vector. </td>
+         </tr>
+   <tr>
+  <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">14 - 15</td>
+  <td style="width: 80%;" width="80%">The RecordStore is closed. This makes 
+the RecordEnumeration   invalid. </td>
+         </tr>
+   <tr>
+  <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">16 - 23</td>
+  <td style="width: 80%;" width="80%">The user interface is initialised.
+A List screen is created,   and for each ShoppingItem in the Vector, a string 
+representing the item   is added to the List. Note that the numbering of items
+in the List matches   that in the Vector; when the user requests to edit
+an item, the details   of the item can be retrieved by Vector.elementAt(List.getSelectedIndex()). 
+  </td>
+         </tr>
+         
+      </tbody>     
+    </table>
+        
+    <p>The entire sequence is contained in a try-catch block for RecordStoreExceptions. 
+  These are only expected to occur if the record store does not exist, in 
+  which case the application's normal flow of execution will start with 
+ a blank list, and create the store in saveData(). This will occur the  
+first time the example is run, as the database does not exist.</p>
+        
+    <p>A RecordStoreException occurring after the first record has been loaded 
+  would suggest a corrupt database, or something else accessing the file 
+ at the same time. This circumstance has not been considered in this example, 
+  which will start with all the records it has loaded. Ideally the user 
+ should be warned.</p>
+        
+    <p>An inner try-catch block for IOExceptions is used for ShoppingItem's 
+  constructor. This is discussed after the next sequence diagram.</p>
+        
+    <p>This sequence diagram illustrates the constructor of ShoppingItem. 
+It   expands step 12 of the previous diagram.</p>
+        
+    <div style="text-align: center;" align="center"> <!--kadov_tag{{<implicit_p>}}--><img
+ alt="doc-files/uml_loading_item.jpg"
+ src="doc-files/uml_loading_item.jpg"
+ style="border: medium none ; width: 640px; height: 326px;" width="640"
+ height="326" border="0">
+   </div>
+   <!--(Table)=========================================================-->
+     
+    <table x-use-null-cells="" style="width: 90%;" width="90%">
+   <tbody>
+         <tr>
+  <th style="text-align: center; width: 10%;" align="center" width="10%">Message</th>
+  <th style="text-align: left; width: 80%;" align="left" width="80%">Description</th>
+         </tr>
+   <tr>
+  <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">1</td>
+  <td style="width: 80%;" width="80%">loadData constructs a new <a
+ href="../../../../../../com/nokia/midp/examples/rms/shopping/ShoppingItem.html"><code>ShoppingItem</code></a>, 
+  using the retrieved record id and record data. </td>
+         </tr>
+   <tr>
+  <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">2</td>
+  <td style="width: 80%;" width="80%">The record data is used to open a ByteArrayInputStream. 
+          </td>
+         </tr>
+   <tr>
+  <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">3</td>
+  <td style="width: 80%;" width="80%">A DataInputStream is opened on the
+ByteArrayInputStream.   </td>
+         </tr>
+   <tr>
+  <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">4 - 5</td>
+  <td style="width: 80%;" width="80%">The name of this item is read with
+the function <code>DataInputStream.readUTF()</code>.   </td>
+         </tr>
+   <tr>
+  <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">6 - 7</td>
+  <td style="width: 80%;" width="80%">The quantity is read with the function 
+          <code>DataInputStream.readInt()</code>.   </td>
+         </tr>
+   <tr>
+  <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">8 - 9</td>
+  <td style="width: 80%;" width="80%">The input streams are closed. </td>
+         </tr>
+         
+      </tbody>     
+    </table>
+  </blockquote>
+      
+  <h3><a name="4.1.1">4.1.1. IOException handling in loadData()</a> </h3>
+      
+  <blockquote>      
+    <p>There are two practical ways to handle corrupt database records. This 
+  example deletes corrupt records, but salvages all readable records in 
+ the database. This requires nested try-catch blocks, one for accessing 
+ the database itself (discussed above), and a second for the IO streams 
+ used in ShoppingItem's constructor. An IOException occurring there suggests 
+  that a single record in the database is corrupt. The application continues 
+  to load as many items as possible, and marks the corrupt ones for deletion 
+  in saveData().</p>
+        
+    <p>Consider the scenario if only the outer block was used, and that multiple 
+  records in the database throw IOExceptions when the application attempts 
+  to read them. On reading the first corrupt record, the application stops 
+  reading records. It only knows about one record that is corrupt, and only 
+  this record is marked for deletion. Any record currently unread will be 
+  left unmodified in the database (but not visible to the user) until the 
+  next time the application is started. Each time the application is restarted, 
+  some records would reappear, and other records might disappear.</p>
+        
+    <p>An alternative strategy that could be used is for the application to
+  warn the user that the database is corrupt, and give them the choice of
+  quitting or completely deleting the database. Using this option, the IOException
+  could be caught from the same try- block as the RecordStoreException.</p>
+  </blockquote>
+      
+  <h3><a name="4.2">4.2. Saving</a> </h3>
+      
+  <blockquote>      
+    <p>The following three diagrams show the sequence of actions that take 
+  place when the database records are saved, which occurs when the application 
+  exits. The first diagram shows ShoppingListMIDlet updating the RMS by 
+ deleting any records with record ids listed in the Vector deletedRecords.</p>
+        
+    <div style="text-align: center;" align="center"> <!--kadov_tag{{<implicit_p>}}--><img
+ alt="doc-files/uml_saving_deleting.jpg"
+ src="doc-files/uml_saving_deleting.jpg"
+ style="border: medium none ; width: 640px; height: 322px;" width="640"
+ height="322" border="0">
+   </div>
+        
+    <p>The second diagram shows ShoppingListMIDlet saving the contents of 
+the   Vector shoppingItems, treating the class ShoppingItem as a black box.</p>
+        
+    <div style="text-align: center;" align="center"> <!--kadov_tag{{<implicit_p>}}--><img
+ alt="doc-files/uml_saving.jpg" src="doc-files/uml_saving.jpg"
+ style="border: medium none ; width: 640px; height: 374px;" width="640"
+ height="374" border="0">
+   </div>
+   <!--(Table)=========================================================-->
+     
+    <table x-use-null-cells="" style="width: 90%;" width="90%">
+   <tbody>
+         <tr>
+  <th style="text-align: center; width: 10%;" align="center" width="10%">Message</th>
+  <th style="text-align: left; width: 80%;" align="left" width="80%">Description</th>
+         </tr>
+   <tr>
+  <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">1</td>
+  <td style="width: 80%;" width="80%">ShoppingListMIDlet's exit sequence
+calls           <a
+ href="../../../../../../com/nokia/midp/examples/rms/shopping/ShoppingListMIDlet.html#saveData%28%29"><code>saveData</code></a>. 
+  </td>
+         </tr>
+   <tr>
+  <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">2</td>
+  <td style="width: 80%;" width="80%">saveData calls <code>RecordStore.openRecordStore(String,boolean)</code> 
+  to create a new RecordStore object, creating the underlying store if it 
+  does not exist. </td>
+         </tr>
+   <tr>
+  <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">3 - 5</td>
+  <td style="width: 80%;" width="80%">saveData calls <code>deletedRecords.elements()</code>, 
+to   retrieve an enumeration of Integers containing the record ids of deleted 
+  ShoppingItems. </td>
+         </tr>
+   <tr>
+  <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">6 - 11</td>
+  <td style="width: 80%;" width="80%">saveData iterates over the enumeration. 
+          </td>
+         </tr>
+   <tr>
+  <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">7</td>
+  <td style="width: 80%;" width="80%">saveData checks the loop conditional, 
+by calling <code>Enumeration.hasMoreElements()</code>.   </td>
+         </tr>
+   <tr>
+  <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">8 - 10</td>
+  <td style="width: 80%;" width="80%">saveData calls <code>Enumeration.nextElement()</code> 
+to   retrieve the Integer, and <code>Integer.intValue()</code> to convert 
+this   to a primitive int. </td>
+         </tr>
+   <tr>
+  <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">11</td>
+  <td style="width: 80%;" width="80%">saveData calls <code>RecordStore.deleteRecord(int)</code>, 
+  on the record id retrieved in step 10. </td>
+         </tr>
+   <tr>
+  <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">12 - 14</td>
+  <td style="width: 80%;" width="80%">saveData calls <code>shoppingItems.elements()</code>, 
+to   retrieve an enumeration of ShoppingItems. </td>
+         </tr>
+   <tr>
+  <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">15 - 22</td>
+  <td style="width: 80%;" width="80%">saveData iterates over the enumeration. 
+          </td>
+         </tr>
+   <tr>
+  <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">16</td>
+  <td style="width: 80%;" width="80%">saveData checks the loop conditional, 
+by calling <code>Enumeration.hasMoreElements()</code>.   </td>
+         </tr>
+   <tr>
+  <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">17 - 18</td>
+  <td style="width: 80%;" width="80%">saveData calls <code>Enumeration.nextElement()</code> 
+to   retrieve the ShoppingItem </td>
+         </tr>
+   <tr>
+  <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">19 - 20</td>
+  <td style="width: 80%;" width="80%">saveData checks if this record is modified. 
+If it is not,   processing moves on to the next item in the enumeration. 
+         </td>
+         </tr>
+   <tr>
+  <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">21 - 22</td>
+  <td style="width: 80%;" width="80%">The ShoppingItem is converted to a
+byte array. This is discussed   in the next sequence diagram and commentry.
+The record id for this ShoppingItem   is also retrieved. </td>
+         </tr>
+   <tr>
+  <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">23</td>
+  <td style="width: 80%;" width="80%">saveData calls <code>RecordStore.setRecord(int,byte[],int,int)</code>, 
+  using the record id and data retrieved in the previous two steps. If the 
+  record id is <a
+ href="../../../../../../com/nokia/midp/examples/rms/shopping/ShoppingItem.html#NOT_IN_DATABASE"><code>ShoppingItem.NOT_IN_DATABASE</code></a>, 
+  <code>RecordStore.addRecord(byte[],int,int)</code> is called instead. 
+           </td>
+         </tr>
+   <tr>
+  <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">24</td>
+  <td style="width: 80%;" width="80%">The RecordStore is closed. </td>
+         </tr>
+         
+      </tbody>     
+    </table>
+        
+    <p>The sequence to step 23 is contained in a try-catch block for RecordStoreFullExceptions. 
+  A real device may have a limit on the amount of data stored in the RMS 
+ as low as 8k, after which this exception would be thrown. A non-demo application 
+  should probably catch this condition, warn the user and try to let them 
+  choose what will be lost. Some applications will by their design and purpose 
+  have a set limit on the amount of data that can be stored, and could assume 
+  that this could never happen.</p>
+        
+    <p>This example performs minimal recovery in this condition, by closing 
+  the record store. Already written records will be preserved, and all others 
+  will be lost. This exception is expected if the "Generate 1000 items" 
+ action is used on a device with an 8k limit.</p>
+        
+    <p>The same block has a catch for general Exceptions. These are not expected 
+  in this method, and error recovery has been implemented minimally in this 
+  example, by separating step 24 (closing the record store) in to a separate 
+  finally block.</p>
+        
+    <p>This sequence diagram illustrates the implementation of ShoppingItem.toByteArray. 
+  It expands step 21 of the previous diagram.</p>
+        
+    <div style="text-align: center;" align="center"> <!--kadov_tag{{<implicit_p>}}--><img
+ alt="doc-files/uml_saving_item.jpg" src="doc-files/uml_saving_item.jpg"
+ style="border: medium none ; width: 640px; height: 390px;" width="640"
+ height="390" border="0">
+   </div>
+   <!--(Table)=========================================================-->
+     
+    <table x-use-null-cells="" style="width: 90%;" width="90%">
+   <tbody>
+         <tr>
+  <th style="text-align: center; width: 10%;" align="center" width="10%">Message</th>
+  <th style="text-align: left; width: 80%;" align="left" width="80%">Description</th>
+         </tr>
+   <tr>
+  <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">1</td>
+  <td style="width: 80%;" width="80%">saveData calls <a
+ href="../../../../../../com/nokia/midp/examples/rms/shopping/ShoppingItem.html#toByteArray%28%29"><code>ShoppingItem.toByteArray()</code></a>. 
+  </td>
+         </tr>
+   <tr>
+  <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">2</td>
+  <td style="width: 80%;" width="80%">A new ByteArrayOutputStream is constructed. 
+          </td>
+         </tr>
+   <tr>
+  <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">3</td>
+  <td style="width: 80%;" width="80%">A DataOutputStream is opened on the 
+ByteArrayOutputStream.   </td>
+         </tr>
+   <tr>
+  <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">4</td>
+  <td style="width: 80%;" width="80%">The name of this item is written with 
+the function <code>DataOutputStream.writeUTF(String)</code>.   </td>
+         </tr>
+   <tr>
+  <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">5</td>
+  <td style="width: 80%;" width="80%">The DataOutputStream may write the
+score to the ByteArrayOutputStream   immediately, or it may defer writing
+until step 9. </td>
+         </tr>
+   <tr>
+  <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">6 - 7</td>
+  <td style="width: 80%;" width="80%">The quantity is written with the function 
+          <code>DataOutputStream.writeInt(int)</code>,   and may be written 
+to the ByteArrayOutputStream. </td>
+         </tr>
+   <tr>
+  <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">8 - 9</td>
+  <td style="width: 80%;" width="80%">The DataOutputStream is flushed. When 
+this step completes,   the score and high score will have been written to 
+the ByteArrayOutputStream.   </td>
+         </tr>
+   <tr>
+  <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">10 - 11</td>
+  <td style="width: 80%;" width="80%">The record data is retrieved from the 
+ByteArrayOutputStream   as a byte array.</td>
+         </tr>
+   <tr>
+  <td style="text-align: center; width: 10%;" align="center"
+ valign="top" width="10%">12 - 13</td>
+  <td style="width: 80%;" width="80%">The output streams are closed. </td>
+         </tr>
+         
+      </tbody>     
+    </table>
+  </blockquote>
+      
+  <h3><a name="4.3">4.3. Alternative implementations</a> </h3>
+      
+  <blockquote>      
+    <p>When designing an application, the method of data storage can be very 
+  important. After the "Generate 1000 items" action is performed,   this example
+stores one record for each of the 1000 objects that it creates.   The developer
+may compare this method of data storage with alternative   schemes on the
+target device.</p>
+        
+    <p>This example loads all of the database records in to memory, and only 
+  accesses the RMS at launch and exit. To reduce the memory footprint at 
+ the expense of more calls to the RMS, the Vector could be omitted. In   this
+scenario the List is populated directly from the database, and each   time
+an item is edited it is loaded from the RMS, and stored immediately   after
+editing.</p>
+        
+    <p>This could be continued to only load the short description of the currently
+  showing records.</p>
+        
+    <p>For this example, the items are very small, and the description in 
+the   List contains all of the non-implementation data in ShoppingItem.</p>
+   <!--kadov_tag{{<implicit_p>}}-->     
+    <p>   </p>
+     
+    <p>Instead of keeping the list of deleted items in a separate Vector, 
+saveData()   could iterate over a RecordEnumeration and check that the corresponding 
+  ShoppingItem is present in the shoppingItems Vector. The time to do this 
+  is proportional to (number of records in RMS) x (number of items in shoppingItems), 
+  and is not feasible for large numbers of items.</p>
+   <!--kadov_tag{{<implicit_p>}}-->     
+    <p>   </p>
+     
+    <p>Another trade off between memory and database IO is in the use of the
+  <a
+ href="../../../../../../com/nokia/midp/examples/rms/shopping/ShoppingItem.html#modified"><code>ShoppingItem.modified</code></a> 
+  field. As can be seen when the Generate menu option is used, saving all 
+  records in a large database is a lot slower than saving only the modified 
+  ones.</p>
+  </blockquote>
+  </blockquote>
+    
+<h3><a name="5">5. Summary</a> </h3>
+    
+<blockquote>    
+  <p>This example has demonstrated how to open and save an RMS database, 
+ using the <a
+ href="../../../../../../../../../CLDC1.1_API/java/io/package-summary.html">java.io</a> 
+  package to store a class as a byte array.</p>
+  </blockquote>
+   <br>
+ <br>
+</body>
+</html>

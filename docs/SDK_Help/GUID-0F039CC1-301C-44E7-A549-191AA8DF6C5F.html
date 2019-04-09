@@ -1,0 +1,213 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Class and interface description"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-0F039CC1-301C-44E7-A549-191AA8DF6C5F"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> JavaTM Implementation Notes</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-0F039CC1-301C-44E7-A549-191AA8DF6C5F"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-0F039CC1-301C-44E7-A549-191AA8DF6C5F"><!----></a>Class
+and interface description</h1>
+<p>This chapter lists the implementation specifics of Wireless Messaging
+API at package level. </p>
+<p>The following general clarification is made towards JSR-205 client connection’s
+scope: </p>
+<p>The S60 implementation supports sending of messages not only to the
+address specified when creating the client connection, but to other recipients
+as well. These recipients might be added after creating the client connection.
+This clarification applies to the following paragraph:</p>
+<p><span class="q">"If the application specifies a full destination address that
+defines a recipient to the Connector, it gets a MessageConnection that works
+in a “client” mode”. This kind of Connection can only be used for sending
+messages to the address specified when creating it."</span> </p>
+<p>(Chapter 1, Sending and receiving messages <a href="http://jcp.org/en/jsr/detail?id=205" target="_blank">JSR-205
+API specification</a>)</p>
+<p/>
+<div><h3>javax.microedition.io.Connector</h3><p>This class is supported as specified in JSR-205, with the following
+clarification for the following method: </p><p><span><code>open(String name, int mode, Boolean timeouts) </code></span></p><div class="tablenoborder"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-A2C6E7DD-5411-4CA1-9F00-18C04AAB2167"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-A2C6E7DD-5411-4CA1-9F00-18C04AAB2167" frame="border" border="1" rules="all">
+
+
+
+<thead align="left">
+<tr class="title "><th valign="top" width="19.333333333333332%" id="d0e30817">
+<p>Parameter name</p>
+</th><th valign="top" width="19.333333333333332%" id="d0e30822">
+<p>Parameter values</p>
+</th><th valign="top" width="61.33333333333334%" id="d0e30827">
+<p>Clarification</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td valign="top" width="19.333333333333332%" headers="d0e30817 ">
+<p><code>timeouts</code></p>
+</td>
+<td valign="top" width="19.333333333333332%" headers="d0e30822 ">
+<p>Boolean</p>
+</td>
+<td valign="top" width="61.33333333333334%" headers="d0e30827 ">
+<p>The value of this parameter is not taken into account by the S60   implementation : the implementation always throws <code>InterruptedIOExceptions</code> in
+case of timeouts.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+<div><h3>javax.wireless.messaging.BinaryMessage</h3><p>In the S60 implementation this class is not supported. See section <code>javax.microedition.messaging.MessageConnection</code> for
+more details.</p><p/></div>
+<div><h3>javax.wireless.messaging.Message</h3><p>This class is supported as specified in JSR-205.</p></div>
+<div><h3>javax.microedition.messaging.MessageConnection</h3><p>In the S60 implementation this class is supported as specified in JSR-205,
+with the following clarifications for the following methods: </p><p><span><code>newMessage(String type)</code></span></p><p><span><code>newMessage(String address, String type)</code></span></p><div class="tablenoborder"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-4C2C3528-B267-42CD-86E4-3DF4064DD369"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-4C2C3528-B267-42CD-86E4-3DF4064DD369" frame="border" border="1" rules="all">
+
+
+
+<thead align="left">
+<tr class="title "><th valign="top" width="18.666666666666668%" id="d0e30916">
+<p>Parameter name</p>
+</th><th valign="top" width="29.666666666666668%" id="d0e30921">
+<p>Parameter values</p>
+</th><th valign="top" width="51.66666666666667%" id="d0e30926">
+<p>Clarification</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td valign="top" width="18.666666666666668%" headers="d0e30916 ">
+<p><code>type</code></p>
+</td>
+<td valign="top" width="29.666666666666668%" headers="d0e30921 ">
+<p><code>MULTIPART_MESSAGE</code></p>
+</td>
+<td valign="top" width="51.66666666666667%" headers="d0e30926 ">
+<p>The S60 implementation allows only the creation of <code>MULTIPART_MESSAGE</code> through
+a MMS-type of connection, due to the following reasons:·</p>
+<ul>
+<li><p><code>TEXT_MESSAGE | BINARY_MESSAGE</code> are SMS-specific
+messages whereas <code>MULTIPART_MESSAGE</code> is an MMS-specific
+message.</p></li>
+<li><p>JSR-205 does not allow the sending of any other type of messages
+than <code>MULTIPART_MESSAGE</code>s through an MMS-type of connection</p>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table></div><p><span><code>send(Message)</code></span></p><p>In the S60 implementation this is implemented as a blocked call and
+returns either after the Message has been sent or a 1-minute time-out occurred,
+in which case an <code>InterruptedIOException</code> is thrown.</p><p/><p/></div>
+<div><h3>javax.wireless.messaging.MessageListener</h3><p>In the S60 implementation this class is supported as specified in JSR-205
+with the following clarification: <code>MessageListener</code> MUST
+not call <code>receive()</code> directly, as this will result in a
+blocking operation. Instead, it can start a new thread which will receive
+the message or call another method of the application (which is outside of
+the listener) that will call <code>receive()</code> in a new thread.</p><p/></div>
+<div><h3>javax.wireless.messaging.MessagePart</h3><p>This class is supported as specified by JSR-205, with the following
+clarifications for the following methods: </p><p><span><code>MessagePart(byte[] contents, int offset, int length, java.lang.String
+mimeType, java.lang.String contentId, java.lang.String contentLocation, java.lang.String
+enc)</code></span></p><p><span><code>MessagePart(byte[] contents, java.lang.String mimeType,
+java.lang.String contentId, java.lang.String contentLocation,java.lang.String
+enc)</code></span></p><p><span><code>MessagePart(java.io.InputStream is, java.lang.String mimeType,
+java.lang.String contentId, java.lang.String contentLocation, java.lang.String
+enc)</code></span></p><div class="tablenoborder"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-BAA5659D-9318-4A3F-8674-D57E4C6F99D3"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-BAA5659D-9318-4A3F-8674-D57E4C6F99D3" frame="border" border="1" rules="all">
+
+
+
+<thead align="left">
+<tr class="title "><th valign="top" width="18.666666666666668%" id="d0e31055">
+<p>Parameter name</p>
+</th><th valign="top" width="29.666666666666668%" id="d0e31060">
+<p>Parameter values</p>
+</th><th valign="top" width="51.66666666666667%" id="d0e31065">
+<p>Clarification</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td valign="top" width="18.666666666666668%" headers="d0e31055 ">
+<p><code>contentLocation</code></p>
+</td>
+<td valign="top" width="29.666666666666668%" headers="d0e31060 ">
+<p>The content location, which specifies the file name of the file that
+is attached.</p>
+</td>
+<td valign="top" width="51.66666666666667%" headers="d0e31065 ">
+<p>The S60 implementation applies the following restrictions to <code>contentLocation</code>: </p>
+<ul>
+<li><p>Wildcards are not allowed in any path component, including
+the filename and extension. </p></li>
+<li><p>Double backslashes are not allowed anywhere in the path. </p>
+</li>
+<li><p>The following characters cannot occur in the path: &lt; &gt;:
+" / |*</p></li>
+<li><p>Either or both of a filename or extension must be present,
+or the function will return false.</p></li>
+<li><p>The entire component following the final backslash (the filename
+and extension) may not consist solely of space characters, or of a single
+or double dot.</p></li>
+<li><p>Spaces between the drive, if specified, and the first directory
+in the path are illegal, although there may be spaces between other path components,
+for example, between directories.</p></li>
+</ul>
+<p>If there is no content location specified through the JSR-205 API, the
+S60 implementation generates one with the following prefix <code>midp_wma20_attachment</code> and
+a corresponding unique index for every attachment (e.g. <code>midp_wma20_attachment1</code>, <code>midp_wma20_attachment2</code>).
+Vice-versa if this kind of attachment with this particular content location
+is received by the S60 implementation, the content location is removed before
+propagating the corresponding attachment to the java receiver.</p>
+<p/>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="18.666666666666668%" headers="d0e31055 ">
+<p><code>enc</code></p>
+</td>
+<td valign="top" width="29.666666666666668%" headers="d0e31060 ">
+<p>The encoding scheme for the <code>MessagePart</code></p>
+</td>
+<td valign="top" width="51.66666666666667%" headers="d0e31065 ">
+<p>The S60 implementation allows the following String values for the encoding:</p>
+<p>ISO-8859-1, ISO-8859-2, ISO-8859-4, ISO-8859-5, ISO-8859-6, ISO-8859-7,
+ISO-8859-8, ISO-8859-9, ISO-2022-JP, ISO-2022-KR, </p>
+<p>UTF-8, UTF-16 in the following forms: </p>
+<ul>
+<li><p>UTF-16</p></li>
+<li><p>UTF-16BE </p></li>
+<li><p>UTF-16LE</p></li>
+</ul>
+<p>UCS-2, identified also as “ISO-10646-UCS-2” , </p>
+<p>HZ-GB-2312, GB_2312-80, Big5, Big5-HKSCS, Shift_JIS, EUC-JP, EUC-KR
+, KOI8-R, KOI8-U</p>
+<p>windows-936, windows-1250, windows-1251, windows-1252, windows-1253,
+windows-1254, windows-1255, windows-1256, windows-1257, windows-1258</p>
+<p/>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+<div><h3>javax.wireless.messaging.MultipartMessage</h3><p>This class is supported as specified by JSR-205, with the following
+method clarification: </p><p><span><code>setAddress(String address)</code></span></p><div class="tablenoborder"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-6DA13E02-2825-4F66-A44C-9A2E383DEE09"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-6DA13E02-2825-4F66-A44C-9A2E383DEE09" frame="border" border="1" rules="all">
+
+
+
+<thead align="left">
+<tr class="title "><th valign="top" width="18.666666666666668%" id="d0e31228">
+<p>Parameter name</p>
+</th><th valign="top" width="29.666666666666668%" id="d0e31233">
+<p>Parameter values</p>
+</th><th valign="top" width="51.66666666666667%" id="d0e31238">
+<p>Clarification</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td valign="top" width="18.666666666666668%" headers="d0e31228 ">
+<p><code>address</code></p>
+</td>
+<td valign="top" width="29.666666666666668%" headers="d0e31233 ">
+<p>The JSR-205 states that address may be set to null</p>
+</td>
+<td valign="top" width="51.66666666666667%" headers="d0e31238 ">
+<p>This call is interpreted as a blind call; the previously set addresses
+(if any) remain unmodified.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+<div><h3>javax.wireless.messaging.SizeExceededException</h3><p>This class is supported as specified in JSR-205 with no further clarifications.</p></div>
+<div><h3>javax.wireless.messaging.TextMessage</h3><p>In the S60 implementation this class is not supported. See section <code>javax.microedition.messaging.MessageConnection</code> for
+more details.</p><p/></div>
+</div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

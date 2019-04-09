@@ -1,0 +1,13 @@
+MIDlet-1: SendMessage, , com.nokia.midp.examples.sip.SendMessage
+MIDlet-2: ReceiveMessage, , com.nokia.midp.examples.sip.ReceiveMessage
+MIDlet-3: OriginatingInvite, ,
+ com.nokia.midp.examples.sip.OriginatingInvite
+MIDlet-4: TerminatingInvite, ,
+ com.nokia.midp.examples.sip.TerminatingInvite
+MIDlet-5: RegisterTest, , com.nokia.midp.examples.sip.RegisterTest
+MIDlet-6: Subscribe, , com.nokia.midp.examples.sip.Subscribe
+MIDlet-Name: SIP Example MIDlets
+MicroEdition-Configuration: CLDC-1.1
+MicroEdition-Profile: MIDP-2.0
+MIDlet-Vendor: Nokia
+MIDlet-Version: 1.0

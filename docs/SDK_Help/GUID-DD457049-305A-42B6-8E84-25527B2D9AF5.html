@@ -1,0 +1,18 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Selecting registration context and initializing requests"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-DD457049-305A-42B6-8E84-25527B2D9AF5"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> JavaTM Implementation Notes</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-DD457049-305A-42B6-8E84-25527B2D9AF5"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-DD457049-305A-42B6-8E84-25527B2D9AF5"><!----></a>Selecting
+registration context and initializing requests</h1>
+<p>This section describes how a registration context is chosen for the
+request. A registration context is used to get the access point of the connection
+and the values of ‘From’ and ‘Contact’ headers (in some cases) for a request.
+The registration context here means a SIP profile (created by the SIP Settings
+Tool) or an own registration. A request can also be sent without the registration
+context. See section <a href="GUID-46A21412-EDF6-4552-8F97-73A838038FD5.html#GUID-46A21412-EDF6-4552-8F97-73A838038FD5">Sending
+request without using a registration context</a>. </p>
+<p>An own registration means that the REGISTER request is sent by a MIDlet.
+Registration by SIP Profile means that a sip stack sends the REGISTER request
+to the registrar server when SIP Profile is used.</p>
+<p>The sections below clarify how a request is sent with or without a registration
+context.</p>
+</div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

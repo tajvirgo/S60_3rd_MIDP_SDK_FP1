@@ -1,0 +1,11 @@
+MIDlet-1: MMS, , com.nokia.midp.examples.mms.MMSMIDlet
+MIDlet-Jar-Size: 13820
+MIDlet-Jar-URL: mms.jar
+MIDlet-Name: MMS
+MicroEdition-Configuration: CLDC-1.1
+MicroEdition-Profile: MIDP-2.0
+MIDlet-Version: 1.0
+MIDlet-Vendor: Nokia
+Application-ID: MMSMIDlet
+MIDlet-Push-1: mms://:MMSMIDlet, com.nokia.midp.examples.mms.MMSMIDlet, *
+MIDlet-Permissions: javax.microedition.io.PushRegistry

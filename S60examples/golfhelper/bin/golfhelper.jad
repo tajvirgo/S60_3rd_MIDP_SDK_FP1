@@ -1,0 +1,8 @@
+MIDlet-1: Golf Helper, , com.nokia.midp.examples.location.golf.GolfHelperMIDlet
+MIDlet-Jar-Size: 11416
+MIDlet-Jar-URL: golfhelper.jar
+MIDlet-Name: GolfHelperMIDlet
+MicroEdition-Configuration: CLDC-1.1
+MicroEdition-Profile: MIDP-2.0
+MIDlet-Version: 1.0
+MIDlet-Vendor: Nokia

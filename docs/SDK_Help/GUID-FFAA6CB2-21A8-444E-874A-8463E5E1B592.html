@@ -1,0 +1,278 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="EventList"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-FFAA6CB2-21A8-444E-874A-8463E5E1B592"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> JavaTM Implementation Notes</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-FFAA6CB2-21A8-444E-874A-8463E5E1B592"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-FFAA6CB2-21A8-444E-874A-8463E5E1B592"><!----></a>EventList </h1>
+<p>The three <code>EventLists</code> provide access to the native
+Calendar database. Each list represents one type of the possible Calendar
+entries: Appointments, Day Notes, and Anniversaries.</p>
+<p>The <code>EventLists</code> do not support all valid values
+for <code>RepeatRule.FREQUENCY</code> and <code>RepeatRule.INTERVAL</code> fields.
+The details are in the corresponding sections.</p>
+<p>In PIM API there are no methods for informing the API user about valid <code>RepeatRule</code> values.
+(<code>EventList.getSupportedRepeatRuleFields()</code> provides only
+the valid field combinations.) Invalid <code>RepeatRule</code> values
+cause <code>PIMItem.commit()</code> to be rejected (throwing a <code>PIMException</code>)
+or the values to be silently changed to valid ones, if possible.</p>
+<div><h3>Appointments</h3><p>The supported Appointment <code>Event</code> fields are the
+following:</p><div class="tablenoborder"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-316AE024-A90D-4270-972F-691AD7A5844B"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-316AE024-A90D-4270-972F-691AD7A5844B" frame="border" border="1" rules="all"><caption><strong>Table 11: </strong>The supported
+Appointment <code>Event</code> fields</caption>
+
+
+<thead align="left">
+<tr class="title "><th valign="top" width="47%" id="d0e21422">
+<p>PIM API field</p>
+</th><th valign="top" width="53%" id="d0e21427">
+<p>Corresponding Calendar Appointment field</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td valign="top" width="47%" headers="d0e21422 ">
+<p><code>Event.SUMMARY</code></p>
+</td>
+<td valign="top" width="53%" headers="d0e21427 ">
+<p>Subject</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="47%" headers="d0e21422 ">
+<p><code>Event.NOTE</code></p>
+</td>
+<td valign="top" width="53%" headers="d0e21427 ">
+<p>Description</p>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="47%" headers="d0e21422 ">
+<p><code>Event.LOCATION</code></p>
+</td>
+<td valign="top" width="53%" headers="d0e21427 ">
+<p>Location</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="47%" headers="d0e21422 ">
+<p><code>Event.START</code></p>
+</td>
+<td valign="top" width="53%" headers="d0e21427 ">
+<p>Start date/time</p>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="47%" headers="d0e21422 ">
+<p><code>Event.END</code></p>
+</td>
+<td valign="top" width="53%" headers="d0e21427 ">
+<p>End date/time</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="47%" headers="d0e21422 ">
+<p><code>Event.ALARM</code></p>
+</td>
+<td valign="top" width="53%" headers="d0e21427 ">
+<p>Alarm</p>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="47%" headers="d0e21422 ">
+<p><code>Event.CLASS</code> </p>
+</td>
+<td valign="top" width="53%" headers="d0e21427 ">
+<p>Synchronization</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="47%" headers="d0e21422 ">
+<p><code>Event.UID</code></p>
+</td>
+<td valign="top" width="53%" headers="d0e21427 ">
+<p>(Internal unique identifier)</p>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="47%" headers="d0e21422 ">
+<p><code>Event.REVISION</code></p>
+</td>
+<td valign="top" width="53%" headers="d0e21427 ">
+<p>(Internal last modification date)</p>
+</td>
+</tr>
+</tbody>
+</table></div><p>The supported Appointment <code>RepeatRule</code> field combinations
+are the following:</p><ul>
+<li><p><code>RepeatRule.FREQUENCY + RepeatRule.END</code></p>
+</li>
+<li><p><code>RepeatRule.FREQUENCY + RepeatRule.INTERVAL + RepeatRule.END</code></p>
+</li>
+</ul><p>The supported values for <code>RepeatRule.FREQUENCY</code> are
+the following:</p><ul>
+<li><p><code>RepeatRule.DAILY</code></p></li>
+<li><p><code>RepeatRule.WEEKLY</code></p></li>
+<li><p><code>RepeatRule.MONTHLY</code></p></li>
+<li><p><code>RepeatRule.YEARLY</code></p></li>
+</ul><p>For frequency <code>RepeatRule.WEEKLY</code> only intervals
+1 and 2 are supported. For other frequencies, only interval 1 is supported. </p><p>The Appointments <code>EventList</code> does not support any
+attributes. </p><p>The Appointments <code>EventList</code> does not support categories.</p></div>
+<div><h3>Day notes</h3><p>The supported Day Note <code>Event</code> fields are the following:</p><div class="tablenoborder"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-1B4D5425-61DB-4FD5-990E-69B13DFE0393"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-1B4D5425-61DB-4FD5-990E-69B13DFE0393" frame="border" border="1" rules="all"><caption><strong>Table 12: </strong>The supported
+Day Note <code>Event</code> fields</caption>
+
+
+<thead align="left">
+<tr class="title "><th valign="top" width="45%" id="d0e21680">
+<p>PIM API field</p>
+</th><th valign="top" width="55.00000000000001%" id="d0e21685">
+<p>Corresponding Calendar Appointment field</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td valign="top" width="45%" headers="d0e21680 ">
+<p><code>Event.SUMMARY</code></p>
+</td>
+<td valign="top" width="55.00000000000001%" headers="d0e21685 ">
+<p>Subject</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="45%" headers="d0e21680 ">
+<p><code>Event.NOTE</code></p>
+</td>
+<td valign="top" width="55.00000000000001%" headers="d0e21685 ">
+<p>Description</p>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="45%" headers="d0e21680 ">
+<p><code>Event.START</code></p>
+</td>
+<td valign="top" width="55.00000000000001%" headers="d0e21685 ">
+<p>Start date</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="45%" headers="d0e21680 ">
+<p><code>Event.END</code></p>
+</td>
+<td valign="top" width="55.00000000000001%" headers="d0e21685 ">
+<p>End date</p>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="45%" headers="d0e21680 ">
+<p><code>Event.CLASS</code></p>
+</td>
+<td valign="top" width="55.00000000000001%" headers="d0e21685 ">
+<p>Synchronization</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="45%" headers="d0e21680 ">
+<p><code>Event.UID</code></p>
+</td>
+<td valign="top" width="55.00000000000001%" headers="d0e21685 ">
+<p>(Internal unique identifier)</p>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="45%" headers="d0e21680 ">
+<p><code>Event.REVISION</code></p>
+</td>
+<td valign="top" width="55.00000000000001%" headers="d0e21685 ">
+<p>(Internal last modification date)</p>
+</td>
+</tr>
+</tbody>
+</table></div><p>The Day Notes <code>EventList</code> does not support any attributes.</p><p> The Day Notes <code>EventList</code> does not support categories. </p><p>The Day Notes <code>EventList</code> does not support any <code>RepeatRule</code> fields.</p></div>
+<div><h3>Anniversaries</h3><p>The supported Anniversary <code>Event</code> fields are the
+following:</p><div class="tablenoborder"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-ECD98C84-FC4E-4BAB-8DBC-2294218A421D"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-ECD98C84-FC4E-4BAB-8DBC-2294218A421D" frame="border" border="1" rules="all"><caption><strong>Table 13: </strong>The supported
+Anniversary <code>Event</code> fields</caption>
+
+
+<thead align="left">
+<tr class="title "><th valign="top" width="45%" id="d0e21858">
+<p>PIM API field</p>
+</th><th valign="top" width="55.00000000000001%" id="d0e21863">
+<p>Corresponding Calendar Appointment field</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td valign="top" width="45%" headers="d0e21858 ">
+<p><code>Event.SUMMARY</code></p>
+</td>
+<td valign="top" width="55.00000000000001%" headers="d0e21863 ">
+<p>Occasion</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="45%" headers="d0e21858 ">
+<p><code>Event.NOTE</code></p>
+</td>
+<td valign="top" width="55.00000000000001%" headers="d0e21863 ">
+<p>Description</p>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="45%" headers="d0e21858 ">
+<p><code>Event.START</code></p>
+</td>
+<td valign="top" width="55.00000000000001%" headers="d0e21863 ">
+<p>Start date</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="45%" headers="d0e21858 ">
+<p><code>Event.ALARM</code></p>
+</td>
+<td valign="top" width="55.00000000000001%" headers="d0e21863 ">
+<p>Alarm</p>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="45%" headers="d0e21858 ">
+<p><code>Event.END</code></p>
+</td>
+<td valign="top" width="55.00000000000001%" headers="d0e21863 ">
+<p>End date</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="45%" headers="d0e21858 ">
+<p><code>Event.CLASS</code></p>
+</td>
+<td valign="top" width="55.00000000000001%" headers="d0e21863 ">
+<p>Synchronization</p>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="45%" headers="d0e21858 ">
+<p><code>Event.UID</code></p>
+</td>
+<td valign="top" width="55.00000000000001%" headers="d0e21863 ">
+<p>(Internal unique identifier)</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="45%" headers="d0e21858 ">
+<p><code>Event.REVISION</code></p>
+</td>
+<td valign="top" width="55.00000000000001%" headers="d0e21863 ">
+<p>(Internal last modification date)</p>
+</td>
+</tr>
+</tbody>
+</table></div><p>The supported Anniversary <code>RepeatRule</code> field combinations
+are as follows: </p><ul>
+<li><p><code>RepeatRule.FREQUENCY</code></p></li>
+</ul><p>The only supported <code>RepeatRule.FREQUENCY</code> value is <code>RepeatRule.YEARLY</code>. </p><p>The Anniversary <code>EventList</code> does not support any
+attributes. </p><p>The Anniversary <code>EventList</code> does not support categories.</p></div>
+<div><h3>Unsupported in S60</h3><p>Unsupported <code>RepeatRule</code> fields:</p><ul>
+<li><p><code>RepeatRule.COUNT</code></p></li>
+<li><p><code>RepeatRule.MONTH_IN_YEAR</code></p></li>
+<li><p><code>RepeatRule.DAY_IN_WEEK</code></p></li>
+<li><p><code>RepeatRule.WEEK_IN_MONTH</code></p></li>
+<li><p><code>RepeatRule.DAY_IN_MONTH</code></p></li>
+<li><p><code>RepeatRule.DAY_IN_YEAR</code></p></li>
+</ul><p><code>EventLists</code> do not support any attributes.</p><p> <code>EventLists</code> do not support categories.</p></div>
+</div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

@@ -1,0 +1,10 @@
+@import url('pdf.css');
+thead,
+#head ul {
+	background-color: rgb(183, 20, 20);
+}
+.debug {
+	color: rgb(183, 20, 20);
+	text-transform: uppercase;
+	margin-left: 1em;
+}

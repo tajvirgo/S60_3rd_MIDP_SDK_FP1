@@ -1,0 +1,97 @@
+/* Javadoc style sheet */
+
+/* Define colors, fonts and other style attributes here to override the defaults  */
+
+/* Page background color */
+body { background-color: #FFFFFF }
+
+/* Table colors */
+.TableHeadingColor     { background: #CCCCFF } /* Dark mauve */
+.TableSubHeadingColor  { background: #EEEEFF } /* Light mauve */
+.TableRowColor         { background: #FFFFFF } /* White */
+
+/* Font used in left-hand frame lists */
+.FrameTitleFont   { font-size: normal; font-family: normal }
+.FrameHeadingFont { font-size: normal; font-family: normal }
+.FrameItemFont    { font-size: normal; font-family: normal }
+
+/* Example of smaller, sans-serif font in frames */
+/* .FrameItemFont  { font-size: 10pt; font-family: Helvetica, Arial, sans-serif } */
+
+/* Navigation bar fonts and colors */
+.NavBarCell1    { background-color:#EEEEFF;}/* Light mauve */
+.NavBarCell1Rev { background-color:#00008B;}/* Dark Blue */
+.NavBarFont1    { font-family: Arial, Helvetica, sans-serif; color:#000000;}
+.NavBarFont1Rev { font-family: Arial, Helvetica, sans-serif; color:#FFFFFF;}
+
+.NavBarCell2    { font-family: Arial, Helvetica, sans-serif; background-color:#FFFFFF;}
+.NavBarCell3    { font-family: Arial, Helvetica, sans-serif; background-color:#FFFFFF;}
+
+/* Additions to Javadoc default style sheet */
+
+/* the code example body */
+pre.example {
+			padding: 4px;
+			border-style: solid;
+			border-width: 1px;
+			border-color: black;
+			white-space: pre;
+			background: #F8f8f8;
+		}
+		
+.example A:link { color: blue; }
+.example A:visited { color: blue; }
+.example A:hover { color: blue; background: #f0f0f0; }
+
+/* the title of the example */
+.example_title { font-weight: bold; }
+
+/* comments */
+.example_comment { color: #008000; }
+
+/* primary types: int, boolean, float */
+.example_type { font-weight: bold; }
+
+/* identifiers beginning with capitals */
+.example_class { color: #000080; }
+.example_class A:link { color: #000080; }
+.example_class A:visited { color: #000080; }
+.example_class A:hover { color: #000080; background: #f0f0f0; }
+
+/* public, protected, private */
+.example_modifier { font-weight: bold; color: #606060; }
+
+/* class definition: class, extends, implements */
+.example_proclamation { font-weight: bold; color: #b04090; }
+
+/* flow control: if, for, return */
+.example_control { color: #800080; font-weight: bold; }
+
+/* strings */
+.example_string { color:blue; }
+
+/* true, false */
+.example_literal { color:blue; }
+
+/* Nokia custom additions to the style sheet */
+
+div.codeExample	{
+					border: none;
+					font-family: Courier, monospace; 
+					font-size: small;
+					margin-left: 2em;
+					margin-right: 2em;
+					margin-top: 0em;
+					margin-bottom: 0.5em;
+					padding-top: 0.5em;
+					padding-bottom: 0.5em;
+					padding-left: 0.5em;
+					padding-right: 0.5em;
+					white-space: pre;
+					background: #EEEEEE;
+				}
+
+.fixme {
+	font-color: #440000;
+	background: #FFCCCC;
+}

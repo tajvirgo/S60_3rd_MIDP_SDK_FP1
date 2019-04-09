@@ -1,0 +1,8 @@
+MIDlet-1: PKIMIDLET, , com.nokia.midp.examples.security.pki.PKIMIDLET
+MIDlet-Description: For testing SATSA-PKI.
+MIDlet-Jar-Size: @@@
+MIDlet-Jar-URL: pki.jar
+MIDlet-Name: PKIMIDLET
+MIDlet-Vendor: Nokia
+MIDlet-Version: 1.0
+MIDlet-Permissions: javax.microedition.securityservice.CMSMessageSignatureService

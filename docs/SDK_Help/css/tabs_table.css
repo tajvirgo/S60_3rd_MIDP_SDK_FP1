@@ -1,0 +1,31 @@
+/* table-based tabs -specific */
+table.tab tr td.off {
+	background: url('../images/tab_off_strip.gif');
+	cursor: pointer;
+	display: block;
+	font-family: arial;
+	font-size: 11px;
+	height: 16px;
+	margin: 0;
+	padding: 5px 3px 0 3px;
+	white-space: nowrap;
+	}
+table.tab tr td.off a {
+	color: #000;
+	text-decoration: none;
+	}
+table.tab tr td.off a:hover {
+	text-decoration: underline;
+	}
+table.tab tr td.on {
+	background: url('../images/tab_on_strip.gif');
+	cursor: default;
+	display: block;
+	font-family: arial;
+	font-size: 11px;
+	font-weight: bold;
+	height: 16px;
+	margin: 0;
+	padding: 5px 3px 0 3px;
+	white-space: nowrap;
+	}

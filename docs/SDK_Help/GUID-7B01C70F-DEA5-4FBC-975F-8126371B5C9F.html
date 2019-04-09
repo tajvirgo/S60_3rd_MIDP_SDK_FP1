@@ -1,0 +1,93 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Connecting and retrieving a location"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-7B01C70F-DEA5-4FBC-975F-8126371B5C9F"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> Tools and Utilities</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-7B01C70F-DEA5-4FBC-975F-8126371B5C9F"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-7B01C70F-DEA5-4FBC-975F-8126371B5C9F"><!----></a>Connecting and retrieving a location</h1>
+<p>For information on how to retrieve locations from the Location Framework,
+see S60 Location Acquisition API Specification.</p>
+<p>To get a location from the Simulation PSY, a user first needs to connect
+to <code>RPositionServer</code>. Then it is possible to open a sub-session
+to Simulation PSY using <code>RPositioner</code> via <code>RPositionServer</code>.
+Before opening a sub-session to Simulation PSY, the PSY should be enabled
+in the S60 platform Location Settings UI.</p>
+<p>For example:</p>
+<pre class="codeblock" id="GUID-4AF56693-8689-46BA-9CBC-AD38E75896A8"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-4AF56693-8689-46BA-9CBC-AD38E75896A8"><!----></a>TPositionInfo posInfo;
+TRequestStatus status;
+RPositionServer positionServer;
+RPositioner simPSY;
+
+User::LeaveIfError(positionServer.Connect());
+CleanupClosePushL(positionServer);
+User::LeaveIfError(simPSY.Open(positionServer));
+CleanupClosePushL(simPSY);
+
+// Set Requestor information
+User::LeaveIfError(simPSY.SetRequestor(CRequestor::ERequestorService,  CRequestor::EFormatUrl, _L("http://www.example.com")));
+
+simPSY.NotifyPositionUpdate(posInfo, status);
+User::WaitForRequest(status);
+
+// Do something with posInfo
+
+CleanupStack::PopAndDestroy(2, &amp;positionServer); // simPSY
+</pre>
+<p>Alternatively, the sub-session to Simulation PSY can be opened directly
+using its positioning plug-in ID, 0x101f7a81.</p>
+<p>Simulation PSY supports the class types <code>TPositionInfo</code>, <code>TPositionCourseInfo</code>, <code>TPositionSatelliteInfo</code> and <code>HPositionGenericInfo</code>, which means that the argument
+to <code>RPositioner::NotifyPositionUpdate()</code> must be of these
+classes. <code>HPositionGenericInfo</code>, <code>TPositionCourseInfo</code> and <code>TPositionSatelliteInfo</code> are
+all derived from <code>TPositionInfo</code>.</p>
+<p>In the Simulated Movement mode, no class specific position information
+is stored in the incoming position class. Only position information specific
+to <code>TPositionInfo</code> is stored.</p>
+<p>In the NMEA mode, position data is stored depending on the incoming
+position class. For <code>HPositionGenericInfo</code>, a request field
+is present for each retrievable position data. If a field is set as requested
+in <code>HPositionGenericInfo</code>, the Simulation PSY stores the
+corresponding position data. For example, if the field <code>EPositionFieldNMEASentences</code> is
+set as requested, the raw NMEA sentences that constitute the position fix
+are stored in <code>HPositionGenericInfo</code>. The number of the
+returned NMEA sentences is placed into the <code>EPositionFieldNMEASentences</code> field.
+The returned type is TUint8. The first sentence is placed into the <code>EPositionFieldNMEASentencesStart</code> field,
+the second sentence in the <code>EPositionFieldNMEASentencesStart+1</code> field,
+etc. The returned type is <code>TDesC8</code>. The format of the returned
+location estimates, WGS 84, is used in both NMEA and Simulated Movement mode.</p>
+<p>In Fixed Data Mode, no class specific position information is stored
+in the incoming position class. Only position information specific to <code>TPositionInfo</code> is
+stored.</p>
+<p>When two clients connect to Simulation PSY, two instances are constructed.
+It is possible for both to read from the configuration file and/or simulation
+file at the same time. The outputs of the two sessions are completely independent
+of each other.</p>
+<p>It is possible to set update options on a positioning plug-in in the
+Location Acquisition API (see S60 Location Acquisition API Specification).
+Simulation PSY supports the following update options: timeout, interval and
+partial updates. Partial updates are only supported in the NMEA mode, meaning
+that no partial updates could be returned for the Simulated Movement mode.
+See S60 Location Acquisition API Specification for more information about
+partial updates.</p>
+<p><code>HPositionGenericInfo</code>, <code>TPositionCourseInfo</code> and <code>TPositionSatelliteInfo</code> are
+supported in both modes. Only the NMEA mode supports position data specific
+for these position classes.</p>
+<div><h3>Error situations</h3><p>When trying to open the PSY with <code>RPositioner::Open()</code>,
+one of these error codes could be returned:</p><ul>
+<li><p><code>KErrNotFound</code>; Simulation PSY cannot
+find a needed file.</p></li>
+<li><p><code>KErrCorrupt</code>; the syntax of the Simulated
+Movement file is incorrect or all words are not present.</p></li>
+<li><p><code>KErrNotSupported</code>; the extension of the
+simulation file is recognized, neither of SPS nor NME.</p></li>
+</ul><p>When trying to get a location estimate with <code>RPositioner::NotifyPositionUpdate()</code>,
+one of these error codes could be returned:</p><ul>
+<li><p><code>KPositionQualityLoss</code>; the configuration
+for requests is set to fail in the Simulated Movement mode.</p></li>
+<li><p><code>KPositionPartialUpdate</code>; NMEA is missing
+position info and the client allows partial updates.</p></li>
+<li><p>System wide error codes from <code>TLexer</code> and <code>Math</code></p>
+</li>
+<li><p>Other system wide error codes.</p></li>
+</ul><p>When trying to cancel a location estimate with <code>RPositioner::CancelNotifyPositionUpdate()</code>,
+following error code could be returned:</p><ul>
+<li><p><code>KErrCancel</code>; ongoing request is properly
+cancelled.</p></li>
+</ul></div>
+</div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

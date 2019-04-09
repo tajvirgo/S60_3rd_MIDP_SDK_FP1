@@ -1,0 +1,10 @@
+MIDlet-1: AMMSMIDlet, /logo.png, com.nokia.midp.examples.jsr234.mansion.AMMSMIDlet
+MIDlet-Name: AMMSMIDlet
+MIDlet-Jar-Size: 620906
+MIDlet-Jar-URL: AMMSMIDlet.jar
+MIDlet-Version: 1.0
+MicroEdition-Profile: MIDP-1.0
+MicroEdition-Configuration: CLDC-1.1
+MIDlet-Vendor: Nokia
+MIDlet-Description: JSR-234, AMMS MIDlet example
+MIDlet-Icon: /logo.png

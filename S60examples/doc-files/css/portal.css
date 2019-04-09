@@ -1,0 +1,96 @@
+/*Portal styles*/
+div.prim-channel{
+	font-size: 11px;
+	width: 534px;
+	margin: 0;
+}
+
+div.prim-channel h1{
+	color: #ffffff;
+	display: block;
+	font-family: arial,helvetica,sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	margin: 0px;
+	padding: 6px 0 7px 9px;
+}
+
+div.prim-channel h1.bl{
+	background: url(../images/prim_channel_bl_header.gif) top right no-repeat #FFF;
+}
+
+div.prim-channel h1.org{
+	background: url(../images/prim_channel_org_header.gif) top right no-repeat #FFF;
+}
+
+div.prim-channel h1.grn{
+	background: url(../images/prim_channel_grn_header.gif) top right no-repeat #FFF;
+}
+
+div.prim-channel .prim-channel-body{
+	background: #FFF;
+	border: 1px solid #666;
+	border-top: none;
+	color: #666;
+	display: block;
+	margin: -4px 0 10px 0;
+	padding: 8px 8px 7px 8px;
+}
+
+div#sec-channel-wrapper-left{
+	float: left;
+	margin: 0 10px 0 0;
+	width: 262px;
+}
+
+div#sec-channel-wrapper-right{
+	float: left;
+	width: 262px;
+}
+
+div.sec-channel{
+	font-size: 11px;
+	width: 262px;
+	float: left;
+}
+
+div.sec-channel .left{
+	margin-right: 10px;
+}
+
+div.sec-channel h1{
+	color: #ffffff;
+	display: block;
+	font-family: arial,helvetica,sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	margin: 0px;
+	padding: 6px 0 7px 9px;
+}
+
+div.sec-channel h1.bl{
+	background: url(../images/sec_channel_bl_header.gif) top right no-repeat #FFF;
+}
+
+div.sec-channel h1.org{
+	background: url(../images/sec_channel_org_header.gif) top right no-repeat #FFF;
+}
+
+div.sec-channel h1.grn{
+	background: url(../images/sec_channel_grn_header.gif) top right no-repeat #FFF;
+}
+
+div.sec-channel .sec-channel-body{
+	background: #FFF;
+	border: 1px solid #666;
+	border-top: none;
+	color: #666;
+	display: block;
+	margin: -4px 0 10px 0;
+	padding: 8px 8px 7px 8px;
+}
+
+span.channel-controls{
+	float: right;
+	margin: -23px 5px 0 0;
+}

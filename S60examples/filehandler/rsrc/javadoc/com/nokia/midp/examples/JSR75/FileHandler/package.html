@@ -1,0 +1,644 @@
+<!DOCTYPE doctype PUBLIC "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+    <!--(==============================================================)--><!--(Document created with RoboEditor. )============================--><!--(==============================================================)-->
+  <title>filehandler_package-summary</title>
+                    <!--(Meta)==========================================================--> 
+               
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=windows-1252">
+                 
+  <meta name="Originator" content="ImportDoc">
+                 
+  <meta name="OriginalFile" content="FileHandler_help.doc">
+                 
+  <meta name="template" content="SDK.htt">
+                 
+  <meta name="generator"
+ content="RoboHELP by eHelp Corporation - www.ehelp.com">
+                 
+  <meta name="generator-major-version" content="0.1">
+                 
+  <meta name="generator-minor-version" content="1">
+                 
+  <meta name="filetype" content="kadov">
+                 
+  <meta name="filetype-version" content="1">
+                 
+  <meta name="page-count" content="1">
+                 
+  <meta name="layout-height" content="13246">
+                 
+  <meta name="layout-width" content="737">
+       <!--(Links)=========================================================--> 
+               
+        <!--(Style Sheet)===================================================--> 
+               
+  <style>
+<!--
+
+A:visited {
+	color: #800080;
+}
+
+A:link {
+	color: #0000ff;
+}
+
+-->
+  </style><!--(Body)==========================================================-->
+</head>
+  <body lang="EN-US">
+      This example demonstrates the use of a JSR 75 FileConnection.      
+<div placeholder="" x-missing-content-placeholder="" id="header"
+ style="width: 100%; position: relative;">     
+<p> </p>
+     </div>
+            
+<h3>Section Contents</h3>
+          
+<blockquote>             
+  <p><a href="#1">1. About this example</a> </p>
+                  
+  <p><a href="#2">2. Building and running</a> </p>
+                  
+  <p><a href="#3">3. Design and implementation</a> </p>
+     </blockquote>
+       <!--(HR)============================================================--> 
+     
+<hr style="height: 2px; width: 100%;" size="2" width="100%"
+ align="center">       
+<h3><a name="1">1. About this example</a> </h3>
+          
+<blockquote>             
+  <p>In Java™ Platform, Micro Edition software development, Connected Limited Device Configuration
+    (CLDC) and the profiles based on it are not required to support the reading
+    or writing of files. The Generic Connection Framework (GCF) defined by
+   the CLDC provides the basic scaffolding for file I/O, primarily through
+   the <span style="font-family: 'Courier New';">InputConnection</span>,
+    <span style="font-family: 'Courier New';">OutputConnection</span>, and
+  <span style="font-family: 'Courier New';">StreamConnection</span> interfaces.
+    The File Connection Optional Package (FCOP) is one of the two optional
+   packages defined by JSR75. PIM, which is the other package, is not within
+    the scope of this document. As the number and names of mounted file systems
+    may vary from device to device, the package also includes a support class,
+    the <span style="font-family: 'Courier New';">FileSystemRegistry</span>
+    class (defined in the <span style="font-family: 'Courier New';">javax.microedition.io.file</span>
+    package), that lets applications list the available file systems. The
+    <span style="font-family: 'Courier New';">FileSystemRegistry</span> class
+    also notifies interested applications whenever the user inserts or removes
+    a memory expansion card from the device.</p>
+                  
+  <p>The purpose of this example application is to show how to implement
+  FileConnection APIs and how to provide access to file systems on devices
+    and/or mounted memory cards. File system connectivity through the Generic
+    Connection Framework may be supported by an implementation if the target
+    device has the necessary underlying operating system and hardware support
+    for file systems. Connections to a file system are opened to file systems
+    located either on memory cards or in a device’s memory, depending on
+device     and operating system limitations. </p>
+
+    <p>Since this MIDlet accesses a user's phone book and other PIM user data, certain 
+    MIDP security settings need to be enabled for the MIDlet to be fully functional. The "Read User 
+    Data Access" and "Write User Data Access" function groups have to be allowed for the MIDlet to access 
+    the required data on the device or on the SDK.  See your device documentation or SDK user guide for 
+    more details.</p>
+     </blockquote>
+                    
+<h3><a name="2">2. Building and running</a> </h3>
+          
+<blockquote>             
+  <h3>2.1 Compiling</h3>
+                  
+  <p>MIDlets are compiled using a standard Java SDK. You can use the IDE
+  tool of your choice(Eclipse, Netbeans, JBuilder 2005 Developer)</p>
+                  
+  <p>The following screen appears when the FileHandler MIDlet is started.
+    The application checks first if the device supports JSR75 FileConnection
+    Optional Package. One of system properties that application shows is
+the     file separator character(s) for the underlying platform. For example,
+  "\" would be returned on a Windows OS based platform, and "/"   would be
+  returned on a Unix system.</p>
+                  
+  <p class="BodyText" style="margin-left: 67.7pt; text-align: center;"
+ align="center"> </p>
+                  
+  <p style="text-align: center;" align="center"><b
+ style="font-weight: bold;"><span style="font-family: Arial;">Start-Up  
+Screen</span></b></p>
+                  
+  <p style="text-align: center;" align="center"><img
+ src="doc-files/image001.jpg" x-maintain-ratio="TRUE"
+ style="border: medium none ; width: 247px; height: 329px; float: none;"
+ width="247" height="329" border="0" alt="image 1">
+      </p>
+                  
+  <p style="text-align: center;" align="center"> </p>
+                  
+  <h3>2.2 Granting access</h3>
+                  
+  <p>In order to work around with files systems, user must grant access to
+    it. MIDP security settings will determine if and how often a user will
+be prompted. By pressing <span style="font-family: 'Courier New';">&lt;start&gt;</span>
+    command, Java virtual machine prompts dialog where access to local file
+    system is asked. This is only the access dialog for <span
+ style="font-family: 'Courier New';">FileSystemRegistry</span><b>   </b>class<b>.
+    </b>Access prompts can and will occur further on using this   application.
+  All IO operations to local file system must be prompted at   least once.</p>
+                  
+  <p style="text-align: center;" align="center"><b
+ style="font-weight: bold;">Granting access to local   file system</b></p>
+                  
+  <p style="text-align: center; font-weight: bold;" align="center"><b
+ style="font-weight: bold;"><img src="doc-files/image002.jpg"
+ x-maintain-ratio="TRUE"
+ style="border: medium none ; width: 245px; height: 327px; float: none;"
+ width="245" height="327" border="0" alt="image 2">
+      </b></p>
+                  
+  <p class="BodyText" style="margin-left: 67.7pt;"> </p>
+                  
+  <p>If user denies the access, application cannot deliver the functionality
+    and requests to close.</p>
+                  
+  <p style="text-align: center;" align="center"> </p>
+                  
+  <p style="text-align: center;" align="center"><b
+ style="font-weight: bold;">Denied access to local file   system</b></p>
+                  
+  <p style="text-align: center;" align="center"><img
+ src="doc-files/image003.gif" x-maintain-ratio="TRUE"
+ style="border: medium none ; width: 245px; height: 327px; float: none;"
+ width="245" height="327" border="0">
+      </p>
+                  
+  <h3>2.3 Selecting volume to work with</h3>
+                  
+  <p>When the access to read local file system is granted, the user must
+  select a volume to work with. All actions to come are targeted on selected
+    volume. The user may select volume from the list and proceed by pressing
+    <span style="font-family: 'Courier New';">&lt;select&gt;</span> key on
+   keyboard.</p>
+                  
+  <p class="BodyText"> </p>
+                  
+  <p style="text-align: center;" align="center"><b
+ style="font-weight: bold;">Selecting volume</b></p>
+                  
+  <p style="text-align: center; font-weight: bold;" align="center"><b
+ style="font-weight: bold;"><img src="doc-files/image004.gif"
+ x-maintain-ratio="TRUE"
+ style="border: medium none ; width: 245px; height: 325px; float: none;"
+ width="245" height="325" border="0">
+      </b></p>
+                  
+  <p style="text-align: center;" align="center"> </p>
+                  
+  <h3>2.4 Mounting or unmounting media</h3>
+                  
+  <p>FileHandler application can react in volume changes on system by implementing
+    <span style="font-family: 'Courier New';">FileSystemListener</span> interface.
+    If a mounted volume is removed or new media is inserted, an info screen
+    is displayed. The volume list is also updated and application returns
+  to volume selection.</p>
+                  
+  <h3>2.5 Commands to selected volume</h3>
+                  
+  <p>When the volume is selected, basic file handling commands can be invoked.
+    Certain commands require the user to select target from a list. This
+is     done by pressing <span style="font-family: 'Courier New';">Up</span>/<span
+ style="font-family: 'Courier New';">down</span> keys on the device’s keyboard.
+    A reverse colored bar indicates the file/folder that is currently selected.
+    If the user has not selected a file or folder for the command is to invoke,
+    a “<span style="font-family: 'Courier New';">Nothing to do</span>.” message
+    is shown on screen. </p>
+                  
+  <p>The available commands are as follows:</p>
+                  
+  <h3>2.5.1 Back</h3>
+                  
+  <p>Changes the directory up one level. <span
+ style="font-family: 'Courier New';">List   Directory</span> is also invoked.</p>
+                  
+  <h3>2.5.2 List Directory</h3>
+                  
+  <p>Lists the current folder’s/Root directory’s content. A “<span
+ style="font-family: 'Courier New';">/’”</span>   at the end of the file
+name indicates that it’s a folder.</p>
+                  
+  <p class="BodyText"> </p>
+                  
+  <p style="text-align: center;" align="center"><b
+ style="font-weight: bold;">List folder’s / Root’s content</b></p>
+                  
+  <p style="text-align: center; font-family: Arial;" align="center"><b
+ style="font-weight: bold;"><img src="doc-files/image006.gif"
+ x-maintain-ratio="TRUE"
+ style="border: medium none ; width: 245px; height: 327px; float: none;"
+ width="245" height="327" border="0">
+      </b></p>
+                  
+  <h3>2.5.3 Open &amp; Edit file</h3>
+                  
+  <p>Opens the selected text file and shows its content on an editable textbox.
+    The user can edit this text as desired. If the user tries to open files
+    other than text files, “<span style="font-family: 'Courier New';">Only
+   text files are supported.</span>” info message is shown on the screen.
+  The application also checks that the requested text file’s size does not
+    exceed 4k bytes. If that is the case, a “<span
+ style="font-family: 'Courier New';">File   '&lt;file&gt;' is larger than
+  4k.</span>" info message is shown on   the screen. “<span
+ style="font-family: 'Courier New';">Open &amp; Edit   file</span>” command
+  can also be invoked by pressing the &lt;<span
+ style="font-family: 'Courier New';">select</span>&gt;   key on the keyboard.
+  If the user selects &lt;<span style="font-family: 'Courier New';">Done</span>&gt;,
+    all text on the editable textbox is overwritten into the file that was
+   opened. This is done in Delete/Create new manner. The file being processed
+    is first deleted and then recreated with new given context. If the user
+    cancels this function by pressing &lt;B<span
+ style="font-family: 'Courier New';">ack</span>&gt;   key, a “<span
+ style="font-family: 'Courier New';">Command was Cancelled.</span>”   message
+  is shown on the screen. The application also returns to the screen   in
+which  this function was initially invoked. If the selected text file   is
+READONLY,  an IOException is shown on the screen, but the application   runs
+normally.</p>
+                  
+  <p class="BodyText"> </p>
+                  
+  <p style="text-align: center;" align="center"><b
+ style="font-weight: bold;">Open &amp; Edit selected   text file</b></p>
+                  
+  <p style="text-align: center; font-family: Arial;" align="center"><b
+ style="font-weight: bold;"><img src="doc-files/image007.gif"
+ x-maintain-ratio="TRUE"
+ style="border: medium none ; width: 245px; height: 329px; float: none;"
+ width="245" height="329" border="0">
+      </b></p>
+                  
+  <h3>2.5.4 Change folder </h3>
+                  
+  <p>The Change Folder command opens the selected folder and lists its content.
+    This command can also be invoked by pressing &lt;<span
+ style="font-family: 'Courier New';">select</span>&gt;   key on keyboard.</p>
+                  
+  <p class="BodyText"> </p>
+                  
+  <p style="text-align: center;" align="center"><b
+ style="font-weight: bold;">Folder changed</b></p>
+                  
+  <p style="text-align: center; font-family: Arial;" align="center"><b
+ style="font-weight: bold;"><img src="doc-files/image008.gif"
+ x-maintain-ratio="TRUE"
+ style="border: medium none ; width: 245px; height: 327px; float: none;"
+ width="245" height="327" border="0">
+      </b></p>
+                  
+  <h3>2.5.5 Create Folder</h3>
+                  
+  <p>The Create Folder command creates a new folder in the location where
+    user is at the moment. When this command is invoked, dialog is shown
+where     user can enter a name for the folder. The default is “<span
+ style="font-family: 'Courier New';">New   Folder</span>”. If the user gives
+  an empty name, the “<span style="font-family: 'Courier New';">Incorrect
+  name or Empty.</span>” info message is shown on the screen. If the user 
+   cancels this function by pressing the &lt;B<span
+ style="font-family: 'Courier New';">ack</span>&gt;   key, a “<span
+ style="font-family: 'Courier New';">Command was Cancelled.</span>”   message
+  is shown on the screen. When the user selects &lt;<span
+ style="font-family: 'Courier New';">Done</span>&gt;,   the application creates
+  a new folder and shows a “<span style="font-family: 'Courier New';">Directory
+    ‘&lt;new folder&gt;’</span> <span
+ style="font-family: 'Courier New';">created.</span>”     info message. The
+application also returns to the screen in which this    function was initially
+invoked. The maximum name size is 50 characters.</p>
+                  
+  <p class="BodyText"> </p>
+                  
+  <p style="text-align: center;" align="center"><b
+ style="font-weight: bold;">Create new folder</b></p>
+                  
+  <p style="text-align: center; font-weight: bold;" align="center"><b
+ style="font-weight: bold;"><img src="doc-files/image009.gif"
+ x-maintain-ratio="TRUE"
+ style="border: medium none ; width: 247px; height: 331px; float: none;"
+ width="247" height="331" border="0">
+      </b></p>
+                  
+  <h3>2.5.6 Rename</h3>
+                  
+  <p>The Rename command renames selected file or folder according to the
+  user’s input. When this command is invoked, a dialog is shown in which
+  user can type new name. The default is selected folder’s name. If user
+  gives an empty name, the “<span style="font-family: 'Courier New';">Incorrect
+    name or Empty.</span>” info message in shown on the screen. If user cancels
+    this function by pressing the &lt;<span
+ style="font-family: 'Courier New';">back&gt;</span>   key, a “<span
+ style="font-family: 'Courier New';">Command was Cancelled.</span>”   message
+  is shown on the screen. The application also returns to the screen   in
+which  this function was initially invoked with clear screen. An info   note
+    <span style="font-family: Arial;">“</span><span
+ style="font-family: 'Courier New';">&lt;type&gt;   </span><span
+ style="font-family: Arial;">‘</span><span
+ style="font-family: 'Courier New';">&lt;old   name&gt;</span><span
+ style="font-family: Arial;">’</span><span
+ style="font-family: 'Courier New';">   renamed as </span><span
+ style="font-family: Arial;">‘</span><span
+ style="font-family: 'Courier New';">&lt;new   name&gt;</span><span
+ style="font-family: Arial;">’</span>.” is shown.   The maximum name size
+  is 50 characters.</p>
+                  
+  <p class="BodyText"> </p>
+                  
+  <p style="text-align: center;" align="center"><b
+ style="font-weight: bold;">Rename selected file / folder</b></p>
+                  
+  <p style="text-align: center; font-family: Arial;" align="center"><b
+ style="font-weight: bold;"><img src="doc-files/image010.gif"
+ x-maintain-ratio="TRUE"
+ style="border: medium none ; width: 247px; height: 327px; float: none;"
+ width="247" height="327" border="0">
+      </b></p>
+                  
+  <h3>2.5.7 Permissions</h3>
+                  
+  <p>All files and folders have read/write permissions. By selecting a file
+    or folder on the directory list and by invoking this function, permissions
+    are shown on the screen. If file or folder is not editable, it has a
+  <span style="font-family: 'Courier New';">READONLY</span> flag set and
+no modification-based     functions (rename, delete, edit) can be applied
+to it.</p>
+                  
+  <p class="BodyText"> </p>
+                  
+  <p style="text-align: center;" align="center"><b
+ style="font-weight: bold;">Selected file’s read &amp;   write permissions</b></p>
+                  
+  <p style="text-align: center; font-family: Arial;" align="center"><b
+ style="font-weight: bold;"><img src="doc-files/image011.gif"
+ x-maintain-ratio="TRUE"
+ style="border: medium none ; width: 247px; height: 329px; float: none;"
+ width="247" height="329" border="0">
+      </b></p>
+                  
+  <h3>2.5.8 Size</h3>
+                  
+  <p>By selecting a file or folder on the directory list and by invoking
+  this function, the size of the file or folder in bytes is shown on the
+  screen. If selected item is a folder, the folder size including subdirectories
+    is calculated and shown.</p>
+                  
+  <p class="BodyText"> </p>
+                  
+  <p style="text-align: center;" align="center"><b
+ style="font-weight: bold;">Selected file’s size</b></p>
+                  
+  <p style="text-align: center; font-family: Arial;" align="center"><b
+ style="font-weight: bold;"><img src="doc-files/image012.gif"
+ x-maintain-ratio="TRUE"
+ style="border: medium none ; width: 247px; height: 327px; float: none;"
+ width="247" height="327" border="0">
+      </b></p>
+                  
+  <p class="BodyText"> </p>
+                  
+  <h3>2.5.9 URL</h3>
+                  
+  <p>The URL command returns the full URL of the selected file or folder
+  including the scheme. The print is in an escaped ASCII format as defined
+    by RFC 2396. The resulting URL looks as follows: </p>
+                  
+  <p class="BodyText"><span style="font-family: 'Courier New';">    </span> <span
+ style="font-size: 10pt; font-family: 'Courier New';">file://&lt;host&gt;/&lt;root&gt;/&lt;directory&gt;/&lt;filename.extension&gt;</span></p>
+                  
+  <p class="BodyText">or </p>
+                  
+  <p class="BodyText"><span style="font-family: 'Courier New';">    </span><span style="font-size: 10pt; font-family: 'Courier New';">file://&lt;host&gt;/&lt;root&gt;/&lt;directory&gt;/&lt;directoryname&gt;/</span></p>
+                  
+  <p class="BodyText"> </p>
+                  
+  <p style="text-align: center;" align="center"><b
+ style="font-weight: bold;">Selected file’s URL</b></p>
+                  
+  <p style="text-align: center; font-family: Arial;" align="center"><b
+ style="font-weight: bold;"><img src="doc-files/image013.gif"
+ x-maintain-ratio="TRUE"
+ style="border: medium none ; width: 247px; height: 327px; float: none;"
+ width="247" height="327" border="0">
+      </b></p>
+                  
+  <h3>2.5.10<span
+ style="font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">   
+    </span>Delete</h3>
+                  
+  <p class="BodyText">By selecting a file or folder on the directory list
+  and   by invoking this function, a selection is deleted. If the selected
+ file   has a <span style="font-family: 'Courier New';">READONLY</span> flag
+ set,   the application cannot delete it and the following info screen is
+shown.   This also happens if a folder is not empty or has a <span
+ style="font-family: 'Courier New';">READONLY</span>   flag set.</p>
+                  
+  <p class="BodyText"> </p>
+                  
+  <p style="text-align: center;" align="center"><b
+ style="font-weight: bold;">Delete selection was not   possible</b></p>
+                  
+  <p style="text-align: center; font-family: Arial;" align="center"><b
+ style="font-weight: bold;"><img src="doc-files/image014.gif"
+ x-maintain-ratio="TRUE"
+ style="border: medium none ; width: 247px; height: 327px; float: none;"
+ width="247" height="327" border="0">
+      </b></p>
+                  
+  <p class="BodyText">If it is possible to delete the selected file or folder,
+    the following info screen is shown and deletion will take place.</p>
+                  
+  <p class="BodyText"> </p>
+                  
+  <p style="text-align: center;" align="center"><b
+ style="font-weight: bold;">Delete selection was done   successfully</b></p>
+                  
+  <p style="text-align: center; font-family: Arial;" align="center"><b
+ style="font-weight: bold;"><img src="doc-files/image015.jpg"
+ x-maintain-ratio="TRUE"
+ style="border: medium none ; width: 245px; height: 327px; float: none;"
+ width="245" height="327" border="0" alt="image 15">
+      </b></p>
+                  
+  <h3>2.5.11<span
+ style="font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">   
+    </span>Used Mem</h3>
+                  
+  <p class="BodyText">The Used Mem command determines the used memory of
+a   file system on which the connection's target resides. This may only be
+  an estimate and varies based on platform-specific file system blocking
+  and metadata information.</p>
+                  
+  <p class="BodyText"> </p>
+                  
+  <p style="text-align: center;" align="center"><b
+ style="font-weight: bold;">Used Memory</b></p>
+                  
+  <p style="text-align: center; font-family: Arial;" align="center"><b
+ style="font-weight: bold;"><img src="doc-files/image016.gif"
+ x-maintain-ratio="TRUE"
+ style="border: medium none ; width: 247px; height: 327px; float: none;"
+ width="247" height="327" border="0">
+      </b></p>
+                  
+  <h3>2.5.12<span
+ style="font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">   
+    </span>Free size</h3>
+                  
+  <p class="BodyText">The free size command determines the free memory that
+    is available on the file system on which the file or directory resides.
+    This may only be an estimate and varies based on platform-specific file
+    system blocking and metadata information.</p>
+                  
+  <p class="BodyText"> </p>
+                  
+  <p style="text-align: center;" align="center"><b
+ style="font-weight: bold;">Free size</b></p>
+                  
+  <p style="text-align: center; font-family: Arial;" align="center"><b
+ style="font-weight: bold;"><img src="doc-files/image017.gif"
+ x-maintain-ratio="TRUE"
+ style="border: medium none ; width: 245px; height: 327px; float: none;"
+ width="245" height="327" border="0">
+      </b></p>
+                  
+  <p class="BodyText"> </p>
+                  
+  <h3>2.5.13<span
+ style="font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">   
+    </span>Select volume</h3>
+                  
+  <p class="BodyText">The Select volume function returns to the screen on
+  which   volumes can be selected.</p>
+                  
+  <p class="BodyText"> </p>
+                  
+  <p style="text-align: center;" align="center"><b
+ style="font-weight: bold;">Select volume</b></p>
+                  
+  <p style="text-align: center; font-family: Arial;" align="center"><b
+ style="font-weight: bold;"><img src="doc-files/image018.gif"
+ x-maintain-ratio="TRUE"
+ style="border: medium none ; width: 247px; height: 327px; float: none;"
+ width="247" height="327" border="0">
+      </b></p>
+                  
+  <p class="BodyText"> </p>
+     </blockquote>
+          
+<h3><a name="3">3. Design and implementation</a> </h3>
+          
+<blockquote>             
+  <p>The FileHandler example accommodates ModelViewController approach with
+    its structure. The MIDlet’s lifecycle begins when the user tells the
+application     management software AMS (a part of the device's software
+operating environment     that manages <code><span
+ style="font-size: 10pt; font-family: 'Courier New';">MIDlets</span></code>)
+    to run application by calling its default constructor. This also signals
+    the <code><span style="font-size: 10pt; font-family: 'Courier New';">MIDlet</span></code>
+    that it has entered the <em>Active</em> state (<span
+ style="font-family: 'Courier New';">startApp()</span><span
+ style="font-family: 'Courier New';">)</span>.</p>
+                  
+  <p><span style="font-family: 'Courier New';">FileHandlerMIDlet</span> constructs
+    the ViewController by giving its MIDlet reference along with a parameter.
+    Therefore the controller can exit the application at any time needed
+(by     user invoke). The MIDlet also owns references to the Screen device,
+which     is needed, for example, for <span
+ style="font-family: 'Courier New';">ListBox</span>     control.</p>
+                  
+  <p><span style="font-family: 'Courier New';">   new FileHandlerViewController(this);</span></p>
+                  
+  <p>Example applications core operations are handled and directed from <span
+ style="font-family: 'Courier New';">FileHandlerViewController</span> class
+    which carries out the following actions: </p>
+                  
+  <p><span style="font-family: Symbol;">·<span
+ style="font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">       
+    </span></span>registers <span style="font-family: 'Courier New';">FileSystemListener</span>
+    class to listen to volume changes</p>
+                  
+  <p><span style="font-family: Symbol;">·<span
+ style="font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">       
+    </span></span>initializes <span style="font-family: 'Courier New';">FileHandlerModel</span>
+    for action command listings</p>
+                  
+  <p><span style="font-family: Symbol;">·<span
+ style="font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">       
+    </span></span>initializes <span style="font-family: 'Courier New';">FileHandlerDialogs</span>
+    for user input </p>
+                  
+  <p><span style="font-family: Symbol;">·<span
+ style="font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">       
+    </span></span>sets itself to listen to commands by user key input</p>
+                  
+  <p><span style="font-family: Symbol;">·<span
+ style="font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">       
+    </span></span>launches every file operation as a thread.</p>
+                  
+  <p class="BodyText"><span style="font-family: 'Courier New';">FileHandlerViewController
+    </span>implements<span style="font-family: 'Courier New';"> CommandListener</span>
+    interface to listen to user key events from controls. In this case the
+   only control to show and to act as a selector is ListBox. All data shown
+    to the user is added to the ListBox item pool. In <span
+ style="font-family: 'Courier New';">commandAction</span>()   method all
+commands are interpreted and certain operations are triggered.   Due to the
+nature of a file system, all triggered operations are done   in threads.
+This ensures that no deadlock situations are to emerge if   some functionality
+takes a bit longer or hangs. All file operations have   their own unique
+class which extends <span style="font-family: 'Courier New';">Thread</span>.
+ There is one case when thread synchronization is required.  When an operation
+such as changing a directory results in a subsequent list directory operation 
+then synchronization is added so that the first operation completes before 
+the second starts.</p>
+                  
+  <p>The controller class preps variables and constructs proper threads by
+    calling its default constructors with several parameters. Typical parameters
+    are reference to the control itself, and fileconnection member. A specific
+    action is launched by calling the <span
+ style="font-family: 'Courier New';">start</span>()   method of a thread.
+  After this there is no room to call anything because   thread has been
+triggered   and the process is running normally. In this   case the application
+does  not wait for a thread to finish.</p>
+                  
+  <p class="BodyText"> </p>
+                  
+  <p>Most of the exceptions are handled in the <span
+ style="font-family: 'Courier New';">FileHandlerErrorHandler</span>   class
+  by calling static method <span style="font-family: 'Courier New';">handleError</span>().
+    Some exceptions are met in try/catch structure in order to inform user
+   that the operation can be done with certain alterations.</p>
+                  
+  <p class="BodyText">The figure below shows the class diagram of the FileHandler
+    application.</p>
+                  
+  <p class="BodyText"> </p>
+                  
+  <p style="text-align: center;" align="center"><b
+ style="font-weight: bold;">FileHandler example’s Class   diagram </b></p>
+                  
+  <p style="text-align: center;" align="center"> </p>
+                  
+  <p style="text-align: center; font-weight: bold;" align="center"><b
+ style="font-weight: bold;"><img src="doc-files/image019.gif"
+ x-maintain-ratio="TRUE"
+ style="border: medium none ; width: 647px; height: 546px; float: none;"
+ width="647" height="546" border="0">
+      </b></p>
+     </blockquote>
+          
+<div placeholder="" x-missing-content-placeholder="" id="footer"
+ style="width: 100%; position: relative;">     
+<p> </p>
+     </div>
+      <br>
+    <br>
+   <br>
+  <br>
+ <br>
+</body>
+</html>

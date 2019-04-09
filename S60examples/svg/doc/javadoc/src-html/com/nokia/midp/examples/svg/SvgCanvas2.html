@@ -1,0 +1,228 @@
+<HTML>
+<BODY BGCOLOR="white">
+<PRE>
+<FONT color="green">001</FONT>    /* Copyright © 2006 Nokia. */<a name="line.1"></a>
+<FONT color="green">002</FONT>    package com.nokia.midp.examples.svg;<a name="line.2"></a>
+<FONT color="green">003</FONT>    <a name="line.3"></a>
+<FONT color="green">004</FONT>    <a name="line.4"></a>
+<FONT color="green">005</FONT>    import java.util.*;<a name="line.5"></a>
+<FONT color="green">006</FONT>    import java.io.*;<a name="line.6"></a>
+<FONT color="green">007</FONT>    <a name="line.7"></a>
+<FONT color="green">008</FONT>    import javax.microedition.midlet.*;<a name="line.8"></a>
+<FONT color="green">009</FONT>    import javax.microedition.lcdui.*;<a name="line.9"></a>
+<FONT color="green">010</FONT>    import javax.microedition.lcdui.game.GameCanvas;<a name="line.10"></a>
+<FONT color="green">011</FONT>    import javax.microedition.io.*;<a name="line.11"></a>
+<FONT color="green">012</FONT>    <a name="line.12"></a>
+<FONT color="green">013</FONT>    import javax.microedition.m2g.*;<a name="line.13"></a>
+<FONT color="green">014</FONT>    import org.w3c.dom.svg.*;<a name="line.14"></a>
+<FONT color="green">015</FONT>    <a name="line.15"></a>
+<FONT color="green">016</FONT>    <a name="line.16"></a>
+<FONT color="green">017</FONT>    /**<a name="line.17"></a>
+<FONT color="green">018</FONT>     * Simple canvas that uses JSR-226 to render SVG content.<a name="line.18"></a>
+<FONT color="green">019</FONT>     */<a name="line.19"></a>
+<FONT color="green">020</FONT>    public class SvgCanvas2 extends GameCanvas  {<a name="line.20"></a>
+<FONT color="green">021</FONT>    <a name="line.21"></a>
+<FONT color="green">022</FONT>            /**<a name="line.22"></a>
+<FONT color="green">023</FONT>             * Constructor.<a name="line.23"></a>
+<FONT color="green">024</FONT>             */<a name="line.24"></a>
+<FONT color="green">025</FONT>        public SvgCanvas2 (boolean suppressKeyEvents)  {<a name="line.25"></a>
+<FONT color="green">026</FONT>                super(suppressKeyEvents);<a name="line.26"></a>
+<FONT color="green">027</FONT>    <a name="line.27"></a>
+<FONT color="green">028</FONT>                    // *** setup an instance of ScalableGraphics<a name="line.28"></a>
+<FONT color="green">029</FONT>            sg = ScalableGraphics.createInstance();<a name="line.29"></a>
+<FONT color="green">030</FONT>                    sg.setRenderingQuality(sg.RENDERING_QUALITY_HIGH);<a name="line.30"></a>
+<FONT color="green">031</FONT>    <a name="line.31"></a>
+<FONT color="green">032</FONT>            // *** load an svg image from a file<a name="line.32"></a>
+<FONT color="green">033</FONT>            try {<a name="line.33"></a>
+<FONT color="green">034</FONT>                    InputStream svgStream = getClass().getResourceAsStream("content2.svg");<a name="line.34"></a>
+<FONT color="green">035</FONT>                    svgImage = (SVGImage)( SVGImage.createImage( svgStream, null ) );<a name="line.35"></a>
+<FONT color="green">036</FONT>    <a name="line.36"></a>
+<FONT color="green">037</FONT>                            // ** set the width and height of the document to match the screen capabilities<a name="line.37"></a>
+<FONT color="green">038</FONT>                    svgImage.setViewportWidth( getWidth() );<a name="line.38"></a>
+<FONT color="green">039</FONT>                    svgImage.setViewportHeight( getHeight() );<a name="line.39"></a>
+<FONT color="green">040</FONT>    <a name="line.40"></a>
+<FONT color="green">041</FONT>                } catch ( Exception e ){<a name="line.41"></a>
+<FONT color="green">042</FONT>                    e.printStackTrace();<a name="line.42"></a>
+<FONT color="green">043</FONT>                }<a name="line.43"></a>
+<FONT color="green">044</FONT>        }<a name="line.44"></a>
+<FONT color="green">045</FONT>    <a name="line.45"></a>
+<FONT color="green">046</FONT>    <a name="line.46"></a>
+<FONT color="green">047</FONT>            /**<a name="line.47"></a>
+<FONT color="green">048</FONT>             * Paint method.<a name="line.48"></a>
+<FONT color="green">049</FONT>             */<a name="line.49"></a>
+<FONT color="green">050</FONT>        public void paint(Graphics g)  {<a name="line.50"></a>
+<FONT color="green">051</FONT>            // *** clear the display<a name="line.51"></a>
+<FONT color="green">052</FONT>            g.setColor(255, 255, 255);<a name="line.52"></a>
+<FONT color="green">053</FONT>            g.fillRect(0, 0, getWidth(), getHeight());<a name="line.53"></a>
+<FONT color="green">054</FONT>    <a name="line.54"></a>
+<FONT color="green">055</FONT>            // *** render the SVG image<a name="line.55"></a>
+<FONT color="green">056</FONT>            sg.bindTarget( g );<a name="line.56"></a>
+<FONT color="green">057</FONT>                sg.setTransparency(1f);<a name="line.57"></a>
+<FONT color="green">058</FONT>                sg.render(0, 0, svgImage);<a name="line.58"></a>
+<FONT color="green">059</FONT>                    sg.releaseTarget();<a name="line.59"></a>
+<FONT color="green">060</FONT>        }<a name="line.60"></a>
+<FONT color="green">061</FONT>    <a name="line.61"></a>
+<FONT color="green">062</FONT>    <a name="line.62"></a>
+<FONT color="green">063</FONT>            /**<a name="line.63"></a>
+<FONT color="green">064</FONT>             * Restore the original view of the SVG Image.<a name="line.64"></a>
+<FONT color="green">065</FONT>             */<a name="line.65"></a>
+<FONT color="green">066</FONT>        public void restoreView() {<a name="line.66"></a>
+<FONT color="green">067</FONT>                SVGSVGElement myEl = (SVGSVGElement) svgImage.getDocument().getDocumentElement();<a name="line.67"></a>
+<FONT color="green">068</FONT>                myEl.setCurrentRotate(0);<a name="line.68"></a>
+<FONT color="green">069</FONT>                myEl.setCurrentScale(1);<a name="line.69"></a>
+<FONT color="green">070</FONT>                SVGPoint origin = myEl.getCurrentTranslate();<a name="line.70"></a>
+<FONT color="green">071</FONT>                origin.setX(0);<a name="line.71"></a>
+<FONT color="green">072</FONT>                origin.setY(0);<a name="line.72"></a>
+<FONT color="green">073</FONT>                repaint();<a name="line.73"></a>
+<FONT color="green">074</FONT>        }<a name="line.74"></a>
+<FONT color="green">075</FONT>    <a name="line.75"></a>
+<FONT color="green">076</FONT>            /**<a name="line.76"></a>
+<FONT color="green">077</FONT>             * Zoom in on the SVG Image.<a name="line.77"></a>
+<FONT color="green">078</FONT>             */<a name="line.78"></a>
+<FONT color="green">079</FONT>        public void zoomIn() {<a name="line.79"></a>
+<FONT color="green">080</FONT>                SVGSVGElement myEl = (SVGSVGElement)(svgImage.getDocument().getDocumentElement());<a name="line.80"></a>
+<FONT color="green">081</FONT>                myEl.setCurrentScale(myEl.getCurrentScale() * 1.2f);<a name="line.81"></a>
+<FONT color="green">082</FONT>                repaint();<a name="line.82"></a>
+<FONT color="green">083</FONT>        }<a name="line.83"></a>
+<FONT color="green">084</FONT>    <a name="line.84"></a>
+<FONT color="green">085</FONT>            /**<a name="line.85"></a>
+<FONT color="green">086</FONT>             * Zoom out on the SVG Image.<a name="line.86"></a>
+<FONT color="green">087</FONT>             */<a name="line.87"></a>
+<FONT color="green">088</FONT>        public void zoomOut() {<a name="line.88"></a>
+<FONT color="green">089</FONT>                SVGSVGElement myEl = (SVGSVGElement)(svgImage.getDocument().getDocumentElement());<a name="line.89"></a>
+<FONT color="green">090</FONT>                myEl.setCurrentScale(myEl.getCurrentScale() * 0.8f);<a name="line.90"></a>
+<FONT color="green">091</FONT>                repaint();<a name="line.91"></a>
+<FONT color="green">092</FONT>        }<a name="line.92"></a>
+<FONT color="green">093</FONT>    <a name="line.93"></a>
+<FONT color="green">094</FONT>    <a name="line.94"></a>
+<FONT color="green">095</FONT>            /**<a name="line.95"></a>
+<FONT color="green">096</FONT>             * Rotate out on the SVG Image.<a name="line.96"></a>
+<FONT color="green">097</FONT>             */<a name="line.97"></a>
+<FONT color="green">098</FONT>        public void rotateOut() {<a name="line.98"></a>
+<FONT color="green">099</FONT>                SVGSVGElement myEl = (SVGSVGElement)(svgImage.getDocument().getDocumentElement());<a name="line.99"></a>
+<FONT color="green">100</FONT>                myEl.setCurrentRotate(myEl.getCurrentRotate() + 10);<a name="line.100"></a>
+<FONT color="green">101</FONT>                repaint();<a name="line.101"></a>
+<FONT color="green">102</FONT>        }<a name="line.102"></a>
+<FONT color="green">103</FONT>    <a name="line.103"></a>
+<FONT color="green">104</FONT>    <a name="line.104"></a>
+<FONT color="green">105</FONT>            /**<a name="line.105"></a>
+<FONT color="green">106</FONT>             * Rotate in on the SVG Image.<a name="line.106"></a>
+<FONT color="green">107</FONT>             */<a name="line.107"></a>
+<FONT color="green">108</FONT>        public void rotateIn() {<a name="line.108"></a>
+<FONT color="green">109</FONT>                SVGSVGElement myEl = (SVGSVGElement)(svgImage.getDocument().getDocumentElement());<a name="line.109"></a>
+<FONT color="green">110</FONT>                myEl.setCurrentRotate(myEl.getCurrentRotate() - 10);<a name="line.110"></a>
+<FONT color="green">111</FONT>                repaint();<a name="line.111"></a>
+<FONT color="green">112</FONT>        }<a name="line.112"></a>
+<FONT color="green">113</FONT>    <a name="line.113"></a>
+<FONT color="green">114</FONT>    <a name="line.114"></a>
+<FONT color="green">115</FONT>            /**<a name="line.115"></a>
+<FONT color="green">116</FONT>             * Key repeat method.<a name="line.116"></a>
+<FONT color="green">117</FONT>             */<a name="line.117"></a>
+<FONT color="green">118</FONT>        protected void keyRepeated(int keyCode){<a name="line.118"></a>
+<FONT color="green">119</FONT>                    keyPressed(keyCode);<a name="line.119"></a>
+<FONT color="green">120</FONT>        }<a name="line.120"></a>
+<FONT color="green">121</FONT>    <a name="line.121"></a>
+<FONT color="green">122</FONT>    <a name="line.122"></a>
+<FONT color="green">123</FONT>            /**<a name="line.123"></a>
+<FONT color="green">124</FONT>             * Handle key presses.<a name="line.124"></a>
+<FONT color="green">125</FONT>             */<a name="line.125"></a>
+<FONT color="green">126</FONT>        protected void keyPressed(int keyCode) {<a name="line.126"></a>
+<FONT color="green">127</FONT>                    SVGSVGElement svgDoc = (SVGSVGElement) svgImage.getDocument().getDocumentElement();<a name="line.127"></a>
+<FONT color="green">128</FONT>                    int action = getGameAction(keyCode);<a name="line.128"></a>
+<FONT color="green">129</FONT>                    SVGPoint origin = svgDoc.getCurrentTranslate();<a name="line.129"></a>
+<FONT color="green">130</FONT>                    switch (action) {<a name="line.130"></a>
+<FONT color="green">131</FONT>                            case RIGHT:<a name="line.131"></a>
+<FONT color="green">132</FONT>                                    origin.setX(origin.getX() + 5f);<a name="line.132"></a>
+<FONT color="green">133</FONT>                                    break;<a name="line.133"></a>
+<FONT color="green">134</FONT>                            case LEFT:<a name="line.134"></a>
+<FONT color="green">135</FONT>                                    origin.setX(origin.getX() - 5f);<a name="line.135"></a>
+<FONT color="green">136</FONT>                                    break;<a name="line.136"></a>
+<FONT color="green">137</FONT>                            case UP:<a name="line.137"></a>
+<FONT color="green">138</FONT>                                    origin.setY(origin.getY() - 5f);<a name="line.138"></a>
+<FONT color="green">139</FONT>                                    break;<a name="line.139"></a>
+<FONT color="green">140</FONT>                            case DOWN:<a name="line.140"></a>
+<FONT color="green">141</FONT>                                    origin.setY(origin.getY() + 5f);<a name="line.141"></a>
+<FONT color="green">142</FONT>                                    break;<a name="line.142"></a>
+<FONT color="green">143</FONT>                    }<a name="line.143"></a>
+<FONT color="green">144</FONT>                    repaint();<a name="line.144"></a>
+<FONT color="green">145</FONT>        }<a name="line.145"></a>
+<FONT color="green">146</FONT>    <a name="line.146"></a>
+<FONT color="green">147</FONT>        protected void sizeChanged(int w, int h)<a name="line.147"></a>
+<FONT color="green">148</FONT>        {<a name="line.148"></a>
+<FONT color="green">149</FONT>            System.out.println("sizeChanged(): w = "+w+", h = "+h);<a name="line.149"></a>
+<FONT color="green">150</FONT>            svgImage.setViewportWidth(w);<a name="line.150"></a>
+<FONT color="green">151</FONT>            svgImage.setViewportHeight(h);<a name="line.151"></a>
+<FONT color="green">152</FONT>            repaint();<a name="line.152"></a>
+<FONT color="green">153</FONT>        }    <a name="line.153"></a>
+<FONT color="green">154</FONT>    <a name="line.154"></a>
+<FONT color="green">155</FONT>            /*<a name="line.155"></a>
+<FONT color="green">156</FONT>             * Private members<a name="line.156"></a>
+<FONT color="green">157</FONT>             */<a name="line.157"></a>
+<FONT color="green">158</FONT>    <a name="line.158"></a>
+<FONT color="green">159</FONT>        private ScalableGraphics sg;<a name="line.159"></a>
+<FONT color="green">160</FONT>        private SVGImage svgImage;<a name="line.160"></a>
+<FONT color="green">161</FONT>    <a name="line.161"></a>
+<FONT color="green">162</FONT>    }<a name="line.162"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+</BODY>
+</HTML>

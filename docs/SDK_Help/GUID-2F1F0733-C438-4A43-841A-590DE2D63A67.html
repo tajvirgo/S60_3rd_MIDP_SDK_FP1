@@ -1,0 +1,142 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Default MIDP project structure"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-2F1F0733-C438-4A43-841A-590DE2D63A67"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> S60 3rd Edition SDK for Symbian OS Supporting Feature Pack 1, for MIDP</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-2F1F0733-C438-4A43-841A-590DE2D63A67"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-2F1F0733-C438-4A43-841A-590DE2D63A67"><!----></a>Default
+MIDP project structure</h1>
+<p>This section describes the main file and folder types involved in the
+different phases of application development. The following figure presents
+a view of a HelloWorld application project structure. Depending on the actual
+content of your project, there may be differences. </p>
+<div class="note"><p><strong class="note_title">Note: </strong>This section deals with the issue based on a development environment
+that includes Eclipse and S60 MIDP SDK. The project structure may have some
+variations in different environments, but the basic principles are still the
+same.</p></div>
+<div class="figure" id="GUID-467AAEA2-3D17-4DED-A0E7-C65B06D74DD6"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-467AAEA2-3D17-4DED-A0E7-C65B06D74DD6"><!----></a><img src="GUID-4120E60B-8258-4C22-9434-BDEE69A0E142_d0e1254_href.png" alt=""/><p class="figure-title"><strong>Figure 3: </strong>Default Eclipse project structure</p></div>
+<div><h3>Setting up the project environment</h3><p>This phase includes setting up a working environment for the project. </p><ul>
+<li><p><code>src</code> folder </p>
+
+<p>This folder is meant for the source <span>Java<sup style="font-size: 75%">TM</sup></span> files
+of the project.</p>
+
+</li>
+<li><p><code>res</code> folder</p>
+
+<p>This folder is meant for all the possible resource files that are needed
+in the final deployment package, such as figures, icons, and documents. These
+are not used in the Hello World example application, but could be part of
+other similar applications.</p>
+
+</li>
+<li><p><code>bin</code> folder</p>
+
+<p>This folder is meant for the compiled class files.</p>
+
+</li>
+<li><p><code>dist</code> folder</p>
+
+<p>This folder is meant for the JAR an JAD files.</p>
+
+</li>
+</ul></div>
+<div><h3>Creating and compiling source files</h3><p>This phase includes creating and compiling source files, as well as
+creating or importing other necessary resources.</p><ul>
+<li><p><code>*.java</code> files </p>
+
+<p>Java files (<code>*.java</code>) are the source files of the
+application created by the developer. Java files are located in the <code>src</code> folder.</p>
+
+</li>
+<li><p>Resource files </p>
+
+<p>Resource files, if they exist, can include image and document files
+that need to be enclosed in the JAR file and are required by the application.
+Resource files are located in the <code>res</code> folder.</p>
+
+</li>
+<li><p><code>JRE System Library</code></p>
+
+<p>This folder includes all the required libraries provided by the SDK,
+for example, <code>JRE System Library [S60_3rd_MIDP_SDK]</code>. </p>
+
+</li>
+<li><p><code>*.class</code> files</p>
+
+<p>Java class files (<code>*.class</code>) are source files compiled
+into bytecode format so that they can be interpreted and executed by the Java
+Virtual Machine (JVM). Java class files are located in the bin folder and
+will be enclosed in a JAR file.</p>
+
+</li>
+</ul></div>
+<div><h3>Creating MIDlet suites</h3><p>This phase includes combining the related files into a JAR file and
+creating an accompanying JAD file for a MIDlet suite, which can be deployed
+onto a mobile device. </p><p>The JAR (Java Archive Repository) file format is used for combining
+several files and resources into one JAR file and can be subsequently transferred
+to a mobile device as a single package. This format also supports file compression
+and digital signatures. The Hello World example application includes one application
+JAR file. An application package also contains the following files:</p><p>A JAR file includes a Manifest file (<code>MANIFEST.MF</code>),
+which is a descriptor file. This file is an essential part of the signed MIDlet
+model in the MIDP 2.0 specification and is mandatory. Manifest files can be
+created by defining the appropriate information in the while creating the
+JAR file, or by using an existing manifest file. </p><p>The following manifest file attributes are mandatory:</p><ul>
+<li><p><code>MIDlet-Name</code></p></li>
+<li><p><code>MIDlet-Version</code></p></li>
+<li><p><code>MIDlet-Vendor</code></p></li>
+</ul><p>The manifest file or the JAD file must contain the following attributes: </p><ul>
+<li><p><code>MIDlet-&lt;n&gt; for each MIDlet</code></p>
+</li>
+<li><p><code>MicroEdition-Profile</code></p></li>
+<li><p><code>MicroEdition-Configuration</code></p></li>
+</ul><p>The following manifest file attributes are optional:</p><ul>
+<li><p><code>MIDlet-Description</code></p></li>
+<li><p><code>MIDlet-Icon</code></p></li>
+<li><p><code>MIDlet-Info-URL</code></p></li>
+<li><p><code>MIDlet-Data-Size</code></p></li>
+<li><p><code>MIDlet-Permissions</code></p></li>
+<li><p><code>MIDlet-Permissions-Opt</code></p></li>
+<li><p><code>MIDlet-Push-&lt;n&gt;</code></p></li>
+<li><p><code>MIDlet-Install-Notify</code></p></li>
+<li><p><code>MIDlet-Delete-Notify</code></p></li>
+<li><p><code>MIDlet-Delete-Confirm</code></p></li>
+<li><p>Any application-specific attributes that do not begin with <code>MIDlet-</code> or <code>MicroEdition-</code></p>
+</li>
+</ul><p>An example manifest file might look like this:</p><pre class="codeblock" id="GUID-A39701D9-21C5-4F4D-8EF4-2C48BC680F97"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-A39701D9-21C5-4F4D-8EF4-2C48BC680F97"><!----></a>MIDlet-Name: MyMIDlet
+MIDlet-Version: 0.0.1
+MIDlet-Vendor: Nokia
+MicroEdition-Profile: MIDP-2.0
+MicroEdition-Configuration: CLDC-1.1
+MIDlet-1: HelloWorldMIDlet, , example.hello.HelloWorldMIDlet</pre><p>The JAD (Java Application Descriptor) file format is used for managing
+and describing a MIDlet suite. The file also allows configuration specific
+attributes that can be used when installing a MIDlet. Each JAR file can come
+with its own JAD file. A JAD file contains the following mandatory attributes: </p><ul>
+<li><p><code>MIDlet-Name</code></p></li>
+<li><p><code>MIDlet-Version</code> </p></li>
+<li><p><code>MIDlet-Vendor</code></p></li>
+<li><p><code>MIDlet-Jar-URL</code></p></li>
+<li><p><code>MIDlet-Jar-Size</code></p></li>
+</ul><p>The following JAD file attributes are optional:</p><ul>
+<li><p><code>MIDlet-&lt;n&gt; for each MIDlet</code></p>
+</li>
+<li><p><code>MicroEdition-Profile</code></p></li>
+<li><p><code>MicroEdition-Configuration</code></p></li>
+<li><p><code>MIDlet-Description</code></p></li>
+<li><p><code>MIDlet-Icon</code></p></li>
+<li><p><code>MIDlet-Info-URL</code></p></li>
+<li><p><code>MIDlet-Data-Size</code></p></li>
+<li><p><code>MIDlet-Permissions</code></p></li>
+<li><p><code>MIDlet-Permissions-Opt</code></p></li>
+<li><p><code>MIDlet-Push-&lt;n&gt;</code></p></li>
+<li><p><code>MIDlet-Install-Notify</code></p></li>
+<li><p><code>MIDlet-Delete-Notify</code></p></li>
+<li><p><code>MIDlet-Delete-Confirm</code></p></li>
+<li><p>MIDlet specific attributes that do not begin with <code>MIDlet-</code></p>
+</li>
+</ul><p>An example JAD file might look like this:</p><pre class="codeblock" id="GUID-D81FA314-F06B-4DAC-814B-240BF34D4385"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-D81FA314-F06B-4DAC-814B-240BF34D4385"><!----></a>MIDlet-Name: MyMIDlet
+MIDlet-Version: 0.0.1
+MIDlet-Vendor: Nokiay
+MicroEdition-Profile: MIDP-2.0
+MicroEdition-Configuration: CLDC-1.1
+MIDlet-Jar-URL: MyMIDlet.jar
+MIDlet-Jar-Size: 1887
+MIDlet-1: HelloWorldMIDlet, , example.hello.HelloWorldMIDlet</pre></div>
+</div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

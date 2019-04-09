@@ -1,0 +1,856 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title></title>
+</head>
+  <body>
+     This example demonstrates use of the push registry.     
+<p><br>
+     <!--section contents--> </p>
+         
+<h3>Section Contents</h3>
+         
+<blockquote>               
+  <p><a href="#1">1. About this example</a>   </p>
+                   
+  <p>   <a href="#2">2. Pre-requisites</a>   </p>
+                   
+  <p>   <a href="#3">3. Building and running</a>   </p>
+                   
+  <p>   <a href="#4">4. Design and implementation</a>   </p>
+                   
+  <p>   <a href="#5">5. Summary</a>   </p>
+     </blockquote>
+         
+<hr align="center" size="2" width="100%">     
+<h3><a name="1">1. About this example</a> </h3>
+         
+<blockquote>               
+  <p>The Push Registry provides the ability for an application to respond
+  to a connection attempt or a timer based event without the application
+having   to be active ie. continually running. This example demonstrates
+how to start   MIDlets automatically either by connection or timer based
+initiation. This   example uses the MIDP IO API.</p>
+     </blockquote>
+         
+<h3> <a name="2">2. Pre-requisites</a> </h3>
+         
+<blockquote>               
+  <p>The example makes use of the standard MIDP application framework and
+  LCDUI API. In this example there is little explanation given about the
+use   of SocketConnections and it is therefore suggested that the reader
+is familiar   with the Sockets example before attempting this example. </p>
+                   
+  <p>This demonstration uses MIDP 2.0</p>
+     </blockquote>
+         
+<h3> <a name="3">3. Building and running</a> </h3>
+         
+<blockquote>               
+
+  <p>The following classes should be included in the jar:</p>
+                   
+  <p>com.nokia.midp.examples.network.push.* </p>
+                   
+  <p>No resource files are used.</p>
+                   
+  <p>During installation on the emulator the PushExample will ask for confirmation
+  of the Push Permissions and confirmation to receive data, it will then
+display   the launch screen. The installation screens are displayed below.
+"OK" should   be selected on the confirmation screens.</p>
+                   
+  <table border="0" width="90%">
+         <tbody>
+           <tr>
+             <td align="center" valign="bottom" width="33%">            
+                                
+        <div align="center"><img alt="doc-files/pushconf.jpg"
+ src="doc-files/pushconf.jpg">
+             </div>
+             </td>
+             <td align="center" valign="bottom" width="33%">            
+                                
+        <div align="center"><img alt="doc-files/pushconf2.jpg"
+ src="doc-files/pushconf2.jpg">
+             </div>
+             </td>
+             <td align="center" valign="bottom" width="33%">            
+                                
+        <div align="center"><img alt="doc-files/pushmidlet.jpg"
+ src="doc-files/pushmidlet.jpg">
+             </div>
+             </td>
+           </tr>
+                             
+    </tbody>               
+  </table>
+                   
+  <ul>
+         <li>Launch the "ConnectMIDlet".</li>
+                   
+  </ul>
+                   
+  <p>The following screen will be displayed.</p>
+                   
+  <table border="0" width="90%">
+         <tbody>
+           <tr>
+             <td align="center" valign="bottom" width="100%">           
+                                 
+        <div align="center"><img alt="doc-files/connectmidlet.jpg"
+ src="doc-files/connectmidlet.jpg">
+             </div>
+             </td>
+           </tr>
+                             
+    </tbody>               
+  </table>
+                   
+  <ul>
+         <li>Complete the address with the port number specified within the 
+ MIDlet-Push attribute of the JAD file.</li>
+         <li>Select "Connect".</li>
+                   
+  </ul>
+                   
+  <p>Two confirmation screens will then be displayed. The first is a confirmtaion
+  that data is to be sent over the connection. The second asks to start the
+  PushMIDlet.</p>
+                   
+  <table border="0" width="90%">
+         <tbody>
+           <tr>
+             <td align="center" valign="bottom" width="50%">            
+                                
+        <div align="center"><img alt="doc-files/connectconfirm.jpg"
+ src="doc-files/connectconfirm.jpg">
+             </div>
+             </td>
+             <td align="center" valign="bottom" width="50%">            
+                                
+        <div align="center"><img alt="doc-files/connectpushconf.jpg"
+ src="doc-files/connectpushconf.jpg">
+             </div>
+             </td>
+           </tr>
+                             
+    </tbody>               
+  </table>
+                   
+  <ul>
+         <li>Select "Ok" on both screens.</li>
+                   
+  </ul>
+                   
+  <p>The PushMIDlet will be started and another two confirmation screens
+will be displayed. One asks for confirmation to send data over the connection,
+  the other to receive data.</p>
+                   
+  <table border="0" width="90%">
+         <tbody>
+           <tr>
+             <td align="center" valign="bottom" width="50%">            
+                                
+        <div align="center"><img alt="doc-files/pushconnconf.jpg"
+ src="doc-files/pushconnconf.jpg">
+             </div>
+             </td>
+             <td align="center" valign="bottom" width="50%">            
+                                
+        <div align="center"><img alt="doc-files/pushconnconf2.jpg"
+ src="doc-files/pushconnconf2.jpg">
+             </div>
+             </td>
+           </tr>
+                             
+    </tbody>               
+  </table>
+                   
+  <ul>
+         <li>Select "Ok" on both screens.</li>
+                   
+  </ul>
+                   
+  <p>The following screen will be displayed. This is the main screen of the
+  PushMIDlet. The screen provides three pieces of information: the method
+by  which the midlet was started, the currently registered push connections
+and  an indication of whether the timer based alarm is set.</p>
+                   
+  <table border="0" width="90%">
+         <tbody>
+           <tr>
+             <td align="center" valign="bottom" width="100%">           
+                                 
+        <div align="center"><img alt="doc-files/pushstart.jpg"
+ src="doc-files/pushstart.jpg">
+             </div>
+             </td>
+           </tr>
+                             
+    </tbody>               
+  </table>
+                   
+  <p>The following screens show the sequence of events involved in setting
+  the alarm.</p>
+                   
+  <table border="0" width="90%">
+         <tbody>
+           <tr>
+             <td align="center" valign="bottom" width="100%">           
+                                 
+        <div align="center"><img alt="doc-files/pushmen.jpg"
+ src="doc-files/pushmen.jpg">
+             </div>
+             </td>
+           </tr>
+                             
+    </tbody>               
+  </table>
+                   
+  <ul>
+         <li>Select "Set Alarm" from the Options menu.</li>
+                   
+  </ul>
+                   
+  <p>The following screen will be displayed.</p>
+                   
+  <table border="0" width="90%">
+         <tbody>
+           <tr>
+             <td align="center" valign="bottom" width="100%">           
+                                 
+        <div align="center"><img alt="doc-files/pushalarmset.jpg"
+ src="doc-files/pushalarmset.jpg">
+             </div>
+             </td>
+           </tr>
+                             
+    </tbody>               
+  </table>
+                   
+  <ul>
+         <li>Select "Exit".</li>
+                   
+  </ul>
+                   
+  <p>A confirmation screen will be displayed asking for permission to use
+  auto invocation.</p>
+                   
+  <table border="0" width="90%">
+         <tbody>
+           <tr>
+             <td align="center" valign="bottom" width="100%">           
+                                 
+        <div align="center"><img alt="doc-files/pushalarmconf.jpg"
+ src="doc-files/pushalarmconf.jpg">
+             </div>
+             </td>
+           </tr>
+                             
+    </tbody>               
+  </table>
+                   
+  <ul>
+         <li>Select "Ok".</li>
+                   
+  </ul>
+                   
+  <p>The application will terminate and the following screen displayed.</p>
+                   
+  <table border="0" width="90%">
+         <tbody>
+           <tr>
+             <td align="center" valign="bottom" width="100%">           
+                                 
+        <div align="center"><img alt="doc-files/pushmidlet.jpg"
+ src="doc-files/pushmidlet.jpg">
+             </div>
+             </td>
+           </tr>
+                             
+    </tbody>               
+  </table>
+                   
+  <p>The MIDlet will remain inactive for thirty seconds before being reactivated.
+  A confirmation screen will be displayed asking for permission to start
+the   MIDlet. Select "Ok" and the main screen of the MIDlet will be displayed
+with  an indication that the MIDlet was started in response to an alarm.</p>
+                   
+  <table border="0" width="90%">
+         <tbody>
+           <tr>
+             <td align="center" valign="bottom" width="50%">            
+                                
+        <div align="center"><img alt="doc-files/pushalarmconf2.jpg"
+ src="doc-files/pushalarmconf2.jpg">
+             </div>
+             </td>
+             <td align="center" valign="bottom" width="50%">            
+                                
+        <div align="center"><img alt="doc-files/pushstartalarm.jpg"
+ src="doc-files/pushstartalarm.jpg">
+             </div>
+             </td>
+           </tr>
+                             
+    </tbody>               
+  </table>
+                   
+  <p>The following screens show the steps taken to register a push connection
+  that is not already contained within the JAD file.</p>
+                   
+  <table border="0" width="90%">
+         <tbody>
+           <tr>
+             <td align="center" valign="bottom" width="100%">           
+                                 
+        <div align="center"><img alt="doc-files/pushmenureg.jpg"
+ src="doc-files/pushmenureg.jpg">
+             </div>
+             </td>
+           </tr>
+                             
+    </tbody>               
+  </table>
+                   
+  <ul>
+         <li>Select "Dynamic Connection" from the Options menu.</li>
+                   
+  </ul>
+                   
+  <p>The register connection screen will be displayed as shown below.</p>
+                   
+  <table border="0" width="90%">
+         <tbody>
+           <tr>
+             <td align="center" valign="bottom" width="50%">            
+                                
+        <div align="center"><img alt="doc-files/pushregister.jpg"
+ src="doc-files/pushregister.jpg">
+             </div>
+             </td>
+             <td align="center" valign="bottom" width="50%">            
+                                
+        <div align="center"><img alt="doc-files/pushregmenu.jpg"
+ src="doc-files/pushregmenu.jpg">
+             </div>
+             </td>
+           </tr>
+                             
+    </tbody>               
+  </table>
+                   
+  <ul>
+         <li>Complete the url by adding a port number to listen to.</li>
+         <li>Select "Register" from the Options menu.</li>
+                   
+  </ul>
+                   
+  <p>The screen will display two confirmation screens. One asking for permission
+  to use auto invocation the other asking for confirmation to receive data
+ on this connection.</p>
+                   
+  <table border="0" width="90%">
+         <tbody>
+           <tr>
+             <td align="center" valign="bottom" width="50%">            
+                                
+        <div align="center"><img alt="doc-files/pushregconf.jpg"
+ src="doc-files/pushregconf.jpg">
+             </div>
+             </td>
+             <td align="center" valign="bottom" width="50%">            
+                                
+        <div align="center"><img alt="doc-files/pushregconf2.jpg"
+ src="doc-files/pushregconf2.jpg">
+             </div>
+             </td>
+           </tr>
+                             
+    </tbody>               
+  </table>
+                   
+  <ul>
+         <li>Select "Ok" on both screens.</li>
+                   
+  </ul>
+                   
+  <p> The main screen of the MIDlet will be displayed with the current push
+  list updated to contain the new push connection.</p>
+                   
+  <table border="0" width="90%">
+         <tbody>
+           <tr>
+             <td align="center" valign="bottom" width="100%">           
+                                 
+        <div align="center"><img alt="doc-files/push2conn.jpg"
+ src="doc-files/push2conn.jpg">
+             </div>
+             </td>
+           </tr>
+                             
+    </tbody>               
+  </table>
+                   
+  <p>This section has shown how to use the main features of this example
+it is left up to the reader to activate the PushMIDlet on the dynamically
+registered connection using the ConnectMIDlet, to unregister a dynamic connection
+and unset the alarm both of which are performed in a similar manner to their
+registration.</p>
+     </blockquote>
+         
+<h3> <a name="4">4. Design and implementation</a> </h3>
+         
+<blockquote>               
+  <p> The Application Management Software (AMS) controls the lifecycles of
+  the applications on a device and it contains a push registry which is responsible
+  for launching the relevant inactive MIDlet when a push event occurs. Whilst
+  the MIDlet is active however, the MIDlet is responsible for dealing with
+ any inbound connections and scheduled events that may occur. The IO API
+has  the class PushRegistry which provides methods to access the lists of
+inbound  connections and timer alarms and their associated MIDlet users that
+are contained  within the AMS PushRegistry. The PushRegistry class also has
+methods to register   and unregister alarms and connections dynamically.
+Inbound connections can  also be statically defined in a JAD file.</p>
+                   
+  <p> Statically registered connections, those contained within the JAD file,
+  are usually left to be registered and unregistered with the push registry
+  on installation or uninstallation. Connections registered in this way can
+  however, prevent the successful installation of the MIDlet on to the device
+  if the defined connection is already bound. If the MIDlet suite is required
+  to be installed on to a device even if this defined port has already been
+  bound by the device then the application should register the connection
+dynamically.  That is, an attempt to register the connection should be made
+once the MIDlet  has been activated and any exceptions that are thrown should
+be dealt with  by the MIDlet. </p>
+                   
+  <p> The address for an inbound connection has two parts, the host name
+and a port number. The host name could be either an IP address when making
+network connections or a phone number when using SMS. In the case of a network
+connection address, both the host name (IP address) and port can either be
+well known (static) or system assigned (dynamic). When opening inbound network
+connections a static address is assigned by defining the protocol and the
+port number eg. "socket://:5001" and a dynamic address assigned by just defining
+the protocol with no host name or port number eg. "socket://". If the address
+  for an inbound connection is assigned dynamically then the host name and
+ port number must be discovered by the MIDlet and then made available to
+users  wishing to activate the MIDlet. In the case of SMS the address will
+always  be statically defined, for example "sms://:5001" for an inbound connection,
+ as the host name is a fixed phone number. </p>
+                   
+  <p>Timer Alarms can only be registered dynamically and only one alarm is
+  supported per MIDlet, repeated calls to register an alarm will merely overide
+  the previous alarm. The PushRegistry API does not provide any method to
+establish  whether the MIDlet was started by an alarm, if this information
+is needed  the MIDlet should provide its own means of discovering this, for
+instance  by using the RMS. </p>
+                   
+  <p>This example allows the JAD file to statically register inbound connection(s)
+  at MIDlet installation, and enables the user to register an Alarm during
+ execution as this must be done dynamically. The example also allows connections
+ to be registered and unregistered dynamically, and this can be done once
+the application is started. Note: In this example it is also possible to
+unregister and reregister the connection defined in the JAD file.</p>
+                   
+  <p>This example also requires the use of the Runnable interface to provide
+  a seperate thread of execution. The MIDlet's startApp(), destroyApp() etc.
+  and event handler methods are performed within a system thread and should
+  therefore execute and return quickly allowing the system thread to move
+onto  other tasks including being able to respond to a users request to quit
+the  current application. All methods which take time to complete their execution
+  for example those performing networking should take place in a seperate
+thread  to the system thread.</p>
+                   
+  <h3>   <a name="4.1">4.1. Class Diagram</a>   </h3>
+                   
+  <blockquote>                         
+    <p>The following table and diagram shows the classes and interfaces involved
+  in the push example. The class diagram only shows the PushMIDlet, the ConnectMIDlet
+  will have an identical diagram except it does not use a ServerSocketConnection
+  interface.</p>
+                             
+    <p>Application Classes</p>
+                             
+    <ul>
+           <li><a
+ href="../../../../midp/examples/network/push/PushMIDlet.html"
+ title="class in com.series60.examples.network.push"><code>PushMIDlet</code></a> 
+  Extends the MIDlet class and implements the CommandListener and Runnable
+  interfaces. Supplies a MIDlet that starts itself in response to a connection,
+  a timed alarm or manually by the user. Whilst running, the MIDlet can register
+  and unregister connections and a timer based alarm can be set by the user.</li>
+           <li><a
+ href="../../../../midp/examples/network/push/ConnectMIDlet.html"
+ title="class in com.series60.examples.network.push"><code>ConnectMIDlet</code></a> 
+  Extends the MIDlet class and implements the CommandListener and Runnable
+  interfaces. Simply provides a mechanism to connect to and start a MIDlet
+ which has registered push connections.</li>
+                             
+    </ul>
+                             
+    <p>System Classes and Interfaces</p>
+                             
+    <ul>
+           <li><a
+ href="../../../../../../../../../MIDP2.0_API/javadoc/javax/microedition/io/PushRegistry.html"
+ title="class or interface in javax.microedition.io"><code>PushRegistry</code></a> 
+  Provides a means of accessing and manipulating the lists of push registrations
+  contained in the AMS PushRegistry.</li>
+           <li><a
+ href="../../../../../../../../../MIDP2.0_API/javadoc/javax/microedition/io/Connector.html"
+ title="class or interface in javax.microedition.io"><code>Connector</code></a> 
+  Is responsible for creating instances of the Connection interface. It provides
+  the method to actually open the connection.</li>
+           <li><a
+ href="../../../../../../../../../CLDC1.1_API/javax/microedition/io/Connection.html"
+ title="class or interface in javax.microedition.io"><code>Connection</code></a> 
+  Is the basic type of interface for a connection and provides the close method
+ for the connection.</li>
+           <li><a
+ href="../../../../../../../../../MIDP2.0_API/javadoc/javax/microedition/io/SocketConnection.html"
+ title="class or interface in javax.microedition.io"><code>SocketConnection</code></a> 
+  The SocketConnection is the specific type of interface used to establish
+  a connection with a Server. It also provides the Input and Output Streams
+  required for this connection. These Input and Output Streams once closed
+ can not be reopened unless the connection is opened again.</li>
+           <li><a
+ href="../../../../../../../../../MIDP2.0_API/javadoc/javax/microedition/io/ServerSocketConnection.html"
+ title="class or interface in javax.microedition.io"><code>ServerSocketConnection</code></a> 
+  The ServerSocketConnection is the specific type of interface returned when
+  a SocketConnection is set up to listen for connections on a specific port.
+  A ServerSocketConnection has the method acceptAndOpen() to access an inbound
+  connection, the method returns a SocketConnection which can be used to
+read   and write data.</li>
+           <li><a
+ href="../../../../../../../../../CLDC1.1_API/java/io/InputStream.html"
+ title="class or interface in java.io"><code>InputStream</code></a> Provides
+  an InputStream in order to receive data from the connection.</li>
+           <li><a
+ href="../../../../../../../../../CLDC1.1_API/java/io/InputStreamReader.html"
+ title="class or interface in java.io"><code>InputStreamReader</code></a> 
+  Provides a Reader for the InputStream in order to bridge the byte stream
+  to a character stream.</li>
+           <li><a
+ href="../../../../../../../../../MIDP2.0_API/javadoc/javax/microedition/lcdui/CommandListener.html"
+ title="class or interface in javax.microedition.lcdui"><code>CommandListener</code></a> 
+  Is the interface used to deal with the user interaction.</li>
+           <li><a
+ href="../../../../../../../../../CLDC1.1_API/java/lang/Runnable.html"
+ title="class or interface in java.lang"><code>Runnable</code></a> Provides
+  a seperate thread of execution.</li>
+                             
+    </ul>
+                             
+    <div align="center">     <img alt="doc-files/class_diagram.jpg"
+ src="doc-files/class_diagram.jpg">
+        </div>
+       </blockquote>
+                   
+  <h3>   <a name="4.2">4.2. Sequence Diagram</a>   </h3>
+                   
+  <blockquote>                         
+    <p>The following use case and sequence diagram considers the scenario
+  where the PushMIDlet is started in response to a connection created by
+the   ConnectMIDlet.</p>
+                             
+    <div align="center">     <img alt="doc-files/uml_connectandsend.jpg"
+ src="doc-files/uml_connectandsend.jpg">
+        </div>
+                             
+    <table border="0" width="90%">
+           <tbody>
+             <tr>
+               <th align="center" width="10%">Message</th>
+               <th align="left" width="80%">Description</th>
+             </tr>
+             <tr>
+               <td align="center" valign="top" width="10%"> 1 - 2</td>
+               <td width="80%">The user attempts to connect to the address
+ of  a registered push connection this causes commandAction() to be called
+ and  a thread is created and started.</td>
+             </tr>
+             <tr>
+               <td align="center" valign="top" width="10%"> 3 - 5 </td>
+               <td width="80%">The framework calls the thread's run() method 
+ which opens a SocketConnection to the relevant address using Connector.open().</td>
+             </tr>
+             <tr>
+               <td align="center" valign="top" width="10%"> 6</td>
+               <td width="80%">On opening a connection to this address the
+ AMS  becomes aware that a push event has occurred.</td>
+             </tr>
+             <tr>
+               <td align="center" valign="top" width="10%"> 7 </td>
+               <td width="80%">The AMS then activates the PushMIDlet.</td>
+             </tr>
+             <tr>
+               <td align="center" valign="top" width="10%"> 8 - 9 </td>
+               <td width="80%">The framework then calls the MIDlets startApp()
+  method which creates a Thread and starts it running.</td>
+             </tr>
+             <tr>
+               <td align="center" valign="top" width="10%"> 10</td>
+               <td width="80%">The framework calls the threads run() method 
+ to start its execution.</td>
+             </tr>
+             <tr>
+               <td align="center" valign="top" width="10%"> 11 - 12 </td>
+               <td width="80%">A call to the listConnections() method of
+the  PushRegistry is made. The boolean parameter passed in is set to true
+in order  to return a list of the connections with available data, this is
+returned  in the form of a String array. It is expected that there will be
+only one  connection returned in the array although the functionality will
+deal with  all connections.</td>
+             </tr>
+             <tr>
+               <td align="center" valign="top" width="10%"> 13</td>
+               <td width="80%">The display is updated with the method by
+which   the MIDlet was started.</td>
+             </tr>
+             <tr>
+               <td align="center" valign="top" width="10%"> 14</td>
+               <td width="80%">A ServerSocketConnection is opened using Connector.open()
+  on the connection string returned in the String array.           </td>
+             </tr>
+             <tr>
+               <td align="center" valign="top" width="10%"> 15 - 17</td>
+               <td width="80%">The connection on the socket is accepted and 
+ opened using the acceptAndOpen() method. This method returns a SocketConnection.</td>
+             </tr>
+             <tr>
+               <td align="center" valign="top" width="10%"> 18 - 19</td>
+               <td width="80%">As there is no data to be read the SocketConnection
+  and ServerSocketConnection are closed. </td>
+             </tr>
+             <tr>
+               <td align="center" valign="top" width="10%"> 20</td>
+               <td width="80%">A call to displayConnections() is made. </td>
+             </tr>
+             <tr>
+               <td align="center" valign="top" width="10%"> 21 - 22</td>
+               <td width="80%">A call to the listConnections() method of
+the  PushRegistry is made with the parameter set to false. This returns a
+String  array containing all registered connections. The display is updated
+with the current push list and the run() method enters a while loop where
+it waits  for commands from the user to register or unregister a connection
+or to peform  the registering of the alarm if required on exiting.</td>
+             </tr>
+                                       
+      </tbody>                         
+    </table>
+                             
+    <p>The following diagram shows the scenario where the user requests an
+  alarm to be set, the user exits the application and the application is
+then   restarted after the the specified time has elapsed.</p>
+                             
+    <div align="center">     <img alt="doc-files/sd_setalarm.jpg"
+ src="doc-files/sd_setalarm.jpg">
+        </div>
+                             
+    <table border="0" width="90%">
+           <tbody>
+             <tr>
+               <th align="center" width="10%">Message</th>
+               <th align="left" width="80%">Description</th>
+             </tr>
+             <tr>
+               <td align="center" valign="top" width="10%"> 1 </td>
+               <td width="80%">The user requests the alarm to be set which
+ causes  commandAction() to be called, a boolean flag is set to true indicating
+ the  alarm is to be set the next time the application is to be terminated
+ and the display is updated to reflect that the alarm has been set.</td>
+             </tr>
+             <tr>
+               <td align="center" valign="top" width="10%"> 2 - 3</td>
+               <td width="80%">The user requests to exit the application
+which   causes commandAction() to be called which in turn calls destroyApp().</td>
+             </tr>
+             <tr>
+               <td align="center" valign="top" width="10%"> 4 </td>
+               <td width="80%">A synchronised block is entered as the setting
+  of the alarm must be done before any further progress through destroyApp()
+  is made.</td>
+             </tr>
+             <tr>
+               <td align="center" valign="top" width="10%"> 5 - 7</td>
+               <td width="80%">The thread is then notified that it has something
+  to do and starts its execution again. The run() method then calls setAlarm().</td>
+             </tr>
+             <tr>
+               <td align="center" valign="top" width="10%"> 8 </td>
+               <td width="80%">A new Date object is created, which represents
+  the current time.</td>
+             </tr>
+             <tr>
+               <td align="center" valign="top" width="10%"> 9 - 10</td>
+               <td width="80%">A call to the registerAlarm() method of the
+ PushRegistry  is made, setting an alarm on this MIDlet for 30 seconds after
+ the time represented  by the Date object. This method returns the time of
+ the previous alarm that  was set or zero if there was no previous alarm.
+The setAlarm() method then  completes and the synchronised block is left.</td>
+             </tr>
+             <tr>
+               <td align="center" valign="top" width="10%"> 11 - 12</td>
+               <td width="80%"> Once the alarm has been set the destroyApp() 
+ method can complete the clearing up of any resources that might be left and
+ the thread is terminated.</td>
+             </tr>
+             <tr>
+               <td align="center" valign="top" width="10%"> 13</td>
+               <td width="80%"> commandAction() then calls notifyDestroyed() 
+ and the application is terminated.</td>
+             </tr>
+             <tr>
+               <td align="center" valign="top" width="10%"> 14</td>
+               <td width="80%"> After the specified amount of time has elapsed
+  the AMS activates the PushMIDlet.</td>
+             </tr>
+             <tr>
+               <td align="center" valign="top" width="10%"> 15 - 16</td>
+               <td width="80%"> The framework then calls the MIDlets startApp()
+  method which creates a Thread and starts it running.</td>
+             </tr>
+             <tr>
+               <td align="center" valign="top" width="10%"> 17</td>
+               <td width="80%">The framework calls the threads run() method 
+ to start its execution. </td>
+             </tr>
+             <tr>
+               <td align="center" valign="top" width="10%"> 18 - 19</td>
+               <td width="80%">A call to the listConnections() method of
+the  PushRegistry is made. The boolean parameter passed in is set to true
+in order  to return a list of the connections with available data, this is
+returned  in the form of a String array. As the String array will be empty
+ie. the application was not started by a push connection, the display is
+merely updated to reflect that the MIDlet was started by other means.</td>
+             </tr>
+             <tr>
+               <td align="center" valign="top" width="10%"> 20</td>
+               <td width="80%"> A call to displayConnections() is made. </td>
+             </tr>
+             <tr>
+               <td align="center" valign="top" width="10%"> 21 - 22</td>
+               <td width="80%"> A call to the listConnections() method of 
+the  PushRegistry is made with the parameter set to false. This returns a 
+String  array containing all registered connections. The display is updated 
+with the current push list and the run() method enters a while loop where 
+it waits  for commands from the user to register or unregister a connection 
+or to peform  the registering of the alarm if required on exiting.</td>
+             </tr>
+                                       
+      </tbody>                         
+    </table>
+                             
+    <p>The following diagram shows the scenario where the user registers
+a push connection.</p>
+                             
+    <div align="center">     <img alt="doc-files/sd_registerconn.jpg"
+ src="doc-files/sd_registerconn.jpg">
+        </div>
+                             
+    <table border="0" width="90%">
+           <tbody>
+             <tr>
+               <th align="center" width="10%">Message</th>
+               <th align="left" width="80%">Description</th>
+             </tr>
+             <tr>
+               <td align="center" valign="top" width="10%"> 1 - 2</td>
+               <td width="80%">The user requests to register a connection 
+which  causes commandAction() to be called which notifies the thread that 
+it has  something to do.</td>
+             </tr>
+             <tr>
+               <td align="center" valign="top" width="10%"> 3 - 4</td>
+               <td width="80%">The thread commences its execution again and 
+ the regConnection() method is called.</td>
+             </tr>
+             <tr>
+               <td align="center" valign="top" width="10%"> 5 </td>
+               <td width="80%">The url for the connection is obtained from
+ the  screen.</td>
+             </tr>
+             <tr>
+               <td align="center" valign="top" width="10%"> 6</td>
+               <td width="80%">The registerConnection() method of the PushRegistry
+  is called to register the connection. The method requires the url of the
+ connection, the classname of the MIDlet to be activated and a list of senders
+ that are allowed to launch the MIDlet.</td>
+             </tr>
+             <tr>
+               <td align="center" valign="top" width="10%"> 7 - 8 </td>
+               <td width="80%">The display is returned to the main screen 
+of  the MIDlet and the list of current push connections updated.</td>
+             </tr>
+                                       
+      </tbody>                         
+    </table>
+                             
+    <p>The following diagram shows the scenario where the user unregisters
+  a connection.</p>
+                             
+    <div align="center">     <img alt="doc-files/sd_unregisterconn.jpg"
+ src="doc-files/sd_unregisterconn.jpg">
+        </div>
+                             
+    <table border="0" width="90%">
+           <tbody>
+             <tr>
+               <th align="center" width="10%">Message</th>
+               <th align="left" width="80%">Description</th>
+             </tr>
+             <tr>
+               <td align="center" valign="top" width="10%"> 1 - 2</td>
+               <td width="80%">The user requests to unregister a connection 
+ which causes commandAction() to be called which notifies the thread that 
+it has something to do.</td>
+             </tr>
+             <tr>
+               <td align="center" valign="top" width="10%"> 3 - 4</td>
+               <td width="80%">The thread commences its execution again and 
+ the regConnection() method is called.</td>
+             </tr>
+             <tr>
+               <td align="center" valign="top" width="10%"> 5 </td>
+               <td width="80%">The url for the connection is obtained from
+ the  screen.</td>
+             </tr>
+             <tr>
+               <td align="center" valign="top" width="10%"> 6</td>
+               <td width="80%">The unregisterConnection() method of the PushRegistry
+  is called to unregister the connection. The method requires only the url
+ of the connection that is to be unregistered.</td>
+             </tr>
+             <tr>
+               <td align="center" valign="top" width="10%"> 7 - 8 </td>
+               <td width="80%">The display is returned to the main screen 
+of  the MIDlet and the list of current push connections updated.</td>
+             </tr>
+                                       
+      </tbody>                         
+    </table>
+       </blockquote>
+     </blockquote>
+         
+<h3> <a name="5">5. Summary</a> </h3>
+         
+<blockquote>               
+  <p>This example has demonstrated: </p>
+                   
+  <ul>
+         <li> How to register a static connection ie. within the JAD file.</li>
+         <li> How to register and unregister a connection dynamically.</li>
+         <li> How to register and unregister an timer based alarm.</li>
+         <li> How to access the list of connections contained in the AMS
+PushRegistry.</li>
+         <li> How to use a ServerSocketConnection.</li>
+                   
+  </ul>
+     </blockquote>
+     <br>
+    <br>
+   <br>
+  <br>
+ <br>
+</body>
+</html>

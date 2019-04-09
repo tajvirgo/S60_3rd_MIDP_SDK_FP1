@@ -1,0 +1,8 @@
+MIDlet-1: HawkMIDlet, , com.nokia.midp.examples.hawk.HawkMIDlet
+MIDlet-Jar-Size: @@@
+MIDlet-Jar-URL: hawk.jar
+MIDlet-Name:  HawkMIDlet
+MicroEdition-Configuration: CLDC-1.1
+MicroEdition-Profile: MIDP-2.0
+MIDlet-Version: 1.0
+MIDlet-Vendor: Nokia

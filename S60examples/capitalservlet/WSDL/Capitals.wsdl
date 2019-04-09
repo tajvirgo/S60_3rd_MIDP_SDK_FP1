@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" 
+			 xmlns:tns="urn:nokia:examples:webservices:capitals:2005-01/wsdl" 
+			 xmlns:ns2="urn:nokia:examples:webservices:capitals:2005-01/types" 
+		     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+		     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+		     name="capitals"
+		     targetNamespace="urn:nokia:examples:webservices:capitals:2005-01/wsdl">
+  <types>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema"
+			xmlns:tns="urn:nokia:examples:webservices:capitals:2005-01/types" 
+            xmlns:soap11-enc="http://schemas.xmlsoap.org/soap/encoding/" 
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+            xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+            targetNamespace="urn:nokia:examples:webservices:capitals:2005-01/types">
+      <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+      <element name="request" type="xsd:string"/>
+      <element name="response" type="xsd:string"/>
+    </schema>
+  </types>
+
+  <message name="capitalRequest">
+    <part name="nation" element="ns2:request"/>
+  </message>
+  <message name="capitalResponse">
+    <part name="capital" element="ns2:response"/>
+  </message>
+  
+  <portType name="capitalPortType">
+    <operation name="getCapital">
+      <input message="tns:capitalRequest"/>
+      <output message="tns:capitalResponse"/>
+    </operation>
+  </portType>
+  
+  <binding name="capitalBinding" type="tns:capitalPortType">
+    <operation name="getCapital">
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <soap:operation soapAction=""/>
+    </operation>
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+  </binding>
+  
+  <!-- Publishes the service on localhost -->
+  <!-- NOTE: localhost is ok for testing with WTK emulator but other emulators
+                  may require the actual hostname of IP address in the URL.  If you are
+                  are using an emulator other than WTK you should update the URL to use
+                  the actual hostname or IP address.  You should make this change in the
+                  WSDL source file (see CapitalServlet).  -->
+
+  <service name="capitals">
+  	<documentation>Simple capital query service</documentation>
+    <port name="capitalPort" binding="tns:capitalBinding">
+      <soap:address xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+                    location="http://localhost:8080/CapitalService/"/>
+    </port>
+  </service>
+</definitions>

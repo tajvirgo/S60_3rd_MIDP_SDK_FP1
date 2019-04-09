@@ -1,0 +1,162 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Class and interface description"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-7374292D-C5CC-4491-9DD9-104F2796BA44"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> JavaTM Implementation Notes</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-7374292D-C5CC-4491-9DD9-104F2796BA44"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-7374292D-C5CC-4491-9DD9-104F2796BA44"><!----></a>Class
+and interface description</h1>
+<p>This section lists the implementation specifics of SIP API for J2ME
+(JSR-180) at package level.</p>
+<div><h3>javax.microedition.io.Connector</h3><p><span><code>Connection open(String name)</code></span></p><p>UDP is a default connection protocol in SIP signalling. The S60 implementation
+changes the connection protocol to TCP when the <code>transport=tcp</code> parameter
+is added to the URI passed as an argument to the <code>Connector.open(</code>)
+operation. For example, <code>sip:sippy@operator.com:5070;transport=tcp</code>.
+Also, when the message to be sent is larger than approximately 1300 bytes
+the message will automatically be sent via TCP. Note that the protocol cannot
+be changed for example from UDP to TCP in the middle of the dialog. </p><p>Restrictions related to the creation of <code>SipClientConnection</code> and <code>SipConnectionNotifier</code> objects:</p><ul>
+<li><p>sips: connection is not supported.</p></li>
+<li><p>In the creation of <code>SipConnectionNotifier</code> object,
+"type" parameter corresponds to the Accept-Contact header value of incoming
+request. This is the only supported argument for <code>Connector.open()</code> operation.</p>
+<pre class="codeblock" id="GUID-B9597704-8E88-4184-8518-78DD13A0C9F3"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-B9597704-8E88-4184-8518-78DD13A0C9F3"><!----></a>SipConnectionNotifier scn = (SipConnectionNotifier) Connector.open
+   ("sip:*;type=\"application/vnd.company.x-game\"");
+</pre>
+</li>
+<li><p>The S60 implementation does not support <code>SipConnectionNotifier</code> to
+act in the dedicated mode. S60 implementation throws IOException if MIDlet
+passes "dedicated mode" URI as argument to the <code>Connertor.open()</code> operation.</p>
+<div class="note"><p><strong class="note_title">Note: </strong>There is one special case where S60 implementation throws  <code>IllegalArgumentException</code> instead
+of <code>IOException</code> if MIDlet passes "dedicated mode" URI
+as argument to the <code>Connector.open()</code> operation. This special
+URI is "sip:".</p><p>S60 implementation throws <code>IllegalArgumentException</code> if
+MIDlet passes "sip:". URI is passed as argument to the <code>Connector.open()</code> operation.</p></div>
+</li>
+</ul></div>
+<div><h3>javax.microedition.sip.SipAddress</h3><p>This interface has been implemented as specified by SIP API for J2ME
+(JSR-180).</p></div>
+<div><h3>javax.microedition.sip.SipClientConnection</h3><p><span><code>int enableRefresh(SipRefreshListener srl)</code></span></p><p>This method can be called only for REGISTER and SUBSCRIBE requests.</p><p><span><code>SipClientConnection initCancel()</code></span></p><p>The user cannot set headers or content to a CANCEL request.</p><p><span><code>void initRequest(java.lang.String method,SipConnectionNotifier
+scn)</code></span></p><p>The following requests can be set as an argument method: <code>REGISTER</code>, <code>INVITE</code>, <code>OPTIONS</code>, <code>MESSAGE</code>, <code>SUBSCRIBE</code>, <code>PUBLISH</code>, <code>UPDATE</code>, <code>REFER</code>, and <code>&lt;EXTENSION&gt;</code>. </p><p>The following requests cannot be set as an argument method: <code>ACK</code>, <code>CANCEL</code>, <code>BYE</code>, <code>PRACK</code>, <code>UPDATE</code>, and <code>NOTIFY</code>.</p><p>An <code>&lt;EXTENSION&gt;</code> request means any arbitrary request
+defined by the user.</p><p>Section <a href="GUID-DD457049-305A-42B6-8E84-25527B2D9AF5.html#GUID-DD457049-305A-42B6-8E84-25527B2D9AF5">Selecting
+registration context and initializing requests</a> contains more information
+on how the <code>SipConnectionNotifier</code> argument affects the
+values of system headers.</p><p>The system headers ‘CSeq’ and ‘Call-ID’ are not available immediately
+after this operation call. ‘To’, ‘From’ and ‘Contact’ headers are available
+for a MIDlet after this operation call. More detailed information can be found
+in section <a href="GUID-08529BC4-5DE6-4E4F-B1BA-EDF7841E7A2E.html#GUID-08529BC4-5DE6-4E4F-B1BA-EDF7841E7A2E">Restrictions
+on headers</a>.</p><p><span><code>boolean receive(long timeout)</code></span></p><p>This operation throws <code>IOException</code> and the state
+of the object is set to <code>TERMINATED</code> if an error has occurred
+in the sip stack during transaction.</p><p><span><code>void setCredentials(java.lang.String username,java.lang.String
+password,java.lang.String realm)</code></span></p><p>The MIDlet has to set the credentials before sending a request (See
+Example 1 <code>setCredentials()</code> in <a href="http://www.jcp.org/en/jsr/detail?id=180" target="_blank">SIP
+API for J2ME (JSR-180) specification</a>). The S60 implementation does
+not pass 401 or 407 responses to the MIDlet. The S60 implementation throws <code>IOException</code> if
+the registrar server returns 401 or 407 and credentials has not been set by
+MIDlet. The user is not asked for the credentials either, in a situation where
+the server sends a 401 or a 407 response. </p><p><span><code>void setRequestURI(java.lang.String URI)</code></span></p><p>The S60 implementation does not support this operation. This operation
+throws <code>SipException</code> with <code>INVALID_OPERATION</code> if
+this operation is called in the <code>INITIALIZED</code> state.</p></div>
+<div><h3>javax.microedition.sip.SipConnection</h3><p><span><code>void addHeader(java.lang.String name, java.lang.String
+value)</code></span></p><p>Adds a header to the SIP message. See section <a href="GUID-1EE9A934-42D9-4429-939A-932F31C0C833.html#GUID-1EE9A934-42D9-4429-939A-932F31C0C833">Headers</a> for detailed information related to them. If multiple header
+field values exist, the header value is added topmost of this type of headers.</p><p>Example 1: Adding single header field row. The message already contains
+header Route:</p><pre>&lt;sip:carol@chicago.com&gt;.
+addHeader("Route", " &lt;sip:alice@atlanta.com&gt;");
+the result will be
+Route: &lt;sip:alice@atlanta.com&gt;
+Route: &lt;sip:carol@chicago.com&gt;
+</pre><p>Example 2: Adding multiple header field rows as a comma-separated list.
+The message already contains header Route: &lt;sip:carol@chicago.com&gt;.</p><pre>addHeader("Route", "&lt;sip:alice@atlanta.com&gt;,&lt;sip:bob@biloxi.com&gt;");
+the result will be: 
+Route: &lt;sip:alice@atlanta.com&gt;
+Route: &lt;sip:bob@biloxi.com&gt;
+Route: &lt;sip:carol@chicago.com&gt;</pre><p><span><code>java.lang.String getHeader()</code></span></p><p>The top-most header field value, or null if the current message does
+not have such a header or the header is for other reasons not available (e.g.
+message not initialized). As mentioned in the description of the <code>addHeader()</code> operation,
+headers are stored as separate objects and the topmost header is returned.</p><p>Example 1: Get top-most Route header from a message that contains three
+Route headers.</p><pre>Route: &lt;sip:alice@atlanta.com&gt;
+Route: &lt;sip:carol@chicago.com&gt;
+Route: &lt;sip:bob@biloxi.com&gt;
+getHeader("Route");
+the result is:
+&lt;sip:alice@atlanta.com&gt;</pre><p><span><code>java.lang.String[] getHeaders(java.lang.String name)</code></span></p><p>Gets the header field value(s) of a specified header type. The method
+returns the header field-values separated in an array regardless of how they
+are stored in the message. </p><p>Example 1: Get Route headers from a message that contains two Route
+headers in separate header field rows.</p><pre>
+Route: &lt;sip:alice@atlanta.com&gt;
+Route: &lt;sip:carol@chicago.com&gt;
+getHeaders("Route");
+the result is a String array:
+{"&lt;sip:alice@atlanta.com&gt;", "&lt;sip:carol@chicago.com&gt;"}</pre><p>Example 2: Get Route headers from a message that contains three Route
+headers in a comma-separated header field value.</p><pre>Route: &lt;sip:alice@atlanta.com&gt;,&lt;sip:carol@chicago.com&gt;,&lt;sip:bob@biloxi.com&gt;
+getHeaders("Route");
+the result is a String array:
+{"&lt;sip:alice@atlanta.com&gt;", "&lt;sip:carol@chicago.com&gt;","&lt;sip:bob@biloxi.com&gt;"}
+</pre><p><span><code>void setHeader(java.lang.String name, java.lang.String
+value)</code></span></p><p>Sets the header value in a SIP message. See section <a href="GUID-1EE9A934-42D9-4429-939A-932F31C0C833.html#GUID-1EE9A934-42D9-4429-939A-932F31C0C833">Headers</a> for detailed information related to them. If the header does
+not exist, it will be added to the message, otherwise the existing header
+is overwritten. If multiple header field values exist, the one on the top
+is overwritten.  </p><p>Example 1: Replacing single header field row. The message already contains
+the following headers:</p><pre>Route: &lt;sip:alice@atlanta.com&gt;
+Route: &lt;sip:carol@chicago.com&gt;
+setHeader("Route", " &lt;sip:bob@biloxi.com&gt;");
+the result will be
+Route: &lt;sip:bob@biloxi.com&gt;
+Route: &lt;sip:carol@chicago.com&gt;</pre><p>Example 2: Setting multiple header field rows as a comma-separated list.
+The message already contains one header:</p><pre>Route: &lt;sip:carol@chicago.com&gt;
+setHeader("Route", "&lt;sip:alice@atlanta.com&gt;,&lt;sip:bob@biloxi.com&gt;");
+the result will be:
+Route: &lt;sip:alice@atlanta.com&gt;
+Route: &lt;sip:bob@biloxi.com&gt;</pre><p><span><code>void removeHeader(java.lang.String name)</code></span></p><p>Removes the header from the message. If multiple header field values
+exist, the topmost is removed. If the named header is not found, this method
+does nothing. </p><p>Example 1: Removing header from a message that contains two Route headers
+in separate header field rows.</p><pre>Route: &lt;sip:alice@atlanta.com&gt;
+Route: &lt;sip:carol@chicago.com&gt;
+removeHeader("Route");
+the result is:
+Route: &lt;sip:carol@chicago.com&gt;</pre><p><span><code>java.lang.String getRequestURI()</code></span></p><p>The S60 implementation does not support this operation. This operation
+always returns null.</p><p><span><code>void send()</code></span></p><p>The S60 implementation tries to send request/response for 30 seconds
+if e.g. creation of the GPRS connection fails or if the registration of the
+SIP Profile takes time. This means that the <code>send()</code> operation
+blocks for 30 seconds at the most. <code>IOException</code> is thrown
+if sending the request/response still fails after 30 seconds. </p><p>The following restrictions/features apply to the UAS side:</p><ul>
+<li><p>A successful response (&lt;= 299) for SUBSCRIBE and REFER
+requests are not actually sent until the MIDlet sends the first <code>NOTIFY</code> request
+to the UAC side, i.e. when the <code>NOTIFY</code> is sent, first
+the successful response is sent followed immediately by the sending of the <code>NOTIFY</code> request. </p>
+</li>
+<li><p><code>IOException</code> is thrown if some error
+has occurred (e.g. in the sip stack) after the creation of the <code>SipServerConnection</code> object
+and before the <code>send()</code> operation call. The state of the <code>SipServerConnection</code> object
+is set to <code>TERMINATED</code> in this situation.</p></li>
+</ul></div>
+<div><h3>javax.microedition.sip.SipConnectionNotifier </h3><p>This interface has been implemented as specified by SIP API for J2ME
+(JSR-180).</p></div>
+<div><h3>javax.microedition.sip.SipDialog</h3><p><span><code>java.lang.String getDialogID()</code></span></p><p>In the SUBSCRIBE and REFER cases, dialog ID is available on the UAS
+after sending a first NOTIFY request.</p><p><span><code>SipClientConnection getNewClientConnection(java.lang.String
+method)</code></span></p><p>Section <a href="GUID-244AE7BF-9A0A-4D81-B7A9-DD34D0A60856.html#GUID-244AE7BF-9A0A-4D81-B7A9-DD34D0A60856">Sending
+a request inside an existing dialog</a> describes the restrictions on this
+operation.</p></div>
+<div><h3>javax.microedition.sip.SipException</h3><p>This interface has been implemented as specified by SIP API for J2ME
+(JSR-180).</p></div>
+<div><h3>javax.microedition.sip.SipHeader</h3><p>This interface has been implemented as specified by SIP API for J2ME
+(JSR-180). </p></div>
+<div><h3>javax.microedition.sip.SipRefreshHelper</h3><p><span><code>java.io.OutputStream update(int refreshID,java.lang.String[]
+contact,java.lang.String type,int length,int expires)</code></span></p><ul>
+<li><p>Updating a ‘Contact’ header is only allowed in the REGISTER
+case.</p></li>
+<li><p>Only one ‘Contact’ header is allowed to set to the ‘contact’
+argument.</p></li>
+</ul></div>
+<div><h3>javax.microedition.sip.SipRefreshListener</h3><p><span><code>void refreshEvent(int refreshID,int statusCode,java.lang.String
+reasonPhrase)</code></span></p><p>This callback operation is not called by the S60 implementation when
+a refreshing occurs. This callback operation is called when a refresh task
+is started, updated (by MIDlet), cancelled or failed. </p></div>
+<div><h3>javax.microedition.sip.SipServerConnection</h3><p>The functionality of all other requests except <code>REGISTER</code> request
+is supported on the UAS side.</p><p><span><code>void initResponse(int code)</code></span></p><p>A 100 response to <code>INVITE</code> is sent automatically
+by the sip stack in the S60 implementation. Setting and sending 100 response
+to INVITE is ignored on the UAS side. A 100 response is not allowed for other
+request methods and <code>IllegalArgumentException</code> is thrown.</p></div>
+<div><h3>javax.microedition.sip.SipServerConnectionListener</h3><p><span><code>void notifyRequest(SipConnectionNotifier scn)</code></span></p><p>This callback operation is not called if the MIDlet blocks in the <code>SipConnectionNotifier.acceptAndOpen()</code> operation
+at the same time. The reason for this functionality is that the <code>acceptAndOpen()</code> operation
+returns a <code>SipServerConnection</code> object and the <code>notifyRequest()</code> operation
+call is unnecessary in this situation because the <code>acceptAndOpen()</code> operation
+has already provided a <code>SipServerConnection</code> object to
+the MIDlet.</p></div>
+</div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

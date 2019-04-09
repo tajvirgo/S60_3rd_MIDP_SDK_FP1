@@ -1,0 +1,52 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobiletask"/><meta name="DC.Title" content="Setting the PATH variable"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-3101DED2-806D-4547-887A-E6CDA692AFE6"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> S60 Example MIDlets</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-3101DED2-806D-4547-887A-E6CDA692AFE6"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-3101DED2-806D-4547-887A-E6CDA692AFE6"><!----></a>Setting
+the PATH variable</h1>
+<div><h3>Context</h3><p>To avoid having to enter the full path every time you need to compile
+or preverify a MIDlet, it is useful to set the path permanently so it will
+persist even after rebooting. This is done by adding the full paths of the
+Java compiler and preverifier directories to the PATH variable.</p><p>Typically, this full path is <code>C:\j2sdk1.4.2_&lt;version&gt;\bin</code> for
+the Java compiler and <code>C:\&lt;S60_SDK_installation_directory&gt;\bin</code> for
+the preverifier.</p><p>Complete the following steps to set the path permanently on Microsoft
+2000 and XP:</p></div>
+<h3>Steps</h3><ol id="GUID-8936AB2E-5174-4913-A872-8D608FF2A593"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-8936AB2E-5174-4913-A872-8D608FF2A593"><!----></a>
+<li id="GUID-833637E3-9645-47C0-B24B-AC320317229D"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-833637E3-9645-47C0-B24B-AC320317229D"><!----></a><span>Choose <span>Start
+&gt; Control Panel &gt; System</span>.</span></li>
+<li id="GUID-70C4E175-F364-4335-AF4A-A72FA6B8F308"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-70C4E175-F364-4335-AF4A-A72FA6B8F308"><!----></a><span>Go to the <span>Advanced</span> tab
+and click the <span>Environment Variables</span> button.</span></li>
+<li id="GUID-D184B74E-E61F-4AF3-AC4E-6CA52FCBAB38"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-D184B74E-E61F-4AF3-AC4E-6CA52FCBAB38"><!----></a><span>In the <span>Environment
+variables</span> window, locate the <span>Path</span> variable in the <span>User Variables</span> or <span>System
+Variables</span> list.</span>
+
+<p>If you are not sure where to add the path, enter it as the last Path
+variable value listed in <span>User Variables</span>.</p>
+
+</li>
+<li id="GUID-BBAE3568-3849-4E1D-83C9-69470942E734"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-BBAE3568-3849-4E1D-83C9-69470942E734"><!----></a><span>Select the <span>Path</span> variable
+and click <span>Edit</span>.</span></li>
+<li id="GUID-F7B4D7E9-5477-4B7A-9AD0-1614B48ECE38"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-F7B4D7E9-5477-4B7A-9AD0-1614B48ECE38"><!----></a><span>Enter the
+Java compiler and preverifier paths into the <span>variable value</span> field,
+for example, as follows:</span>
+
+<p><code>C:\j2sdk1.4.2_&lt;version&gt;\bin</code> for the compiler.</p>
+<p><code>C:\&lt;S60_SDK_installation_directory&gt;\bin</code> for
+the preverifier.</p>
+<p><span>Warning:</span> Do not delete the existing path settings. Deleting the
+settings may affect the functioning of the system or other programs!</p>
+<div class="note"><p><strong class="note_title">Note: </strong>The PATH can be a series of directories separated by semi-colons (;).
+Microsoft Windows looks for programs in the PATH directories in the order
+from left to right. You should have only one bin directory specified for the
+Java SDK at a time (those following the first one are ignored). If there is
+a path setting already specified, you can update it with the path given here.</p></div>
+
+</li>
+<li id="GUID-14D9B319-514F-4E4A-BE3E-D235853971FC"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-14D9B319-514F-4E4A-BE3E-D235853971FC"><!----></a><span>Click <span>OK</span>.</span>
+</li>
+<li id="GUID-48CF458B-6EF4-4C19-ACDE-BD165B03EEF2"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-48CF458B-6EF4-4C19-ACDE-BD165B03EEF2"><!----></a><span>In the <span>System
+Properties</span> window, click <span>OK</span>.</span>
+
+</li>
+</ol>
+<div><h3>Results</h3><p>The new paths have now been set for each time you open the command prompt.</p><p>You can verify the settings by completing the steps detailed in <a href="GUID-AE8966DA-75A1-4E45-A699-A6A30B1CB30C.html#GUID-AE8966DA-75A1-4E45-A699-A6A30B1CB30C">Checking the paths for the
+Java compiler and preverifier tools</a>.</p></div></div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

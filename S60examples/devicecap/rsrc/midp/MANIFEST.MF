@@ -1,0 +1,6 @@
+MIDlet-1: Device Capabilities, , com.nokia.midp.examples.mm.devicecap.DeviceCapMIDlet
+MIDlet-Name: Device Capabilities
+MicroEdition-Configuration: CLDC-1.1
+MicroEdition-Profile: MIDP-2.0
+MIDlet-Vendor: Nokia
+MIDlet-Version: 1.0

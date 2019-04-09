@@ -1,0 +1,339 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Content types"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-7EBBF4E2-CAE0-46AB-BB84-AC9955F382C9"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> JavaTM Implementation Notes</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-7EBBF4E2-CAE0-46AB-BB84-AC9955F382C9"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-7EBBF4E2-CAE0-46AB-BB84-AC9955F382C9"><!----></a>Content
+types</h1>
+<p>The following content types are supported for creating players :</p>
+<div class="tablenoborder"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-AB2A7A70-B366-4B57-9055-D58CBE820F36"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-AB2A7A70-B366-4B57-9055-D58CBE820F36" frame="border" border="1" rules="all"><caption><strong>Table 18: </strong>Synthesized audio
+playback</caption>
+
+
+<thead align="left">
+<tr class="title "><th valign="top" width="31%" id="d0e23547">
+<p>Device</p>
+</th><th valign="top" width="69%" id="d0e23552">
+<p>MMAPI controls</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td valign="top" width="31%" headers="d0e23547 ">
+<p><code>TONE_DEVICE_LOCATOR</code></p>
+</td>
+<td valign="top" width="69%" headers="d0e23552 ">
+<p>VolumeControl, StopTimeControl, ToneControl, RateControl, TempoControl,
+MIDIControl, PitchControl</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="31%" headers="d0e23547 ">
+<p><code>MIDI_DEVICE_LOCATOR</code></p>
+</td>
+<td valign="top" width="69%" headers="d0e23552 ">
+<p>VolumeControl, MIDIControl, PitchControl</p>
+</td>
+</tr>
+</tbody>
+</table></div><div class="tablenoborder"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-85CB0AFB-0383-409D-8713-12B2A3C81A95"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-85CB0AFB-0383-409D-8713-12B2A3C81A95" frame="border" border="1" rules="all"><caption><strong>Table 19: </strong>Audio
+playback</caption>
+
+
+
+<thead align="left">
+<tr class="title "><th valign="top" width="13.25%" id="d0e23612">
+<p>Format suffix</p>
+</th><th valign="top" width="29.75%" id="d0e23617">
+<p>MIME type</p>
+</th><th valign="top" width="25%" id="d0e23622">
+<p>Protocols</p>
+</th><th valign="top" width="32%" id="d0e23627">
+<p>MMAPI controls</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td valign="top" width="13.25%" headers="d0e23612 ">
+<p>JTS</p>
+</td>
+<td valign="top" width="29.75%" headers="d0e23617 ">
+<p>audio/x-tone-seq</p>
+</td>
+<td valign="top" width="25%" headers="d0e23622 ">
+<p>http, https, file</p>
+</td>
+<td valign="top" width="32%" headers="d0e23627 ">
+<p>VolumeControl, StopTimeControl, ToneControl, RateControl, TempoControl,
+MIDIControl, PitchControl</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="13.25%" headers="d0e23612 ">
+<p>WAV</p>
+</td>
+<td valign="top" width="29.75%" headers="d0e23617 ">
+<p>audio/wav, audio/x-wav, audio/basic, audio/x-basic</p>
+</td>
+<td valign="top" width="25%" headers="d0e23622 ">
+<p>http, https, file</p>
+</td>
+<td valign="top" width="32%" headers="d0e23627 ">
+<p>VolumeControl, StopTimeControl, RateControl, MetaDataControl</p>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="13.25%" headers="d0e23612 ">
+<p>AU</p>
+</td>
+<td valign="top" width="29.75%" headers="d0e23617 ">
+<p>audio/au, audio/x-au, audio/basic, audio/x-basic</p>
+</td>
+<td valign="top" width="25%" headers="d0e23622 ">
+<p>http, https, file</p>
+</td>
+<td valign="top" width="32%" headers="d0e23627 ">
+<p>VolumeControl, StopTimeControl, RateControl, MetaDataControl</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="13.25%" headers="d0e23612 ">
+<p>AMR</p>
+</td>
+<td valign="top" width="29.75%" headers="d0e23617 ">
+<p>audio/amr</p>
+</td>
+<td valign="top" width="25%" headers="d0e23622 ">
+<p>http, https, rtsp, file</p>
+</td>
+<td valign="top" width="32%" headers="d0e23627 ">
+<p>VolumeControl, StopTimeControl, RateControl, MetaDataControl</p>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="13.25%" headers="d0e23612 ">
+<p>AWB</p>
+</td>
+<td valign="top" width="29.75%" headers="d0e23617 ">
+<p>audio/amr-wb</p>
+</td>
+<td valign="top" width="25%" headers="d0e23622 ">
+<p>http, https, file</p>
+</td>
+<td valign="top" width="32%" headers="d0e23627 ">
+<p>VolumeControl, StopTimeControl, RateControl, MetaDataControl</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="13.25%" headers="d0e23612 ">
+<p>MID</p>
+</td>
+<td valign="top" width="29.75%" headers="d0e23617 ">
+<p>audio/midi, audio/sp-midi</p>
+</td>
+<td valign="top" width="25%" headers="d0e23622 ">
+<p>http, https, file</p>
+</td>
+<td valign="top" width="32%" headers="d0e23627 ">
+<p>VolumeControl, StopTimeControl, TempoControl, MIDIControl, PitchControl,
+RateControl, MetaDataControl</p>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="13.25%" headers="d0e23612 ">
+<p>MP3</p>
+</td>
+<td valign="top" width="29.75%" headers="d0e23617 ">
+<p>audio/mp3</p>
+</td>
+<td valign="top" width="25%" headers="d0e23622 ">
+<p>http, https, file</p>
+</td>
+<td valign="top" width="32%" headers="d0e23627 ">
+<p>VolumeControl, StopTimeControl, RateControl, MetaDataControl</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="13.25%" headers="d0e23612 ">
+<p>MP4</p>
+</td>
+<td valign="top" width="29.75%" headers="d0e23617 ">
+<p>audio/mp4, audio/mpeg4</p>
+</td>
+<td valign="top" width="25%" headers="d0e23622 ">
+<p>http, https, rtsp, file</p>
+</td>
+<td valign="top" width="32%" headers="d0e23627 ">
+<p>VolumeControl, StopTimeControl, RateControl, MetaDataControl</p>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="13.25%" headers="d0e23612 ">
+<p>3GP</p>
+</td>
+<td valign="top" width="29.75%" headers="d0e23617 ">
+<p>audio/3gpp</p>
+</td>
+<td valign="top" width="25%" headers="d0e23622 ">
+<p>http, https, rtsp, file</p>
+</td>
+<td valign="top" width="32%" headers="d0e23627 ">
+<p>VolumeControl, StopTimeControl, RateControl, MetaDataControl</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="13.25%" headers="d0e23612 ">
+<p>AAC</p>
+</td>
+<td valign="top" width="29.75%" headers="d0e23617 ">
+<p>audio/aac</p>
+</td>
+<td valign="top" width="25%" headers="d0e23622 ">
+<p>http, https, file</p>
+</td>
+<td valign="top" width="32%" headers="d0e23627 ">
+<p>VolumeControl, StopTimeControl, RateControl, MetaDataControl</p>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="13.25%" headers="d0e23612 ">
+<p>RA, RM</p>
+</td>
+<td valign="top" width="29.75%" headers="d0e23617 ">
+<p>application/vnd.rn-realmedia</p>
+</td>
+<td valign="top" width="25%" headers="d0e23622 ">
+<p>http, https, rtsp, file</p>
+</td>
+<td valign="top" width="32%" headers="d0e23627 ">
+<p>VolumeControl, StopTimeControl, RateControl, MetaDataControl</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="13.25%" headers="d0e23612 ">
+<p>WMA</p>
+<p><a href="GUID-5A896120-C0D0-47EF-A5B2-49D8D01D2F51.html#GUID-5A896120-C0D0-47EF-A5B2-49D8D01D2F51">S60 3rd Ed. FP
+1</a></p>
+</td>
+<td valign="top" width="29.75%" headers="d0e23617 ">
+<p>audio/x-ms-wma</p>
+</td>
+<td valign="top" width="25%" headers="d0e23622 ">
+<p>http, https, file</p>
+</td>
+<td valign="top" width="32%" headers="d0e23627 ">
+<p>VolumeControl, StopTimeControl, RateControl, MetaDataControl</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<div class="note"><p><strong class="note_title">Note: </strong>HTTP Streaming is only supported for the media type <code>audio/amr</code>.
+With other types, the media data is downloaded completely before playing. </p></div>
+<div class="tablenoborder"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-EC4D5828-AFAB-4F7D-A468-57D295FCE41A"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-EC4D5828-AFAB-4F7D-A468-57D295FCE41A" frame="border" border="1" rules="all"><caption><strong>Table 20: </strong>Video playback</caption>
+
+
+
+<thead align="left">
+<tr class="title "><th valign="top" width="15.422885572139306%" id="d0e23993">
+<p>Format suffix</p>
+</th><th valign="top" width="33.333333333333336%" id="d0e23998">
+<p>MIME type</p>
+</th><th valign="top" width="19.154228855721396%" id="d0e24003">
+<p>Protocols</p>
+</th><th valign="top" width="32.08955223880597%" id="d0e24008">
+<p>MMAPI controls</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td valign="top" width="15.422885572139306%" headers="d0e23993 ">
+<p>MP4, MPEG4</p>
+</td>
+<td valign="top" width="33.333333333333336%" headers="d0e23998 ">
+<p>video/mp4, video/mpeg4</p>
+</td>
+<td valign="top" width="19.154228855721396%" headers="d0e24003 ">
+<p>http, https, rtsp, file</p>
+</td>
+<td valign="top" width="32.08955223880597%" headers="d0e24008 ">
+<p>VolumeControl, StopTimeControl, VideoControl, GUIControl, RateControl,
+FramePositioningControl</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="15.422885572139306%" headers="d0e23993 ">
+<p>3GP</p>
+</td>
+<td valign="top" width="33.333333333333336%" headers="d0e23998 ">
+<p>video/3gpp</p>
+</td>
+<td valign="top" width="19.154228855721396%" headers="d0e24003 ">
+<p>http, https, rtsp, file</p>
+</td>
+<td valign="top" width="32.08955223880597%" headers="d0e24008 ">
+<p>VolumeControl, StopTimeControl, VideoControl, GUIControl, RateControl,
+FramePositioningControl</p>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="15.422885572139306%" headers="d0e23993 ">
+<p>RM</p>
+</td>
+<td valign="top" width="33.333333333333336%" headers="d0e23998 ">
+<p>application/vnd.rn-realmedia</p>
+</td>
+<td valign="top" width="19.154228855721396%" headers="d0e24003 ">
+<p>http, https, rtsp, file</p>
+</td>
+<td valign="top" width="32.08955223880597%" headers="d0e24008 ">
+<p>VolumeControl, StopTimeControl, VideoControl, GUIControl, RateControl,
+FramePositioningControl</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="15.422885572139306%" headers="d0e23993 ">
+<p>RV</p>
+</td>
+<td valign="top" width="33.333333333333336%" headers="d0e23998 ">
+<p>application/vnd.rn-realmedia</p>
+</td>
+<td valign="top" width="19.154228855721396%" headers="d0e24003 ">
+<p>http, https, rtsp, file</p>
+</td>
+<td valign="top" width="32.08955223880597%" headers="d0e24008 ">
+<p>VolumeControl, StopTimeControl, VideoControl, GUIControl, RateControl,
+FramePositioningControl</p>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="15.422885572139306%" headers="d0e23993 ">
+<p>GIF</p>
+<p><a href="GUID-5A896120-C0D0-47EF-A5B2-49D8D01D2F51.html#GUID-5A896120-C0D0-47EF-A5B2-49D8D01D2F51">S60 3rd Ed. FP
+1</a></p>
+</td>
+<td valign="top" width="33.333333333333336%" headers="d0e23998 ">
+<p>image/gif</p>
+</td>
+<td valign="top" width="19.154228855721396%" headers="d0e24003 ">
+<p>http, https, file</p>
+</td>
+<td valign="top" width="32.08955223880597%" headers="d0e24008 ">
+<p>StopTimeControl, VideoControl, GUIControl, RateControl, FramePositioningControl</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<div class="note"><p><strong class="note_title">Note: </strong>HTTP Streaming is only supported for the media type <code>audio/amr</code>.
+With other types, the media data must be downloaded completely before playing. </p></div>
+<p>Other data types may be supported as well, depending on the platform
+version and the product. They can be queried dynamically by calling <code>Manager.getSupportedContentTypes(
+null )</code>. The call will return all supported content types for all
+protocols, including capture-only content types. Thus, not all returned types
+are playable. Likewise a protocol name string can be used instead of null
+to get the content types supported by a specific protocol. </p>
+<p>Examples:</p>
+<pre class="codeblock" id="GUID-A6799E39-9673-4818-A431-84F28F42508D"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-A6799E39-9673-4818-A431-84F28F42508D"><!----></a>Manager.getSupportedContentTypes( "rtsp" );
+
+Manager.getSupportedContentTypes( "capture" );
+
+</pre>
+<p>For further information on S60 multimedia capabilities, see <a href="http://forum.nokia.com/audiovideo" target="_blank">Audio &amp; Video at Forum Nokia</a>.</p>
+</div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

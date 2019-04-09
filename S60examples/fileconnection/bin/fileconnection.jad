@@ -1,0 +1,8 @@
+MIDlet-1: FileConnDemo, , com.nokia.midp.examples.fileconnection.FileConnDemo
+MIDlet-Jar-Size: 9656
+MIDlet-Jar-URL: fileconnection.jar
+MIDlet-Name: FileConnDemo
+MicroEdition-Configuration: CLDC-1.1
+MicroEdition-Profile: MIDP-2.0
+MIDlet-Vendor: Nokia
+MIDlet-Version: 1.0

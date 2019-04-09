@@ -1,0 +1,619 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>Hello World Plus Example</title>
+</head>
+  <body>
+                     
+<p> This example demonstrates how to create a simple interactive MIDlet.
+The MIDlet described  initially displays a "Hello World" message and allows
+the user to edit that message. <br>
+           <!--section contents--> </p>
+                   
+<h3>Section Contents</h3>
+                     
+<blockquote>                               
+  <p> <a href="#1">1. About this example</a> </p>
+                                         
+  <p> <a href="#2">2. Pre-requisites</a> </p>
+                                         
+  <p> <a href="#3">3. Building and running</a> </p>
+                                         
+  <p> <a href="#4">4. Design and implementation</a> </p>
+                                         
+  <p> <a href="#5">5. Summary</a> </p>
+           </blockquote>
+                     
+<hr align="center" width="100%" size="2">           
+<h3> <a name="1">1. About this example</a> </h3>
+                     
+<blockquote>                               
+  <p>This example demonstrates how to create a simple interactive MIDlet.
+     The MIDlet described  initially displays a "Hello World" message and
+allows     the user to edit that message.</p>
+                                         
+  <p>This example demonstrates the following:</p>
+                                         
+  <ul>
+           <li>MIDlet lifecycle.</li>
+           <li>Creating and handling commands.</li>
+           <li>Creating UI's with high-level components and making those
+UI's   visible.</li>
+           <li>Managing transitions between different UI screens.</li>
+                                         
+  </ul>
+           </blockquote>
+                     
+<h3> <a name="2">2. Pre-requisites</a> </h3>
+                     
+<blockquote>                               
+  <p>The example makes use of the standard MIDP application framework and
+     LCDUI API. This example uses MIDP 2.0.</p>
+           </blockquote>
+                     
+<h3> <a name="3">3. Building and running</a> </h3>
+                     
+<blockquote>                               
+  <p>The example is built using the standard method for building and running
+     as described in 				<a
+ href="../../../../../../../../../doc-files/building.html">Building   and
+   running the examples</a>.</p>
+                                         
+  <p>The following classes should be included in the jar:</p>
+                                         
+  <blockquote>com.nokia.midp.examples.lcdui.helloworldplus.*<br>
+           </blockquote>
+                                         
+  <p>No resource files are used.</p>
+                                         
+  <p>When launched, the application displays the following screen.</p>
+                                         
+  <div align="center"> <img alt="doc-files/display_text_1.png"
+ src="doc-files/display_text_1.png">
+           </div>
+                                         
+  <p>This displays the current text message and two commands, "Exit" and
+"Options".</p>
+                                         
+  <ul>
+           <li>Select "Exit" to terminate the MIDlet.</li>
+           <li>Select "Options" to open the menu, containing two options
+"Edit    Text"   and "Close".</li>
+           <li>Select "Edit Text" to edit the displayed text.</li>
+           <li>Select "Close" to instruct the system framework to terminate 
+ the   MIDlet.</li>
+                                         
+  </ul>
+                                         
+  <p>The difference between "Exit" and "Close" is discussed in sections 4.6
+     and 4.7.</p>
+                                         
+  <p>Selecting "Edit Text" launches the text editing screen which is shown
+     below.</p>
+                                         
+  <div align="center"> <img alt="doc-files/edit_text_1.png"
+ src="doc-files/edit_text_1.png">
+           </div>
+                                         
+  <p>The text editing screen contains an editable text field and two commands,
+     "OK" and "Cancel". The text field 		is initialized with the text from
+ the    previous screen.</p>
+                                         
+  <ul>
+           <li>Use the navigation and phone keys to move around and edit
+the   text   in the text field.</li>
+           <li>Select "OK" to dismiss the text editing screen and accept
+the   edited    text.</li>
+           <li>Select "Cancel" to dismiss the text editing screen and reject
+  the   edited  text.</li>
+                                         
+  </ul>
+                                         
+  <p>After dismissing the text editing screen, the user is returned to the
+     text displaying screen. If the user had 		accepted the edited text,
+the    text  displayed will be updated. If the user had rejected the edited
+text,    the text 		displayed will remain unchanged.</p>
+           </blockquote>
+                     
+<h3> <a name="4">4. Design and implementation</a> </h3>
+                     
+<blockquote>                               
+  <p>Application classes</p>
+                                         
+  <ul>
+           <li><a
+ href="../../../../midp/examples/lcdui/helloworldplus/HelloWorldPlusMIDlet.html"
+ title="class in com.series60.examples.lcdui.helloworldplus"><code>HelloWorldPlusMIDlet</code></a>
+     A simple MIDlet displaying either  					TextScreen or TextEditor UI
+objects.      This class is responsible for responding to lifecycle events
+ 					from    the  framework and the application itself. It is responsible
+for creating    and maintaining  					references to the TextScreen and TextEditor
+UI objects.     It also handles the transitions between  					these two UI
+objects.</li>
+           <li><a
+ href="../../../../midp/examples/lcdui/helloworldplus/TextEditor.html"
+ title="class in com.series60.examples.lcdui.helloworldplus"><code>TextEditor</code></a>
+     Provides an editable text field along with  					an "OK" command key
+to   dismiss  this screen and accept the edited text, and a "Cancel" key
+to dismiss   this   					screen and reject the edited text. This class creates
+ command   objects  to correspond with keys  					displayed which it lodges
+ with the   command framework. This class registers itself with the command
+  					framework   as the 'command listener' and is notified when a command
+ is activated. </li>
+           <li><a
+ href="../../../../midp/examples/lcdui/helloworldplus/TextScreen.html"
+ title="class in com.series60.examples.lcdui.helloworldplus"><code>TextScreen</code></a>
+     Displays a message on the screen along with an  					"Edit Text" command
+    key to launch the TextEditor screen, and an "Exit" command key to exit
+ the    					application. This class creates commands objects to correspond
+ with   keys displayed which it lodges  					with the command framework.
+This  class   registers itself with the command framework as the  					'command
+ listener'   and is notified when a command is activated.</li>
+                                         
+  </ul>
+                                         
+  <p>System classes</p>
+                                         
+  <ul>
+           <li><a
+ href="../../../../../../../../../MIDP2.0_API/javadoc/javax/microedition/lcdui/Form.html"
+ title="class or interface in javax.microedition.lcdui"><code>Form</code></a>
+     A Screen that contains a mixture of Items, and handles layout and user
+  interaction   focus.</li>
+           <li><a
+ href="../../../../../../../../../MIDP2.0_API/javadoc/javax/microedition/lcdui/TextField.html"
+ title="class or interface in javax.microedition.lcdui"><code>TextField</code></a>
+     Item placed on a Form to display and allow editing of a text string.</li>
+           <li><a
+ href="../../../../../../../../../MIDP2.0_API/javadoc/javax/microedition/lcdui/StringItem.html"
+ title="class or interface in javax.microedition.lcdui"><code>StringItem</code></a>
+     Item placed on a Form to display a text string.</li>
+           <li><a
+ href="../../../../../../../../../MIDP2.0_API/javadoc/javax/microedition/lcdui/Display.html"
+ title="class or interface in javax.microedition.lcdui"><code>Display</code></a>
+     The manager of the display and input devices of the system.</li>
+                                         
+  </ul>
+                                         
+  <div align="center"> <img alt="doc-files/class_diagram.jpg"
+ src="doc-files/class_diagram.jpg">
+           </div>
+                                         
+  <h3> <a name="4.1">4.1. Launching the MIDlet</a> </h3>
+                                         
+  <blockquote>                                                   
+    <p>During the midlet lifecycle, the following events occur:</p>
+                                                             
+    <ul>
+           <li>construction of the main class</li>
+           <li>startApp() is called</li>
+           <li>pauseApp() and startApp() are called zero or more times</li>
+           <li>destroyApp() is called</li>
+                                                             
+    </ul>
+                                                             
+    <p>The midlet must be aware that startApp() may be called repeatedly.
+      Also, there is no guarantee that 						the lifecycle methods will be
+ called    sequentially.  pauseApp() may be called before startApp() completes.</p>
+                                                             
+    <p>If startApp() throws an exception, destroyApp() will be called immediately.</p>
+                                                             
+    <p>All of these examples handle this by having a variable of type Display
+     called display.  When the 						midlet is constructed, this variable
+will     be null.  In startApp()'s initialisation code, it 						is set.
+ Each time    startApp() is called it tests the variable to see if initialisation
+ needs    						to be performed.</p>
+                                                             
+    <p>The following diagram shows the sequence of actions when the HelloWorldPlusMIDlet
+     is launched.</p>
+                                                             
+    <div align="center"> <img alt="doc-files/hw_start_sequence.jpg"
+ src="doc-files/hw_start_sequence.jpg">
+           </div>
+                                                             
+    <table width="90%" border="0">
+           <tbody>
+                  <tr>
+           <th align="center" width="10%">Message</th>
+           <th align="left" width="80%">Description</th>
+           </tr>
+           <tr>
+           <td valign="top" align="center" width="10%">1 - 2</td>
+           <td width="80%">The framework contstructs a new instance of 								HelloWorldPlusMIDlet,
+     and calls the startApp() method.</td>
+           </tr>
+           <tr>
+           <td valign="top" align="center" width="10%">3</td>
+           <td width="80%"> 								The startApp() method tests whether the 
+ instance    variable called display is null.  This will be 								the case 
+ when startApp()    is called for the first time, and TextScreen needs to 
+be 								constructed.     								The startApp() could be called following 
+ a pause, in which case   there would already be a 								displayable object. 
+ 								If it is null   then the sequence continues to step 4. 								If 
+ display is not null then   the sequence skips to step 11. 							</td>
+           </tr>
+           <tr>
+           <td valign="top" align="center" width="10%">4</td>
+           <td width="80%"> 								The startApp() calls Display.getDisplay(),
+   and   stores the return value in the instance 								variable display.
+ 							</td>
+           </tr>
+           <tr>
+           <td valign="top" align="center" width="10%">5</td>
+           <td width="80%">The startApp() method creates an instance of TextScreen.</td>
+           </tr>
+           <tr>
+           <td valign="top" align="center" width="10%">6</td>
+           <td width="80%">The TextScreen constructor creates an instance 
+of  the   StringItem  class.</td>
+           </tr>
+           <tr>
+           <td valign="top" align="center" width="10%">7</td>
+           <td width="80%">The TextScreen constructor appends the instance
+ of  the   StringItem class to itself. 						TextScreen extends the Form
+class   which   is able to contain and display items derived from Item including 
+ StringItem.</td>
+           </tr>
+           <tr>
+           <td valign="top" align="center" width="10%">8</td>
+           <td width="80%">The TextScreen constructor adds a command object 
+ that   handles  "Exit" key presses to the command handling framework.</td>
+           </tr>
+           <tr>
+           <td valign="top" align="center" width="10%">9</td>
+           <td width="80%">The TextScreen constructor adds a command object 
+ that   handles  "Edit Text" key presses to the command handling framework.</td>
+           </tr>
+           <tr>
+           <td valign="top" align="center" width="10%">10</td>
+           <td width="80%">The TextScreen constructor calls setCommandListener()
+    to  register itself with the command framework as the command listener
+ and   will  be notified when a command is activated.</td>
+           </tr>
+           <tr>
+           <td valign="top" align="center" width="10%">11</td>
+           <td width="80%">After ensuring that a displayable object now exists
+   (an   instance of TextScreen), the MIDlet's startApp() method tells the
+ framework    to display that object.</td>
+           </tr>
+                                                                        
+       
+      </tbody>                                                  
+    </table>
+           </blockquote>
+                                         
+  <h3> <a name="4.2">4.2. First Launch of the Edit Screen.</a> </h3>
+                                         
+  <blockquote>                                                   
+    <p>The user presses the "Edit Text" key to launch the TextEditor screen
+     for the first time during the operation of the application.</p>
+                                                             
+    <div align="center"> <img alt="doc-files/hw_edit_key_sequence.jpg"
+ src="doc-files/hw_edit_key_sequence.jpg">
+           </div>
+                                                             
+    <table width="90%" border="0">
+           <tbody>
+                  <tr>
+           <th align="center" width="10%">Message</th>
+           <th align="left" width="80%">Description</th>
+           </tr>
+           <tr>
+           <td valign="top" align="center" width="10%"> 1</td>
+           <td width="80%">The user presses the "Edit Text" key, causing
+the   framework    to call the commandAction() method on the current command
+listener,   an instance   of TextScreen. The framework passes a reference
+to the command   object CMD_EDIT,   to the commandAction() method as a parameter.</td>
+           </tr>
+           <tr>
+           <td valign="top" align="center" width="10%"> 2</td>
+           <td width="80%">The commandAction() method 'identifies' the command
+   object   it receives as CMD_EDIT and calls the parent method textEditorRequested()
+     to initiate the launch of the TextEditor.</td>
+           </tr>
+           <tr>
+           <td valign="top" align="center" width="10%"> 3-4</td>
+           <td width="80%">The HelloWorldPlusMIDlet method textEditorRequested()
+    handles  the creation of TextEditor object and the display transition
+from    the TextScreen  to the TextEditor screen. The textEditorRequested()
+gets   the current displayed  text from the TextScreen object.</td>
+           </tr>
+           <tr>
+           <td valign="top" align="center" width="10%"> 5</td>
+           <td width="80%">The textEditorRequested() method creates a TextEditor
+    object  if one has not already been created. This will be the case because
+    this method  is being called for the first time. The currently displayed
+   text is passed  to the constructor of TextEditor to set the opening text
+  of the editor.</td>
+           </tr>
+           <tr>
+           <td valign="top" align="center" width="10%"> 6</td>
+           <td width="80%">The TextEditor constructor creates an instance 
+of  the   TextField  class.</td>
+           </tr>
+           <tr>
+           <td valign="top" align="center" width="10%"> 7</td>
+           <td width="80%">The TextEditor constructor appends the instance
+ of  the   TextField class to itself. 						TextEditor extends the Form class 
+ which  is able to contain and display items derived from the Item class including
+   TextField.</td>
+           </tr>
+           <tr>
+           <td valign="top" align="center" width="10%"> 8</td>
+           <td width="80%">The TextEditor constructor adds a command object 
+ that   handles  "OK" key presses to the command handling framework.</td>
+           </tr>
+           <tr>
+           <td valign="top" align="center" width="10%"> 9</td>
+           <td width="80%">The TextEditor constructor adds a command object 
+ that   handles  "Cancel" key presses to the command handling framework.</td>
+           </tr>
+           <tr>
+           <td valign="top" align="center" width="10%"> 10</td>
+           <td width="80%">The TextEditor constructor calls setCommandListener()
+    to  register itself with the command framework as the command listener
+ and   will  be notified when a command is activated.</td>
+           </tr>
+           <tr>
+           <td valign="top" align="center" width="10%"> 11</td>
+           <td width="80%">The HelloWorldPlusMIDlet method textEditorRequested()
+    tells  the framework to display the new instance of the TextEditor class.</td>
+           </tr>
+                                                                        
+       
+      </tbody>                                                  
+    </table>
+           </blockquote>
+                                         
+  <h3> <a name="4.3">4.3. Subsequent Launching of the Edit Screen.</a> </h3>
+                                         
+  <blockquote>                                                   
+    <p>The user presses the "Edit Text" key to launch the TextEditor screen
+     again. This differs from the previous sequence in that there is no need
+   to  create a new TextEditor object because one already exists.</p>
+                                                             
+    <div align="center"> <img
+ alt="doc-files/hw_2nd_edit_key_sequence.jpg"
+ src="doc-files/hw_2nd_edit_key_sequence.jpg">
+           </div>
+                                                             
+    <table width="90%" border="0">
+           <tbody>
+                  <tr>
+           <th align="center" width="10%">Message</th>
+           <th align="left" width="80%">Description</th>
+           </tr>
+           <tr>
+           <td valign="top" align="center" width="10%"> 1</td>
+           <td width="80%">The user presses the "Edit Text" key, causing
+the   framework    to call the commandAction() method on the current command
+listener,   an instance   of TextScreen. The framework passes a reference
+to the command   object CMD_EDIT,   to the commandAction() method as a parameter.</td>
+           </tr>
+           <tr>
+           <td valign="top" align="center" width="10%"> 2</td>
+           <td width="80%">The commandAction() method 'identifies' the command
+   object   it receives as CMD_EDIT and calls the parent method textEditorRequested()
+     to initiate the launch of the TextEditor.</td>
+           </tr>
+           <tr>
+           <td valign="top" align="center" width="10%"> 3-4</td>
+           <td width="80%">The HelloWorldPlusMIDlet method textEditorRequested()
+    does  not need to create an instance of TextEditor because one already
+ exists.   It handles the transition from the TextScreen to the TextEditor
+ screen. The  textEditorRequested() gets the current displayed text from
+the  TextScreen   object.</td>
+           </tr>
+           <tr>
+           <td valign="top" align="center" width="10%"> 5-6</td>
+           <td width="80%">The textEditorRequested() method sets the initial
+  text   on the TextEditor object.</td>
+           </tr>
+           <tr>
+           <td valign="top" align="center" width="10%"> 7</td>
+           <td width="80%">The textEditorRequested() method tells the framework 
+   to  display the TextEditor object.</td>
+           </tr>
+                                                                        
+       
+      </tbody>                                                  
+    </table>
+           </blockquote>
+                                         
+  <h3> <a name="4.4">4.4. Closing the Edit Screen with the OK Key.</a> </h3>
+                                         
+  <blockquote>                                                   
+    <p>The user presses the "OK" key to dismiss the TextEditor screen and
+     accept the edited text.</p>
+                                                             
+    <div align="center"> <img alt="doc-files/hw_ok_sequence.jpg"
+ src="doc-files/hw_ok_sequence.jpg">
+           </div>
+                                                             
+    <table width="90%" border="0">
+           <tbody>
+                  <tr>
+           <th align="center" width="10%">Message</th>
+           <th align="left" width="80%">Description</th>
+           </tr>
+           <tr>
+           <td valign="top" align="center" width="10%"> 1</td>
+           <td width="80%">The user presses the "OK" key, causing the framework 
+   to  call the commandAction() method on the current command listener, an 
+ instance   of TextEditor. The framework passes a reference to the command 
+ object CMD_OK,   to the commandAction() method as a parameter.</td>
+           </tr>
+           <tr>
+           <td valign="top" align="center" width="10%"> 2</td>
+           <td width="80%">The commandAction() method 'identifies' the command
+   object   it receives as CMD_OK. It gets the current text from the TextField
+   object.</td>
+           </tr>
+           <tr>
+           <td valign="top" align="center" width="10%"> 3</td>
+           <td width="80%">The commandAction() method calls the parent method 
+  textEditorDone()   passing with it, the new text string.</td>
+           </tr>
+           <tr>
+           <td valign="top" align="center" width="10%"> 4-5</td>
+           <td width="80%">The HelloWorldPlusMIDlet method textEditorRequested()
+    sets  the text on the TextScreen object.</td>
+           </tr>
+           <tr>
+           <td valign="top" align="center" width="10%"> 6</td>
+           <td width="80%">The HelloWorldPlusMIDlet method textEditorRequested()
+    tells  the framework to display the updated instance of the TextScreen
+ class.</td>
+           </tr>
+                                                                        
+       
+      </tbody>                                                  
+    </table>
+           </blockquote>
+                                         
+  <h3> <a name="4.5">4.5. Closing the Edit Screen with the Cancel Key.</a> 
+       </h3>
+                                         
+  <blockquote>                                                   
+    <p>The user presses the "Cancel" key to dismiss the TextEditor screen
+     and reject the edited text.</p>
+                                                             
+    <div align="center"> <img alt="doc-files/hw_cancel_sequence.jpg"
+ src="doc-files/hw_cancel_sequence.jpg">
+           </div>
+                                                             
+    <table width="90%" border="0">
+           <tbody>
+                  <tr>
+           <th align="center" width="10%">Message</th>
+           <th align="left" width="80%">Description</th>
+           </tr>
+           <tr>
+           <td valign="top" align="center" width="10%"> 1</td>
+           <td width="80%">The user presses the "Cancel" key, causing the 
+framework     to call the commandAction() method on the current command listener, 
+an  instance   of TextEditor. The framework passes a reference to the command
+  object CMD_CANCEL,   to the commandAction() method as a parameter.</td>
+           </tr>
+           <tr>
+           <td valign="top" align="center" width="10%"> 2</td>
+           <td width="80%">The commandAction() method 'identifies' the command
+   object   it receives as CMD_CANCEL. It calls the parent method textEditorDone()
+   passing   with it, a null text string.</td>
+           </tr>
+           <tr>
+           <td valign="top" align="center" width="10%"> 3</td>
+           <td width="80%">The HelloWorldPlusMIDlet method textEditorDone() 
+ tells    the framework to display the unchanged instance of the TextScreen 
+ class.</td>
+           </tr>
+                                                                        
+       
+      </tbody>                                                  
+    </table>
+           </blockquote>
+                                         
+  <h3> <a name="4.6">4.6. Exiting the MIDlet with the Exit Key.</a> </h3>
+                                         
+  <blockquote>                                                   
+    <p>The user presses the "Exit" key shown by the TextScreen object to
+close the application.</p>
+                                                             
+    <div align="center"> <img alt="doc-files/hw_exit_sequence.jpg"
+ src="doc-files/hw_exit_sequence.jpg">
+           </div>
+                                                             
+    <table width="90%" border="0">
+           <tbody>
+                  <tr>
+           <th align="center" width="10%">Message</th>
+           <th align="left" width="80%">Description</th>
+           </tr>
+           <tr>
+           <td valign="top" align="center" width="10%"> 1</td>
+           <td width="80%">The user presses the "Exit" key, causing the framework 
+    to call the commandAction() method on the current command listener, an 
+ instance   of TextScreen. The framework passes a reference to the command 
+ object CMD_EXIT,   to the commandAction() method as a parameter.</td>
+           </tr>
+           <tr>
+           <td valign="top" align="center" width="10%"> 2</td>
+           <td width="80%">The commandAction() method 'identifies' the command
+   object   it receives as CMD_EXIT. It calls the parent method exitRequested().</td>
+           </tr>
+           <tr>
+           <td valign="top" align="center" width="10%"> 3-4</td>
+           <td width="80%">The HelloWorldPlusMIDlet method exitRequested()
+ calls    destroyApp()  and notifyDestroyed(). Calling destroyApp() 'invites'
+ the  MIDlet  to terminate  itself. In this case, the destroyApp() method
+is empty  because  the MIDlet  holds no resources to release. The notifyDestroyed()
+  tells the  scheduler that the MIDlet is now in the 'destroyed' state.</td>
+           </tr>
+                                                                        
+       
+      </tbody>                                                  
+    </table>
+           </blockquote>
+                                         
+  <h3> <a name="4.7">4.7. The MIDlet is terminated by the Framework.</a> 
+ </h3>
+                                         
+  <blockquote>                                                   
+    <p>The framework terminates the MIDlet by calling its destroyApp() method.</p>
+                                                             
+    <div align="center"> <img
+ alt="doc-files/hw_exit_by_framework_sequence.jpg"
+ src="doc-files/hw_exit_by_framework_sequence.jpg">
+           </div>
+                                                             
+    <table width="90%" border="0">
+           <tbody>
+                  <tr>
+           <th align="center" width="10%">Message</th>
+           <th align="left" width="80%">Description</th>
+           </tr>
+           <tr>
+           <td valign="top" align="center" width="10%"> 1</td>
+           <td width="80%">The framework calls the destroyApp() method on 
+ 							HelloWorldPlusMIDlet.     The framework passes the boolean value "true"
+to the destroyApp() method    as  							a parameter. This tells the MIDlet
+that the termination is unconditional     and it must release  							all
+ the resources it is holding and return.   In  this case, the destroyApp()
+ method is empty  							because the MIDlet   holds  no resources to release.
+ notifyDestroyed() does not need to be called    							because  the framework
+ already knows that destroyApp() has been called  on the MIDlet.</td>
+           </tr>
+                                                                        
+       
+      </tbody>                                                  
+    </table>
+           </blockquote>
+           </blockquote>
+                     
+<h3> <a name="5">5. Summary</a> </h3>
+                     
+<blockquote>                               
+  <p>This example has demonstrated the following:</p>
+                                         
+  <ul>
+           <li>	MIDlet lifecycle.</li>
+           <li>	Creating and handling commands.</li>
+           <li>	Creating UI's with high-level components and making those 
+UI's   visible.</li>
+           <li>	Managing transitions between different UI screens.</li>
+                                         
+  </ul>
+           </blockquote>
+           <br>
+          <br>
+         <br>
+        <br>
+       <br>
+      <br>
+     <br>
+    <br>
+   <br>
+  <br>
+ <br>
+</body>
+</html>

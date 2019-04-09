@@ -1,0 +1,200 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="vCard and vCalendar"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-BB222DC9-4F32-475E-A505-3C25965705B2"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> JavaTM Implementation Notes</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-BB222DC9-4F32-475E-A505-3C25965705B2"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-BB222DC9-4F32-475E-A505-3C25965705B2"><!----></a>vCard
+and vCalendar</h1>
+<p>The supported Versit personal information exchange formats are:</p>
+<ul>
+<li><p>vCard 2.1 for <code>Contacts</code></p></li>
+<li><p>vCalendar 1.0 for <code>Events</code> and <code>ToDos</code></p>
+</li>
+</ul>
+
+
+<p>The supported character encodings for the exchange formats are:</p>
+<ul>
+<li><p>UTF-8 (default)</p></li>
+<li><p>ISO-8859-1</p></li>
+</ul>
+<p>The S60 3rd Edition Feature Pack 1 implementation supports extended
+fields for <code>ContactList</code>. These fields have a specific
+vCard properties which extend the standard vCard property values. Extended
+fields and their properties are listed as follows:</p>
+<div class="tablenoborder"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-414C0710-7A19-4DCB-A929-E5E772231003"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-414C0710-7A19-4DCB-A929-E5E772231003" frame="border" border="1" rules="all"><caption><strong>Table 16: </strong>Extended fields
+and their properties</caption>
+
+
+
+<thead align="left">
+<tr class="title "><th valign="top" width="39.33333333333333%" id="d0e22534">
+<p>PIM API field </p>
+</th><th valign="top" width="28.666666666666668%" id="d0e22539">
+<p>Extended vCard property</p>
+</th><th valign="top" width="32%" id="d0e22544">
+<p>Note</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td valign="top" width="39.33333333333333%" headers="d0e22534 ">
+<p><code>Contact.NICKNAME</code></p>
+</td>
+<td valign="top" width="28.666666666666668%" headers="d0e22539 ">
+<p>X-NICKNAME</p>
+</td>
+<td valign="top" width="32%" headers="d0e22544 ">
+<p/>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="39.33333333333333%" headers="d0e22534 ">
+<p><code>Contact.CLASS</code></p>
+</td>
+<td valign="top" width="28.666666666666668%" headers="d0e22539 ">
+<p>X-CLASS</p>
+</td>
+<td valign="top" width="32%" headers="d0e22544 ">
+<p/>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="39.33333333333333%" headers="d0e22534 ">
+<p><code>SIP</code></p>
+</td>
+<td valign="top" width="28.666666666666668%" headers="d0e22539 ">
+<p>X-SIP</p>
+</td>
+<td valign="top" width="32%" headers="d0e22544 ">
+<p>No URI scheme included in value</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="39.33333333333333%" headers="d0e22534 ">
+<p><code>DTMF</code></p>
+</td>
+<td valign="top" width="28.666666666666668%" headers="d0e22539 ">
+<p>X-DTMF</p>
+</td>
+<td valign="top" width="32%" headers="d0e22544 ">
+<p/>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="39.33333333333333%" headers="d0e22534 ">
+<p><code>User ID</code></p>
+</td>
+<td valign="top" width="28.666666666666668%" headers="d0e22539 ">
+<p>X-WV-ID</p>
+</td>
+<td valign="top" width="32%" headers="d0e22544 ">
+<p>Wireless Village user ID</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="39.33333333333333%" headers="d0e22534 ">
+<p><code>Department</code></p>
+</td>
+<td valign="top" width="28.666666666666668%" headers="d0e22539 ">
+<p>ORG</p>
+</td>
+<td valign="top" width="32%" headers="d0e22544 ">
+<p>2<span>nd</span> element of the value array</p>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="39.33333333333333%" headers="d0e22534 ">
+<p><code>Children</code></p>
+</td>
+<td valign="top" width="28.666666666666668%" headers="d0e22539 ">
+<p>X-CHILDREN</p>
+</td>
+<td valign="top" width="32%" headers="d0e22544 ">
+<p/>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="39.33333333333333%" headers="d0e22534 ">
+<p><code>Assistant name</code></p>
+</td>
+<td valign="top" width="28.666666666666668%" headers="d0e22539 ">
+<p>X-ASSISTANT</p>
+</td>
+<td valign="top" width="32%" headers="d0e22544 ">
+<p/>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="39.33333333333333%" headers="d0e22534 ">
+<p><code>Assistant phone</code></p>
+</td>
+<td valign="top" width="28.666666666666668%" headers="d0e22539 ">
+<p>X-ASSISTANT-TEL</p>
+</td>
+<td valign="top" width="32%" headers="d0e22544 ">
+<p><code>Contact.TEL</code> field attribute but converted as a
+separate property in vCards</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="39.33333333333333%" headers="d0e22534 ">
+<p><code>Spouse</code> </p>
+</td>
+<td valign="top" width="28.666666666666668%" headers="d0e22539 ">
+<p>X-SPOUSE</p>
+</td>
+<td valign="top" width="32%" headers="d0e22544 ">
+<p/>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="39.33333333333333%" headers="d0e22534 ">
+<p><code>VOIP</code></p>
+</td>
+<td valign="top" width="28.666666666666668%" headers="d0e22539 ">
+<p>X-SIP;VOIP</p>
+</td>
+<td valign="top" width="32%" headers="d0e22544 ">
+<p>SIP field with VOIP parameter</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="39.33333333333333%" headers="d0e22534 ">
+<p><code>Last name reading</code></p>
+</td>
+<td valign="top" width="28.666666666666668%" headers="d0e22539 ">
+<p>SOUND;X-IRMC-N</p>
+</td>
+<td valign="top" width="32%" headers="d0e22544 ">
+<p>1<span>st</span> element of the value array</p>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="39.33333333333333%" headers="d0e22534 ">
+<p><code>First name reading</code></p>
+</td>
+<td valign="top" width="28.666666666666668%" headers="d0e22539 ">
+<p>SOUND;X-IRMC-N</p>
+</td>
+<td valign="top" width="32%" headers="d0e22544 ">
+<p>2<span>nd</span> element of the value array</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="39.33333333333333%" headers="d0e22534 ">
+<p><code>Video number</code></p>
+</td>
+<td valign="top" width="28.666666666666668%" headers="d0e22539 ">
+<p>TEL;X-VIDEO_CALL</p>
+<p>TEL;VIDEO</p>
+</td>
+<td valign="top" width="32%" headers="d0e22544 ">
+<p><code>Contact.TEL</code> field attribute. Converted using both
+property parameters to maintain data compatibility.</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<div class="note"><p><strong class="note_title">Note: </strong>S60 Phonebook supports PTT (Push-To-Talk) and Share View fields. These
+fields are not supported by PIM API and are not converted in vCard conversion.</p></div>
+<p/>
+</div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

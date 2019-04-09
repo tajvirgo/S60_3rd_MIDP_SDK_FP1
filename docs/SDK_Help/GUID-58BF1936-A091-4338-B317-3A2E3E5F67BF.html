@@ -1,0 +1,99 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Using own (MIDlet specific) registration context"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-58BF1936-A091-4338-B317-3A2E3E5F67BF"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> JavaTM Implementation Notes</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-58BF1936-A091-4338-B317-3A2E3E5F67BF"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-58BF1936-A091-4338-B317-3A2E3E5F67BF"><!----></a>Using
+own (MIDlet specific) registration context</h1>
+<p>This section describes how a MIDlet can manage an own registration and
+how the own registration can be used as the registration context of other
+requests. See the example code at end of this chapter. </p>
+<p><span>Creation of own registration</span></p>
+<p>A MIDlet has to perform the following steps before sending a REGISTER
+request:</p>
+<ul>
+<li><p>A MIDlet has to pass the URI of the registrar server as an
+argument to the <code>Connector.open()</code> operation.</p></li>
+<li><p>A MIDlet has to set ‘To’, ‘From’, and ‘Contact’ headers to
+the REGISTER request in the case where the MIDlet wants to register a user
+to the registrar server. The REGISTER request is interpreted to “fetch registrations”
+request if the MIDlet does not set the ‘Contact’ header to the REGISTER request.</p>
+</li>
+<li><p>A MIDlet has to pass a <code>SipConnectionNotifier</code> object
+as an argument to the <code>initRequest()</code> operation. The S60
+implementation stores all necessary registration context information to the <code>SipConnectionNotifier</code> object
+in the case that this own registration is used as the registration context
+with other requests.</p></li>
+</ul>
+<p>More notes for registration:</p>
+<ul>
+<li><p>The user is always prompted for an access point in the case
+of own registration.</p></li>
+<li><p><code>IOException</code> is thrown if the ‘To’ header
+of the <code>REGISTER</code> request is equal to the value of the
+‘To’ header of any existing profile. ‘To’ header of the profile is defined
+in the Public username field in the SIP Settings Tool.</p></li>
+</ul>
+<p><span>Own registration as registration context of other request</span></p>
+<p>A MIDlet passes a <code>SipConnectionNotifier</code> object
+as the second argument to the <code>initRequest()</code> operation,
+when it wants to use an own registration as the registration context of other
+requests. The MIDlet does not set the ‘From’ header to the request in this
+situation. Setting a ‘Contact’ is optional in the same way as described in
+section <a href="GUID-3F0FE319-F852-4337-BD1D-138228328745.html#GUID-3F0FE319-F852-4337-BD1D-138228328745">Selecting registration
+context (from SIP Settings Tool)</a>. </p>
+<p>The S60 implementation searches the ‘From’ and ‘Contact’ headers to
+see whether these headers match the corresponding headers of any REGISTER
+request done by the MIDlet. If the ‘Contact’ header has no semantics in the
+request (e.g. MESSAGE), then only the ‘From’ header is used to check whether
+it matches the ‘To’ header of any of the own registrations.</p>
+<p><span>De-registering own registration</span></p>
+<p>A <code>SipClientConnection</code> object for de-registration
+is created in the same way as a <code>SipClientConnection</code> object
+for the original registration, i.e. using <code>Connector.open()</code> operation.
+The ‘To’, ‘From’ and ‘Contact’ headers of de-registration request have to
+be equal to the original registration. The REGISTER request is handled as
+the original registration if the ‘To’, ‘From’ and ‘Contact’ headers do not
+match any existing registration objects. </p>
+<p>De-registration can also be done via the <code>SipRefreshHelper</code> interface.</p>
+<p>Example in the code level:</p>
+<pre class="codeblock" id="GUID-072EF4A3-8FD0-4249-92CD-7834AE090575"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-072EF4A3-8FD0-4249-92CD-7834AE090575"><!----></a>//Creation of own registration.
+SipConnectionNotifier notifier = ...;
+SipClientConnection  reg = ( SipClientConnection ) Connector.open( "sip:myRegistrar.com:5070" );
+reg.initRequest( "REGISTER", notifier );
+String contactHdrValue = "sip: UserA@" + notifier.getLocalAddress() + ":" 
+                          + notifier.getLocalPort() + ";expires=3000";
+reg.setHeader( "Contact", contactHdrValue );
+reg.setHeader( "To", "sip:UserA@myRegistrar.com:5070" );
+reg.setHeader( "From", "sip:UserA@myRegistrar.com:5070" );
+reg.send();
+//Handling of the response has been left out from this example.
+
+//INVITE request is sent so that own registration is used as a "registration context" 
+//of the INVITE request.
+SipClientConnection  scc = ( SipClientConnection )
+    Connector.open("sip:UserB@target.com:5070");
+scc.initRequest( "INVITE", notifier );
+scc.setHeader( "Accept-Contact", "*;type=\"application/test\"" );  
+scc.send();
+//Handling rest of the dialog has been left out from this example.
+//Sending de-register request for own registration.
+SipClientConnection  dereg = ( SipClientConnection ) Connector.open( "sip:myRegistrar.com:5070" );
+dereg.initRequest( "REGISTER", null ); 
+dereg.setHeader( "Contact", contactHdrValue );
+dereg.setHeader( "To", "sip:UserA@myRegistrar.com:5070" );
+dereg.setHeader( "From", "sip:UserA@myRegistrar.com:5070" );
+dereg.setHeader( "Expires", "0" );
+dereg.send();
+//Handling of the response has been left out from this example.
+</pre>
+<p>The example code above generates the following INVITE request:</p>
+<pre class="codeblock" id="GUID-817D3C4F-60AD-4670-B4DC-C48EF332491C"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-817D3C4F-60AD-4670-B4DC-C48EF332491C"><!----></a>INVITE sip:UserB@target.com:5070 SIP/2.0
+Via: SIP/2.0/UDP 174.22.99.137:5060;branch=z9hG4bKlqh5ad26mthc7hde0klaqpk
+From: sip: UserA@myRegistrar.com;tag=j8sqa8eialhc7bd2f4nn
+To: sip:UserB@target.com
+Contact: sip:UserA@174.22.99.137:5060;expires=3000
+Accept-Contact: *;type="application/test"
+CSeq: 1527 INVITE
+Call-ID:  S3Zld0ZUoIf950kGHsrfGO5fODYJqE
+Max-Forwards: 70
+</pre>
+</div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

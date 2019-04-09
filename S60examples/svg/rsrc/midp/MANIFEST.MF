@@ -1,0 +1,8 @@
+MIDlet-1: HelloWorld, , com.nokia.midp.examples.svg.HelloWorldMidlet
+MIDlet-2: LoadStatic, , com.nokia.midp.examples.svg.LoadStaticMidlet
+MIDlet-3: SvgAnimator, , com.nokia.midp.examples.svg.SvgAnimatorMidlet
+MIDlet-Name: SVG Example MIDlets
+MicroEdition-Configuration: CLDC-1.1
+MicroEdition-Profile: MIDP-2.0
+MIDlet-Vendor: Nokia
+MIDlet-Version: 1.0

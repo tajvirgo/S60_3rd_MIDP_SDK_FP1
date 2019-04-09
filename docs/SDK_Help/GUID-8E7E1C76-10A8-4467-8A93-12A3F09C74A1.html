@@ -1,0 +1,165 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Runtime environment notes"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-8E7E1C76-10A8-4467-8A93-12A3F09C74A1"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> JavaTM Implementation Notes</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-8E7E1C76-10A8-4467-8A93-12A3F09C74A1"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-8E7E1C76-10A8-4467-8A93-12A3F09C74A1"><!----></a>Runtime
+environment notes</h1>
+<div><h3>Localization and direct access directories</h3><p>There is no user interface (UI) and no localized texts. <a href="http://www.jcp.org/en/jsr/detail?id=179" target="_blank">Location
+API for J2ME (JSR-179)</a> does not directly access any directories.</p></div>
+<div><h3>Security</h3><p>The Location API implementation uses MIDP 2.0 security. The permissions
+defined in the Location API are grouped to the following Function groups:</p><div class="tablenoborder"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-D4E76B30-7E4F-43DE-B26F-812D02BA2E3B"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-D4E76B30-7E4F-43DE-B26F-812D02BA2E3B" frame="border" border="1" rules="all"><caption><strong>Table 25: </strong>The permissions
+defined in the Location API</caption>
+
+
+<thead align="left">
+<tr class="title "><th valign="top" width="67.5%" id="d0e27138">
+<p>Permission name</p>
+</th><th valign="top" width="32.5%" id="d0e27143">
+<p>Function Group</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td valign="top" width="67.5%" headers="d0e27138 ">
+<p><code>javax.microedition.location.Location</code></p>
+</td>
+<td valign="top" width="32.5%" headers="d0e27143 ">
+<p>Location</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="67.5%" headers="d0e27138 ">
+<p><code>javax.microedition.location.Orientation</code></p>
+</td>
+<td valign="top" width="32.5%" headers="d0e27143 ">
+<p>(no group)</p>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="67.5%" headers="d0e27138 ">
+<p><code>javax.microedition.location.ProximityListener</code></p>
+</td>
+<td valign="top" width="32.5%" headers="d0e27143 ">
+<p>Location</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="67.5%" headers="d0e27138 ">
+<p><code>javax.microedition.location.LandmarkStore.read</code></p>
+</td>
+<td valign="top" width="32.5%" headers="d0e27143 ">
+<p>Landmark </p>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="67.5%" headers="d0e27138 ">
+<p><code>javax.microedition.location.LandmarkStore.write</code></p>
+</td>
+<td valign="top" width="32.5%" headers="d0e27143 ">
+<p>Landmark </p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="67.5%" headers="d0e27138 ">
+<p><code>javax.microedition.location.LandmarkStore.category</code></p>
+</td>
+<td valign="top" width="32.5%" headers="d0e27143 ">
+<p>Landmark </p>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="67.5%" headers="d0e27138 ">
+<p><code>javax.microedition.location.LandmarkStore.management</code></p>
+</td>
+<td valign="top" width="32.5%" headers="d0e27143 ">
+<p>Landmark </p>
+</td>
+</tr>
+</tbody>
+</table></div><p>The policy for these function groups for the different domains is defined
+below. The table below contains all the allowed settings for the function
+groups. </p><div class="tablenoborder"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-36FDEF42-78D7-498A-8B29-702B97043339"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-36FDEF42-78D7-498A-8B29-702B97043339" frame="border" border="1" rules="all"><caption><strong>Table 26: </strong>User settings
+for Location and Landmark function groups</caption>
+
+
+
+
+<thead align="left">
+<tr class="title "><th valign="top" width="17.764471057884233%" id="d0e27289">
+<p>Function group</p>
+</th><th valign="top" width="17.365269461077844%" id="d0e27294">
+<p>Manufacturer domain</p>
+</th><th valign="top" width="20.558882235528944%" id="d0e27299">
+<p>Operator domain</p>
+</th><th valign="top" width="17.365269461077844%" id="d0e27304">
+<p>Trusted 3rd partydomain</p>
+</th><th valign="top" width="26.94610778443114%" id="d0e27309">
+<p>Untrusted domain</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td valign="top" width="17.764471057884233%" headers="d0e27289 ">
+<p>Location</p>
+</td>
+<td valign="top" width="17.365269461077844%" headers="d0e27294 ">
+<p>Default setting: Blanket</p>
+<p>Settings: Blanket</p>
+<p>Orientation: Not supported</p>
+</td>
+<td valign="top" width="20.558882235528944%" headers="d0e27299 ">
+<p>Default setting: Blanket</p>
+<p>Settings: Blanket</p>
+<p>Orientation: Not supported</p>
+</td>
+<td valign="top" width="17.365269461077844%" headers="d0e27304 ">
+<p>Default setting: Session</p>
+<p>Settings: Blanket, Session, Oneshot, No</p>
+<p>Orientation: Not supported</p>
+</td>
+<td valign="top" width="26.94610778443114%" headers="d0e27309 ">
+<p>Default setting: Oneshot</p>
+<p>Settings: Session, Oneshot, No</p>
+<p>Orientation: Not supported</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="17.764471057884233%" headers="d0e27289 ">
+<p>Landmark</p>
+</td>
+<td valign="top" width="17.365269461077844%" headers="d0e27294 ">
+<p>Default setting: Blanket</p>
+<p>Settings: Blanket</p>
+<p>Orientation: Not supported</p>
+</td>
+<td valign="top" width="20.558882235528944%" headers="d0e27299 ">
+<p>Default setting: Blanket</p>
+<p>Settings: Blanket</p>
+<p>Orientation: Not supported</p>
+</td>
+<td valign="top" width="17.365269461077844%" headers="d0e27304 ">
+<p>Default setting: Session</p>
+<p>Settings: Blanket, Session, No</p>
+<p>Orientation: Not supported</p>
+</td>
+<td valign="top" width="26.94610778443114%" headers="d0e27309 ">
+<p>Default setting: Session</p>
+<p>Settings: Session, No</p>
+<p>Orientation: Not supported</p>
+</td>
+</tr>
+</tbody>
+</table></div><p>Explanations for the table values are as follows:</p><ul>
+<li><p>“Blanket” is valid for every invocation of an API by a MIDlet
+suite until it is uninstalled or the permission is changed by the user.</p>
+</li>
+<li><p>“Session” is valid from the invocation of a MIDlet suite
+until it terminates. “Session” mode MUST prompt the user on or before the
+first invocation of the API or function, which is protected. When the user
+re-invokes the MIDlet suite the prompt MUST be repeated.</p></li>
+<li><p>“No” means that the MIDlet can’t access the protected function
+at all.</p></li>
+<li><p>"Oneshot" is valid for a single invocation of an API by a
+MIDlet suite and must prompt the user every time when the API or a protected
+function is invocated.</p></li>
+</ul></div>
+</div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

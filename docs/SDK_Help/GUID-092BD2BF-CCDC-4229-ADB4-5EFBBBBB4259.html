@@ -1,0 +1,64 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Additional notes"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-092BD2BF-CCDC-4229-ADB4-5EFBBBBB4259"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> JavaTM Implementation Notes</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-092BD2BF-CCDC-4229-ADB4-5EFBBBBB4259"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-092BD2BF-CCDC-4229-ADB4-5EFBBBBB4259"><!----></a>Additional
+notes</h1>
+<div><h3>LocationProvider</h3><p>The <code>LocationProvider</code> implementation uses the native
+Location acquisition API. </p><p>The default <code>timeout</code> for <code>getLocation</code> is
+set to: </p><ul>
+<li><p>2 * "average time to first fix", timeout &gt;= 15s.</p></li>
+</ul><p>The “average time to first fix” value is retrieved from the native API
+for the used location technology.  </p><p>The default values for <code>setLocationListener</code> are
+set to: </p><ul>
+<li><p>interval = 1.25 * TTF (if terminalbased), 4 * TTF (if networkbased) </p>
+</li>
+<li><p>timeout = MIN(2 * TTF, interval)</p></li>
+<li><p>maxAge = 0.5 * interval</p></li>
+</ul><p>The “average time to next fix” (Time-to-Fix, TTF) value
+is retrieved from the native API for the used location technology. </p><p>State changes to and from <code>AVAILABLE</code> and <code>TEMPORARILY_UNAVAILABLE</code> are
+delayed to reduce the number of changes:</p><ul>
+<li><p>From AVAILABLE to TEMPORARILY_UNAVAILABLE = 5 seconds</p>
+</li>
+<li><p>From TEMPORARILY_UNAVAILABLE to AVAILABLE = 2 seconds</p>
+</li>
+</ul></div>
+<div><h3>LandmarkStore</h3><p>The <code>LandmarkStore</code> implementation uses the native
+Landmark APIs. Stores are always created on the default drive. The default
+drive is set by the native API and is the phone’s internal drive, which is
+non-removable. Store names are case insensitive. </p><p>Special syntax “store name (x:)”, where x is a drive letter can be used,
+for example:</p><pre class="codeblock" id="GUID-ED2C0A51-FFCD-4369-865E-5C1B171DAE04"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-ED2C0A51-FFCD-4369-865E-5C1B171DAE04"><!----></a>LandmarkStore.getInstance("My store (c:)")</pre><p>This syntax is used in <code>listLandmarkStores</code> for stores
+that are found on other drives than the default drive and is also supported
+in <code>getInstance</code> and <code>deleteLandmarkStore</code>. </p><p>Maximum string lengths:</p><ul>
+<li><p>Landmark name = 255</p></li>
+<li><p>Category name = 124</p></li>
+<li><p>Description = 4096</p></li>
+</ul><p>For <code>createLandmarkStore</code> the following apply:</p><ul>
+<li><p>Drive cannot be specified using “store name (x:)”, landmark
+stores are always created on the default drive.</p></li>
+<li><p>Case is preserved for store names</p></li>
+<li><p><code>IllegalArgumentException</code> is thrown if
+bad characters are used in the name (e.g. ‘:’)</p></li>
+<li><p>Created stores have predefined categories. This is done by
+the native implementation and it also decides the specific categories created.</p>
+</li>
+</ul><p>For <code>getLandmarks</code> the following apply:</p><ul>
+<li><p>Special search features:</p>
+<ul>
+<li><p>* and ? are wildcards</p></li>
+<li><p>Empty string “” as category name finds uncategorized landmarks</p>
+</li>
+</ul>
+</li>
+<li><p>Examples:</p></li>
+<li><p><code>getLandmarks("", "f*Bar")</code> will match
+all uncategorized landmarks with names like “fooBar”, “foooBar”, “fBar” etc.
+(* matches 0 or more characters).</p></li>
+<li><p><code>getLandmarks("fooBa?", null)</code> will match
+all landmarks in categories “fooBar”, “fooBaz” etc. (? matches exactly 1 character).</p>
+</li>
+</ul></div>
+<div><h3>AddressInfo</h3><p>The maximum string length for the address fields is 255.</p></div>
+<div><h3>Coordinates</h3><p>The <code>distance</code> and <code>azimuthTo</code> methods
+of the <code>Coordinates</code> class call the native Location API.
+This means that the algorithm used is the same as in the native API.</p></div>
+</div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

@@ -1,0 +1,10 @@
+MIDlet-1: btl2capEcho, /logo.png, com.nokia.midp.examples.btl2capecho.MIDletApplication
+MIDlet-Name: btl2capEcho
+MIDlet-Jar-Size: 28792
+MIDlet-Jar-URL: btl2capEcho.jar
+MIDlet-Version: 1.0
+MicroEdition-Profile: MIDP-1.0
+MicroEdition-Configuration: CLDC-1.1
+MIDlet-Vendor: Nokia
+MIDlet-Description: JSR-82 Bluetooth MIDlet example using L2CAP
+MIDlet-Icon: /logo.png

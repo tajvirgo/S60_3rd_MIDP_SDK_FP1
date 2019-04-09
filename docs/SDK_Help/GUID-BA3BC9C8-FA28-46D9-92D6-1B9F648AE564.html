@@ -1,0 +1,40 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Simulation PSY configuration"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-BA3BC9C8-FA28-46D9-92D6-1B9F648AE564"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> Tools and Utilities</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-BA3BC9C8-FA28-46D9-92D6-1B9F648AE564"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-BA3BC9C8-FA28-46D9-92D6-1B9F648AE564"><!----></a>Simulation PSY configuration</h1>
+<p>The Simulation PSY <span>Configuration</span> dialog consists
+of two <span>Options</span> menu items, as described in the
+following sub-sections.</p>
+<p><span>Select Configuration File</span></p>
+<p>This enables the user to select the data file to be used when giving
+the simulated location information.</p>
+<p>Configuring the data file:</p>
+<ol>
+<li id="GUID-FEFE5604-6C3D-4D69-B1A4-5DB9F6804F86"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-FEFE5604-6C3D-4D69-B1A4-5DB9F6804F86"><!----></a><p>Select this
+command from the <span>Options</span> menu.</p><p> A <span>Select
+file</span> dialog pops up.</p></li>
+<li id="GUID-1C58E71D-4776-4ADF-A915-5B0A2D2220E1"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-1C58E71D-4776-4ADF-A915-5B0A2D2220E1"><!----></a><p>Choose one
+file and press <span>Select</span>.</p><p>The value will be shown in the edit
+box in the form.</p>
+<div class="figure" id="GUID-1028E80E-27F3-49D2-9BBE-3ECAC1D1CAFC"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-1028E80E-27F3-49D2-9BBE-3ECAC1D1CAFC"><!----></a><img src="GUID-2DC2C688-4D93-4BB5-8BDB-9B0E9E9AA9DB_d0e16232_href.png" alt=""/><p class="figure-title"><strong>Figure 90: </strong>Select Configuration file</p></div>
+</li>
+</ol>
+<p><span>Get Current Location</span></p>
+<p>This option gives the simulated location using the selected data file.
+This gives the user a way of verifying that the correct data file is selected.</p>
+<p>Select the <span>Get Location</span> menu item from the <span>Options</span> menu
+in the <span>Configuration</span> dialog. If the location information
+is available the simulated latitude, longitude, altitude, horizontal accuracy
+and vertical accuracy are displayed in a list dialog in the specified order.</p>
+<div class="figure" id="GUID-0F9558BA-FE38-41BB-9F73-E2FE375F315F"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-0F9558BA-FE38-41BB-9F73-E2FE375F315F"><!----></a><img src="GUID-26EA41A4-1853-43F5-993F-A45C628C445E_d0e16258_href.png" alt=""/><p class="figure-title"><strong>Figure 91: </strong>Get current location</p></div>
+<p>In case of error, an error note with the error code will be displayed.</p>
+<div class="figure" id="GUID-7C65F60D-9D94-4737-8107-A08147FDFB15"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-7C65F60D-9D94-4737-8107-A08147FDFB15"><!----></a><img src="GUID-5103EC67-9D59-4F52-98FD-DEA3D629EDEF_d0e16266_href.png" alt=""/><p class="figure-title"><strong>Figure 92: </strong>Error note</p></div>
+<p>Simulation PSY Configurator always uses Simulation PSY to get the location
+information. Therefore the values are simulated values and not the actual
+location.</p>
+<div class="note"><p><strong class="note_title">Note: </strong>After each location request has been completed Simulation
+PSY session is closed. Every time the user makes a request, Simulation PSY
+starts the simulation from the beginning. The end user will get the same location
+information even if a simulated movement file is used, unless the data file
+specifies random behavior.</p></div>
+</div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

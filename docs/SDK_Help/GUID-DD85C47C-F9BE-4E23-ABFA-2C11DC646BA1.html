@@ -1,0 +1,39 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobiletask"/><meta name="DC.Title" content="Configuring TCP/IP support"/><meta name="abstract" content="This section describes how to configure TCP/IP connectivity for the S60 SDK using the Preferences window. Once you have completed the configuration tasks, you can test the connectivity as described in Using TCP/IP Support with the emulator."/><meta name="description" content="This section describes how to configure TCP/IP connectivity for the S60 SDK using the Preferences window. Once you have completed the configuration tasks, you can test the connectivity as described in Using TCP/IP Support with the emulator."/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-DD85C47C-F9BE-4E23-ABFA-2C11DC646BA1"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> Tools and Utilities</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-DD85C47C-F9BE-4E23-ABFA-2C11DC646BA1"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-DD85C47C-F9BE-4E23-ABFA-2C11DC646BA1"><!----></a>Configuring TCP/IP support</h1><div><h3>Prerequisites</h3><p>Please note the following prerequisites in order to be able to make
+a successful network connection with the S60 SDK:</p><ul>
+<li><p>You have a PC with Windows™ 2000 or Windows™ XP operating
+system.</p></li>
+<li><p>A working ethernet network connection is in place.</p>
+</li>
+<li><p>S60 SDK has been successfully installed on your PC.</p>
+</li>
+<li><p>The emulator is up and running. For instruction on launching
+the emulator, please refer to the Starting the Emulator section. </p></li>
+</ul><p>The HTTP proxy can be selected in the <a href="GUID-0CBF3391-2CDB-45FE-8B95-4F3553A382FE.html#GUID-0CBF3391-2CDB-45FE-8B95-4F3553A382FE">Network
+tab</a> of the <a href="GUID-D61FEABF-825E-4F0B-A9A1-410290998C19.html#GUID-D61FEABF-825E-4F0B-A9A1-410290998C19">Preferences
+window</a></p></div>
+<h3>Steps</h3><ol id="GUID-2B17B8C4-88DB-402C-A882-6F5F17BC6F0D"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-2B17B8C4-88DB-402C-A882-6F5F17BC6F0D"><!----></a>
+<li id="GUID-75ECD968-C9A2-4BA8-AA69-A0E76A2B392F"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-75ECD968-C9A2-4BA8-AA69-A0E76A2B392F"><!----></a><span>Open the <a href="GUID-0CBF3391-2CDB-45FE-8B95-4F3553A382FE.html#GUID-0CBF3391-2CDB-45FE-8B95-4F3553A382FE">Network
+tab</a> of the <a href="GUID-D61FEABF-825E-4F0B-A9A1-410290998C19.html#GUID-D61FEABF-825E-4F0B-A9A1-410290998C19">Preferences
+window</a>.</span>
+
+</li>
+<li id="GUID-7CB6EFD0-4B72-4866-87A3-549017770E7B"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-7CB6EFD0-4B72-4866-87A3-549017770E7B"><!----></a><span>Select the <span>Use HTTP proxy</span> checkbox and enter the
+needed information in the <span>Proxy server name</span> and <span>Proxy server port</span> fields.</span>
+
+<div class="figure" id="GUID-677691F1-3DA2-4EE4-AFBD-13BD263B01C6"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-677691F1-3DA2-4EE4-AFBD-13BD263B01C6"><!----></a><img src="GUID-C8CEA500-30E2-4098-A5F1-BA7ADE563699_d0e8841_href.png" alt=""/><p class="figure-title"><strong>Figure 36: </strong>HTTP proxy settings</p></div>
+<div class="note"><p><strong class="note_title">Note: </strong>Your application has to support connections via proxy. These proxy settings
+constitute simply a centralized storage facility for this information.</p></div>
+
+</li>
+<li id="GUID-BEE9BFDE-3915-4198-A71E-BBDC9E1DC45A"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-BEE9BFDE-3915-4198-A71E-BBDC9E1DC45A"><!----></a><span>Click <span>OK</span> to accept the changes.</span></li>
+<li id="GUID-9C303859-1785-4AAE-A81F-DD1B28ED4BB8"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-9C303859-1785-4AAE-A81F-DD1B28ED4BB8"><!----></a><span>Exit the <a href="GUID-D61FEABF-825E-4F0B-A9A1-410290998C19.html#GUID-D61FEABF-825E-4F0B-A9A1-410290998C19">Preferences
+window</a>.</span>
+
+</li>
+</ol>
+<div><h3>Results</h3><p>The Ethernet connection is now configured for the emulator using the
+specified HTTP proxy. To test that the connection works, follow instructions
+provided in Using TCP/IP Support with the emulator.</p></div></div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

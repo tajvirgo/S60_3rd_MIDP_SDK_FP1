@@ -1,0 +1,34 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="ReverbControl"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-48F24E3F-2523-4B3B-AF8C-D6A5CE1B420F"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> JavaTM Implementation Notes</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-48F24E3F-2523-4B3B-AF8C-D6A5CE1B420F"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-48F24E3F-2523-4B3B-AF8C-D6A5CE1B420F"><!----></a>ReverbControl</h1>
+<p>The <code>ReverbControl</code> value reverb level does not map
+straight from JSR-234 side to S60 Effect API. As the reverb level is just
+a single value in JSR-234, the Effect API uses three different values (reverb
+level for late reverberation, reflections level for early reflections and
+room level for overall reverberation level) to define the same thing. That
+is, Effect API (which uses MMA's IA-SIG 2.0's definitions) has more fine-grain
+control over reverb than JSR-234.</p>
+<p>JSR-234's definition is closest to the definition of reflections level
+in the Effect API. Therefore, the mapping of room level is currently done
+using the following algorithm:</p>
+<pre class="codeblock" id="GUID-C9F8388A-8964-44C7-B565-A4FECBA18961"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-C9F8388A-8964-44C7-B565-A4FECBA18961"><!----></a>
+int getReverbLevel()
+       {
+       return ( reflectionsLevel + roomLevel );
+       }
+
+int setReverbLevel( int newLevel )
+       {
+           if ( newLevel &gt; 0 )
+                  {
+                  throw new IllegalArgumentException("Too high reverb level."); 
+                  }
+           int tempChange = newLevel - ( reflectionsLevel + roomLevel );
+           reflectionsLevel = newLevel - roomLevel;
+           reverbLevel = reverbLevel + tempChange;
+           return newLevel;
+       }
+
+</pre>
+</div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

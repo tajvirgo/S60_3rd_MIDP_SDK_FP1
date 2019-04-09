@@ -1,0 +1,77 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="The testing process"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-6FCF24FD-AEE3-4B1F-B3A2-46514C8B4608"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> S60 3rd Edition SDK for Symbian OS Supporting Feature Pack 1, for MIDP</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-6FCF24FD-AEE3-4B1F-B3A2-46514C8B4608"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-6FCF24FD-AEE3-4B1F-B3A2-46514C8B4608"><!----></a>The testing
+process</h1>
+<p>Whether you are developing an enterprise-wide application or a simple
+cell phone game, the cycle of debugging and testing proceeds similarly — through
+successive rounds of debugging and testing.</p>
+<ul>
+<li><p><span>Debugging</span></p>
+
+<p>Wireless consumers tend to be less technically oriented than desktop
+computer users and will be less tolerant when programs fail to work properly.
+Thorough debugging and testing of wireless applications is extremely important.</p>
+<p>A debugger systematically breaks down your code into distinct sections,
+monitors the activity, and verifies that the code executes the way it was
+intended. When the debugger finds an error, you correct the problem in your
+source code, recompile, and resume testing.</p>
+
+</li>
+<li><p><span>Testing</span></p>
+
+<p>Before testing on actual devices, you can test on an emulator integrated
+with your development environment. By testing your MIDlets on multiple emulators,
+you can get an instant sense of how your application will look and function
+on the actual devices. Ultimately, of course, your wireless application should
+be tested on the actual device(s) it will run on.</p>
+
+</li>
+<li><p><span>Coding Errors</span></p>
+
+<p>Three broad categories of errors can occur in your code: compile errors,
+runtime errors, and logic errors.</p>
+<ul>
+<li><p>Compile errors appear at the time your source code is compiled.
+Syntax errors commonly appear at compile time.</p></li>
+<li><p>A runtime error causes the program to fail or terminate prematurely.
+Runtime errors result from problems that will not occur until the code is
+being executed. For example, trying to open a file that does not exist, or
+attempting to divide by zero, are errors that cannot be caught at compile
+time.</p><p>In a typical development environment, when your program
+throws an exception, a debugger will print a stack trace in the Console output
+view, input view, and error view. You then double-click a line of the stack
+trace to go directly to the line of source code listed in the trace. As execution
+proceeds, you monitor the program's behavior step by step, until the error
+is produced or the program fails. At that point, you fix the bugs, recompile
+the program, and resume testing.</p></li>
+<li><p>A logic error is a non-fatal problem with the design or implementation
+of your application. Although the program statements may not throw exceptions,
+they do not produce the results you intended when you wrote the code. For
+example, logic errors can occur when variables contain incorrect values, when
+graphic images don't look right, or when output is simply incorrect. Memory
+leaks and attempting to insert more elements into an array than were allocated
+to the array can also result from logic errors.</p><p>A debugger can
+help locate logic errors by allowing you to monitor the values of program
+variables and data objects as the program executes. Modifying data values
+during a debugging session is a good way to test hypothetical bug fixes.</p>
+</li>
+</ul>
+
+</li>
+</ul>
+<div class="note"><p><strong class="note_title">Note: </strong>Enabling optional compiler warnings in your IDE allows you to make full
+use of its debugging features. However, this can considerably slow down the
+process. In Eclipse, compiler warnings can be turned on or off by selecting
+in the Eclipse menu bar <span>Run &gt; Debug &gt; Nokia SDK Plug-in</span> and then choosing
+the appropriate warnings.</p></div>
+<div><h3>Common testing programs</h3><p>The Java Verified testing program is an industry-wide initiative for
+testing J2ME™ applications. In the program, applications are tested against
+Unified Testing Criteria, which is developed and maintained by Unified Testing
+Initiative™ launched by Motorola, Nokia, Siemens, Sony Ericsson, and Sun Microsystems.
+It is recommendable to use Unified Testing Criteria (UTC) and also implement
+its requirements to the applications. For more information about Java Verified,
+see <a href="http://www.javaverified.com" target="_blank">The Java Verified Program
+Web site</a>.</p></div>
+
+</div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

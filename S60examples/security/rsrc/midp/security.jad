@@ -1,0 +1,8 @@
+MIDlet-1: SATSAMIDlet, , com.nokia.midp.examples.security.satsa.SATSAMIDlet
+MIDlet-Jar-Size: @@@
+MIDlet-Jar-URL: security.jar
+MIDlet-Name:  SATSAMIDlet
+MicroEdition-Configuration: CLDC-1.1
+MicroEdition-Profile: MIDP-2.0
+MIDlet-Version: 1.0
+MIDlet-Vendor: Nokia

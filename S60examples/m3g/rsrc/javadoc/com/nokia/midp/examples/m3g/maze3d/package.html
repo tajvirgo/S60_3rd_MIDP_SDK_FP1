@@ -1,0 +1,684 @@
+<!DOCTYPE doctype PUBLIC "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+           <!--(==============================================================)--><!--(Document created with RoboEditor. )============================--><!--(==============================================================)-->
+  <title>Maze3Dexample</title>
+                                                <!--(Meta)==========================================================-->
+                                        
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=windows-1252">
+                                             
+  <meta name="Originator" content="ImportDoc">
+                                             
+  <meta name="OriginalFile" content="Maze3Dpackage-summary.doc">
+                                             
+  <meta name="generator"
+ content="RoboHELP by eHelp Corporation - www.ehelp.com">
+                                             
+  <meta name="generator-major-version" content="0.1">
+                                             
+  <meta name="generator-minor-version" content="1">
+                                             
+  <meta name="filetype" content="kadov">
+                                             
+  <meta name="filetype-version" content="1">
+                                             
+  <meta name="page-count" content="1">
+                                             
+  <meta name="layout-height" content="8285">
+                                             
+  <meta name="layout-width" content="702">
+              <!--(Links)=========================================================-->
+                                        
+               <!--(Style Sheet)===================================================-->
+                                        
+  <style>
+
+
+
+
+
+
+
+
+
+<!--
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+A:visited {
+
+
+
+
+
+
+
+
+
+	color: #800080;
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+A:link {
+
+
+
+
+
+
+
+
+
+	color: #0000ff;
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-->
+
+
+
+
+
+
+
+
+
+  </style><!--(Body)==========================================================-->
+</head>
+  <body lang="EN-US">
+            This example application demonstrates how to use Mobile 3-D Graphics
+    API.                     
+<p style="font-weight: bold;"><b><span style="font-weight: bold;">Section 
+       contents</span></b></p>
+                        
+<p>1. <a href="#1">About this example</a></p>
+                        
+<p><span style="font-family: 'Times New Roman';">2. <a href="#2">Prerequisites</a></span></p>
+                        
+<p><span style="font-family: 'Times New Roman'; color: rgb(0,0,0);">3. <a
+ href="#3">Building and running</a></span></p>
+                        
+<p><span style="font-family: 'Times New Roman'; color: rgb(0,0,0);">4. <a
+ href="#4">Design and implementation</a></span></p>
+                        
+<p><span style="font-family: 'Times New Roman'; color: rgb(0,0,0);">5. <a
+ href="#5">Summary</a></span></p>
+                        
+<h3 style="font-family: 'Times New Roman';"><a name="1">1.      About this 
+     example</a></h3>
+                        
+<p><span style="font-family: 'Times New Roman'; color: rgb(0,0,0);">This example
+  application demonstrates how to use Mobile 3-D Graphics API. The game 
+ developed in this example is a maze-traversing game, where the player  
+looks at the world from a first-person point of view. The game is intended 
+       as a demonstration to show some of the features included in M3G API; 
+  it     is not a fully functional game. As such, the geometry is limited 
+to  what     it is feasible to do easily in Java™ code, rather than complex 
+meshes,     which are produced using third-party tools. The latter method 
+may be the       most commonly used, for example, in game production.</span></p>
+                        
+<p style="font-family: 'Times New Roman'; font-weight: bold;"><a
+ name="2" style="font-weight: bold;"><span style="font-weight: bold;">2.
+         Pre-requisites</span></a></p>
+                        
+<p><span style="font-family: 'Times New Roman';">You should be familiar 
+ with Java™programming and the basics of Mobile Information Device Profile 
+       (MIDP) programming.</span></p>
+                        
+<p><span style="font-family: 'Times New Roman';">You should also be familiar 
+       with basic 3-D graphics concepts such as transformations, texturing, 
+  and     blending. M3G contains many concepts and structures based on OpenGL, 
+  and     for that reason knowledge of the basics of OpenGL is highly advised. 
+  Finally,     this example uses the game facilities provided in MIDP 2.0, 
+ in particular     the </span><span
+ style="font-family: 'Courier New',monospace;">GameCanvas</span><span
+ style="font-family: 'Times New Roman';"> class.</span></p>
+                        
+<h3 style="font-family: 'Times New Roman';"><a name="3">3.      Building and
+running</a></h3>
+                        
+<p><span style="font-family: 'Times New Roman';">The example is built using 
+       the standard method for building and running Java MIDlets. </span></p>
+                        
+<p><span style="font-family: 'Times New Roman';">When the application starts 
+       up, the following screen appears:</span></p>
+                        
+<p style="font-family: 'Times New Roman';"><img
+ src="doc-files/image002.jpg" x-maintain-ratio="TRUE"
+ style="border: medium none ; width: 178px; height: 212px; float: none;"
+ width="178" height="212" border="0">
+           </p>
+                        
+<p><b style="font-weight: bold;"><span
+ style="font-size: 8pt; font-family: 'Times New Roman';">Figure:   Initial 
+     game display</span></b></p>
+                        
+<p><span style="font-family: 'Times New Roman';">The MIDlet starts by displaying 
+       a list of options for the user contained in MenuList. At the beginning, 
+       the only options are to start a new game and show the Graphics3D properties. 
+       </span></p>
+                        
+<p style="font-family: 'Times New Roman';">In the game, the player sees 
+ the world from a traditional, first-person point of view and walks around 
+       the maze. The objective is to solve the maze in a minimum amount of 
+ time.      The game doesn’t use any complicated geometry; everything is built
+ using      planes. The objects in the game are basically the floor and the
+ maze walls.     Two labels were also added to indicate the start and end
+of the maze.   The end marker is animated, moving up and down the y axis.
+The scene has     a background sky simulating a star field. The player is
+located where    the main camera is, as s/he moves around the maze. The maze’s
+floor is   located in the xz plane. Figure <b>Normal view</b> shows what
+the game   looks like.</p>
+                        
+<p> </p>
+                        
+<p style="font-family: 'Times New Roman';"><img
+ src="doc-files/image004.jpg" x-maintain-ratio="TRUE"
+ style="border: medium none ; width: 178px; height: 212px; float: none;"
+ width="178" height="212" border="0">
+           </p>
+                        
+<p><b style="font-weight: bold;"><span
+ style="font-size: 8pt; font-family: 'Times New Roman';">Figure:   Normal 
+     view</span></b></p>
+                        
+<p><span style="font-family: 'Times New Roman';">As an aid to the player, 
+       there is a second camera, which is located high in the y axis and looks
+       down on the maze. This camera can be used to view the maze from the
+ top.      It is complemented by a small square that indicates the player’s 
+ location.</span></p>
+                        
+<p style="font-family: 'Times New Roman';"><img
+ src="doc-files/image006.jpg" x-maintain-ratio="TRUE"
+ style="border: medium none ; width: 178px; height: 212px; float: none;"
+ width="178" height="212" border="0">
+           </p>
+                        
+<p><b style="font-weight: bold;"><span
+ style="font-size: 8pt; font-family: 'Times New Roman';">Figure:   Top view</span></b></p>
+                        
+<p><span style="font-family: 'Times New Roman';">Another aid for the player 
+       is the ability to make walls semitransparent. By pressing the Fire 
+button,       the wall in front of the player is made semitransparent. The 
+next time      the player moves, the wall returns to the normal view.</span></p>
+                        
+<p style="font-family: 'Times New Roman';"><img
+ src="doc-files/image008.jpg" x-maintain-ratio="TRUE"
+ style="border: medium none ; width: 178px; height: 212px; float: none;"
+ width="178" height="212" border="0">
+           </p>
+                        
+<p><b style="font-weight: bold;"><span
+ style="font-size: 8pt; font-family: 'Times New Roman';">Figure:   Semitransparent 
+     wall</span></b></p>
+                        
+<p> </p>
+                        
+<h3 style="font-family: 'Times New Roman';"><a name="4">4.      Design and 
+     implementation</a></h3>
+                        
+<p><span style="font-family: 'Times New Roman';">4.1<span
+ style="font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">
+          </span></span><span style="font-family: 'Times New Roman';">Overview</span></p>
+                        
+<p><span style="font-family: 'Times New Roman'; color: rgb(0,0,0);">The game 
+       is designed for MIDP 2.0, and uses the GameCanvas class. It contains 
+  a    thread that is running continuously, following the usual pattern for 
+  MIDP     2.0 games </span></p>
+  <!--(Table)=========================================================--> 
+                          
+<table x-use-null-cells=""
+ style="width: 100%; background-color: rgb(238,238,238);"
+ cellspacing="0" bgcolor="#eeeeee" width="100%">
+            <col style="width: 100%;">  <tbody>
+               <tr style="" valign="top">
+            <td
+ style="border: 1px solid rgb(0,0,0); width: 100%; padding-right: 10px; padding-left: 10px;"
+ width="100%">                                                          
+                   
+      <p style="font-size: 10pt; font-family: 'Courier New',monospace;">while(playing)</p>
+                                                                        
+               
+      <p style="font-size: 10pt; font-family: 'Courier New',monospace;">{ 
+           </p>
+                                                                        
+               
+      <p style="font-size: 10pt; font-family: 'Courier New',monospace;">
+                     checkInput(); </p>
+                                                                        
+               
+      <p style="font-size: 10pt; font-family: 'Courier New',monospace;">
+                     draw3D(); </p>
+                                                                        
+               
+      <p style="font-size: 10pt; font-family: 'Courier New',monospace;">
+                     draw2D(); </p>
+                                                                        
+               
+      <p style="font-size: 10pt; font-family: 'Courier New',monospace;">
+                     flushGraphics(); </p>
+                                                                        
+               
+      <p style="font-size: 10pt; font-family: 'Courier New',monospace;">}</p>
+                 </td>
+               </tr>
+                                             
+  </tbody>           
+</table>
+                        
+<p><span style="font-family: 'Times New Roman';">The method </span><span
+ style="font-family: 'Courier New',monospace;">checkInput</span><span
+ style="font-family: 'Times New Roman';"> will verify the state of the   keys
+and update the player’s position if necessary. The player can move   forward
+and backward, and rotate to the right or left. The player position   will
+be used to update the main camera’s location. If the Fire button   is pressed,
+the nearest wall in front of the player will be selected and   made semitransparent.
+In method </span><span style="font-family: 'Courier New',monospace;">draw3D</span><span
+ style="font-family: 'Times New Roman';">, the scene graph is rendered   by
+binding the target, advancing the animation, and calling </span><span
+ style="font-family: 'Courier New',monospace;">render(world</span><span
+ style="font-family: 'Times New Roman';">, as follows:</span></p>
+  <!--(Table)=========================================================--> 
+                          
+<table x-use-null-cells=""
+ style="width: 100%; background-color: rgb(238,238,238);"
+ cellspacing="0" bgcolor="#eeeeee" width="100%">
+            <col style="width: 100%;">  <tbody>
+               <tr style="" valign="top">
+            <td
+ style="border: 1px solid rgb(0,0,0); width: 100%; padding-right: 10px; padding-left: 10px;"
+ width="100%">                                                          
+                   
+      <p
+ style="font-family: 'Courier New',monospace; letter-spacing: -0.6pt; font-size: 10pt;">try 
+           </p>
+                                                                        
+               
+      <p
+ style="font-family: 'Courier New',monospace; letter-spacing: -0.6pt; font-size: 10pt;">{ 
+           </p>
+                                                                        
+               
+      <p
+ style="font-family: 'Courier New',monospace; letter-spacing: -0.6pt; font-size: 10pt;">
+                      g3d.bindTarget(g);</p>
+                                                                        
+               
+      <p
+ style="font-family: 'Courier New',monospace; letter-spacing: -0.6pt; font-size: 10pt;">
+                      binded = true;</p>
+                                                                        
+               
+      <p
+ style="font-family: 'Courier New',monospace; letter-spacing: -0.6pt; font-size: 10pt;">
+                      world.animate((int)(System.currentTimeMillis() - gameStart));</p>
+                                                                        
+               
+      <p
+ style="font-family: 'Courier New',monospace; letter-spacing: -0.6pt; font-size: 10pt;">
+                      g3d.render(world);</p>
+                                                                        
+               
+      <p
+ style="font-family: 'Courier New',monospace; letter-spacing: -0.6pt; font-size: 10pt;">}</p>
+                                                                        
+               
+      <p
+ style="font-family: 'Courier New',monospace; letter-spacing: -0.6pt; font-size: 10pt;">finally 
+           </p>
+                                                                        
+               
+      <p
+ style="font-family: 'Courier New',monospace; letter-spacing: -0.6pt; font-size: 10pt;">{ 
+           </p>
+                                                                        
+               
+      <p
+ style="font-family: 'Courier New',monospace; letter-spacing: -0.6pt; font-size: 10pt;">
+                      // release the target </p>
+                                                                        
+               
+      <p
+ style="font-family: 'Courier New',monospace; letter-spacing: -0.6pt; font-size: 10pt;">
+                      if (binded)</p>
+                                                                        
+               
+      <p
+ style="font-family: 'Courier New',monospace; letter-spacing: -0.6pt; font-size: 10pt;">
+                      { </p>
+                                                                        
+               
+      <p
+ style="font-family: 'Courier New',monospace; letter-spacing: -0.6pt; font-size: 10pt;">
+                                            g3d.releaseTarget();</p>
+                                                                        
+               
+      <p
+ style="font-family: 'Courier New',monospace; letter-spacing: -0.6pt; font-size: 10pt;">
+                      }</p>
+                                                                        
+               
+      <p
+ style="font-family: 'Courier New',monospace; letter-spacing: -0.6pt; font-size: 10pt;">}</p>
+                 </td>
+               </tr>
+                                             
+  </tbody>           
+</table>
+                        
+<p><span style="font-family: 'Times New Roman';">The method <i>draw2D </i>in 
+       turn will write text to the upper and lower parts of the screen. It 
+ is     important to do the 2-D drawing after the 3-D rendering is ready, 
+since     upon clearing the 3-D buffers the 2-D part will be removed. It is
+also    important not to mix 2-D and 3-D Graphics while the target is bound.
+Although      M3G does not forbid it, performing 2-D drawing commands onto
+a <i>Graphics      </i>object while bound has unpredictable results.</span></p>
+                        
+<h3><span style="font-family: 'Times New Roman';">4.2<span
+ style="font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">
+          </span>Maze Classes</span></h3>
+                        
+<p><span style="font-family: 'Times New Roman';">The game’s MIDlet class 
+ takes care of holding the display and providing transitions between the 
+ different screens. The game has three screens: <i>MazeCanvas, </i>where 
+ the game is actually played; <i>MenuList, </i>which contains a list of 
+ options to play the game; and <i>Graphics3Dproperties, </i>which displays 
+       the properties of the underlying implementation. Figure 5 shows the 
+ class      diagram.</span></p>
+                        
+<p> </p>
+                        
+<p style="font-family: 'Times New Roman';"><img
+ src="doc-files/image010.jpg" x-maintain-ratio="TRUE"
+ style="border: medium none ; width: 680px; height: 231px; float: none;"
+ width="680" height="231" border="0">
+           </p>
+                        
+<p><b style="font-weight: bold;"><span
+ style="font-size: 8pt; font-family: 'Times New Roman';">Figure:   Class diagram</span></b></p>
+                        
+<p><span style="font-family: 'Times New Roman';">The Maze and Plane classes 
+       are utility classes to build the game maze and meshes.</span></p>
+                        
+<h3><span style="font-family: 'Times New Roman';">4.3<span
+ style="font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">
+          </span>Scene Graph</span></h3>
+                        
+<p><span style="font-family: 'Times New Roman';">The game will be rendered 
+       in retained mode, with the scene graph constructed in code. The graph 
+     starts with a World object that contains two cameras. The first one will
+       move with the player, and the second one is fixed on top of the maze.
+     The background contains an image with a star field. The rest of the
+components        are geometrical objects, all of them rectangular planes. 
+That includes       the floor, the walls, the location square, and the start 
+and end marks.       Each object includes an appearance. Notice that there 
+are no lights in     the world as the appearance is just made by textures 
+rather than materials.</span></p>
+                        
+<p><span style="font-family: 'Times New Roman';">The end mark mesh contains 
+       an animation track that updates its position up and down the y axis. 
+  Every     time the scene is rendered, the time is increased and the World’s 
+  animate     method is called to advance the animation.</span></p>
+                        
+<p style="font-family: 'Times New Roman';">Figure<span
+ style="font-size: 10pt;">   </span>Scene Graph<span
+ style="font-size: 10pt;"> </span>shows a diagram   of what the scene graph 
+     looks like, starting from the World object.</p>
+                        
+<p style="font-family: 'Times New Roman';"><img
+ src="doc-files/image012.jpg" x-maintain-ratio="TRUE"
+ style="border: medium none ; width: 680px; height: 900px; float: none;"
+ width="680" height="900" border="0">
+           </p>
+                        
+<p><b style="font-weight: bold;"><span
+ style="font-size: 8pt; font-family: 'Times New Roman';">Figure:   Scene Graph</span></b><span
+ style="font-family: 'Times New Roman';">   </span></p>
+                        
+<h3><i style="font-style: italic;"><span style="font-style: normal;">4.4</span><span
+ style="font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">
+        </span></i>Maze   Construction and Geometry</h3>
+                        
+<p><span style="font-family: 'Times New Roman';">Instead of having a fixed 
+       set of mazes to play, the maze is randomly generated every time a game
+      is started. The maze is generated using a depth-first search algorithm. 
+      Each row of the maze is stored in bits of a long value where walls are
+     1s and spaces are 0s. That limits the maximum width of the maze to 64.
+    The algorithm starts with a maze that has all walls up, and it creates
+   a path between the spaces. The Maze class contains the maze generation 
+  code, and it also builds the necessary planes. For simplicity, the maze 
+  is always square.</span></p>
+                        
+<p style="font-family: 'Times New Roman';"><img
+ src="doc-files/image014.jpg" x-maintain-ratio="TRUE"
+ style="border: medium none ; width: 395px; height: 377px; float: none;"
+ width="395" height="377" border="0">
+           </p>
+                        
+<p><b style="font-weight: bold;"><span
+ style="font-size: 8pt; font-family: 'Times New Roman';">Figure:   Maze</span></b></p>
+                        
+<p><span style="font-family: 'Times New Roman';">Square planes describe 
+ all the geometry in the world. The Plane class takes care of building  
+standard squares located in the plane xy with vertices from (-1, -1) to 
+ (1, 1). The square itself is made out of four triangles so that it is  
+double sided. This is important since the player can see the walls from 
+ the front or the back. The Plane class takes a Transform object that modifies
+  the plane, making it suitable for the game. The createMesh method generates
+  the actual Mesh with the desired location, rotation, and scaling transformation.</span></p>
+                        
+<p><span style="font-family: 'Times New Roman';">The floor is built using 
+       a Transform that rotates the plane 90 degrees to locate it in the xz
+  plane,     and scales it to fit the desired size. The floor’s appearance 
+ is a mosaic-like     texture that is repeated ten times. Since the floor 
+is large in terms   of the scene, and the texture is repeated many times, 
+perspective correction     is enabled.</span></p>
+                        
+<p><span style="font-family: 'Times New Roman';">The walls are built in 
+ the </span><span style="font-family: 'Courier New',monospace;">createPlanes</span><span
+ style="font-family: 'Times New Roman';"> method of the Maze class. Each 
+ wall is a plane translated and scaled to its designated position. Vertical 
+       walls are also rotated 90 degrees on the y axis. The decision was made
+      to give some sort of lighting to the walls, making the lower part lighter
+       that the higher part. There are several ways to achieve this, for
+example        by attaching a Material and using lights, or setting vertex 
+colors to     a similar, lighter shade in the lower part. Another choice, 
+and the one      used here, is to use a gradient texture that is lighter in
+the lower  part.     The texture is repeated across the length of the wall.
+In parallel,  an    Appearance was constructed that uses the same texture 
+but contains a CompositeMode     using ALPHA_ADD-blending. This texture will 
+be used when  making a semitransparent     wall.</span></p>
+                        
+<p><span style="font-family: 'Times New Roman';">The start and end marks 
+ are located at the beginning and end of the maze. Each mark is textured 
+ using a rectangular image containing the “Start” and “End” labels. The 
+ textures contain an alpha channel for the area outside the text and their 
+       blending mode is set to ALPHA.</span></p>
+                        
+<p><span style="font-family: 'Times New Roman';">The location mark uses 
+ a texture clamped to the square and is set as not renderable. Whenever 
+ the game is set to use the top view, the square is made renderable and 
+ it is moved to the camera’s position.</span></p>
+                        
+<h3><span style="font-family: 'Times New Roman';">4.5<span
+ style="font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">
+          </span>Camera /Player Movement</span></h3>
+                        
+<p><span style="font-family: 'Times New Roman';">As mentioned previously, 
+       the player movements are actually camera movements. The game follows 
+  the     usual convention of using up and down to move forward and backward, 
+  while     left and right rotate the camera. The variables </span><span
+ style="font-family: 'Courier New',monospace;">locationx</span><span
+ style="font-family: 'Times New Roman';"> and </span><span
+ style="font-family: 'Courier New',monospace;">locationz</span><span
+ style="font-family: 'Times New Roman';"> are used to keep track of the 
+ player’s position, and </span><span
+ style="font-family: 'Courier New',monospace;">angley</span><span
+ style="font-family: 'Times New Roman';"> indicates the orientation of   the
+camera. When right and left are pressed, </span><span
+ style="font-family: 'Courier New',monospace;">angley</span><span
+ style="font-family: 'Times New Roman';"> is modified, and when up and   down
+are pressed, the location is updated. The variables stepx and stepz   are
+used to keep note of how much to advance in each forward and backward   step.
+This reduces the need to repeat sine/cosine calculations. At the   beginning,
+the player is on the upper wall looking to the negative z axis.   Figure
+<b>Player movements</b> shows how movements are carried out.</span></p>
+                        
+<p><span style="font-family: 'Times New Roman';">When moving, it is important 
+       to avoid crossing walls. While there are many ways to do this, the 
+picking       feature of M3G is handy. Find the wall nearest to the direction 
+in which       the player is moving, calculate the distance, and if it is 
+too small,     disallow the movement. Picking is done at the center of the 
+screen since       the player is going in the direction is looking at. Picking 
+uses the  current     camera’s near plane as the origin of the picking ray, 
+and when  the player     move backward, the camera is temporarily reversed 
+to detect  walls on the     player’s back.</span></p>
+                        
+<p style="font-family: 'Times New Roman';"><img
+ src="doc-files/image016.jpg" x-maintain-ratio="TRUE"
+ style="border: medium none ; width: 529px; height: 533px; float: none;"
+ width="529" height="533" border="0">
+           </p>
+                        
+<p><b style="font-weight: bold;"><span
+ style="font-size: 8pt; font-family: 'Times New Roman';">Figure:   Player 
+     movements</span></b></p>
+                        
+<p><span style="font-family: 'Times New Roman';">When a Fire press is detected, 
+       picking is used again to detect which wall is in front of the player. 
+     If a wall is found, its alpha factor is set to 0.8 and its appearance 
+   is set to </span><span style="font-family: 'Courier New',monospace;">clearWallAppearance</span><span
+ style="font-family: 'Times New Roman';">. This makes the wall semitransparent, 
+       showing other walls behind it. When the user moves again, the wall 
+returns       to its original appearance and alpha factor.</span></p>
+                        
+<p><span style="font-family: 'Times New Roman';">The background is made 
+ of a star field image. Since the background is set in screen coordinates, 
+       when the player rotates, the background stays in the same place, giving 
+       a nonrealistic impression. To solve this problem, whenever the player 
+     turns right or left the background is shifted using the cropping mechanism. 
+       This gives the illusion of a star field that is in synchrony with the
+     player’s movements.</span></p>
+                        
+<h3><span style="font-family: 'Times New Roman';">4.6<span
+ style="font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">
+          </span>Game Setup</span></h3>
+                        
+<p><span style="font-family: 'Times New Roman';">The MIDlet starts by displaying 
+       a list of options for the user contained in MenuList. At the beginning, 
+       the only options are to start a new game and show the Graphics3D properties. 
+       When the user starts a new game, a Maze object is created, the maze 
+ is     generated, and the scene graph is built in the MazeCanvas </span><span
+ style="font-family: 'Courier New',monospace;">init</span><span
+ style="font-family: 'Times New Roman';">   method. Past this the start method 
+     creates a new Thread that will drive   the drawing loop. Meanwhile, a
+ timer    is being updated comparing the start   of the game’s time with the
+ current    time, to keep track of how long the   game has been played.</span></p>
+                        
+<p><span style="font-family: 'Times New Roman';">The stop method halts   the
+thread and freezes the timer. This is done, for instance, when the   main
+menu is displayed again or the application is externally paused.   The </span><span
+ style="font-family: 'Courier New',monospace;">keyPressed</span><span
+ style="font-family: 'Times New Roman';"> method listens for key events, 
+ and in case they do not correspond to standard values the </span><span
+ style="font-family: 'Courier New',monospace;">MenuList</span><span
+ style="font-family: 'Times New Roman';">   is presented. It is possible to
+switch from the normal view to the top   view, and vice versa. It is also 
+     possible to halt the current game and   start a new one.</span></p>
+                        
+<p><span style="font-family: 'Times New Roman';">The game is finished when 
+       the player reaches the end mark. Each time the player moves, his/her 
+  position     is tested to see if it is close enough to the end of the maze. 
+  When it    is, the game ends and the timer is stopped.</span></p>
+                        
+<h3><span style="font-family: 'Times New Roman';"><a name="5"></a>5.<span
+ style="font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-stretch: normal; font-size-adjust: none;">
+          </span></span><span
+ style="font-family: 'Times New Roman'; text-transform: none;">Summary</span></h3>
+                        
+<p><span style="font-family: 'Times New Roman'; color: rgb(0,0,0);">The example 
+       has demonstrated how to use the Mobile 3-D Graphics API For Java™ Platform, Micro Edition (M3G).</span></p>
+                        
+<p> </p>
+             <br>
+           <br>
+          <br>
+         <br>
+        <br>
+       <br>
+      <br>
+     <br>
+    <br>
+    <br>
+ <br>
+</body>
+</html>

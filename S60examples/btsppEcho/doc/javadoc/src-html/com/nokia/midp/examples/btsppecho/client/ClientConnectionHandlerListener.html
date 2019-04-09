@@ -1,0 +1,121 @@
+<HTML>
+<BODY BGCOLOR="white">
+<PRE>
+<FONT color="green">001</FONT>    /* Copyright © 2006 Nokia. */<a name="line.1"></a>
+<FONT color="green">002</FONT>    package com.nokia.midp.examples.btsppecho.client;<a name="line.2"></a>
+<FONT color="green">003</FONT>    <a name="line.3"></a>
+<FONT color="green">004</FONT>    /**<a name="line.4"></a>
+<FONT color="green">005</FONT>     * Interface for a client bluetooth connection handler.<a name="line.5"></a>
+<FONT color="green">006</FONT>     */<a name="line.6"></a>
+<FONT color="green">007</FONT>    public interface ClientConnectionHandlerListener<a name="line.7"></a>
+<FONT color="green">008</FONT>    {<a name="line.8"></a>
+<FONT color="green">009</FONT>        // The handler's accept and open of a new connection<a name="line.9"></a>
+<FONT color="green">010</FONT>        // has occurred, but the I/O streams are not yet open.<a name="line.10"></a>
+<FONT color="green">011</FONT>        // The I/O streams must be open to send or receive<a name="line.11"></a>
+<FONT color="green">012</FONT>        // messages.<a name="line.12"></a>
+<FONT color="green">013</FONT>        public void handleAcceptAndOpen(ClientConnectionHandler handler);<a name="line.13"></a>
+<FONT color="green">014</FONT>    <a name="line.14"></a>
+<FONT color="green">015</FONT>    <a name="line.15"></a>
+<FONT color="green">016</FONT>        // The handler's I/O streams are now open and the<a name="line.16"></a>
+<FONT color="green">017</FONT>        // handler can now be used to send and receive messages.<a name="line.17"></a>
+<FONT color="green">018</FONT>        public void handleStreamsOpen(ClientConnectionHandler handler);<a name="line.18"></a>
+<FONT color="green">019</FONT>    <a name="line.19"></a>
+<FONT color="green">020</FONT>    <a name="line.20"></a>
+<FONT color="green">021</FONT>        // Opening of the handler's I/O streams failed. The handler has<a name="line.21"></a>
+<FONT color="green">022</FONT>        // closed any connections or streams that were open.<a name="line.22"></a>
+<FONT color="green">023</FONT>        // The handler should not be used anymore,<a name="line.23"></a>
+<FONT color="green">024</FONT>        // and should be discarded.<a name="line.24"></a>
+<FONT color="green">025</FONT>        public void handleStreamsOpenError(ClientConnectionHandler handler,<a name="line.25"></a>
+<FONT color="green">026</FONT>                                           String errorMessage);<a name="line.26"></a>
+<FONT color="green">027</FONT>    <a name="line.27"></a>
+<FONT color="green">028</FONT>    <a name="line.28"></a>
+<FONT color="green">029</FONT>        // The handler got an inbound message.<a name="line.29"></a>
+<FONT color="green">030</FONT>        public void handleReceivedMessage(<a name="line.30"></a>
+<FONT color="green">031</FONT>                        ClientConnectionHandler handler,<a name="line.31"></a>
+<FONT color="green">032</FONT>                        byte[] messageBytes);<a name="line.32"></a>
+<FONT color="green">033</FONT>    <a name="line.33"></a>
+<FONT color="green">034</FONT>    <a name="line.34"></a>
+<FONT color="green">035</FONT>        // A message that had been previously queued for sending<a name="line.35"></a>
+<FONT color="green">036</FONT>        // (identified by id) by the handler, has been sent successfully.<a name="line.36"></a>
+<FONT color="green">037</FONT>        public void handleQueuedMessageWasSent(<a name="line.37"></a>
+<FONT color="green">038</FONT>                        ClientConnectionHandler handler,<a name="line.38"></a>
+<FONT color="green">039</FONT>                        Integer id);<a name="line.39"></a>
+<FONT color="green">040</FONT>    <a name="line.40"></a>
+<FONT color="green">041</FONT>    <a name="line.41"></a>
+<FONT color="green">042</FONT>        // The handler has closed its connections and streams.<a name="line.42"></a>
+<FONT color="green">043</FONT>        // The handler should not be used anymore, and should be discarded.<a name="line.43"></a>
+<FONT color="green">044</FONT>        // Only handlers which have previously called 'handleOpen' may<a name="line.44"></a>
+<FONT color="green">045</FONT>        // call 'handleClose', and only just once.<a name="line.45"></a>
+<FONT color="green">046</FONT>        public void handleClose(ClientConnectionHandler handler);<a name="line.46"></a>
+<FONT color="green">047</FONT>    <a name="line.47"></a>
+<FONT color="green">048</FONT>    <a name="line.48"></a>
+<FONT color="green">049</FONT>        // An error related to the handler occurred. The handler<a name="line.49"></a>
+<FONT color="green">050</FONT>        // has closed the connection, and the handler should no<a name="line.50"></a>
+<FONT color="green">051</FONT>        // longer be used.<a name="line.51"></a>
+<FONT color="green">052</FONT>        public void handleErrorClose(ClientConnectionHandler handler,<a name="line.52"></a>
+<FONT color="green">053</FONT>                                     String errorMessage);<a name="line.53"></a>
+<FONT color="green">054</FONT>    <a name="line.54"></a>
+<FONT color="green">055</FONT>    }<a name="line.55"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+</BODY>
+</HTML>

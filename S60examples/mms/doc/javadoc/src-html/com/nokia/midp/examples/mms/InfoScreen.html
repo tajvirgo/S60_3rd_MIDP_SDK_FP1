@@ -1,0 +1,114 @@
+<HTML>
+<BODY BGCOLOR="white">
+<PRE>
+<FONT color="green">001</FONT>    /* Copyright © 2006 Nokia. */<a name="line.1"></a>
+<FONT color="green">002</FONT>    package com.nokia.midp.examples.mms;<a name="line.2"></a>
+<FONT color="green">003</FONT>    <a name="line.3"></a>
+<FONT color="green">004</FONT>    import javax.microedition.lcdui.*;<a name="line.4"></a>
+<FONT color="green">005</FONT>    <a name="line.5"></a>
+<FONT color="green">006</FONT>    /**<a name="line.6"></a>
+<FONT color="green">007</FONT>     * InfoScreen shows informational or error alert dialogs.<a name="line.7"></a>
+<FONT color="green">008</FONT>     */<a name="line.8"></a>
+<FONT color="green">009</FONT>    class InfoScreen<a name="line.9"></a>
+<FONT color="green">010</FONT>    extends Alert<a name="line.10"></a>
+<FONT color="green">011</FONT>    {<a name="line.11"></a>
+<FONT color="green">012</FONT>            private final int timeInfo_duration = 3000;<a name="line.12"></a>
+<FONT color="green">013</FONT>            private final int timeErr_duration = 5000;<a name="line.13"></a>
+<FONT color="green">014</FONT>            private final String errTitle = "Error";<a name="line.14"></a>
+<FONT color="green">015</FONT>            InfoScreen()<a name="line.15"></a>
+<FONT color="green">016</FONT>            {<a name="line.16"></a>
+<FONT color="green">017</FONT>                    super("InfoScreen");<a name="line.17"></a>
+<FONT color="green">018</FONT>            }<a name="line.18"></a>
+<FONT color="green">019</FONT>            /**<a name="line.19"></a>
+<FONT color="green">020</FONT>             * Displays the information messages on the info screen.<a name="line.20"></a>
+<FONT color="green">021</FONT>             * @param message the given message to be displayed<a name="line.21"></a>
+<FONT color="green">022</FONT>             * @param display the display object<a name="line.22"></a>
+<FONT color="green">023</FONT>             */<a name="line.23"></a>
+<FONT color="green">024</FONT>            public void showInfo(String message, Display display)<a name="line.24"></a>
+<FONT color="green">025</FONT>            {<a name="line.25"></a>
+<FONT color="green">026</FONT>                    setTitle(null);<a name="line.26"></a>
+<FONT color="green">027</FONT>                    setType(AlertType.INFO);<a name="line.27"></a>
+<FONT color="green">028</FONT>                    setTimeout(timeInfo_duration);<a name="line.28"></a>
+<FONT color="green">029</FONT>                    setString(message);<a name="line.29"></a>
+<FONT color="green">030</FONT>                    display.setCurrent(this);<a name="line.30"></a>
+<FONT color="green">031</FONT>            }<a name="line.31"></a>
+<FONT color="green">032</FONT>    <a name="line.32"></a>
+<FONT color="green">033</FONT>            /**<a name="line.33"></a>
+<FONT color="green">034</FONT>             * Displays the error messages on the info screen.<a name="line.34"></a>
+<FONT color="green">035</FONT>             * @param message the given message to be displayed<a name="line.35"></a>
+<FONT color="green">036</FONT>             * @param display the display object<a name="line.36"></a>
+<FONT color="green">037</FONT>             */<a name="line.37"></a>
+<FONT color="green">038</FONT>            public void showError(String message, Display display)<a name="line.38"></a>
+<FONT color="green">039</FONT>            {<a name="line.39"></a>
+<FONT color="green">040</FONT>                    setTitle(errTitle);<a name="line.40"></a>
+<FONT color="green">041</FONT>                    setType(AlertType.ERROR);<a name="line.41"></a>
+<FONT color="green">042</FONT>                    setTimeout(timeErr_duration);<a name="line.42"></a>
+<FONT color="green">043</FONT>                    setString(message);<a name="line.43"></a>
+<FONT color="green">044</FONT>                    display.setCurrent(this);<a name="line.44"></a>
+<FONT color="green">045</FONT>            }<a name="line.45"></a>
+<FONT color="green">046</FONT>    <a name="line.46"></a>
+<FONT color="green">047</FONT>    }<a name="line.47"></a>
+<FONT color="green">048</FONT>    <a name="line.48"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+</BODY>
+</HTML>

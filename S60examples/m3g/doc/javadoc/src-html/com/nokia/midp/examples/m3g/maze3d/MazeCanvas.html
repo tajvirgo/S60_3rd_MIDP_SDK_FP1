@@ -1,0 +1,821 @@
+<HTML>
+<BODY BGCOLOR="white">
+<PRE>
+<FONT color="green">001</FONT>    /* Copyright © 2006 Nokia. */<a name="line.1"></a>
+<FONT color="green">002</FONT>    package com.nokia.midp.examples.m3g.maze3d;<a name="line.2"></a>
+<FONT color="green">003</FONT>    <a name="line.3"></a>
+<FONT color="green">004</FONT>    import java.util.*;<a name="line.4"></a>
+<FONT color="green">005</FONT>    import javax.microedition.lcdui.*;<a name="line.5"></a>
+<FONT color="green">006</FONT>    import javax.microedition.lcdui.game.*;<a name="line.6"></a>
+<FONT color="green">007</FONT>    import javax.microedition.m3g.*;<a name="line.7"></a>
+<FONT color="green">008</FONT>    <a name="line.8"></a>
+<FONT color="green">009</FONT>    /**<a name="line.9"></a>
+<FONT color="green">010</FONT>     * The main class used by the 3d maze midlet. It setups the 3D scene and does the movements<a name="line.10"></a>
+<FONT color="green">011</FONT>     * and rendering<a name="line.11"></a>
+<FONT color="green">012</FONT>     */<a name="line.12"></a>
+<FONT color="green">013</FONT>    class MazeCanvas<a name="line.13"></a>
+<FONT color="green">014</FONT>        extends GameCanvas<a name="line.14"></a>
+<FONT color="green">015</FONT>        implements Runnable {<a name="line.15"></a>
+<FONT color="green">016</FONT>      /** Height of the walls */<a name="line.16"></a>
+<FONT color="green">017</FONT>      private final static float WALL_HEIGHT = 10.f;<a name="line.17"></a>
+<FONT color="green">018</FONT>      /** Overall side of the maze*/<a name="line.18"></a>
+<FONT color="green">019</FONT>      private final static float MAZE_SIDE_LENGTH = 200f;<a name="line.19"></a>
+<FONT color="green">020</FONT>      /** Amount to advance at each step */<a name="line.20"></a>
+<FONT color="green">021</FONT>      private final static float STEP = 3.0f;<a name="line.21"></a>
+<FONT color="green">022</FONT>      /** Amount to rotate each time */<a name="line.22"></a>
+<FONT color="green">023</FONT>      private final static float ANGLE_STEP = 8.0f;<a name="line.23"></a>
+<FONT color="green">024</FONT>      /** The number of milliseconds to wait in the main loop */<a name="line.24"></a>
+<FONT color="green">025</FONT>      private final static int MILLIS_PER_TICK = 5;<a name="line.25"></a>
+<FONT color="green">026</FONT>    <a name="line.26"></a>
+<FONT color="green">027</FONT>      /** time spent in the run loop */<a name="line.27"></a>
+<FONT color="green">028</FONT>      private long loopDuration = MILLIS_PER_TICK;<a name="line.28"></a>
+<FONT color="green">029</FONT>    <a name="line.29"></a>
+<FONT color="green">030</FONT>      /**<a name="line.30"></a>
+<FONT color="green">031</FONT>       * Size of the steps to directions z<a name="line.31"></a>
+<FONT color="green">032</FONT>       * stored to avoid extra trigonometric calculations<a name="line.32"></a>
+<FONT color="green">033</FONT>       */<a name="line.33"></a>
+<FONT color="green">034</FONT>      private float stepz = -STEP;<a name="line.34"></a>
+<FONT color="green">035</FONT>    <a name="line.35"></a>
+<FONT color="green">036</FONT>      /**<a name="line.36"></a>
+<FONT color="green">037</FONT>       * Size of the steps to directions x<a name="line.37"></a>
+<FONT color="green">038</FONT>       * stored to avoid extra trigonometric calculations<a name="line.38"></a>
+<FONT color="green">039</FONT>       */<a name="line.39"></a>
+<FONT color="green">040</FONT>      private float stepx = 0f;<a name="line.40"></a>
+<FONT color="green">041</FONT>    <a name="line.41"></a>
+<FONT color="green">042</FONT>      /** Player's x location */<a name="line.42"></a>
+<FONT color="green">043</FONT>      private float locationx = 0f;<a name="line.43"></a>
+<FONT color="green">044</FONT>    <a name="line.44"></a>
+<FONT color="green">045</FONT>      /** Player's z location */<a name="line.45"></a>
+<FONT color="green">046</FONT>      private float locationz = 0;<a name="line.46"></a>
+<FONT color="green">047</FONT>    <a name="line.47"></a>
+<FONT color="green">048</FONT>      /** Player's rotation */<a name="line.48"></a>
+<FONT color="green">049</FONT>      private float angley = 0f;<a name="line.49"></a>
+<FONT color="green">050</FONT>    <a name="line.50"></a>
+<FONT color="green">051</FONT>      /** Flags whether we are looking the game from the top */<a name="line.51"></a>
+<FONT color="green">052</FONT>      private boolean topView = false;<a name="line.52"></a>
+<FONT color="green">053</FONT>    <a name="line.53"></a>
+<FONT color="green">054</FONT>      /** Flags to keep the drawing going */<a name="line.54"></a>
+<FONT color="green">055</FONT>      private volatile boolean playing = true;<a name="line.55"></a>
+<FONT color="green">056</FONT>    <a name="line.56"></a>
+<FONT color="green">057</FONT>      /** Stores the amount of frames per second being displayed */<a name="line.57"></a>
+<FONT color="green">058</FONT>      private volatile float fps = 0;<a name="line.58"></a>
+<FONT color="green">059</FONT>    <a name="line.59"></a>
+<FONT color="green">060</FONT>      /** Stores how long has taken to run thorugh the maze */<a name="line.60"></a>
+<FONT color="green">061</FONT>      private volatile long gameStart = 0;<a name="line.61"></a>
+<FONT color="green">062</FONT>    <a name="line.62"></a>
+<FONT color="green">063</FONT>      /** Stores how long has taken to run thorugh the maze */<a name="line.63"></a>
+<FONT color="green">064</FONT>      private volatile long duration = 0;<a name="line.64"></a>
+<FONT color="green">065</FONT>    <a name="line.65"></a>
+<FONT color="green">066</FONT>      /** Indicates whether the game has finished */<a name="line.66"></a>
+<FONT color="green">067</FONT>      private boolean finished;<a name="line.67"></a>
+<FONT color="green">068</FONT>    <a name="line.68"></a>
+<FONT color="green">069</FONT>      /** Parent MIDlet */<a name="line.69"></a>
+<FONT color="green">070</FONT>      private final MazeMIDlet midlet;<a name="line.70"></a>
+<FONT color="green">071</FONT>    <a name="line.71"></a>
+<FONT color="green">072</FONT>      /** Graphics 3D global instance */<a name="line.72"></a>
+<FONT color="green">073</FONT>      private Graphics3D g3d;<a name="line.73"></a>
+<FONT color="green">074</FONT>    <a name="line.74"></a>
+<FONT color="green">075</FONT>      /** The virtual world of this application */<a name="line.75"></a>
+<FONT color="green">076</FONT>      private World world;<a name="line.76"></a>
+<FONT color="green">077</FONT>    <a name="line.77"></a>
+<FONT color="green">078</FONT>      /** One of the world's 2 cameras (normal view) */<a name="line.78"></a>
+<FONT color="green">079</FONT>      private Camera camera;<a name="line.79"></a>
+<FONT color="green">080</FONT>    <a name="line.80"></a>
+<FONT color="green">081</FONT>      /** One of the world's 2 cameras, (top view) */<a name="line.81"></a>
+<FONT color="green">082</FONT>      private Camera topCamera;<a name="line.82"></a>
+<FONT color="green">083</FONT>    <a name="line.83"></a>
+<FONT color="green">084</FONT>      /** World's background */<a name="line.84"></a>
+<FONT color="green">085</FONT>      private Background background = null;<a name="line.85"></a>
+<FONT color="green">086</FONT>    <a name="line.86"></a>
+<FONT color="green">087</FONT>      /** Simple rectangular mesh used to locate the player */<a name="line.87"></a>
+<FONT color="green">088</FONT>      private Mesh locationSquare = null;<a name="line.88"></a>
+<FONT color="green">089</FONT>    <a name="line.89"></a>
+<FONT color="green">090</FONT>      /** Wall alternate appearance for clear */<a name="line.90"></a>
+<FONT color="green">091</FONT>      private Appearance wallClearAppearance = new Appearance();<a name="line.91"></a>
+<FONT color="green">092</FONT>    <a name="line.92"></a>
+<FONT color="green">093</FONT>      /** Wall alternate appearance */<a name="line.93"></a>
+<FONT color="green">094</FONT>      private Appearance wallAppearance = new Appearance();<a name="line.94"></a>
+<FONT color="green">095</FONT>    <a name="line.95"></a>
+<FONT color="green">096</FONT>      /** Points to the mesh last made semi transparent */<a name="line.96"></a>
+<FONT color="green">097</FONT>      private Mesh transparentMesh = null;<a name="line.97"></a>
+<FONT color="green">098</FONT>    <a name="line.98"></a>
+<FONT color="green">099</FONT>      /** Actual maze object */<a name="line.99"></a>
+<FONT color="green">100</FONT>      private Maze maze = new Maze(10, MAZE_SIDE_LENGTH, WALL_HEIGHT);<a name="line.100"></a>
+<FONT color="green">101</FONT>    <a name="line.101"></a>
+<FONT color="green">102</FONT>      /** Main thread */<a name="line.102"></a>
+<FONT color="green">103</FONT>      private Thread mainThread = null;<a name="line.103"></a>
+<FONT color="green">104</FONT>    <a name="line.104"></a>
+<FONT color="green">105</FONT>      /**<a name="line.105"></a>
+<FONT color="green">106</FONT>       *   Construct the Displayable<a name="line.106"></a>
+<FONT color="green">107</FONT>       */<a name="line.107"></a>
+<FONT color="green">108</FONT>      MazeCanvas(MazeMIDlet midlet)<a name="line.108"></a>
+<FONT color="green">109</FONT>      {<a name="line.109"></a>
+<FONT color="green">110</FONT>            super(true);<a name="line.110"></a>
+<FONT color="green">111</FONT>    <a name="line.111"></a>
+<FONT color="green">112</FONT>            this.midlet = midlet;<a name="line.112"></a>
+<FONT color="green">113</FONT>      }<a name="line.113"></a>
+<FONT color="green">114</FONT>    <a name="line.114"></a>
+<FONT color="green">115</FONT>      /**<a name="line.115"></a>
+<FONT color="green">116</FONT>       * (Re)Starts the game<a name="line.116"></a>
+<FONT color="green">117</FONT>       */<a name="line.117"></a>
+<FONT color="green">118</FONT>      void start()<a name="line.118"></a>
+<FONT color="green">119</FONT>      {<a name="line.119"></a>
+<FONT color="green">120</FONT>            playing = true;<a name="line.120"></a>
+<FONT color="green">121</FONT>            gameStart = System.currentTimeMillis() - duration;<a name="line.121"></a>
+<FONT color="green">122</FONT>    <a name="line.122"></a>
+<FONT color="green">123</FONT>            mainThread = new Thread(this);<a name="line.123"></a>
+<FONT color="green">124</FONT>            mainThread.start();<a name="line.124"></a>
+<FONT color="green">125</FONT>      }<a name="line.125"></a>
+<FONT color="green">126</FONT>    <a name="line.126"></a>
+<FONT color="green">127</FONT>      /**<a name="line.127"></a>
+<FONT color="green">128</FONT>       *   Stops/pauses the game<a name="line.128"></a>
+<FONT color="green">129</FONT>       */<a name="line.129"></a>
+<FONT color="green">130</FONT>      void stop()<a name="line.130"></a>
+<FONT color="green">131</FONT>      {<a name="line.131"></a>
+<FONT color="green">132</FONT>            duration = System.currentTimeMillis() - gameStart;<a name="line.132"></a>
+<FONT color="green">133</FONT>            playing = false;<a name="line.133"></a>
+<FONT color="green">134</FONT>      }<a name="line.134"></a>
+<FONT color="green">135</FONT>    <a name="line.135"></a>
+<FONT color="green">136</FONT>      /**<a name="line.136"></a>
+<FONT color="green">137</FONT>       * Switches from top view to normal view and vice versa<a name="line.137"></a>
+<FONT color="green">138</FONT>       */<a name="line.138"></a>
+<FONT color="green">139</FONT>      void switchView()<a name="line.139"></a>
+<FONT color="green">140</FONT>      {<a name="line.140"></a>
+<FONT color="green">141</FONT>            topView = !topView;<a name="line.141"></a>
+<FONT color="green">142</FONT>            setView();<a name="line.142"></a>
+<FONT color="green">143</FONT>            // informs the MIDLet since this can be switched internally<a name="line.143"></a>
+<FONT color="green">144</FONT>            midlet.viewSwitched();<a name="line.144"></a>
+<FONT color="green">145</FONT>      }<a name="line.145"></a>
+<FONT color="green">146</FONT>    <a name="line.146"></a>
+<FONT color="green">147</FONT>      /**<a name="line.147"></a>
+<FONT color="green">148</FONT>       * Sets the view<a name="line.148"></a>
+<FONT color="green">149</FONT>       */<a name="line.149"></a>
+<FONT color="green">150</FONT>      void setView()<a name="line.150"></a>
+<FONT color="green">151</FONT>      {<a name="line.151"></a>
+<FONT color="green">152</FONT>            // reset the locaiton and draw on top of the maze<a name="line.152"></a>
+<FONT color="green">153</FONT>            locationSquare.setTranslation(locationx,<a name="line.153"></a>
+<FONT color="green">154</FONT>                                                                      2 * WALL_HEIGHT + 3f, locationz);<a name="line.154"></a>
+<FONT color="green">155</FONT>            // the square is rendered only in top view<a name="line.155"></a>
+<FONT color="green">156</FONT>            locationSquare.setRenderingEnable(topView);<a name="line.156"></a>
+<FONT color="green">157</FONT>            // the background is removed in top view<a name="line.157"></a>
+<FONT color="green">158</FONT>            world.setBackground(topView ? null : background);<a name="line.158"></a>
+<FONT color="green">159</FONT>            // sets the actual active camera<a name="line.159"></a>
+<FONT color="green">160</FONT>            if (topView)<a name="line.160"></a>
+<FONT color="green">161</FONT>            {<a name="line.161"></a>
+<FONT color="green">162</FONT>              world.setActiveCamera(topCamera);<a name="line.162"></a>
+<FONT color="green">163</FONT>            }<a name="line.163"></a>
+<FONT color="green">164</FONT>            else<a name="line.164"></a>
+<FONT color="green">165</FONT>            {<a name="line.165"></a>
+<FONT color="green">166</FONT>              world.setActiveCamera(camera);<a name="line.166"></a>
+<FONT color="green">167</FONT>            }<a name="line.167"></a>
+<FONT color="green">168</FONT>      }<a name="line.168"></a>
+<FONT color="green">169</FONT>    <a name="line.169"></a>
+<FONT color="green">170</FONT>      /**<a name="line.170"></a>
+<FONT color="green">171</FONT>       * Builds the world<a name="line.171"></a>
+<FONT color="green">172</FONT>       */<a name="line.172"></a>
+<FONT color="green">173</FONT>      void init()<a name="line.173"></a>
+<FONT color="green">174</FONT>      {<a name="line.174"></a>
+<FONT color="green">175</FONT>            finished = false;<a name="line.175"></a>
+<FONT color="green">176</FONT>            duration = 0;<a name="line.176"></a>
+<FONT color="green">177</FONT>            setFullScreenMode(true);<a name="line.177"></a>
+<FONT color="green">178</FONT>            // get a Graphics3D instance<a name="line.178"></a>
+<FONT color="green">179</FONT>            g3d = Graphics3D.getInstance();<a name="line.179"></a>
+<FONT color="green">180</FONT>            // build the world and the cameras<a name="line.180"></a>
+<FONT color="green">181</FONT>            world = new World();<a name="line.181"></a>
+<FONT color="green">182</FONT>            camera = new Camera();<a name="line.182"></a>
+<FONT color="green">183</FONT>            topCamera = new Camera();<a name="line.183"></a>
+<FONT color="green">184</FONT>            world.addChild(camera);<a name="line.184"></a>
+<FONT color="green">185</FONT>            world.addChild(topCamera);<a name="line.185"></a>
+<FONT color="green">186</FONT>            float w = (float)getWidth();<a name="line.186"></a>
+<FONT color="green">187</FONT>            float h = (float)getHeight();<a name="line.187"></a>
+<FONT color="green">188</FONT>    <a name="line.188"></a>
+<FONT color="green">189</FONT>            // set the perspective<a name="line.189"></a>
+<FONT color="green">190</FONT>            camera.setPerspective(60.f, w / h, 0.1f, 1000.f);<a name="line.190"></a>
+<FONT color="green">191</FONT>            topCamera.setPerspective(60.f, w / h, 0.1f, 1000.f);<a name="line.191"></a>
+<FONT color="green">192</FONT>    <a name="line.192"></a>
+<FONT color="green">193</FONT>            // the top camer has a fixed transform looking from the top<a name="line.193"></a>
+<FONT color="green">194</FONT>            Transform topCameraTransform = new Transform();<a name="line.194"></a>
+<FONT color="green">195</FONT>            topCameraTransform.postRotate(90, -1f, 0f, 0f);<a name="line.195"></a>
+<FONT color="green">196</FONT>            topCameraTransform.postTranslate(0f, 0f, 1.2f * MAZE_SIDE_LENGTH);<a name="line.196"></a>
+<FONT color="green">197</FONT>            topCamera.setTransform(topCameraTransform);<a name="line.197"></a>
+<FONT color="green">198</FONT>    <a name="line.198"></a>
+<FONT color="green">199</FONT>            // Setup the background<a name="line.199"></a>
+<FONT color="green">200</FONT>            background = new Background();<a name="line.200"></a>
+<FONT color="green">201</FONT>            Image backgroundImage = MazeMIDlet.makeImage("/com/nokia/midp/examples/m3g/maze3d/content/background.png");<a name="line.201"></a>
+<FONT color="green">202</FONT>            if (backgroundImage != null)<a name="line.202"></a>
+<FONT color="green">203</FONT>            {<a name="line.203"></a>
+<FONT color="green">204</FONT>              background.setImage(new Image2D(Image2D.RGB, backgroundImage));<a name="line.204"></a>
+<FONT color="green">205</FONT>              background.setImageMode(Background.REPEAT, Background.REPEAT);<a name="line.205"></a>
+<FONT color="green">206</FONT>            }<a name="line.206"></a>
+<FONT color="green">207</FONT>            world.setBackground(background);<a name="line.207"></a>
+<FONT color="green">208</FONT>    <a name="line.208"></a>
+<FONT color="green">209</FONT>            createFloor();<a name="line.209"></a>
+<FONT color="green">210</FONT>            createLocationSquare();<a name="line.210"></a>
+<FONT color="green">211</FONT>            setUpMaze();<a name="line.211"></a>
+<FONT color="green">212</FONT>            createStartEndMarks();<a name="line.212"></a>
+<FONT color="green">213</FONT>            setView();<a name="line.213"></a>
+<FONT color="green">214</FONT>    <a name="line.214"></a>
+<FONT color="green">215</FONT>            // setup the initial location<a name="line.215"></a>
+<FONT color="green">216</FONT>            locationx = maze.findStartLocationX();<a name="line.216"></a>
+<FONT color="green">217</FONT>            locationz = maze.findStartLocationZ();<a name="line.217"></a>
+<FONT color="green">218</FONT>            // look at the center<a name="line.218"></a>
+<FONT color="green">219</FONT>            angley = -180f;<a name="line.219"></a>
+<FONT color="green">220</FONT>    <a name="line.220"></a>
+<FONT color="green">221</FONT>    <a name="line.221"></a>
+<FONT color="green">222</FONT>            setupCamera();<a name="line.222"></a>
+<FONT color="green">223</FONT>    <a name="line.223"></a>
+<FONT color="green">224</FONT>            start();<a name="line.224"></a>
+<FONT color="green">225</FONT>      }<a name="line.225"></a>
+<FONT color="green">226</FONT>    <a name="line.226"></a>
+<FONT color="green">227</FONT>      /**<a name="line.227"></a>
+<FONT color="green">228</FONT>       * Creates the label at the start and at the end of the maze<a name="line.228"></a>
+<FONT color="green">229</FONT>       */<a name="line.229"></a>
+<FONT color="green">230</FONT>      private void createStartEndMarks()<a name="line.230"></a>
+<FONT color="green">231</FONT>      {<a name="line.231"></a>
+<FONT color="green">232</FONT>            // The marks' appearance<a name="line.232"></a>
+<FONT color="green">233</FONT>            Appearance startMarkAppearance = new Appearance();<a name="line.233"></a>
+<FONT color="green">234</FONT>            Appearance endMarkAppearance = new Appearance();<a name="line.234"></a>
+<FONT color="green">235</FONT>    <a name="line.235"></a>
+<FONT color="green">236</FONT>            // The composite mode is ALPHA to show only the letters<a name="line.236"></a>
+<FONT color="green">237</FONT>            // the background is hidden using the alpha layer<a name="line.237"></a>
+<FONT color="green">238</FONT>            CompositingMode markCompositeMode = new CompositingMode();<a name="line.238"></a>
+<FONT color="green">239</FONT>            markCompositeMode.setBlending(CompositingMode.ALPHA);<a name="line.239"></a>
+<FONT color="green">240</FONT>            startMarkAppearance.setCompositingMode(markCompositeMode);<a name="line.240"></a>
+<FONT color="green">241</FONT>            endMarkAppearance.setCompositingMode(markCompositeMode);<a name="line.241"></a>
+<FONT color="green">242</FONT>    <a name="line.242"></a>
+<FONT color="green">243</FONT>            // The label's text is built using a texture<a name="line.243"></a>
+<FONT color="green">244</FONT>            Texture2D startMarkTexture = null;<a name="line.244"></a>
+<FONT color="green">245</FONT>            Image startMarkTextureImage =<a name="line.245"></a>
+<FONT color="green">246</FONT>                    MazeMIDlet.makeImage("/com/nokia/midp/examples/m3g/maze3d/content/start_label.png");<a name="line.246"></a>
+<FONT color="green">247</FONT>            if (startMarkTextureImage != null)<a name="line.247"></a>
+<FONT color="green">248</FONT>            {<a name="line.248"></a>
+<FONT color="green">249</FONT>              startMarkTexture = new Texture2D(<a name="line.249"></a>
+<FONT color="green">250</FONT>                      new Image2D(Image2D.RGBA, startMarkTextureImage));<a name="line.250"></a>
+<FONT color="green">251</FONT>              // the texture is not repeated<a name="line.251"></a>
+<FONT color="green">252</FONT>              startMarkTexture.setWrapping(Texture2D.WRAP_CLAMP,<a name="line.252"></a>
+<FONT color="green">253</FONT>                                                                       Texture2D.WRAP_CLAMP);<a name="line.253"></a>
+<FONT color="green">254</FONT>              startMarkTexture.setBlending(Texture2D.FUNC_REPLACE);<a name="line.254"></a>
+<FONT color="green">255</FONT>              startMarkTexture.setFiltering(Texture2D.FILTER_NEAREST,<a name="line.255"></a>
+<FONT color="green">256</FONT>                                                                            Texture2D.FILTER_NEAREST);<a name="line.256"></a>
+<FONT color="green">257</FONT>              startMarkAppearance.setTexture(0, startMarkTexture);<a name="line.257"></a>
+<FONT color="green">258</FONT>            }<a name="line.258"></a>
+<FONT color="green">259</FONT>    <a name="line.259"></a>
+<FONT color="green">260</FONT>            Texture2D endMarkTexture = null;<a name="line.260"></a>
+<FONT color="green">261</FONT>            Image endMarkTextureImage =<a name="line.261"></a>
+<FONT color="green">262</FONT>                    MazeMIDlet.makeImage("/com/nokia/midp/examples/m3g/maze3d/content/end_label.png");<a name="line.262"></a>
+<FONT color="green">263</FONT>            if (endMarkTextureImage != null)<a name="line.263"></a>
+<FONT color="green">264</FONT>            {<a name="line.264"></a>
+<FONT color="green">265</FONT>              endMarkTexture = new Texture2D(<a name="line.265"></a>
+<FONT color="green">266</FONT>                      new Image2D(Image2D.RGBA, endMarkTextureImage));<a name="line.266"></a>
+<FONT color="green">267</FONT>              // the texture is not repeated<a name="line.267"></a>
+<FONT color="green">268</FONT>              endMarkTexture.setWrapping(Texture2D.WRAP_CLAMP,<a name="line.268"></a>
+<FONT color="green">269</FONT>                                                                     Texture2D.WRAP_CLAMP);<a name="line.269"></a>
+<FONT color="green">270</FONT>              endMarkTexture.setBlending(Texture2D.FUNC_REPLACE);<a name="line.270"></a>
+<FONT color="green">271</FONT>              endMarkTexture.setFiltering(Texture2D.FILTER_NEAREST,<a name="line.271"></a>
+<FONT color="green">272</FONT>                                                                      Texture2D.FILTER_NEAREST);<a name="line.272"></a>
+<FONT color="green">273</FONT>              endMarkAppearance.setTexture(0, endMarkTexture);<a name="line.273"></a>
+<FONT color="green">274</FONT>            }<a name="line.274"></a>
+<FONT color="green">275</FONT>            // create the start mesh<a name="line.275"></a>
+<FONT color="green">276</FONT>            Plane startMarkPlane = maze.createStartMark();<a name="line.276"></a>
+<FONT color="green">277</FONT>            Mesh startMarkMesh = startMarkPlane.createMesh();<a name="line.277"></a>
+<FONT color="green">278</FONT>            startMarkMesh.setAppearance(0, startMarkAppearance);<a name="line.278"></a>
+<FONT color="green">279</FONT>            // these are not pickable<a name="line.279"></a>
+<FONT color="green">280</FONT>            startMarkMesh.setPickingEnable(false);<a name="line.280"></a>
+<FONT color="green">281</FONT>            world.addChild(startMarkMesh);<a name="line.281"></a>
+<FONT color="green">282</FONT>    <a name="line.282"></a>
+<FONT color="green">283</FONT>            // creates the end mesh<a name="line.283"></a>
+<FONT color="green">284</FONT>            Plane endMarkPlane = maze.createEndMark();<a name="line.284"></a>
+<FONT color="green">285</FONT>            Mesh endMarkMesh = endMarkPlane.createMesh();<a name="line.285"></a>
+<FONT color="green">286</FONT>            endMarkMesh.setAppearance(0, endMarkAppearance);<a name="line.286"></a>
+<FONT color="green">287</FONT>            // is not pickable either<a name="line.287"></a>
+<FONT color="green">288</FONT>            endMarkMesh.setPickingEnable(false);<a name="line.288"></a>
+<FONT color="green">289</FONT>    <a name="line.289"></a>
+<FONT color="green">290</FONT>            // Create a sequence of 4 keyframes<a name="line.290"></a>
+<FONT color="green">291</FONT>            KeyframeSequence keyframes =<a name="line.291"></a>
+<FONT color="green">292</FONT>                    new KeyframeSequence(4,3, KeyframeSequence.LINEAR);<a name="line.292"></a>
+<FONT color="green">293</FONT>            keyframes.setDuration(12000);<a name="line.293"></a>
+<FONT color="green">294</FONT>            keyframes.setRepeatMode(KeyframeSequence.LOOP);<a name="line.294"></a>
+<FONT color="green">295</FONT>    <a name="line.295"></a>
+<FONT color="green">296</FONT>            float[] trans = new float[4];<a name="line.296"></a>
+<FONT color="green">297</FONT>            endMarkMesh.getOrientation(trans);<a name="line.297"></a>
+<FONT color="green">298</FONT>            // create set the keyframes.<a name="line.298"></a>
+<FONT color="green">299</FONT>            // Basically keep x and z and animate in the y axis<a name="line.299"></a>
+<FONT color="green">300</FONT>            keyframes.setKeyframe(0, 0,<a name="line.300"></a>
+<FONT color="green">301</FONT>                    new float[]{trans[0], trans[1], trans[2]});<a name="line.301"></a>
+<FONT color="green">302</FONT>            keyframes.setKeyframe(1, 4000,<a name="line.302"></a>
+<FONT color="green">303</FONT>                    new float[]{trans[0], trans[1] - WALL_HEIGHT / 4, trans[2]});<a name="line.303"></a>
+<FONT color="green">304</FONT>            keyframes.setKeyframe(2, 8000,<a name="line.304"></a>
+<FONT color="green">305</FONT>                    new float[]{trans[0], trans[1] + WALL_HEIGHT / 4, trans[2]});<a name="line.305"></a>
+<FONT color="green">306</FONT>            keyframes.setKeyframe(3, 12000,<a name="line.306"></a>
+<FONT color="green">307</FONT>                    new float[]{trans[0], trans[1], trans[2]});<a name="line.307"></a>
+<FONT color="green">308</FONT>            AnimationTrack animationTrack =<a name="line.308"></a>
+<FONT color="green">309</FONT>                    new AnimationTrack(keyframes, AnimationTrack.TRANSLATION);<a name="line.309"></a>
+<FONT color="green">310</FONT>    <a name="line.310"></a>
+<FONT color="green">311</FONT>            AnimationController anim = new AnimationController();<a name="line.311"></a>
+<FONT color="green">312</FONT>            animationTrack.setController(anim);<a name="line.312"></a>
+<FONT color="green">313</FONT>    <a name="line.313"></a>
+<FONT color="green">314</FONT>            // add the animation track<a name="line.314"></a>
+<FONT color="green">315</FONT>            endMarkMesh.addAnimationTrack(animationTrack);<a name="line.315"></a>
+<FONT color="green">316</FONT>    <a name="line.316"></a>
+<FONT color="green">317</FONT>            world.addChild(endMarkMesh);<a name="line.317"></a>
+<FONT color="green">318</FONT>      }<a name="line.318"></a>
+<FONT color="green">319</FONT>    <a name="line.319"></a>
+<FONT color="green">320</FONT>      /**<a name="line.320"></a>
+<FONT color="green">321</FONT>       * Creates the floor<a name="line.321"></a>
+<FONT color="green">322</FONT>       */<a name="line.322"></a>
+<FONT color="green">323</FONT>      private void createFloor()<a name="line.323"></a>
+<FONT color="green">324</FONT>      {<a name="line.324"></a>
+<FONT color="green">325</FONT>            float floorSide = MAZE_SIDE_LENGTH / 2;<a name="line.325"></a>
+<FONT color="green">326</FONT>    <a name="line.326"></a>
+<FONT color="green">327</FONT>            // define the location and size of the floor<a name="line.327"></a>
+<FONT color="green">328</FONT>            Transform floorTransform = new Transform();<a name="line.328"></a>
+<FONT color="green">329</FONT>            floorTransform.postRotate(90.0f, -1.0f, 0.0f, 0.0f);<a name="line.329"></a>
+<FONT color="green">330</FONT>            floorTransform.postScale(floorSide, floorSide, 1.0f);<a name="line.330"></a>
+<FONT color="green">331</FONT>    <a name="line.331"></a>
+<FONT color="green">332</FONT>            // The floor appearance. Basically a texture repeated many times<a name="line.332"></a>
+<FONT color="green">333</FONT>            Appearance floorAppearance = new Appearance();<a name="line.333"></a>
+<FONT color="green">334</FONT>            // The floor needs that perspective correction is enabled<a name="line.334"></a>
+<FONT color="green">335</FONT>            PolygonMode floorPolygonMode = new PolygonMode();<a name="line.335"></a>
+<FONT color="green">336</FONT>            floorPolygonMode.setPerspectiveCorrectionEnable(true);<a name="line.336"></a>
+<FONT color="green">337</FONT>            floorAppearance.setPolygonMode(floorPolygonMode);<a name="line.337"></a>
+<FONT color="green">338</FONT>    <a name="line.338"></a>
+<FONT color="green">339</FONT>            // load the texture<a name="line.339"></a>
+<FONT color="green">340</FONT>            Texture2D floorTexture = null;<a name="line.340"></a>
+<FONT color="green">341</FONT>            Image floorTextureImage = MazeMIDlet.makeImage("/com/nokia/midp/examples/m3g/maze3d/content/floor.png");<a name="line.341"></a>
+<FONT color="green">342</FONT>            if (floorTextureImage != null)<a name="line.342"></a>
+<FONT color="green">343</FONT>            {<a name="line.343"></a>
+<FONT color="green">344</FONT>              floorTexture = new Texture2D(<a name="line.344"></a>
+<FONT color="green">345</FONT>                      new Image2D(Image2D.RGB, floorTextureImage));<a name="line.345"></a>
+<FONT color="green">346</FONT>              // the texture is repeated many times<a name="line.346"></a>
+<FONT color="green">347</FONT>              floorTexture.setWrapping(Texture2D.WRAP_REPEAT,<a name="line.347"></a>
+<FONT color="green">348</FONT>                                                               Texture2D.WRAP_REPEAT);<a name="line.348"></a>
+<FONT color="green">349</FONT>              floorTexture.setBlending(Texture2D.FUNC_REPLACE);<a name="line.349"></a>
+<FONT color="green">350</FONT>              floorTexture.setFiltering(Texture2D.FILTER_LINEAR,<a name="line.350"></a>
+<FONT color="green">351</FONT>                                                                    Texture2D.FILTER_NEAREST);<a name="line.351"></a>
+<FONT color="green">352</FONT>              floorAppearance.setTexture(0, floorTexture);<a name="line.352"></a>
+<FONT color="green">353</FONT>            }<a name="line.353"></a>
+<FONT color="green">354</FONT>            Plane floor = new Plane(floorTransform, 10);<a name="line.354"></a>
+<FONT color="green">355</FONT>    <a name="line.355"></a>
+<FONT color="green">356</FONT>            // build the mesh<a name="line.356"></a>
+<FONT color="green">357</FONT>            Mesh floorMesh = floor.createMesh();<a name="line.357"></a>
+<FONT color="green">358</FONT>            floorMesh.setAppearance(0, floorAppearance);<a name="line.358"></a>
+<FONT color="green">359</FONT>            // the floor is not pickable<a name="line.359"></a>
+<FONT color="green">360</FONT>            floorMesh.setPickingEnable(false);<a name="line.360"></a>
+<FONT color="green">361</FONT>            // add to the world<a name="line.361"></a>
+<FONT color="green">362</FONT>            world.addChild(floorMesh);<a name="line.362"></a>
+<FONT color="green">363</FONT>      }<a name="line.363"></a>
+<FONT color="green">364</FONT>    <a name="line.364"></a>
+<FONT color="green">365</FONT>      /**<a name="line.365"></a>
+<FONT color="green">366</FONT>       * Create the player location square<a name="line.366"></a>
+<FONT color="green">367</FONT>       */<a name="line.367"></a>
+<FONT color="green">368</FONT>      private void createLocationSquare()<a name="line.368"></a>
+<FONT color="green">369</FONT>      {<a name="line.369"></a>
+<FONT color="green">370</FONT>            // initial location of the square<a name="line.370"></a>
+<FONT color="green">371</FONT>            // we are only interested in rotating and scaling it<a name="line.371"></a>
+<FONT color="green">372</FONT>            Transform locationSquareTransform = new Transform();<a name="line.372"></a>
+<FONT color="green">373</FONT>            locationSquareTransform.postRotate(90.0f, -1.0f, 0.0f, 0.0f);<a name="line.373"></a>
+<FONT color="green">374</FONT>            locationSquareTransform.postScale(8, 8, 1.0f);<a name="line.374"></a>
+<FONT color="green">375</FONT>    <a name="line.375"></a>
+<FONT color="green">376</FONT>            // the location apparance is a simple texture decal<a name="line.376"></a>
+<FONT color="green">377</FONT>            Appearance locationSquareAppearance = new Appearance();<a name="line.377"></a>
+<FONT color="green">378</FONT>            Texture2D locationSquareTexture = null;<a name="line.378"></a>
+<FONT color="green">379</FONT>            Image locationSquareImage = MazeMIDlet.makeImage("/com/nokia/midp/examples/m3g/maze3d/content/location.png");<a name="line.379"></a>
+<FONT color="green">380</FONT>            if (locationSquareImage != null)<a name="line.380"></a>
+<FONT color="green">381</FONT>            {<a name="line.381"></a>
+<FONT color="green">382</FONT>              locationSquareTexture = new Texture2D(<a name="line.382"></a>
+<FONT color="green">383</FONT>                      new Image2D(Image2D.RGB, locationSquareImage));<a name="line.383"></a>
+<FONT color="green">384</FONT>              // the texture is not repeated<a name="line.384"></a>
+<FONT color="green">385</FONT>              locationSquareTexture.setWrapping(Texture2D.WRAP_CLAMP,<a name="line.385"></a>
+<FONT color="green">386</FONT>                                                                                    Texture2D.WRAP_CLAMP);<a name="line.386"></a>
+<FONT color="green">387</FONT>              locationSquareTexture.setBlending(Texture2D.FUNC_REPLACE);<a name="line.387"></a>
+<FONT color="green">388</FONT>              locationSquareTexture.setFiltering(Texture2D.FILTER_NEAREST,<a name="line.388"></a>
+<FONT color="green">389</FONT>                                                                                     Texture2D.FILTER_NEAREST);<a name="line.389"></a>
+<FONT color="green">390</FONT>              locationSquareAppearance.setTexture(0, locationSquareTexture);<a name="line.390"></a>
+<FONT color="green">391</FONT>            }<a name="line.391"></a>
+<FONT color="green">392</FONT>            Plane locationPlane = new Plane(locationSquareTransform, 1);<a name="line.392"></a>
+<FONT color="green">393</FONT>            locationSquare = locationPlane.createMesh();<a name="line.393"></a>
+<FONT color="green">394</FONT>            locationSquare.setAppearance(0, locationSquareAppearance);<a name="line.394"></a>
+<FONT color="green">395</FONT>            locationSquare.setRenderingEnable(false);<a name="line.395"></a>
+<FONT color="green">396</FONT>            locationSquare.setPickingEnable(false);<a name="line.396"></a>
+<FONT color="green">397</FONT>    <a name="line.397"></a>
+<FONT color="green">398</FONT>            world.addChild(locationSquare);<a name="line.398"></a>
+<FONT color="green">399</FONT>      }<a name="line.399"></a>
+<FONT color="green">400</FONT>    <a name="line.400"></a>
+<FONT color="green">401</FONT>    <a name="line.401"></a>
+<FONT color="green">402</FONT>      /**<a name="line.402"></a>
+<FONT color="green">403</FONT>       * Sets up the maze<a name="line.403"></a>
+<FONT color="green">404</FONT>       */<a name="line.404"></a>
+<FONT color="green">405</FONT>      private void setUpMaze()<a name="line.405"></a>
+<FONT color="green">406</FONT>      {<a name="line.406"></a>
+<FONT color="green">407</FONT>            // the walls need perspection correction enabled<a name="line.407"></a>
+<FONT color="green">408</FONT>            PolygonMode wallPolygonMode = new PolygonMode();<a name="line.408"></a>
+<FONT color="green">409</FONT>            wallPolygonMode.setPerspectiveCorrectionEnable(true);<a name="line.409"></a>
+<FONT color="green">410</FONT>    <a name="line.410"></a>
+<FONT color="green">411</FONT>            // build the wall semi transparent appearance<a name="line.411"></a>
+<FONT color="green">412</FONT>            wallClearAppearance.setPolygonMode(wallPolygonMode);<a name="line.412"></a>
+<FONT color="green">413</FONT>            // this is to make a wall semi transparent<a name="line.413"></a>
+<FONT color="green">414</FONT>            CompositingMode wallClearCompositeMode = new CompositingMode();<a name="line.414"></a>
+<FONT color="green">415</FONT>            wallClearCompositeMode.setBlending(CompositingMode.ALPHA_ADD);<a name="line.415"></a>
+<FONT color="green">416</FONT>            wallClearAppearance.setCompositingMode(wallClearCompositeMode);<a name="line.416"></a>
+<FONT color="green">417</FONT>    <a name="line.417"></a>
+<FONT color="green">418</FONT>            // build the normal wall appearance<a name="line.418"></a>
+<FONT color="green">419</FONT>            wallAppearance.setPolygonMode(wallPolygonMode);<a name="line.419"></a>
+<FONT color="green">420</FONT>    <a name="line.420"></a>
+<FONT color="green">421</FONT>            // load the wall texture<a name="line.421"></a>
+<FONT color="green">422</FONT>            Image wallTextureImage = MazeMIDlet.makeImage("/com/nokia/midp/examples/m3g/maze3d/content/wall.png");<a name="line.422"></a>
+<FONT color="green">423</FONT>            if (wallTextureImage != null)<a name="line.423"></a>
+<FONT color="green">424</FONT>            {<a name="line.424"></a>
+<FONT color="green">425</FONT>              Texture2D wallTexture = null;<a name="line.425"></a>
+<FONT color="green">426</FONT>              wallTexture = new Texture2D(<a name="line.426"></a>
+<FONT color="green">427</FONT>                      new Image2D(Image2D.RGB, wallTextureImage));<a name="line.427"></a>
+<FONT color="green">428</FONT>              // the texture is repeated<a name="line.428"></a>
+<FONT color="green">429</FONT>              wallTexture.setWrapping(Texture2D.WRAP_REPEAT,<a name="line.429"></a>
+<FONT color="green">430</FONT>                                                              Texture2D.WRAP_CLAMP);<a name="line.430"></a>
+<FONT color="green">431</FONT>              wallTexture.setBlending(Texture2D.FUNC_REPLACE);<a name="line.431"></a>
+<FONT color="green">432</FONT>              wallTexture.setFiltering(Texture2D.FILTER_LINEAR,<a name="line.432"></a>
+<FONT color="green">433</FONT>                                                               Texture2D.FILTER_NEAREST);<a name="line.433"></a>
+<FONT color="green">434</FONT>              // set the texture<a name="line.434"></a>
+<FONT color="green">435</FONT>              wallAppearance.setTexture(0, wallTexture);<a name="line.435"></a>
+<FONT color="green">436</FONT>              wallClearAppearance.setTexture(0, wallTexture);<a name="line.436"></a>
+<FONT color="green">437</FONT>            }<a name="line.437"></a>
+<FONT color="green">438</FONT>    <a name="line.438"></a>
+<FONT color="green">439</FONT>            // The maze create the planes and they are added to the world<a name="line.439"></a>
+<FONT color="green">440</FONT>            Enumeration wallsEnum = maze.createPlanes();<a name="line.440"></a>
+<FONT color="green">441</FONT>            while (wallsEnum.hasMoreElements())<a name="line.441"></a>
+<FONT color="green">442</FONT>            {<a name="line.442"></a>
+<FONT color="green">443</FONT>              Mesh wallMesh = ((Plane) wallsEnum.nextElement()).createMesh();<a name="line.443"></a>
+<FONT color="green">444</FONT>              wallMesh.setAppearance(0, wallAppearance);<a name="line.444"></a>
+<FONT color="green">445</FONT>              world.addChild(wallMesh);<a name="line.445"></a>
+<FONT color="green">446</FONT>            }<a name="line.446"></a>
+<FONT color="green">447</FONT>    <a name="line.447"></a>
+<FONT color="green">448</FONT>      }<a name="line.448"></a>
+<FONT color="green">449</FONT>    <a name="line.449"></a>
+<FONT color="green">450</FONT>      /**<a name="line.450"></a>
+<FONT color="green">451</FONT>       * decides whether it is allowed to move to a given place<a name="line.451"></a>
+<FONT color="green">452</FONT>       * otherwise it is possible to cross walls and go outside the maze<a name="line.452"></a>
+<FONT color="green">453</FONT>       * @param stepx the attempted x step<a name="line.453"></a>
+<FONT color="green">454</FONT>       * @param stepz the attempted z step<a name="line.454"></a>
+<FONT color="green">455</FONT>       * @param forward true if direction is forward<a name="line.455"></a>
+<FONT color="green">456</FONT>       * @return true if allowed to move to a given place<a name="line.456"></a>
+<FONT color="green">457</FONT>       */<a name="line.457"></a>
+<FONT color="green">458</FONT>      private boolean canMove(float stepx, float stepz, boolean forward)<a name="line.458"></a>
+<FONT color="green">459</FONT>      {<a name="line.459"></a>
+<FONT color="green">460</FONT>            float x = locationx + stepx;<a name="line.460"></a>
+<FONT color="green">461</FONT>            float z = locationz + stepz;<a name="line.461"></a>
+<FONT color="green">462</FONT>            // First check if inside the maze area<a name="line.462"></a>
+<FONT color="green">463</FONT>            float mazeSize = MAZE_SIDE_LENGTH / 2 - 2;<a name="line.463"></a>
+<FONT color="green">464</FONT>            if (x &lt;= -mazeSize<a name="line.464"></a>
+<FONT color="green">465</FONT>                    || z &lt;= -mazeSize<a name="line.465"></a>
+<FONT color="green">466</FONT>                    || x > mazeSize<a name="line.466"></a>
+<FONT color="green">467</FONT>                    || z > mazeSize)<a name="line.467"></a>
+<FONT color="green">468</FONT>            {<a name="line.468"></a>
+<FONT color="green">469</FONT>              return false;<a name="line.469"></a>
+<FONT color="green">470</FONT>            }<a name="line.470"></a>
+<FONT color="green">471</FONT>            // collision with walls is easily implemented using picking<a name="line.471"></a>
+<FONT color="green">472</FONT>            // if there is something in front of the camera and the distance is too<a name="line.472"></a>
+<FONT color="green">473</FONT>            // small, the movement is not allowed<a name="line.473"></a>
+<FONT color="green">474</FONT>            RayIntersection ri = new RayIntersection();<a name="line.474"></a>
+<FONT color="green">475</FONT>            // inverse the point of view to detect if it is moving<a name="line.475"></a>
+<FONT color="green">476</FONT>            // bacwards<a name="line.476"></a>
+<FONT color="green">477</FONT>            if (!forward)<a name="line.477"></a>
+<FONT color="green">478</FONT>            {<a name="line.478"></a>
+<FONT color="green">479</FONT>              camera.postRotate(180, 0f, 1f, 0f);<a name="line.479"></a>
+<FONT color="green">480</FONT>            }<a name="line.480"></a>
+<FONT color="green">481</FONT>            if (world.pick(-1, 0.5f, 0.5f, camera, ri))<a name="line.481"></a>
+<FONT color="green">482</FONT>            {<a name="line.482"></a>
+<FONT color="green">483</FONT>              Node selected = ri.getIntersected();<a name="line.483"></a>
+<FONT color="green">484</FONT>              if (selected instanceof Mesh)<a name="line.484"></a>
+<FONT color="green">485</FONT>              {<a name="line.485"></a>
+<FONT color="green">486</FONT>                    // multiply per 9 since that's the size of a step<a name="line.486"></a>
+<FONT color="green">487</FONT>                    float distance = ri.getDistance() * 9;<a name="line.487"></a>
+<FONT color="green">488</FONT>    <a name="line.488"></a>
+<FONT color="green">489</FONT>                    if (distance &lt;= 0.1)<a name="line.489"></a>
+<FONT color="green">490</FONT>                    {<a name="line.490"></a>
+<FONT color="green">491</FONT>                      return false;<a name="line.491"></a>
+<FONT color="green">492</FONT>                    }<a name="line.492"></a>
+<FONT color="green">493</FONT>              }<a name="line.493"></a>
+<FONT color="green">494</FONT>            }<a name="line.494"></a>
+<FONT color="green">495</FONT>            if (!forward)<a name="line.495"></a>
+<FONT color="green">496</FONT>            {<a name="line.496"></a>
+<FONT color="green">497</FONT>              // revert to the original view<a name="line.497"></a>
+<FONT color="green">498</FONT>              camera.postRotate(-180, 0f, 1f, 0f);<a name="line.498"></a>
+<FONT color="green">499</FONT>            }<a name="line.499"></a>
+<FONT color="green">500</FONT>            return true;<a name="line.500"></a>
+<FONT color="green">501</FONT>      }<a name="line.501"></a>
+<FONT color="green">502</FONT>    <a name="line.502"></a>
+<FONT color="green">503</FONT>      /**<a name="line.503"></a>
+<FONT color="green">504</FONT>       * Method checks whenever the keys are pressed<a name="line.504"></a>
+<FONT color="green">505</FONT>       */<a name="line.505"></a>
+<FONT color="green">506</FONT>      private void checkKeys()<a name="line.506"></a>
+<FONT color="green">507</FONT>      {<a name="line.507"></a>
+<FONT color="green">508</FONT>            int keyState = getKeyStates();<a name="line.508"></a>
+<FONT color="green">509</FONT>            boolean moved = false;<a name="line.509"></a>
+<FONT color="green">510</FONT>    <a name="line.510"></a>
+<FONT color="green">511</FONT>            // if fire is detected the mesh in front of you is made semi transparent<a name="line.511"></a>
+<FONT color="green">512</FONT>            if ((keyState & FIRE_PRESSED) != 0)<a name="line.512"></a>
+<FONT color="green">513</FONT>            {<a name="line.513"></a>
+<FONT color="green">514</FONT>              RayIntersection ri = new RayIntersection();<a name="line.514"></a>
+<FONT color="green">515</FONT>              if (world.pick(-1, 0.5f, 0.5f, camera, ri))<a name="line.515"></a>
+<FONT color="green">516</FONT>              {<a name="line.516"></a>
+<FONT color="green">517</FONT>                    // if there is something to pick<a name="line.517"></a>
+<FONT color="green">518</FONT>                    Node selected = ri.getIntersected();<a name="line.518"></a>
+<FONT color="green">519</FONT>                    if (selected instanceof Mesh)<a name="line.519"></a>
+<FONT color="green">520</FONT>                    {<a name="line.520"></a>
+<FONT color="green">521</FONT>                      // make the wall semi transparent<a name="line.521"></a>
+<FONT color="green">522</FONT>                      transparentMesh = ((Mesh) selected);<a name="line.522"></a>
+<FONT color="green">523</FONT>                      transparentMesh.setAppearance(0, wallClearAppearance);<a name="line.523"></a>
+<FONT color="green">524</FONT>                      transparentMesh.setAlphaFactor(0.8f);<a name="line.524"></a>
+<FONT color="green">525</FONT>                    }<a name="line.525"></a>
+<FONT color="green">526</FONT>              }<a name="line.526"></a>
+<FONT color="green">527</FONT>            }<a name="line.527"></a>
+<FONT color="green">528</FONT>            // here we assume only one button is pressed otherwise the "second"<a name="line.528"></a>
+<FONT color="green">529</FONT>            // press is ignored<a name="line.529"></a>
+<FONT color="green">530</FONT>            if ((keyState & LEFT_PRESSED) != 0)<a name="line.530"></a>
+<FONT color="green">531</FONT>            {<a name="line.531"></a>
+<FONT color="green">532</FONT>              // move to the left<a name="line.532"></a>
+<FONT color="green">533</FONT>              angley += ANGLE_STEP;<a name="line.533"></a>
+<FONT color="green">534</FONT>              stepx = STEP * (float) Math.sin(Math.toRadians(angley));<a name="line.534"></a>
+<FONT color="green">535</FONT>              stepz = STEP * (float) Math.cos(Math.toRadians(angley));<a name="line.535"></a>
+<FONT color="green">536</FONT>              // shift the background a bit to the right<a name="line.536"></a>
+<FONT color="green">537</FONT>              background.setCrop(background.getCropX() + 3,<a name="line.537"></a>
+<FONT color="green">538</FONT>                                                     0,<a name="line.538"></a>
+<FONT color="green">539</FONT>                                                     getWidth(),<a name="line.539"></a>
+<FONT color="green">540</FONT>                                                     getHeight());<a name="line.540"></a>
+<FONT color="green">541</FONT>              moved = true;<a name="line.541"></a>
+<FONT color="green">542</FONT>            }<a name="line.542"></a>
+<FONT color="green">543</FONT>            else if ((keyState & RIGHT_PRESSED) != 0)<a name="line.543"></a>
+<FONT color="green">544</FONT>            {<a name="line.544"></a>
+<FONT color="green">545</FONT>              // move to the right<a name="line.545"></a>
+<FONT color="green">546</FONT>              angley -= ANGLE_STEP;<a name="line.546"></a>
+<FONT color="green">547</FONT>              stepx = STEP * (float) Math.sin(Math.toRadians(angley));<a name="line.547"></a>
+<FONT color="green">548</FONT>              stepz = STEP * (float) Math.cos(Math.toRadians(angley));<a name="line.548"></a>
+<FONT color="green">549</FONT>              // shift the background a bit to the left<a name="line.549"></a>
+<FONT color="green">550</FONT>              background.setCrop(background.getCropX() - 3,<a name="line.550"></a>
+<FONT color="green">551</FONT>                                                     0,<a name="line.551"></a>
+<FONT color="green">552</FONT>                                                     getWidth(),<a name="line.552"></a>
+<FONT color="green">553</FONT>                                                     getHeight());<a name="line.553"></a>
+<FONT color="green">554</FONT>              moved = true;<a name="line.554"></a>
+<FONT color="green">555</FONT>            }<a name="line.555"></a>
+<FONT color="green">556</FONT>            else if ((keyState & UP_PRESSED) != 0)<a name="line.556"></a>
+<FONT color="green">557</FONT>            {<a name="line.557"></a>
+<FONT color="green">558</FONT>              // move forward, but first check if it is allowed<a name="line.558"></a>
+<FONT color="green">559</FONT>              if (canMove(-stepx, -stepz, true))<a name="line.559"></a>
+<FONT color="green">560</FONT>              {<a name="line.560"></a>
+<FONT color="green">561</FONT>                    locationx -= stepx;<a name="line.561"></a>
+<FONT color="green">562</FONT>                    locationz -= stepz;<a name="line.562"></a>
+<FONT color="green">563</FONT>              }<a name="line.563"></a>
+<FONT color="green">564</FONT>              moved = true;<a name="line.564"></a>
+<FONT color="green">565</FONT>            }<a name="line.565"></a>
+<FONT color="green">566</FONT>            else if ((keyState & DOWN_PRESSED) != 0)<a name="line.566"></a>
+<FONT color="green">567</FONT>            {<a name="line.567"></a>
+<FONT color="green">568</FONT>              // move backwards, but first check if it is allowed<a name="line.568"></a>
+<FONT color="green">569</FONT>              if (canMove(stepx, stepz, false))<a name="line.569"></a>
+<FONT color="green">570</FONT>              {<a name="line.570"></a>
+<FONT color="green">571</FONT>                    locationx += stepx;<a name="line.571"></a>
+<FONT color="green">572</FONT>                    locationz += stepz;<a name="line.572"></a>
+<FONT color="green">573</FONT>              }<a name="line.573"></a>
+<FONT color="green">574</FONT>              moved = true;<a name="line.574"></a>
+<FONT color="green">575</FONT>            }<a name="line.575"></a>
+<FONT color="green">576</FONT>    <a name="line.576"></a>
+<FONT color="green">577</FONT>            // if moved we make the last transparent wall normal<a name="line.577"></a>
+<FONT color="green">578</FONT>            // and reset the view<a name="line.578"></a>
+<FONT color="green">579</FONT>            if (moved)<a name="line.579"></a>
+<FONT color="green">580</FONT>            {<a name="line.580"></a>
+<FONT color="green">581</FONT>              if (!finished && maze.isAtTheEnd(locationx, locationz, 10f))<a name="line.581"></a>
+<FONT color="green">582</FONT>              {<a name="line.582"></a>
+<FONT color="green">583</FONT>                    finished = true;<a name="line.583"></a>
+<FONT color="green">584</FONT>              }<a name="line.584"></a>
+<FONT color="green">585</FONT>              // if there was a mesh semi transparent<a name="line.585"></a>
+<FONT color="green">586</FONT>              // return to normal<a name="line.586"></a>
+<FONT color="green">587</FONT>              if (transparentMesh != null)<a name="line.587"></a>
+<FONT color="green">588</FONT>              {<a name="line.588"></a>
+<FONT color="green">589</FONT>                    transparentMesh.setAppearance(0, wallAppearance);<a name="line.589"></a>
+<FONT color="green">590</FONT>                    transparentMesh.setAlphaFactor(1f);<a name="line.590"></a>
+<FONT color="green">591</FONT>                    transparentMesh = null;<a name="line.591"></a>
+<FONT color="green">592</FONT>              }<a name="line.592"></a>
+<FONT color="green">593</FONT>              // if we move we reset the top view state<a name="line.593"></a>
+<FONT color="green">594</FONT>              if (topView)<a name="line.594"></a>
+<FONT color="green">595</FONT>              {<a name="line.595"></a>
+<FONT color="green">596</FONT>                    switchView();<a name="line.596"></a>
+<FONT color="green">597</FONT>              }<a name="line.597"></a>
+<FONT color="green">598</FONT>              setupCamera();<a name="line.598"></a>
+<FONT color="green">599</FONT>            }<a name="line.599"></a>
+<FONT color="green">600</FONT>      }<a name="line.600"></a>
+<FONT color="green">601</FONT>    <a name="line.601"></a>
+<FONT color="green">602</FONT>    <a name="line.602"></a>
+<FONT color="green">603</FONT>      /**<a name="line.603"></a>
+<FONT color="green">604</FONT>       * Key pressed used to show the main menu<a name="line.604"></a>
+<FONT color="green">605</FONT>       * @param key the key that was pressed<a name="line.605"></a>
+<FONT color="green">606</FONT>       */<a name="line.606"></a>
+<FONT color="green">607</FONT>      protected void keyPressed(int key)<a name="line.607"></a>
+<FONT color="green">608</FONT>      {<a name="line.608"></a>
+<FONT color="green">609</FONT>            if (key &lt; 0)<a name="line.609"></a>
+<FONT color="green">610</FONT>            {<a name="line.610"></a>
+<FONT color="green">611</FONT>              midlet.showMenu();<a name="line.611"></a>
+<FONT color="green">612</FONT>            }<a name="line.612"></a>
+<FONT color="green">613</FONT>      }<a name="line.613"></a>
+<FONT color="green">614</FONT>    <a name="line.614"></a>
+<FONT color="green">615</FONT>    <a name="line.615"></a>
+<FONT color="green">616</FONT>      /**<a name="line.616"></a>
+<FONT color="green">617</FONT>       * Sets the camera location, orientation, location.<a name="line.617"></a>
+<FONT color="green">618</FONT>       */<a name="line.618"></a>
+<FONT color="green">619</FONT>      private void setupCamera()<a name="line.619"></a>
+<FONT color="green">620</FONT>      {<a name="line.620"></a>
+<FONT color="green">621</FONT>            camera.setOrientation(angley, 0f, 1f, 0f);<a name="line.621"></a>
+<FONT color="green">622</FONT>            camera.setTranslation(locationx, 10f, locationz);<a name="line.622"></a>
+<FONT color="green">623</FONT>      }<a name="line.623"></a>
+<FONT color="green">624</FONT>    <a name="line.624"></a>
+<FONT color="green">625</FONT>      /**<a name="line.625"></a>
+<FONT color="green">626</FONT>       * Draw 2d information on top of the screen<a name="line.626"></a>
+<FONT color="green">627</FONT>       * @param g the graphics object<a name="line.627"></a>
+<FONT color="green">628</FONT>       */<a name="line.628"></a>
+<FONT color="green">629</FONT>      private void draw2D(Graphics g)<a name="line.629"></a>
+<FONT color="green">630</FONT>      {<a name="line.630"></a>
+<FONT color="green">631</FONT>           // text color<a name="line.631"></a>
+<FONT color="green">632</FONT>            g.setColor(45, 235, 45);<a name="line.632"></a>
+<FONT color="green">633</FONT>            StringBuffer status = new StringBuffer("");<a name="line.633"></a>
+<FONT color="green">634</FONT>            if (finished)<a name="line.634"></a>
+<FONT color="green">635</FONT>            {<a name="line.635"></a>
+<FONT color="green">636</FONT>              status.append("Done");<a name="line.636"></a>
+<FONT color="green">637</FONT>            }<a name="line.637"></a>
+<FONT color="green">638</FONT>            else<a name="line.638"></a>
+<FONT color="green">639</FONT>            {<a name="line.639"></a>
+<FONT color="green">640</FONT>              duration = System.currentTimeMillis() - gameStart;<a name="line.640"></a>
+<FONT color="green">641</FONT>            }<a name="line.641"></a>
+<FONT color="green">642</FONT>            status.append(" Time:").append(duration / 1000);<a name="line.642"></a>
+<FONT color="green">643</FONT>    <a name="line.643"></a>
+<FONT color="green">644</FONT>            // draw time on the top right<a name="line.644"></a>
+<FONT color="green">645</FONT>            g.drawString(status.toString(),<a name="line.645"></a>
+<FONT color="green">646</FONT>                                     getWidth(),<a name="line.646"></a>
+<FONT color="green">647</FONT>                                     0,<a name="line.647"></a>
+<FONT color="green">648</FONT>                                     Graphics.TOP | Graphics.RIGHT);<a name="line.648"></a>
+<FONT color="green">649</FONT>            // draw FPS on the bottom left<a name="line.649"></a>
+<FONT color="green">650</FONT>            g.drawString("FPS: " + fps,<a name="line.650"></a>
+<FONT color="green">651</FONT>                                     0,<a name="line.651"></a>
+<FONT color="green">652</FONT>                                     getHeight(),<a name="line.652"></a>
+<FONT color="green">653</FONT>                                     Graphics.BOTTOM | Graphics.LEFT);<a name="line.653"></a>
+<FONT color="green">654</FONT>      }<a name="line.654"></a>
+<FONT color="green">655</FONT>    <a name="line.655"></a>
+<FONT color="green">656</FONT>      /**<a name="line.656"></a>
+<FONT color="green">657</FONT>       * paints the scene<a name="line.657"></a>
+<FONT color="green">658</FONT>       * @param g graphics object<a name="line.658"></a>
+<FONT color="green">659</FONT>       */<a name="line.659"></a>
+<FONT color="green">660</FONT>      private void draw3D(Graphics g)<a name="line.660"></a>
+<FONT color="green">661</FONT>      {<a name="line.661"></a>
+<FONT color="green">662</FONT>            boolean bound = false;<a name="line.662"></a>
+<FONT color="green">663</FONT>            try<a name="line.663"></a>
+<FONT color="green">664</FONT>            {<a name="line.664"></a>
+<FONT color="green">665</FONT>              // binds the target<a name="line.665"></a>
+<FONT color="green">666</FONT>              g3d.bindTarget(g);<a name="line.666"></a>
+<FONT color="green">667</FONT>              bound = true;<a name="line.667"></a>
+<FONT color="green">668</FONT>              // advance the animation<a name="line.668"></a>
+<FONT color="green">669</FONT>              world.animate((int)(System.currentTimeMillis() - gameStart));<a name="line.669"></a>
+<FONT color="green">670</FONT>              // do the rendering<a name="line.670"></a>
+<FONT color="green">671</FONT>              g3d.render(world);<a name="line.671"></a>
+<FONT color="green">672</FONT>            }<a name="line.672"></a>
+<FONT color="green">673</FONT>            finally<a name="line.673"></a>
+<FONT color="green">674</FONT>            {<a name="line.674"></a>
+<FONT color="green">675</FONT>              // release the target<a name="line.675"></a>
+<FONT color="green">676</FONT>              if (bound)<a name="line.676"></a>
+<FONT color="green">677</FONT>              {<a name="line.677"></a>
+<FONT color="green">678</FONT>                    g3d.releaseTarget();<a name="line.678"></a>
+<FONT color="green">679</FONT>              }<a name="line.679"></a>
+<FONT color="green">680</FONT>            }<a name="line.680"></a>
+<FONT color="green">681</FONT>      }<a name="line.681"></a>
+<FONT color="green">682</FONT>    <a name="line.682"></a>
+<FONT color="green">683</FONT>    <a name="line.683"></a>
+<FONT color="green">684</FONT>      /**<a name="line.684"></a>
+<FONT color="green">685</FONT>       * The threads run method<a name="line.685"></a>
+<FONT color="green">686</FONT>       */<a name="line.686"></a>
+<FONT color="green">687</FONT>      public void run()<a name="line.687"></a>
+<FONT color="green">688</FONT>      {<a name="line.688"></a>
+<FONT color="green">689</FONT>            Graphics g = getGraphics();<a name="line.689"></a>
+<FONT color="green">690</FONT>            while (playing)<a name="line.690"></a>
+<FONT color="green">691</FONT>            {<a name="line.691"></a>
+<FONT color="green">692</FONT>              try<a name="line.692"></a>
+<FONT color="green">693</FONT>              {<a name="line.693"></a>
+<FONT color="green">694</FONT>                    long startTime = System.currentTimeMillis();<a name="line.694"></a>
+<FONT color="green">695</FONT>                    if (isShown())<a name="line.695"></a>
+<FONT color="green">696</FONT>                    {<a name="line.696"></a>
+<FONT color="green">697</FONT>                      // update the world if the player has moved<a name="line.697"></a>
+<FONT color="green">698</FONT>                      checkKeys();<a name="line.698"></a>
+<FONT color="green">699</FONT>                      long drawingTime = System.currentTimeMillis();<a name="line.699"></a>
+<FONT color="green">700</FONT>    <a name="line.700"></a>
+<FONT color="green">701</FONT>                      // draw the 3d part<a name="line.701"></a>
+<FONT color="green">702</FONT>                      draw3D(g);<a name="line.702"></a>
+<FONT color="green">703</FONT>                      drawingTime = System.currentTimeMillis() - drawingTime;<a name="line.703"></a>
+<FONT color="green">704</FONT>                      // calculate fps<a name="line.704"></a>
+<FONT color="green">705</FONT>                      fps = (drawingTime &lt;= 1) ? 1000 : 1000 / drawingTime;<a name="line.705"></a>
+<FONT color="green">706</FONT>    <a name="line.706"></a>
+<FONT color="green">707</FONT>                      // draw the 2d part<a name="line.707"></a>
+<FONT color="green">708</FONT>                      draw2D(g);<a name="line.708"></a>
+<FONT color="green">709</FONT>                      // flush to the screen<a name="line.709"></a>
+<FONT color="green">710</FONT>                      flushGraphics();<a name="line.710"></a>
+<FONT color="green">711</FONT>                    }<a name="line.711"></a>
+<FONT color="green">712</FONT>                    // wait for a little and give the other threads<a name="line.712"></a>
+<FONT color="green">713</FONT>                    // the chance to run<a name="line.713"></a>
+<FONT color="green">714</FONT>                    long timeTaken = System.currentTimeMillis() - startTime;<a name="line.714"></a>
+<FONT color="green">715</FONT>                    synchronized (this)<a name="line.715"></a>
+<FONT color="green">716</FONT>                    {<a name="line.716"></a>
+<FONT color="green">717</FONT>                      if (timeTaken &lt; loopDuration)<a name="line.717"></a>
+<FONT color="green">718</FONT>                      {<a name="line.718"></a>
+<FONT color="green">719</FONT>                            wait(loopDuration - timeTaken);<a name="line.719"></a>
+<FONT color="green">720</FONT>                            if (loopDuration > MILLIS_PER_TICK)<a name="line.720"></a>
+<FONT color="green">721</FONT>                            {<a name="line.721"></a>
+<FONT color="green">722</FONT>                              loopDuration--;<a name="line.722"></a>
+<FONT color="green">723</FONT>                            }<a name="line.723"></a>
+<FONT color="green">724</FONT>                      }<a name="line.724"></a>
+<FONT color="green">725</FONT>                      else<a name="line.725"></a>
+<FONT color="green">726</FONT>                      {<a name="line.726"></a>
+<FONT color="green">727</FONT>                        loopDuration = timeTaken;<a name="line.727"></a>
+<FONT color="green">728</FONT>                        wait(1);<a name="line.728"></a>
+<FONT color="green">729</FONT>                      }<a name="line.729"></a>
+<FONT color="green">730</FONT>                    }<a name="line.730"></a>
+<FONT color="green">731</FONT>              }<a name="line.731"></a>
+<FONT color="green">732</FONT>              catch (Exception e)<a name="line.732"></a>
+<FONT color="green">733</FONT>              {<a name="line.733"></a>
+<FONT color="green">734</FONT>                    // ignore. Not much to but we want to keep the loop running<a name="line.734"></a>
+<FONT color="green">735</FONT>              }<a name="line.735"></a>
+<FONT color="green">736</FONT>            }<a name="line.736"></a>
+<FONT color="green">737</FONT>      }<a name="line.737"></a>
+<FONT color="green">738</FONT>    <a name="line.738"></a>
+<FONT color="green">739</FONT>    <a name="line.739"></a>
+<FONT color="green">740</FONT>      /**<a name="line.740"></a>
+<FONT color="green">741</FONT>       * It is possible that the canvas size may change and the application<a name="line.741"></a>
+<FONT color="green">742</FONT>       * must be prepared to resize itself accordingly.  This routine just<a name="line.742"></a>
+<FONT color="green">743</FONT>       * calls application methods stop, init to handle this<a name="line.743"></a>
+<FONT color="green">744</FONT>       * change in conditions.<a name="line.744"></a>
+<FONT color="green">745</FONT>       * @param w width<a name="line.745"></a>
+<FONT color="green">746</FONT>       * @param h height<a name="line.746"></a>
+<FONT color="green">747</FONT>       */<a name="line.747"></a>
+<FONT color="green">748</FONT>      protected void sizeChanged(int w, int h)<a name="line.748"></a>
+<FONT color="green">749</FONT>      {<a name="line.749"></a>
+<FONT color="green">750</FONT>          stop();<a name="line.750"></a>
+<FONT color="green">751</FONT>          init();<a name="line.751"></a>
+<FONT color="green">752</FONT>      }<a name="line.752"></a>
+<FONT color="green">753</FONT>    <a name="line.753"></a>
+<FONT color="green">754</FONT>    }<a name="line.754"></a>
+<FONT color="green">755</FONT>    <a name="line.755"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+</BODY>
+</HTML>

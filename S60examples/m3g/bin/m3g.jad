@@ -1,0 +1,8 @@
+MIDlet-1: 3D Maze, , com.nokia.midp.examples.m3g.maze3d.MazeMIDlet
+MIDlet-Jar-Size: 25511
+MIDlet-Jar-URL: m3g.jar
+MIDlet-Name: 3D Maze Example
+MicroEdition-Configuration: CLDC-1.1
+MicroEdition-Profile: MIDP-2.0
+MIDlet-Vendor: Nokia
+MIDlet-Version: 1.0

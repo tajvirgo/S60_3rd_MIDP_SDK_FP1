@@ -1,0 +1,142 @@
+<!-- Copyright  2006 Nokia. -->
+
+<!-- build.xml -->
+
+<!-- This is the build file for the example project -->
+
+<!-- This build file is used for the shopping MIDlet -->
+
+
+  <project name="shopping" default="build" basedir="..">
+  <property name="build" value="build" />
+  <property name="classes" value="${build}/classes" />
+  <property name="src" value="src" />
+  <property name="rsrc" value="rsrc" />
+  <property name="midp_rsrc" value="${rsrc}/midp" />
+  <property name="bundle" value="${build}/bundle" />
+  <property name="preverified" value="${build}/preverified" />
+  <property name="bin" value="bin" />
+  <property name="midp_bin" value="${midp}/bin" />
+  <property name="targets" value="targets" />
+  <property name="javadoc" value="doc/javadoc" />
+  <property name="javadoc_rsrc" value="${rsrc}/javadoc" />
+
+  <property name="midp" value="." />    
+
+
+  <description>
+   shopping Example MIDlet java build project file
+  </description>
+
+  <target name="help">
+    <!-- TODO-->
+  </target>
+
+  <target name="clean">
+    <delete dir="${bin}" />
+  </target>
+
+  <target name="cleanSrc" description="deletes all class files from src folder">
+    <delete>
+      <fileset dir="${src}" includes="**/*.class"/>
+    </delete>
+  </target>
+
+  <!-- ***** -->
+  <!-- BUILD -->
+  <!-- ***** -->
+  <target name="build" description="clean, compile and build">
+    <antcall target="clean" /> 
+    <antcall target="compile" /> 
+    <antcall target="preverify" /> 
+    <antcall target="package" /> 
+<!--  <antcall target="javadoc" />   -->
+  </target>
+
+  <target name="compile">
+	
+    <mkdir dir="${classes}" />
+    <javac destDir="${classes}" srcDir="${src}" source="1.4" target="1.4" classpathref="project.class.path" includeAntRuntime="no" includeJavaRuntime="no">
+	<bootclasspath>
+      		<fileset dir="../../lib">
+        	<include name="**/*.jar"/>
+		<include name="**/*.zip"/>
+      		</fileset>   
+  	</bootclasspath>  
+  	
+    
+   </javac>  
+   <copy todir="${classes}">
+      <fileset dir="${src}" excludes="**/*.java"/>
+    </copy>
+  </target>
+
+
+<path id="project.class.path">
+      		<fileset dir="../../lib">
+        	   <include name="**/*.jar"/>
+		         <include name="**/*.zip"/>
+      		</fileset>   
+  </path>
+
+ <property name="myclasspath" refid="project.class.path"/>
+
+  <target name="preverify">
+
+    <mkdir dir="${preverified}"/>
+    <exec executable="${basedir}/../../bin/preverify"  failonerror="true">  
+	
+      <arg line="-classpath ${myclasspath}"/>
+      <arg line="-d ${preverified}"/>
+      <arg line="${classes}"/>
+    </exec>     
+    <copy todir="${preverified}"  failonerror="false">
+      <fileset dir="${src}" excludes="**/*.java"/>
+    </copy>
+  </target>
+  
+  <target name="package">
+    <mkdir dir="${bin}" /> 
+      <jar basedir="${preverified}" jarfile="${bin}/${ant.project.name}.jar"
+      manifest="${midp_rsrc}/MANIFEST.MF" compress="true">
+      </jar>
+    
+    <!-- 
+    The JAD file for the project is automatically updated during the next group
+    of ant tasks.  The length of the JAR file is obtained and then that value is
+    placed in the JAD file by replacing a token marker.
+    -->
+
+    <length file="${bin}/${ant.project.name}.jar" property="length.jarfile" /> 
+    <copy file="${midp_rsrc}/${ant.project.name}.jad" toDir="${bin}" />  
+    <replace file="${bin}/${ant.project.name}.jad" token="@@@" value="${length.jarfile}"/>
+
+  </target>
+
+  <!-- ****************** -->
+  <!-- javadoc            -->
+  <!-- ****************** -->
+  <target name="javadoc" description="creates javadoc documentation">
+    <mkdir dir="${javadoc}" />
+  	
+    <javadoc 
+      destdir="${javadoc}"
+      sourcepath="${javadoc_rsrc}"
+      classpath="${myclasspath}"
+      author="true"
+      version="true"
+      use="true"
+      access="private"     
+      noindex="false"
+      linksource="true">
+
+      <packageset dir="${src}">
+        <include name="com/nokia/**" />          
+      </packageset>       	
+	
+      <!-- <fileset dir="${src}" casesensitive="yes">
+                   <include name="**/*.java"/>
+      </fileset> -->    
+    </javadoc> 		
+  </target>
+</project>

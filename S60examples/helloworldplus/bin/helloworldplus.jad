@@ -1,0 +1,8 @@
+MIDlet-1: Hello World Plus, , com.nokia.midp.examples.lcdui.helloworldplus.HelloWorldPlusMIDlet
+MIDlet-Jar-Size: 4095
+MIDlet-Jar-URL: helloworldplus.jar
+MIDlet-Name: Hello World Plus
+MicroEdition-Configuration: CLDC-1.1
+MicroEdition-Profile: MIDP-2.0
+MIDlet-Version: 1.0
+MIDlet-Vendor: Nokia

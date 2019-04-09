@@ -1,0 +1,29 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="What is System.out and System.err redirection?"/><meta name="DC.Relation" scheme="URI" content="GUID-2EAFDF61-2D9F-4397-B977-650C2FB60240"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-01219688-7695-4380-A83A-0547AD5A3E76"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> Tools and Utilities</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-01219688-7695-4380-A83A-0547AD5A3E76"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-01219688-7695-4380-A83A-0547AD5A3E76"><!----></a>What
+is System.out and System.err redirection?</h1>
+<p>S60 3rd Edition SDK provides the possibility to view on the PC the System.out
+and System.err streams used by a MIDlet running on a phone with the help of
+the device connectivity tool. All necessary settings to enable the feature
+are described in <a href="GUID-2EAFDF61-2D9F-4397-B977-650C2FB60240.html#GUID-2EAFDF61-2D9F-4397-B977-650C2FB60240">Setting
+up System.out and System.err redirection</a>. The ability to view System.out
+and System.err streams on the PC provides additional means of MIDlet debugging
+on a real S60 device.</p>
+<p>System.out and System.err streams, which are written to by a MIDlet
+under a test, are captured by a special redirector MIDlet running simultaneously
+with the MIDlet being tested. The redirector MIDlet sends the data using the
+PC connectivity Symbian application and a Bluetooth connection to the device
+connectivity tool running on a PC. System.out and System.err streams are delivered
+to the redirector MIDlet in chunks of approximately 110 symbols. Therefore,
+shorter strings are not immediately seen in the <a href="GUID-EB012373-734D-4A3A-995A-926F9ABFDDF5.html#GUID-EB012373-734D-4A3A-995A-926F9ABFDDF5">Diagnostics
+window</a>, but are held in the buffer. Right after start-up the redirector
+MIDlet sends a “Redirector MIDlet: redirection is started” message to the
+diagnostics window.</p>
+<p>The figure below shows the Diagnostics window of the device connectivity
+tool running on a PC. System.err and System.out printouts are seen in the
+SystemOut part of the window.</p>
+<div class="figure" id="GUID-3E08C7B5-1E22-4FE6-A2AF-16871E4C8A78"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-3E08C7B5-1E22-4FE6-A2AF-16871E4C8A78"><!----></a><img src="GUID-824F2BFE-2045-495C-9D6F-78E88F807CCC_d0e13212_href.png" alt=""/><p class="figure-title"><strong>Figure 83: </strong>Device connectivity tool, Diagnostics view
+with System.out printouts</p></div>
+</div><!--end: content--><!--start: sidebar--><div class="sidebar"><h3>Related information</h3><ul><li><a href="GUID-2EAFDF61-2D9F-4397-B977-650C2FB60240.html#GUID-2EAFDF61-2D9F-4397-B977-650C2FB60240">Setting up
+System.out and System.err Redirection</a></li></ul></div><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

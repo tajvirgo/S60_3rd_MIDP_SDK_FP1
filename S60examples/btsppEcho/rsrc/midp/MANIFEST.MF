@@ -1,0 +1,6 @@
+MIDlet-1: btsppEcho, /logo.png, com.nokia.midp.examples.btsppecho.MIDletApplication
+MIDlet-Name: btsppEcho
+MicroEdition-Profile: MIDP-2.0
+MicroEdition-Configuration: CLDC-1.1
+MIDlet-Vendor: Nokia
+MIDlet-Version: 1.0

@@ -1,0 +1,238 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="On-device MIDlet debugging over WLAN"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-0F214BA9-6EB3-461A-A48A-9F5A583F5AAD"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> Tools and Utilities</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-0F214BA9-6EB3-461A-A48A-9F5A583F5AAD"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-0F214BA9-6EB3-461A-A48A-9F5A583F5AAD"><!----></a>On-device
+MIDlet debugging over WLAN</h1>
+<div class="note"><p><strong class="note_title">Note: </strong>In these instructions it is assumed that the development environment
+has been set up correctly; to verify this please refer to <a href="GUID-9DB21E44-E984-466F-9FC9-2076DFF53BBD.html#GUID-9DB21E44-E984-466F-9FC9-2076DFF53BBD">Setting
+up the development environment</a>.</p></div>
+<div class="note"><p><strong class="note_title">Note: </strong>In these instructions it is also assumed that the debug agent <code>&lt;S60_SDK_installation_directory&gt;\S60Tools\Ecmt\EcmtAgent_MIDP.SIS</code> has been installed on the device. The SIS file installs to native S60 applications,
+EcmtAgent and DebugAgent, and unpacks the <code>RedirMIDlet.jar</code> that
+can be used to redirect System.out and System.err streams from a <a href="GUID-BD3FDAA6-5977-40FF-A3BC-79BD6A9B4D4C.html#GUID-BD3FDAA6-5977-40FF-A3BC-79BD6A9B4D4C">MIDlet</a> to
+the diagnostics view on PC. For more information about stream redirection,
+see <a href="GUID-2EAFDF61-2D9F-4397-B977-650C2FB60240.html#GUID-2EAFDF61-2D9F-4397-B977-650C2FB60240">Setting up system.out
+and system.err redirection</a>.</p></div>
+<p>For Wireless LAN you can use both AdHoc and Infrastructure modes for
+On-device debugging a MIDlet. </p>
+<ol>
+<li id="GUID-4A953632-94A4-45ED-90DA-8B4762B9387E"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-4A953632-94A4-45ED-90DA-8B4762B9387E"><!----></a><p>In IDE device
+settings, set up<span> S60Device_over_wlan</span> as the device to use.</p><p> The
+location for defining this depends on the IDE in question (see <a href="GUID-8590439B-EC9C-4311-99A5-ABD36A0C2734.html#GUID-20EB587F-7FD8-4142-A0F2-4FB60DE00880">On-device
+MIDlet debugging over Bluetooth, step 1</a>).</p></li>
+<li id="GUID-1DC522F6-2D00-469A-B9D9-EEBCAB322C22"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-1DC522F6-2D00-469A-B9D9-EEBCAB322C22"><!----></a><p>Set up WLAN
+so that the PC and the device can connect to each other via WLAN network.
+Configure SDK preferences from the IDE to listen to a port. </p></li>
+<li id="GUID-152836DE-3881-4D92-A33C-55EA65FA31AD"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-152836DE-3881-4D92-A33C-55EA65FA31AD"><!----></a><p>Determine
+the IP address of the PC, for example using ipconfig command line tool or<span> Start
+&gt; Settings &gt; Network Connections &gt; Wireless Network Connection</span> and the
+IP-address is shown on the left sidebar under <span>Details</span>.</p></li>
+<li id="GUID-359F53A7-BBFB-4D49-A0CA-BC53302BE47F"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-359F53A7-BBFB-4D49-A0CA-BC53302BE47F"><!----></a><p>Start the
+DebugAgent on the device and select <span>Options &gt; Settings</span>. </p></li>
+<li id="GUID-F8CD3FA9-87B5-4E9B-9F4B-A6D16D219B40"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-F8CD3FA9-87B5-4E9B-9F4B-A6D16D219B40"><!----></a><p>Set the IP
+address or host name and port number of the PC running the IDE.  </p></li>
+<li id="GUID-301E1042-9EF4-4548-AC8C-0FC352606109"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-301E1042-9EF4-4548-AC8C-0FC352606109"><!----></a><p>Start Debug
+Agent Server by selecting <span>Options &gt; Start</span>.</p></li>
+<li id="GUID-48A0F204-075C-4EBC-B6CF-C0644157E9BA"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-48A0F204-075C-4EBC-B6CF-C0644157E9BA"><!----></a><p>Launch the
+debug session from the IDE.</p></li>
+<li id="GUID-C64B4CAF-A8F2-4319-8A16-22F7C09354A9"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-C64B4CAF-A8F2-4319-8A16-22F7C09354A9"><!----></a><p>Once the <span>Emulator
+Progress</span> dialog stops at “Connect to Agent”, select <span>Options &gt; Connect</span> on
+the device. </p></li>
+</ol>
+<div><h3>DebugAgent</h3><p>The DebugAgent is an S60 application used for On-Device Debugging over
+a WLAN connection. It establishes the connection between an IDE and the Java
+ME virtual machine on the device. The following DebugAgent settings can be
+changed from<span> Options &gt; Settings</span>: </p><div class="tablenoborder"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-A233564C-E15D-4D21-96C5-BAFC205B883F"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-A233564C-E15D-4D21-96C5-BAFC205B883F" frame="border" border="1" rules="all">
+<tbody>
+<tr class="">
+<td valign="top" width="29.5%">
+<p><span>Setting</span></p>
+</td>
+<td valign="top" width="70.5%">
+<p><span>Description</span></p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="29.5%">
+<p><span>Auto cleanup</span></p>
+</td>
+<td valign="top" width="70.5%">
+<p>If enabled, the on-screen log is cleared for each session.</p>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="29.5%">
+<p><span>Log to file</span></p>
+</td>
+<td valign="top" width="70.5%">
+<p>If enabled, logs are written to c:\midp2\agent.log on the device</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="29.5%">
+<p><span>PC host</span></p>
+</td>
+<td valign="top" width="70.5%">
+<p>Hostname or IP-address (preferred) of the PC running the IDE.</p>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="29.5%">
+<p><span>PC port</span></p>
+</td>
+<td valign="top" width="70.5%">
+<p>IDE port number for emulator WLAN connectivity, see MIDP Debugging tab
+in emulator preferences (via emulator or IDE).</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="29.5%">
+<p><span>Access Point</span></p>
+</td>
+<td valign="top" width="70.5%">
+<p>Asked for each connection initialization, or defined for.</p>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="29.5%">
+<p><span>Keep-alive timer</span></p>
+</td>
+<td valign="top" width="70.5%">
+<p>How frequently to ping the PC to keep the WLAN connection open and active.
+Disabling Keep-alive timer may slow down debug session initialization.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="29.5%">
+<p><span>Font Size</span></p>
+</td>
+<td valign="top" width="70.5%">
+<p>The font size used in the log window on the device.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+<div><h3>Connection device to PC over WLAN</h3><p>For on device debugging you can use both Infrastructure and AdHoc modes
+for WLAN connectivity.   </p><p>For Infrastructure mode you must make sure that the WLAN connectivity
+is not blocked between the device and the PC. Follow the instruction in the
+device user’s guide to set up the access point for Infrastructure mode connectivity.
+ </p><p>Direct connection between a WLAN capable PC and the device is recommended.
+  </p><p>To configure the device for AdHoc WLAN connectivity, proceed as follows: </p><ol>
+<li id="GUID-EE598126-099F-4A41-A2A6-6DD6ED19E8B0"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-EE598126-099F-4A41-A2A6-6DD6ED19E8B0"><!----></a><p>In the device,
+go to<span> Menu &gt; Settings &gt; Connection &gt; Access Points &gt; Options </span>dialog.
+ </p></li>
+<li id="GUID-79AB8FB3-987C-402E-A0CB-85D1D1752792"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-79AB8FB3-987C-402E-A0CB-85D1D1752792"><!----></a><p>Select “New
+access point”. </p></li>
+<li id="GUID-B7053DDD-F7DC-4830-B010-85CE98E10D89"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-B7053DDD-F7DC-4830-B010-85CE98E10D89"><!----></a><p>Specify the
+following parameters: </p><div class="tablenoborder"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-9F329D74-13BA-4046-8466-DAE34D1FE6EC"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-9F329D74-13BA-4046-8466-DAE34D1FE6EC" frame="border" border="1" rules="all">
+<tbody>
+<tr class="">
+<td valign="top" width="29.5%">
+<p><span>Data bearer</span></p>
+</td>
+<td valign="top" width="70.5%">
+<p>Wireless LAN</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="29.5%">
+<p><span>WLAN network name</span> </p>
+</td>
+<td valign="top" width="70.5%">
+<p>AdHocNet</p>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="29.5%">
+<p><span>Hide WLAN network</span></p>
+</td>
+<td valign="top" width="70.5%">
+<p>No</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="29.5%">
+<p><span>WLAN network mode</span></p>
+</td>
+<td valign="top" width="70.5%">
+<p>Ad-hoc</p>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="29.5%">
+<p><span>WLAN security mode</span></p>
+</td>
+<td valign="top" width="70.5%">
+<p>Open Network</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="29.5%">
+<p><span>Homepage</span></p>
+</td>
+<td valign="top" width="70.5%">
+<p>None</p>
+</td>
+</tr>
+</tbody>
+</table></div></li>
+<li id="GUID-251279D2-774A-4952-86F1-1CFEC12AF61F"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-251279D2-774A-4952-86F1-1CFEC12AF61F"><!----></a><p>From the <span>Options</span> menu,
+select <span>Advanced Options</span> and set the following parameters: </p><div class="tablenoborder"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-73AF1EFA-86BB-4910-A2F1-1DC895DD83FA"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-73AF1EFA-86BB-4910-A2F1-1DC895DD83FA" frame="border" border="1" rules="all">
+<tbody>
+<tr class="">
+<td valign="top" width="29.5%">
+<p><span>Ipv4 settings</span></p>
+</td>
+<td valign="top" width="70.5%">
+<p>Specify IP of the device (private IP address space is recommended, for
+example 192.168.0.10)</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="29.5%">
+<p><span>AdHoc channel</span></p>
+</td>
+<td valign="top" width="70.5%">
+<p>Automatic</p>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="29.5%">
+<p><span>Proxy Server address</span></p>
+</td>
+<td valign="top" width="70.5%">
+<p>None</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="29.5%">
+<p><span>Proxy port number</span></p>
+</td>
+<td valign="top" width="70.5%">
+<p>0</p>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="29.5%">
+<p><span>WLAN security mode</span></p>
+</td>
+<td valign="top" width="70.5%">
+<p>Open Network</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="29.5%">
+<p><span>Homepage</span></p>
+</td>
+<td valign="top" width="70.5%">
+<p>None</p>
+</td>
+</tr>
+</tbody>
+</table></div></li>
+<li id="GUID-CE1BA9BF-8777-4469-B919-25B72EE57D4A"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-CE1BA9BF-8777-4469-B919-25B72EE57D4A"><!----></a><p>To configure
+the PC to use AdHoc WLAN connectivity, see the user’s guide of your WLAN card
+and set it to use an IP address in the same network as the device (for example
+192.168.0.11). Use this IP address to configure the DebugAgent on the device.</p>
+</li>
+</ol></div>
+</div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

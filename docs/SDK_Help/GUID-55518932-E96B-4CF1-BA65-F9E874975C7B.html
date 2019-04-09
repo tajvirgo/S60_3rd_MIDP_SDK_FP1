@@ -1,0 +1,170 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Usability testing"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-55518932-E96B-4CF1-BA65-F9E874975C7B"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> S60 3rd Edition SDK for Symbian OS Supporting Feature Pack 1, for MIDP</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-55518932-E96B-4CF1-BA65-F9E874975C7B"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-55518932-E96B-4CF1-BA65-F9E874975C7B"><!----></a>Usability
+testing</h1>
+<p>This section lists only the basic requirements for usability testing. </p>
+
+<p>Good usability is the basis for a good application and a pleasant user
+experience. If the application’s usability is poor, some users might stop
+using it. To ensure user satisfaction, you should arrange separate usability
+tests and start testing the application already in the early phases of application
+development. It is easier to fix possible usability problems in these earlier
+stages.</p>
+<p>For a positive user experience, it is important that all main functionalities
+of the application can be accessed easily through the main menu. Ensure that
+each functionality works properly as described in the application documentation
+and the Instructions section and that there are no hidden functionalities. </p>
+<p>Check also that the terminology is correct and that there are no grammatical
+mistakes. Do not use difficult terminology or abbreviations. </p>
+<p>Make sure that the application gives enough feedback to the user. Typically
+users do not wait for more than a couple of seconds if the display does not
+change and seems jammed after they have selected a function. In addition,
+if the application repeatedly shows certain notifications or questions to
+the user, it must be possible to turn those off. </p>
+<p>Any selection of a different function in the application should be performed
+within five seconds. There must be a visual indication within one second that
+the function will be performed. The visual indication can be, for example,
+prompting for user input, using splash screens or progress bars, or displaying
+text such as "Please wait..." or "Sending message…". These indications can
+be enhanced with sounds. Consideration is possible for applications that are
+subject to Digital Rights Management or other types of verification in the
+start up. In these cases, the waiting time can be longer.</p>
+<p>Check that:</p>
+<ul>
+<li><p>All main functions of the application can easily be accessed
+through the main menu.</p></li>
+<li><p>Each functionality works as described in the documentation
+and in the application’s Instructions section.</p></li>
+<li><p>Terminology and grammar are correct and no abbreviations
+are used.</p></li>
+<li><p>Each screen appears for the length of time that is necessary
+to read its information.</p></li>
+<li><p>The consistency of the following features is maintained throughout
+the application: terms, layout, colors (or reverted colors), softkey labels,
+vibra, and sounds.</p></li>
+<li><p>The application gives enough feedback to the user.</p>
+</li>
+<li><p>Repeated user prompts can be turned off.</p></li>
+</ul>
+<div><h3>Menus</h3><p>Check that menu structures are grouped logically and not too deep. A
+wide menu hierarchy is preferred over a deep one. The user must not get lost
+in the menus. Ensure that the Back button is always at hand, on the right
+softkey. Closing the application must be easy as well. </p><p>The order of the items in the menus must be well defined. It is advisable
+to arrange items by frequency of use, that is, the most frequently used item
+should be at the top of the menu, and the Exit item should be the last item,
+at the bottom. In S60 devices, until S60 Platform 2nd Edition Feature Pack
+3, the Exit item is automatically on the Options list of the left softkey. </p><p>All menu items must be shown as selectable items, and the labels of
+the items must be descriptive. The user must easily see which screen items
+can be selected and/or changed, especially if low-level UI components are
+used as menus. Selectivity is not a problem if high-level UI menu components
+are used because they are similar to the system menus. </p><p>If the application requires completing multiphased forms, the current
+screen number as well as the total number of the screens must be indicated
+to the user in, for example, the following format: Page 3/5. The last screen
+in the form must give the user some informative feedback, for example, a Thank
+You screen after pressing the Submit button. </p><p>Add Help to the main menu of the application. Help must be useful and
+complete and include at least the purpose of the application, rules, and use
+of the keys. </p><p>The application also needs to contain an About screen that gives information
+about the developer and other generic information about the application. The
+About screen should contain developer name, application name and application
+version number. These values should be the same as defined in the JAD file. </p><p>Check that:</p><ul>
+<li><p>Sequences of actions are grouped logically.</p></li>
+<li><p>Menus are grouped logically and menu structures are not too
+deep.</p></li>
+<li><p>The Back or Exit button is always available on the right
+softkey.</p></li>
+<li><p>The order of the menu is logical.</p></li>
+<li><p>Menu items are marked clearly.</p></li>
+<li><p>The application has a Help section.</p></li>
+<li><p>Information about the developer and the application is given
+in an About section.</p></li>
+<li><p>It is possible to Exit the application from the main menu.</p>
+</li>
+</ul></div>
+<div><h3>Commands</h3><p>The order of commands and the softkey to which they are assigned depend
+on the following:</p><ul>
+<li><p>Command type</p></li>
+<li><p>Command priority</p></li>
+<li><p>The order in which the commands were added to the UI component</p>
+</li>
+</ul><p>For more information about command mappings and command labels in S60
+devices, see S60 Developer Platform 2.0: Specification .</p><p>In S60 devices, all UI components, except for the Nokia UI API’s <code>FullCanvas</code> class,
+include an Exit or Close command by default. Be careful that UI components
+do not end up with two Exit commands, for example if you have added one yourself. </p><p>Check that:</p><ul>
+<li><p>Softkey labels reflect the style of the user interface of
+the particular Developer Platform.</p></li>
+<li><p>The label related to the right softkey refers to Back, Quit,
+Exit, Cancel, Clear, or other “negative/backward functions.”</p></li>
+</ul></div>
+<div><h3>Sounds</h3><p>Ensure that each sound (if sounds are used) in the application is distinctive
+and has a well-defined meaning. For example, a happy sound should be used
+for a positive action and a sad sound for a negative action. </p><p>Be sure that the current status of the possible sound settings does
+not affect the playability of the application (for example, whether or not
+the sound is activated). </p><p>All in all, you should be careful when adding sounds because too much
+sound may make the use of the application annoying. Therefore, add sounds
+only to places and situations where they give more information or an extra
+experience for the user. Be sure that sounds can be turned off easily. </p><p>Check that:</p><ul>
+<li><p>Each sound has a distinctive meaning.</p></li>
+<li><p>Sound settings do not affect the playability of the application.</p>
+</li>
+<li><p>Sounds are not overused in the application.</p></li>
+<li><p>Sounds can be set on/off in the application and setting is
+saved on exit.</p></li>
+</ul></div>
+<div><h3>Backlights and vibra</h3><p> The backlights and vibra functionalities are supported via the MIDP
+2.0 APIs.</p><p>The vibra functionality can be used to give extra feedback to the user.
+Note that it is a wearing functionality, so it should be used only in special
+circumstances and less frequently than sounds. There should an easy way to
+set vibra on/off and the setting is saved on exit. </p><p>Backlights should always be on if the application is actively used without
+user interaction (there have been no key presses to keep the backlights automatically
+on). However, backlights consume quite a lot of battery power, so there should
+be a setting that allows them to be turned off. </p><p>Check that:</p><ul>
+<li><p>Vibra is not used too often.</p></li>
+<li><p>Vibra can be set on/off.</p></li>
+<li><p>The user can turn backlights off.</p></li>
+</ul></div>
+<div><h3>Settings</h3><p>It is advisable to have user settings for the application, for example,
+settings for sounds. Regardless of the settings it is important that all settings
+and selections can be canceled or restored. Also, make sure that the current
+status of each setting has a clear meaning and that the user can easily understand
+what changes will occur if a setting is changed. Note that settings must be
+saved when the application is closed. </p><p>Check that:</p><ul>
+<li><p>The user can cancel and/or restore settings and selections.</p>
+</li>
+<li><p>The current status of each setting is clear.</p></li>
+<li><p>Settings are saved when the application is closed.</p>
+</li>
+</ul></div>
+<div><h3>Localization</h3><p>The content in all different views in the application must be available
+in the application’s target language. It means that e.g. Main menu, Help and
+About are localized. Text should not contain any spelling errors and it should
+be clear and readable (e.g. no overlapping or text cut off). </p><p>The date format must be handled according to the target country. Verify
+that date, time, time zone, week start, numeric separators, and currency are
+formatted according to the conventions of the target country of the implemented
+language and supported throughout the application. </p><p>Data entry fields must accept and properly display national alphabets,
+for example, ä, ü, and ß. If possible, test that all data entry fields accept
+and properly display all special character input. </p><p>Check that:</p><ul>
+<li><p>All text is available in the application’s target language.</p>
+</li>
+<li><p>There are no spelling errors and text is not overlapped or
+cut off.</p></li>
+<li><p>The language conventions of the target country are followed.</p>
+</li>
+<li><p>National alphabets are accepted and displayed.</p></li>
+</ul></div>
+<div><h3>Games</h3><p>The following guidelines are especially concerned with game MIDlets.
+It is important that the general view of the game is clear and that the game
+gives enough feedback and immediately responds to the player. </p><p>The rule or function of each element in the game must be clear (for
+example, how the player and the enemies are represented, and how they interact). </p><p>The game must be paused automatically as described earlier (section <a href="GUID-9E6BDE2A-19C4-41B1-B097-762BF19175A7.html#GUID-9E6BDE2A-19C4-41B1-B097-762BF19175A7">Pausing a MIDlet</a>)
+and it is also important that the player can pause the game by him/herself.
+When the game is paused it must be easily continued. </p><p>If the application is closed in the middle of the game, the game status
+and settings must be saved so that the game can be continued later.</p><p>Check that:</p><ul>
+<li><p>The general view and the rules and functions of the game
+are clear and described in the Instructions.</p></li>
+<li><p>The game gives enough feedback to the player.</p></li>
+<li><p>The user can pause and continue the game and the status is
+saved.</p></li>
+<li><p>The current status of the settings does not affect the playability
+of the game (for example, whether or not the sound is on).</p></li>
+</ul></div>
+</div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>

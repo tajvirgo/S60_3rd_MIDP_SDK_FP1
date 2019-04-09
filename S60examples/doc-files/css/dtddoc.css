@@ -1,0 +1,39 @@
+h3 {
+    border-bottom: solid 1px black;
+}
+.fixed {
+    font-style: italic;
+}
+.required {
+    font-weight: bold;
+}
+tr {
+    vertical-align: top;
+}
+th {
+    text-align: left;
+}
+td, th {
+    padding: 3px;
+}
+.element > p,
+.element > table {
+    margin-left: 16px;
+}
+.parameterEntityContent {
+    font-family: monospace;
+    font-size: 0.8em;
+}
+.enumeration {
+    margin: 0;
+    padding-left: 1em;
+}
+.contentModel {
+    font-family: monospace;
+}
+.ishattribute {
+    /*color: silver;*/
+}
+.xmlns {
+    /*color: gray;*/
+}

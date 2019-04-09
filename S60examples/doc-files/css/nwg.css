@@ -1,0 +1,198 @@
+/**
+ * This stylesheet contains amendments and modifications to the NWG base stylesheets.
+ */
+
+/* LAYOUT */
+
+div.body {
+  width: auto;
+	margin: 25px 0 0 0;
+}
+
+div.contentFull {
+	min-height: 0;
+	padding: 0 25px 25px 25px;
+	width: auto;
+}
+
+div.contentLeft {
+	width: auto;
+	float: none;	
+	display: block;
+	padding: 0 25px 25px 25px;
+}
+
+div.footer {
+	margin: 0px;
+	padding: 1em 0 0 0;
+	width: auto;
+}
+
+/* HEADER */
+
+.logo {
+  margin: 0;
+  padding: 20px 0 0 10px;
+}
+.header .confidentiality {
+	float: right;
+	padding: 3px 20px;
+	background-color: #CC0000;
+	color: white;
+	text-transform: uppercase;
+}
+
+h1.pageHeading {
+	color: #0054b7;
+	line-height: 24px;
+}
+
+/* NAVIGATION */
+/* 1st level navigation */
+/* 2nd level navigation */
+/* 3rd level navigation */
+
+.nav3 ul {
+	display: block;
+	padding: 0;
+	margin: 0;
+	list-style-position: outside
+}
+.nav3 li {
+	display: block;
+	list-style: none;
+	padding: 0 0 0 12px;
+	margin: 4px 0;
+	white-space: nowrap;
+	background-image: none;	
+}
+.nav3 li.on,
+.nav3 li.on3,
+.nav3 li.on4,
+.nav3 li.on5 {
+	background-image: url("../images/arrow.gif");
+	background-repeat: no-repeat;
+	color: #666;
+}
+.nav3 a,
+.nav3 a:visited {
+	color: rgb(0, 51, 204);
+	text-decoration: none;
+}
+
+div.nav3 {
+	width: 100%;
+	margin-top: 0px;
+}
+
+/* 4th level navigation */
+/* toolbar navigation */
+/* MAIN BODY CONTENT */
+/* comparison-related */
+/* primary */
+/* teasers */
+/* form-related */
+
+table {
+	border: 1px solid #999;
+    margin: 10px 0 0 0;	
+}
+caption {
+    caption-side: bottom;
+    text-align: left;
+}
+div.table-description {
+    margin-top: -10px;
+}
+td,
+th {
+	padding: 3px 5px;
+}
+th > p:first-child,
+td > p:first-child {
+	margin-top: 0;
+}
+
+
+.comment {
+  margin: 5px;
+  padding: 5px;
+  border: solid 1px gray;
+  background-color: silver;
+}
+pre {
+  margin: 10px 10px;
+}
+.codeblock {
+  background-color: #EEE;
+  padding: 5px;
+}
+.listing pre {
+	margin: 0 10px;
+}
+.listing {
+	padding: 5px 0;
+	margin-top: 10px;
+	border-top: solid 1px black;
+	border-bottom: solid 1px black;
+}
+.listing-title {
+	margin: 0;
+}
+
+/* SIDEBAR */
+
+div.sbFooter {
+	height: 4px;
+}
+
+/* COLORS: Only the color attribute is specified */
+/* POPUP */
+/* Tools: download, bookmark, print */
+
+
+/** EXTENSIONS **/
+
+/* Conversion specific classes */
+
+.conversion-error-message {
+    color: red;
+    font-weight: bold;
+    cursor: help;
+}
+
+/* Table of contents */
+
+.toc-controller,
+.toc-space {
+	padding: 0 2px;
+	margin: 0 0.5em 0 0;
+	border: solid 1px black;
+	font-family: monospace;
+	font-size: 10px;
+	line-height: 8px;
+}
+.toc-controller {
+	cursor: pointer;
+}
+.toc-controller:hover {
+	color: gray;
+}
+.toc-space {
+	visibility: hidden;
+}
+.button-manual_sync-container {
+  text-align: right;
+}
+.button-manual_sync {
+  font-size: 10px;
+  margin-right: 5px;
+}
+
+/* Conditions */
+
+.condition-start,
+.condition-end {
+    color: blue;
+    cursor: help;
+}

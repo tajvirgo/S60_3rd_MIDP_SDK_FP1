@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<nokia>
+<phone>
+<name>N80</name>
+<midpver>MIDP2.0</midpver>
+<screensize>352x416</screensize>
+</phone>
+<phone>
+<name>N5300</name>
+<midpver>MIDP2.0</midpver>
+<screensize>240x320</screensize>
+</phone>
+</nokia>

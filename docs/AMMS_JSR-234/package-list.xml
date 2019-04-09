@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package-list><package>javax.microedition.amms</package><package>javax.microedition.amms.control</package><package>javax.microedition.amms.control.audio3d</package><package>javax.microedition.amms.control.audioeffect</package><package>javax.microedition.amms.control.camera</package><package>javax.microedition.amms.control.imageeffect</package><package>javax.microedition.amms.control.tuner</package></package-list>

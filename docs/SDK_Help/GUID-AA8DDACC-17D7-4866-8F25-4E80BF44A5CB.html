@@ -1,0 +1,150 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2006"/><meta name="DC.rights.owner" content="(C) Copyright 2006"/><meta name="security" content="public"/><meta name="Robots" content="index,follow"/><meta http-equiv="PICS-Label" content="(PICS-1.1 'http://www.icra.org/ratingsv02.html' l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) 'http://www.rsac.org/ratingsv01.html' l gen true r (n 0 s 0 v 0 l 0) 'http://www.classify.org/safesurf/' l gen true r (SS~~000 1))"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Virtual file system"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-AA8DDACC-17D7-4866-8F25-4E80BF44A5CB"/><meta name="DC.Language" content="en"/><link rel="stylesheet" type="text/css" href="css/commonltr.css"/><title> JavaTM Implementation Notes</title><script type="text/javascript" src="js/common.js">//</script><script type="text/javascript" src="js/toc.js">//</script><script type="text/javascript" src="js/page.js">//</script><script type="text/javascript" src="js/s60/toc.js">//</script><script type="text/javascript" src="js/s60/page.js">//</script><link href="css/html.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/><link href="css/print.css" rel="stylesheet" type="text/css" media="print"/><link href="css/nwg.css" rel="stylesheet" type="text/css" media="all"/><link href="css/s60/white.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><!--BEGIN: HEADER--><!--END: HEADER--><!--BEGIN: BODY SECTION--><div class="body"><!--begin: content--><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-AA8DDACC-17D7-4866-8F25-4E80BF44A5CB"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-AA8DDACC-17D7-4866-8F25-4E80BF44A5CB"><!----></a>Virtual
+file system</h1>
+<p>Virtual root directories provide another choice for getting direct access
+to common directories. A virtual root directory maps to the particular physical
+directory. For example, the <code>Images</code> virtual root directory
+maps to the <code>data\Images\</code> directory. A <code>FileConnection.list()</code> operation
+returns virtual root directories if the connection has been established using
+a virtual root. A <code>FileSystemRegistry.listRoots()</code> operation
+returns both virtual and physical roots. For example, <code>c:/</code> and <code>e:/</code> are
+physical roots. The corresponding virtual roots are <code>Internal/</code> and <code>Memory
+card/</code>. Virtual root directories map to the same directories that
+are defined in File API System properties. </p>
+<p>File API localizes virtual roots and root directories. File API can
+always convert (no matter what language the device uses) roots and root directories
+written in English to the corresponding physical drives or paths. Therefore,
+English is the recommended language for hard-coded paths in MIDlets.</p>
+<p>The table below contains the reserved names of virtual roots and the
+directories that can be used in the hard-coded paths.</p>
+<p>In case of the virtual file system, English and “local” languages cannot
+be mixed in the URI. E.g. <code>file:///Internal/Kuvat/</code> is
+not a valid URI. Note: “Kuvat” is Finnish and means “Images” in English.</p>
+<p>The <code>FileConnection.list() </code>operation returns virtual
+directories in the language corresponding to the one used in the creation
+of the connection (that is, the language of the virtual root). E.g. <code>FileConnection.list() </code>operation
+of the <code>file:///Internal/ connection</code> returns virtual directories
+in English.</p>
+<div class="tablenoborder"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-AA0B4D30-44FB-4134-994D-4D071C350681"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-AA0B4D30-44FB-4134-994D-4D071C350681" frame="border" border="1" rules="all"><caption><strong>Table 2: </strong>Reserved names
+of virtual roots and directories</caption>
+
+
+<thead align="left">
+<tr class="title "><th valign="top" width="28.499999999999996%" id="d0e18158">
+<p>Reserved name</p>
+</th><th valign="top" width="71.5%" id="d0e18163">
+<p>Description of purpose</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td valign="top" width="28.499999999999996%" headers="d0e18158 ">
+<p>Internal</p>
+</td>
+<td valign="top" width="71.5%" headers="d0e18163 ">
+<p>Virtual root. Points to the phone memory root. For example, <code>c:</code>.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="28.499999999999996%" headers="d0e18158 ">
+<p>Temporary</p>
+</td>
+<td valign="top" width="71.5%" headers="d0e18163 ">
+<p>Virtual root. Points to the temporary data drive. For example, <code>d:</code>.
+Note: Usage of this root is only allowed if MIDlet uses “Manufacturer” access
+domain.</p>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="28.499999999999996%" headers="d0e18158 ">
+<p>Memory card</p>
+</td>
+<td valign="top" width="71.5%" headers="d0e18163 ">
+<p>Virtual root. Points to the memory card root. For example, <code>e:</code>.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="28.499999999999996%" headers="d0e18158 ">
+<p>Rom</p>
+</td>
+<td valign="top" width="71.5%" headers="d0e18163 ">
+<p>Virtual root. Points to the rom data. For example, <code>z:</code>.
+Note: Usage of this root is only allowed if MIDlet uses “Manufacturer” access
+domain.</p>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="28.499999999999996%" headers="d0e18158 ">
+<p>Images</p>
+</td>
+<td valign="top" width="71.5%" headers="d0e18163 ">
+<p>Virtual directory. Points to the “Images” directory. For example, <code>/data/Images/</code>.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="28.499999999999996%" headers="d0e18158 ">
+<p>Videos</p>
+</td>
+<td valign="top" width="71.5%" headers="d0e18163 ">
+<p>Virtual directory. Points to the “Videos” directory. For example, <code>/data/Videos/</code>.</p>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="28.499999999999996%" headers="d0e18158 ">
+<p>Graphics</p>
+</td>
+<td valign="top" width="71.5%" headers="d0e18163 ">
+<p>Virtual directory. Points to the “Pictures” directory. For example, <code>/data/Images/Pictures/</code>. </p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="28.499999999999996%" headers="d0e18158 ">
+<p>Sounds</p>
+</td>
+<td valign="top" width="71.5%" headers="d0e18163 ">
+<p>Virtual directory. Points to the “Sounds” directory. For example, <code>/data/Sounds/</code>. </p>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="28.499999999999996%" headers="d0e18158 ">
+<p>Music</p>
+</td>
+<td valign="top" width="71.5%" headers="d0e18163 ">
+<p>Virtual directory. Points to the “Sounds” directory. For example, <code>/data/Sounds/</code>.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td valign="top" width="28.499999999999996%" headers="d0e18158 ">
+<p>Recordings</p>
+</td>
+<td valign="top" width="71.5%" headers="d0e18163 ">
+<p>Virtual directory. Points to the “Digital” directory. For example, <code>/data/Sounds/Digital/</code>. </p>
+</td>
+</tr>
+<tr class="">
+<td valign="top" width="28.499999999999996%" headers="d0e18158 ">
+<p>Private</p>
+</td>
+<td valign="top" width="71.5%" headers="d0e18163 ">
+<p>Virtual directory. Points to the private work directory of a MIDlet
+suite. For example, <code>/private/102033e6/midlets[1015b77b]/scratch</code>.</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p><span>Example 1</span>:</p>
+<pre class="codeblock" id="GUID-910EF502-2137-4600-A0A4-9D2CBA840D28"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-910EF502-2137-4600-A0A4-9D2CBA840D28"><!----></a>//connection established using physical root
+FileConnection conn = (FileConnection) Connector.open("file:///c:/");
+Enumeration enum = conn.list();
+//the list() operation returns the following physical directory: "data/"
+</pre>
+<p><span>Example 2:</span> </p>
+<pre class="codeblock" id="GUID-7E6DDF2D-5613-42C7-B7FD-E3B9D7E101A5"><a xmlns:d="http://www.pnp-software.com/XSLTdoc" name="GUID-7E6DDF2D-5613-42C7-B7FD-E3B9D7E101A5"><!----></a>//connection established using virtual root
+FileConnection conn = (FileConnection) Connector.open("file:///Internal/");
+Enumeration enum = conn.list();
+// the list() operation returns the following virtual root directories: "Images",
+ "Videos", "Graphics", "Sounds", "Music" and "Recordings"
+</pre>
+</div><!--end: content--><!--start: sidebar--><!--end: sidebar--></div><!--END: BODY SECTION--><!--BEGIN: FOOTER--><div class="footer"><div class="copy">© Nokia 2006.</div></div><!--END: FOOTER--></body></html>
